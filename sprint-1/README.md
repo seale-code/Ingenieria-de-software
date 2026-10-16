@@ -58,3 +58,10 @@ Completar al ejecutar el sprint; no marcar funcionalidades sin validarlas.
 - Qué funcionó: por completar.
 - Qué debemos mejorar: por completar.
 - Acción de mejora, responsable y fecha: por completar.
+
+
+
+
+
+
+
