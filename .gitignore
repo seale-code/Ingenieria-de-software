@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+data/
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+.test-tmp/
+.superpowers/
+.env

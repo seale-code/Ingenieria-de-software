@@ -5,6 +5,10 @@
 
 [← Inicio](../README.md) · [Índice documental](README.md)
 
+## Actualización: base de datos
+
+Después de la revisión inicial se implementó SQLite con 24 pruebas aprobadas. S1-06 y S1-07 están en revisión del equipo. [Evidencia y límites](06-evidencias/2026-10-18_base-datos-sprint-1.md). La base del informe indicada arriba corresponde a la auditoría inicial.
+
 ## Resultado
 
 El repositorio contiene la planificación y documentación inicial del proyecto. **Todavía no cumple la entrega de una solución funcional ni permite dar por terminado el Sprint 1.**
@@ -23,14 +27,14 @@ La revisión se realizó contra las historias HU01–HU15 y los planes del propi
 | Descripciones de Issues | Completadas durante esta revisión | 21 tareas no tenían descripción; se añadió el criterio del plan, responsable propuesto y espacio para evidencia. La tarea #2 ya tenía descripción. |
 | Responsables | Nombres propuestos; sin asignaciones de cuentas | Ninguno de los 25 Issues tiene assignee. No se atribuyeron cuentas sin verificar. |
 | Milestones | Las tareas tienen el milestone de su sprint | Verificado en los Issues. No se verificaron fechas de los milestones mediante esta revisión. |
-| Tablero Kanban | PNG disponible dentro del repositorio | [Tablero S1](07-scrum/TABLERO.md), vista estática inicial con 12 tarjetas en Por hacer. No prueba ejecución del trabajo. |
+| Tablero Kanban | PNG disponible dentro del repositorio | [Tablero S1](07-scrum/TABLERO.md), vista estática con 10 tarjetas Por hacer y 2 En revisión. |
 | Políticas Kanban | Parciales | Acordar límites WIP, responsables de actualizar el PNG y tratamiento de bloqueos. |
 | Fechas, estimaciones y roles Scrum | Pendientes | Acordar duración, capacidad, Product Owner, Scrum Master y estimaciones. |
 | Requisitos y alcance | Organizados con trazabilidad y brechas explícitas | [Requisitos](01-requisitos/REQUISITOS.md). |
 | Diseño | Conceptual y parcial | [Casos](03-diagramas/CASOS_DE_USO.md), [flujo](03-diagramas/FLUJO_PEDIDO.md), [datos](03-diagramas/MODELO_DATOS.md); falta diseño detallado validado. |
-| Código de aplicación | Pendiente | [src/](../src/README.md) contiene guías, sin implementación. |
-| Esquema SQL y datos ficticios | Pendientes | [Base de datos](../src/database/README.md). |
-| Pruebas | Casos documentados, sin ejecutar | [Matriz S1](05-pruebas/CASOS_DE_PRUEBA.md). |
+| Código de aplicación | Base de datos ejecutable; API e interfaz pendientes | [src/](../src/README.md). |
+| Esquema SQL y datos ficticios | Implementados; revisión del equipo pendiente | [Base de datos](../src/database/README.md). |
+| Pruebas | 24 pruebas de base aprobadas; interfaz e integración pendientes | [Matriz S1](05-pruebas/CASOS_DE_PRUEBA.md). |
 | Daily en video | Pendiente en este repositorio | Registrar grabación y datos de la reunión en [evidencias](06-evidencias/README.md). |
 | Review, retrospectiva y demostración | Sin evidencias registradas | Completar después de realizar las actividades; no sustituirlas por plantillas. |
 
@@ -70,4 +74,4 @@ Las historias diferidas siguen en el Product Backlog; no se han marcado completa
 
 Se comprobaron los destinos de enlaces relativos e imágenes de los Markdown, la conservación del PDF y PNG originales mediante sus referencias Git, la relación 12/5/5 de sub-issues y el contenido guardado de las 21 descripciones.
 
-No se ejecutaron pruebas de aplicación porque aún no hay aplicación. No se verificó el contenido de una grabación ni se certificó un tablero en tiempo real.
+En la auditoría inicial no se ejecutaron pruebas. El incremento posterior tiene 24 pruebas de base de datos aprobadas; API e interfaz siguen pendientes. No se verificó el contenido de una grabación ni se certificó un tablero en tiempo real.

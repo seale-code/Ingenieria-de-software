@@ -7,7 +7,7 @@
 
 ![Proyecto académico](https://img.shields.io/badge/Proyecto-Académico-127A50?style=for-the-badge)
 ![Metodología](https://img.shields.io/badge/Scrum-3%20Sprints-F3C623?style=for-the-badge&labelColor=126B48)
-**Estado: planificación documentada; código pendiente.**
+**Estado: base de datos implementada y probada; revisión del equipo pendiente.**
 
 
 <br>
@@ -29,7 +29,7 @@
 | Planes | [Sprint 1](sprint-1/README.md) · [Sprint 2](sprint-2/README.md) · [Sprint 3](sprint-3/README.md) |
 | Validación | [Casos de prueba](docs/05-pruebas/CASOS_DE_PRUEBA.md) y [evidencias](docs/06-evidencias/README.md) |
 
-**Todavía no hay una aplicación ejecutable.** Las carpetas de código contienen guías; la implementación, instalación y pruebas están pendientes.
+**La base de datos ya es ejecutable por consola.** Incluye categorías, productos, sucursales e inventario, datos ficticios y 24 pruebas aprobadas. Consulta la [guía de uso](src/database/README.md). La API y las pantallas siguen pendientes.
 
 ## 🌿 Sobre nuestro proyecto
 
@@ -101,7 +101,7 @@ El tablero del Sprint 1 está guardado como PNG en este repositorio y se muestra
 
 ![Tablero Kanban del Sprint 1](docs/07-scrum/tablero-kanban-sprint-1.png)
 
-Las 12 tareas están en **Por hacer**, según la planificación inicial. Las demás columnas son **En progreso**, **En revisión** y **Terminado**. Es una vista estática; actualizar el PNG cuando cambie el avance, después de verificar revisión y pruebas.
+Hay **10 tareas Por hacer y 2 En revisión**: S1-06 y S1-07, correspondientes al modelo y la base de datos. Las demás columnas son **En progreso**, **En revisión** y **Terminado**. Es una vista estática; actualizar el PNG cuando cambie el avance, después de verificar revisión y pruebas.
 
 [Reglas y detalle del tablero](docs/07-scrum/TABLERO.md) · [Tareas, responsables y PBI](docs/07-scrum/SPRINT_BACKLOG_1.md)
 
@@ -133,7 +133,7 @@ La siguiente distribución es una propuesta inicial; todos colaboran en las revi
 | [`docs/`](docs/) | Requisitos, historias de usuario, diagramas y acuerdos del equipo. |
 | `README.md` | Presentación y guía general del proyecto. |
 
-Cada carpeta contiene una guía inicial para orientar el desarrollo.
+La carpeta de base de datos contiene código ejecutable; frontend y backend conservan sus guías iniciales.
 
 ## 🧰 Tecnologías y herramientas
 
@@ -142,7 +142,7 @@ Cada carpeta contiene una guía inicial para orientar el desarrollo.
 - **Revisión de cambios:** Pull Requests.
 - **Propuesta de arranque:** HTML/CSS/JavaScript, Python con Flask y SQLite.
 
-La propuesta técnica aún no tiene código ni configuración en el repositorio. La arquitectura, las versiones y los comandos se documentarán al iniciar la implementación.
+La base usa Python 3.10+ y SQLite 3.24+, sin paquetes externos. Flask y la interfaz web siguen como propuesta pendiente de implementación.
 
 ## ▶️ Comenzar a trabajar
 
@@ -164,7 +164,15 @@ La propuesta técnica aún no tiene código ni configuración en el repositorio.
 
 6. Implementa, prueba y abre un Pull Request para revisión.
 
-Los comandos de instalación y ejecución se documentarán cuando se defina e implemente el stack.
+Para crear la base con datos ficticios desde la raíz del repositorio:
+
+```bash
+python -m src.database init --demo
+python -m src.database stock --sucursal DEMO-NORTE --solo-disponibles
+python -m unittest discover -s tests -v
+```
+
+Más opciones en la [guía de base de datos](src/database/README.md).
 
 ## ✅ Definición de terminado
 
@@ -185,12 +193,13 @@ Una actividad estará terminada cuando:
 - [x] Cargar las actividades propuestas de los tres sprints.
 - [ ] Completar accesos y asignaciones a cuentas de GitHub.
 - [ ] Acordar tecnologías, fechas y criterios de aceptación.
+- [x] Implementar y probar la base de datos del Sprint 1 (revisión del equipo pendiente).
 - [ ] Implementar catálogo, búsqueda y disponibilidad.
 - [ ] Implementar registro y asignación de pedidos.
 - [ ] Implementar preparación, entrega y seguimiento.
 - [ ] Validar el MVP y preparar la demostración final.
 
-**Estado actual:** estructura y planificación inicial preparadas. Las funcionalidades del sistema están pendientes de implementación.
+**Estado actual:** base SQLite implementada con 24 pruebas aprobadas. Quedan revisión del equipo, API, interfaz e integración del Sprint 1.
 
 ---
 

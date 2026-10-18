@@ -35,6 +35,6 @@ El modelo inicial de inventario no completa HU14. El plan S1 tampoco contiene a�
 
 Fuente funcional: [HU01–HU15](../02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf). Priorización: [MoSCoW](../07-scrum/PRIORIZACION.md).
 
-Acordar fechas, duración, capacidad, roles Scrum, estimaciones, modalidad de entrega y criterios de aceptación pendientes. La propuesta técnica conversada es Flask/Python, SQLite y HTML/CSS/JavaScript; aún no hay implementación ni configuración en el repositorio.
+Acordar fechas, duración, capacidad, roles Scrum, estimaciones, modalidad de entrega y criterios de aceptación pendientes. La propuesta técnica conversada es Flask/Python, SQLite y HTML/CSS/JavaScript; SQLite ya está implementado y probado; Flask y la interfaz siguen pendientes.
 
 La [versión anterior](../00-historico/01-requisitos/ALCANCE_Y_OBJETIVOS.md) se conserva como referencia.

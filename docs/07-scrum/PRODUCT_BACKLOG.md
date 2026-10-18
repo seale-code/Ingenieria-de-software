@@ -42,3 +42,7 @@ Los números #N corresponden a [Issues de este repositorio](https://github.com/s
 - Mantener los PBI Should/Could/Won't en el backlog: postergarlos no elimina la necesidad original.
 
 “Must” expresa importancia para el MVP propuesto; **no implica que las tareas actuales ya cubran toda la historia ni que exista un compromiso de entrega aprobado**.
+
+## Avance técnico del Sprint 1
+
+La base de PBI-14 está implementada con 24 pruebas aprobadas, pendiente de revisión del equipo. No completa la historia: movimientos de inventario, pedidos e integración siguen pendientes. [Evidencia](../06-evidencias/2026-10-18_base-datos-sprint-1.md).

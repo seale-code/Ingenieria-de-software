@@ -16,7 +16,7 @@ Fuente: [PDF original](../02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf)
 
 ## Las 12 tareas existentes
 
-Responsables propuestos según el plan; no se infiere asignación a cuentas de GitHub. Estado inicial del plan: Por hacer; consultar las evidencias de Issues y actualizar el PNG cuando cambie el estado.
+Responsables propuestos según el plan; no se infiere asignación a cuentas de GitHub. Estado actualizado: S1-06 y S1-07 En revisión del equipo, con [implementación y 24 pruebas aprobadas](../06-evidencias/2026-10-18_base-datos-sprint-1.md); las otras 10 tareas siguen Por hacer. El PNG refleja este avance.
 
 | ID del plan | Issue | Tarea | Responsable propuesto | PBI relacionado | Verificación esperada |
 |---|---|---|---|---|---|

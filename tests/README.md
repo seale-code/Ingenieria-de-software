@@ -13,3 +13,7 @@ Registrar por caso: identificador, pasos, datos, resultado esperado, resultado o
 
 Sprint 2: pedido válido, stock insuficiente, asignación y concurrencia de reservas.
 Sprint 3: transiciones de estado, entrega, seguimiento y flujo completo del MVP.
+
+## Suite ejecutable de base de datos
+
+Desde la raíz: `python -m unittest discover -s tests -v`. Son 24 pruebas de integridad, datos ficticios, preservación de datos, filtros y comandos; sin paquetes externos. [Resultados y límites](../docs/06-evidencias/2026-10-18_base-datos-sprint-1.md).

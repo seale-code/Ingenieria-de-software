@@ -8,12 +8,12 @@
 |---|---|---|
 | Categoría | Identificador, nombre | Una categoría agrupa productos; apoya el filtro del plan S1. |
 | Producto | Identificador, nombre, categoría | Un producto puede tener inventario en varias sucursales. |
-| Sucursal | Identificador, nombre y datos de ubicación por definir | Una sucursal mantiene inventario de varios productos. |
+| Sucursal | Identificador, código único, nombre, latitud y longitud | Una sucursal mantiene inventario de varios productos. |
 | Inventario | Producto, sucursal, cantidad de stock | Par producto–sucursal único y cantidad no negativa. |
 
 **Producto 1:N Inventario; Sucursal 1:N Inventario.** La disponibilidad depende del par producto/sucursal; no se usa un único stock global por producto.
 
-Las coordenadas y la referencia del usuario para cercanía deben definirse al refinar HU01. El esquema SQL y los datos de prueba todavía no existen.
+El [esquema SQLite](../../src/database/schema.sql) implementa estas cuatro entidades con claves foráneas y stock entero no negativo. Las coordenadas tienen rango validado y son ficticias en la demo. La ubicación del usuario y el cálculo de cercanía siguen pendientes de refinar en HU01.
 
 ## Extensiones previstas
 
@@ -26,4 +26,4 @@ Las coordenadas y la referencia del usuario para cercanía deben definirse al re
 
 Fuente: tareas #6 y #3 de S1, #21 de S2 y #19 de S3; [HU14](../02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf) describe inventario completo, aún sin descomposición suficiente.
 
-Este modelo es una guía conceptual. Falta elaborar y validar el diagrama entidad-relación detallado y los scripts antes de cerrar la tarea de modelado. El [modelo histórico](../00-historico/03-diagramas/MODELO_DATOS.md) se conserva como referencia y no se usa para justificar disponibilidad por sucursal.
+Los scripts y datos ficticios están implementados y cubiertos por [24 pruebas](../06-evidencias/2026-10-18_base-datos-sprint-1.md). S1-06 y S1-07 quedan en revisión del equipo; no completan HU14. Categoría 1:N Producto; las claves y restricciones exactas están en el esquema SQL. El [modelo histórico](../00-historico/03-diagramas/MODELO_DATOS.md) se conserva como referencia y no se usa para justificar disponibilidad por sucursal.

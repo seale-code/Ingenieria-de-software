@@ -4,7 +4,8 @@
 
 ## Evidencia disponible
 
-- [Tablero Kanban del Sprint 1 en PNG](../07-scrum/tablero-kanban-sprint-1.png): planificación inicial, 12 tareas en Por hacer. Acredita la representación del plan, no implementación ni pruebas.
+- [Tablero Kanban del Sprint 1 en PNG](../07-scrum/tablero-kanban-sprint-1.png): 10 tareas Por hacer y 2 En revisión, según el incremento de base de datos.
+- [Base de datos: implementación y 24 pruebas aprobadas](2026-10-18_base-datos-sprint-1.md).
 
 ## Evidencias pendientes
 
@@ -12,7 +13,7 @@
 |---|---|---|
 | Daily en video | Pendiente | Archivo de la grabación, fecha, participantes y acuerdos. |
 | Demostración de Sprint 1 | Pendiente | Versión ejecutada, búsqueda, filtros, disponibilidad y resultados. |
-| Resultados de pruebas | Pendiente | Caso, versión, resultado obtenido y evidencia. |
+| Resultados de pruebas | Base de datos registrada; interfaz e integración pendientes | Caso, versión, resultado obtenido y evidencia. |
 | Sprint Review | Pendiente | Funciones demostradas, aceptación y pendientes. |
 | Retrospectiva | Pendiente | Hallazgos y acción de mejora con responsable y fecha. |
 

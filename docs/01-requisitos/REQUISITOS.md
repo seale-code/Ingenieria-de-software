@@ -4,7 +4,7 @@
 
 ## Criterio de uso
 
-Este documento organiza lo ya previsto en historias y sprints. Todos los requisitos funcionales están **pendientes de implementación y validación**. Los IDs RF-S1/S2/S3 identifican esta versión y no reutilizan los RF-01–RF-12 del [documento histórico](../00-historico/01-requisitos/REQUISITOS.md).
+Este documento organiza lo ya previsto en historias y sprints. La base de RF-S1-05 está implementada y probada, pendiente de revisión del equipo; los flujos integrados restantes siguen pendientes. Los IDs RF-S1/S2/S3 identifican esta versión y no reutilizan los RF-01–RF-12 del [documento histórico](../00-historico/01-requisitos/REQUISITOS.md).
 
 Los criterios completos del [PDF HU01–HU15](../02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf) prevalecen sobre estos resúmenes. PBI y prioridad detallados están en el backlog.
 
@@ -54,4 +54,4 @@ Autenticación, roles, reportes, ventas de mostrador y alertas de stock mínimo 
 
 ## Validación
 
-[Casos de prueba](../05-pruebas/CASOS_DE_PRUEBA.md) · [Estado y pendientes](../ESTADO_Y_PENDIENTES.md). No hay resultados de ejecución registrados.
+[Casos de prueba](../05-pruebas/CASOS_DE_PRUEBA.md) · [Estado y pendientes](../ESTADO_Y_PENDIENTES.md). Ya están registrados los [resultados de la base de datos](../06-evidencias/2026-10-18_base-datos-sprint-1.md); no acreditan la aplicación integrada.

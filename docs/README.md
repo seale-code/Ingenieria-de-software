@@ -23,6 +23,6 @@
 
 ## Estado
 
-La documentación define trabajo previsto. Actualmente las carpetas de código contienen guías, no una aplicación ejecutable. El [informe de revisión](ESTADO_Y_PENDIENTES.md) distingue documentos disponibles, cobertura parcial y entregables pendientes.
+La documentación define trabajo previsto. La base SQLite ya tiene código, datos ficticios y [24 pruebas aprobadas](06-evidencias/2026-10-18_base-datos-sprint-1.md); API e interfaz siguen pendientes. El [informe de revisión](ESTADO_Y_PENDIENTES.md) distingue documentos disponibles, cobertura parcial y entregables pendientes.
 
 Las versiones anteriores se conservan en [histórico](00-historico/README.md). El PDF original no se modifica.

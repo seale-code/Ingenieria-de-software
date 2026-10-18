@@ -2,11 +2,11 @@
 
 [← Documentación](../README.md) · [Requisitos](../01-requisitos/REQUISITOS.md) · [Evidencias](../06-evidencias/README.md)
 
-**Estado de todos los casos: pendiente de ejecución.** No existe una aplicación ejecutable en el repositorio.
+**S1-CP-09: cubierto por pruebas automáticas aprobadas de la base de datos.** Los casos de interfaz e integración siguen pendientes; las consultas por consola no acreditan pantallas. Ver [evidencia](../06-evidencias/2026-10-18_base-datos-sprint-1.md).
 
 ## Datos ficticios propuestos para las pruebas
 
-Producto A de categoría X: sucursal Norte con stock 5 y Sur con stock 0. Producto B de categoría Y: Norte con stock 0 y Sur con stock 3. Producto C: sin stock en ambas sucursales. Son datos de prueba propuestos, aún no cargados en una base de datos.
+Producto A de categoría X: sucursal Norte con stock 5 y Sur con stock 0. Producto B de categoría Y: Norte con stock 0 y Sur con stock 3. Producto C de categoría X: sin stock en ambas sucursales. Se cargan con `python -m src.database init --demo`, usando códigos DEMO-A/B/C, DEMO-X/Y y DEMO-NORTE/SUR.
 
 ## Matriz
 
@@ -16,7 +16,7 @@ Producto A de categoría X: sucursal Norte con stock 5 y Sur con stock 0. Produc
 | S1-CP-02 | RF-S1-01 / #5 | Buscar el nombre exacto de A. | Mostrar A y su disponibilidad. |
 | S1-CP-03 | RF-S1-01 / #5 | Buscar una parte distintiva del nombre de B. | Mostrar las coincidencias correspondientes. |
 | S1-CP-04 | RF-S1-01 / #7 | Buscar un nombre inexistente. | Lista vacía y mensaje sin resultados. |
-| S1-CP-05 | RF-S1-02 / #1 | Elegir categoría X y luego limpiar el filtro. | Mostrar A; al limpiar recuperar el catálogo según los demás filtros. |
+| S1-CP-05 | RF-S1-02 / #1 | Elegir categoría X y luego limpiar el filtro. | Mostrar A y C; al limpiar recuperar el catálogo según los demás filtros. |
 | S1-CP-06 | RF-S1-02 / #2 | Elegir Norte y activar solo disponibles. | Incluir A; excluir B y C por stock cero en Norte. |
 | S1-CP-07 | RF-S1-02 / #8 | Buscar B con categoría Y y sucursal Sur, solo disponibles. | Mostrar B; con categoría X no mostrar resultados. |
 | S1-CP-08 | RF-S1-03 / #10 | Consultar A en Norte y Sur. | Informar 5 en Norte y sin stock en Sur. |

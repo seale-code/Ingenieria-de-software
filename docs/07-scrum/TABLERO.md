@@ -8,7 +8,7 @@
 
 El archivo PNG está guardado en esta misma carpeta del repositorio. Se muestra directamente en esta página, en el README principal y en el README del Sprint 1.
 
-**Estado representado:** planificación inicial del Sprint 1, con sus 12 tareas en Por hacer. La fuente es el [plan del sprint](../../sprint-1/README.md) y su relación con los [Issues existentes](SPRINT_BACKLOG_1.md). No se inventan tareas en desarrollo ni resultados terminados.
+**Estado representado:** avance del Sprint 1: 10 tareas Por hacer y 2 En revisión (S1-06 y S1-07). Ver [evidencia de base de datos](../06-evidencias/2026-10-18_base-datos-sprint-1.md). La fuente es el [plan del sprint](../../sprint-1/README.md) y su relación con los [Issues existentes](SPRINT_BACKLOG_1.md). No se inventan tareas en desarrollo ni resultados terminados.
 
 Es una vista estática: el PNG debe actualizarse cuando existan avances verificados. Las asignaciones son las propuestas del plan; no equivalen a asignaciones verificadas de cuentas de GitHub.
 
@@ -38,4 +38,4 @@ Si el curso pide Daily en video, guardar la grabación en [evidencias](../06-evi
 
 ## Políticas por acordar
 
-El equipo debe acordar los límites de trabajo en progreso (WIP) y de revisión, cómo resolver bloqueos y quién actualiza el PNG. Esos límites todavía no están aprobados; la imagen representa la planificación inicial.
+El equipo debe acordar los límites de trabajo en progreso (WIP) y de revisión, cómo resolver bloqueos y quién actualiza el PNG. Esos límites todavía no están aprobados; la imagen refleja el avance documentado de la base de datos.
