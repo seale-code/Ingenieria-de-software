@@ -12,7 +12,7 @@
 
 <br>
 
-[📘 Documentación](docs/) · [📋 Issues](https://github.com/seale-code/Ingenieria-de-software/issues) · [🗂️ Tablero del proyecto](https://github.com/users/seale-code/projects/1)
+[📘 Documentación](docs/) · [📋 Issues](https://github.com/seale-code/Ingenieria-de-software/issues) · [🗂️ Tablero del proyecto](docs/07-scrum/tablero-kanban-sprint-1.png)
 
 </div>
 
@@ -84,27 +84,13 @@ En cada sprint realizaremos planificación, seguimiento del trabajo, revisión d
 
 ## 🗂️ Tablero Kanban
 
-Utilizamos un **tablero Kanban como apoyo visual para gestionar los sprints de Scrum**.
+El tablero del Sprint 1 está guardado como PNG en este repositorio y se muestra aquí mismo.
 
-### [🚀 Abrir tablero del proyecto](https://github.com/users/seale-code/projects/1)
+![Tablero Kanban del Sprint 1](docs/07-scrum/tablero-kanban-sprint-1.png)
 
-También está vinculado a la pestaña **Projects** de este repositorio.
+Las 12 tareas están en **Por hacer**, según la planificación inicial. Las demás columnas son **En progreso**, **En revisión** y **Terminado**. Es una vista estática; actualizar el PNG cuando cambie el avance, después de verificar revisión y pruebas.
 
-| 📝 Por hacer | 🚧 En progreso | 🔎 En revisión | ✅ Terminado |
-|:---|:---|:---|:---|
-| Actividad pendiente de iniciar. | Actividad en desarrollo. | Trabajo pendiente de revisión y pruebas. | Trabajo revisado y aceptado. |
-
-Las tarjetas se identifican con **[S1]**, **[S2]** o **[S3]**, según su sprint, y el nombre del responsable propuesto.
-
-**Reglas del equipo:**
-
-- Mover las tarjetas manualmente según el avance real.
-- Definir un responsable y criterios de aceptación por actividad.
-- Revisar y probar el trabajo antes de marcarlo como terminado.
-- Registrar bloqueos y coordinar las dependencias entre integrantes.
-- Las tarjetas borrador pueden convertirse en Issues de este repositorio para gestionar asignaciones y discusiones.
-
-> El repositorio y el Project tienen permisos de acceso independientes. Cada integrante debe tener acceso a ambos para colaborar.
+[Reglas y detalle del tablero](docs/07-scrum/TABLERO.md) · [Tareas, responsables y PBI](docs/07-scrum/SPRINT_BACKLOG_1.md)
 
 ## 👥 Nuestro equipo
 

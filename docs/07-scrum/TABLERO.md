@@ -1,45 +1,37 @@
-# Tablero de seguimiento
+# Tablero Kanban — Sprint 1
 
 [← Guía Scrum](README.md) · [Sprint Backlog 1](SPRINT_BACKLOG_1.md)
 
-## Abrir el tablero
+## Tablero en PNG
 
-**[GitHub Projects — tablero del equipo](https://github.com/users/seale-code/projects/1)**
+![Tablero Kanban del Sprint 1](tablero-kanban-sprint-1.png)
 
-Es el tablero ya enlazado por el repositorio. Esta guía documenta su uso; no es una captura ni certifica el estado actual de cada tarjeta.
+El archivo PNG está guardado en esta misma carpeta del repositorio. Se muestra directamente en esta página, en el README principal y en el README del Sprint 1.
 
-## Elementos relacionados
+**Estado representado:** planificación inicial del Sprint 1, con sus 12 tareas en Por hacer. La fuente es el [plan del sprint](../../sprint-1/README.md) y su relación con los [Issues existentes](SPRINT_BACKLOG_1.md). No se inventan tareas en desarrollo ni resultados terminados.
 
-- [Sprint 1 — Issue #23](https://github.com/seale-code/Ingenieria-de-software/issues/23): 12 tareas existentes.
-- [Sprint 2 — Issue #24](https://github.com/seale-code/Ingenieria-de-software/issues/24): 5 tareas existentes.
-- [Sprint 3 — Issue #25](https://github.com/seale-code/Ingenieria-de-software/issues/25): 5 tareas existentes.
-- [Ver los tres Issues principales](https://github.com/seale-code/Ingenieria-de-software/issues?q=is%3Aissue+Sprint+in%3Atitle).
-- [Product Backlog](PRODUCT_BACKLOG.md): PBI y prioridades; [selección S1](SPRINT_BACKLOG_1.md): tareas y relación con PBI.
-
-Los Issues principales agrupan los sprints; sus sub-issues son tareas de desarrollo. El backlog conserva las necesidades de producto. No se crean 15 Issues adicionales para duplicar esa lista.
+Es una vista estática: el PNG debe actualizarse cuando existan avances verificados. Las asignaciones son las propuestas del plan; no equivalen a asignaciones verificadas de cuentas de GitHub.
 
 ## Columnas y reglas del equipo
 
-| Columna | Cuándo colocar una tarea | Qué registrar |
+| Columna | Cuándo colocar una tarea | Evidencia esperada |
 |---|---|---|
-| Por hacer | Acordada y todavía sin iniciar. | Responsable, sprint, PBI de origen y criterios de aceptación. |
-| En progreso | Se empieza el trabajo real. | Avance y bloqueos, con enlace al trabajo cuando exista. |
-| En revisión | Lista para revisión de otro integrante y pruebas. | Pull Request o entregable, pasos de prueba y resultados. |
-| Terminado | Criterios cumplidos, revisión aprobada, pruebas satisfactorias e integración validada. | Evidencia del resultado y cierre del Issue correspondiente. |
+| Por hacer | Actividad acordada y pendiente de iniciar. | Responsable, PBI de origen y criterios de aceptación. |
+| En progreso | El responsable empieza el trabajo real. | Avance y bloqueos registrados en la tarea. |
+| En revisión | Trabajo listo para revisión por otro integrante y pruebas. | Entregable o Pull Request y resultados de prueba. |
+| Terminado | Criterios cumplidos, revisión aprobada, pruebas satisfactorias e integración validada. | Resultado demostrable y cierre del Issue correspondiente. |
 
-Mover tarjetas manualmente según evidencia. No se presupone automatización entre el cierre del Issue y la columna de Projects: comprobar ambos estados.
+Un bloqueo se registra con causa y próximo paso. No se marca Terminado para ocultar un bloqueo.
 
-Un bloqueo se registra en la tarea indicando causa, persona con quien coordinar y próximo paso. No se marca Terminado para ocultar un bloqueo.
+## Relación con los PBI
 
-## Uso durante el Daily
+Las tarjetas muestran el ID S1, el número del Issue, la actividad, el responsable propuesto y el PBI relacionado. La base de inventario se identifica como parte de PBI-14; las pantallas solo apoyan PBI-08. La relación completa y los criterios pendientes están en el [Sprint Backlog 1](SPRINT_BACKLOG_1.md).
 
-1. Abrir las tareas del sprint activo.
-2. Revisar si el avance permite cumplir el objetivo.
-3. Detectar bloqueos y dependencias entre interfaz, backend y datos.
-4. Ajustar el plan y actualizar tarjetas según el trabajo real.
+## Uso en el Daily y la revisión
 
-Si el curso pide **Daily en video**, guardar el enlace en [evidencias](../06-evidencias/README.md), con fecha y participantes. El tablero apoya la reunión; por sí solo no constituye el video solicitado.
+1. Revisar el tablero y el avance hacia el objetivo del sprint.
+2. Identificar bloqueos y dependencias entre interfaz, backend y datos.
+3. Registrar los cambios de estado con evidencia y actualizar el PNG.
+4. En la Sprint Review, mostrar el entregable y verificar sus criterios antes de aceptar la tarea.
 
-## Uso en la Sprint Review
-
-Abrir una tarea terminada, mostrar su evidencia y verificar los criterios del PBI relacionado. Si una parte sigue pendiente, conservarla visible en el backlog y registrarla en los resultados del sprint.
+Si el curso pide Daily en video, guardar la grabación en [evidencias](../06-evidencias/README.md). El PNG documenta el tablero; la grabación documenta la reunión.

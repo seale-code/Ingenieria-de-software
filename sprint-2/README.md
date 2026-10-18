@@ -1,6 +1,6 @@
 # Sprint 2 — Registro y asignación de pedidos
 
-[← Sprint 1](../sprint-1/README.md) · [Proyecto](../README.md) · [Tablero](https://github.com/users/seale-code/projects/1) · [Sprint 3 →](../sprint-3/README.md)
+[← Sprint 1](../sprint-1/README.md) · [Proyecto](../README.md) · [Tablero](../docs/07-scrum/tablero-kanban-sprint-1.png) · [Sprint 3 →](../sprint-3/README.md)
 
 ## Objetivo
 Registrar pedidos y asignarlos a una sucursal de Inkafarma considerando stock, distancia y capacidad de atención, mediante reglas acordadas y verificables.

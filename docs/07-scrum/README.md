@@ -1,6 +1,8 @@
 # Scrum — PBI, Product Backlog, priorización y tablero
 
-[← Documentación](../README.md) · [Sprint 1](../../sprint-1/README.md) · [Tablero de GitHub Projects](https://github.com/users/seale-code/projects/1)
+[← Documentación](../README.md) · [Sprint 1](../../sprint-1/README.md) · [Tablero Kanban en PNG](tablero-kanban-sprint-1.png)
+
+![Tablero Kanban del Sprint 1](tablero-kanban-sprint-1.png)
 
 ## Qué presentar
 
@@ -11,7 +13,7 @@
 
 ## Cómo se relacionan
 
-**Historia de usuario → PBI del Product Backlog → selección para el sprint → tareas en Issues → seguimiento en Projects → revisión con evidencias.**
+**Historia de usuario → PBI del Product Backlog → selección para el sprint → tareas en Issues → seguimiento en el tablero Kanban → revisión con evidencias.**
 
 Un **PBI (Product Backlog Item)** es un elemento del trabajo del producto. En este backlog se usa un PBI por historia original para conservar su trazabilidad; durante el refinamiento puede dividirse.
 

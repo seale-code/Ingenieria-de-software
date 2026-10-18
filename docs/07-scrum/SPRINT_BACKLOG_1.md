@@ -1,6 +1,6 @@
 # Sprint Backlog 1 — De los PBI a las tareas
 
-[← Guía Scrum](README.md) · [Plan y responsables](../../sprint-1/README.md) · [Issue Sprint 1](https://github.com/seale-code/Ingenieria-de-software/issues/23) · [Tablero](https://github.com/users/seale-code/projects/1)
+[← Guía Scrum](README.md) · [Plan y responsables](../../sprint-1/README.md) · [Issue Sprint 1](https://github.com/seale-code/Ingenieria-de-software/issues/23) · [Tablero](tablero-kanban-sprint-1.png)
 
 ## Objetivo
 
@@ -16,7 +16,7 @@ Fuente: [PDF original](../02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf)
 
 ## Las 12 tareas existentes
 
-Responsables propuestos según el plan; no se infiere asignación a cuentas de GitHub. Estado inicial del plan: Por hacer; consultar Projects e Issues para el avance operativo.
+Responsables propuestos según el plan; no se infiere asignación a cuentas de GitHub. Estado inicial del plan: Por hacer; consultar las evidencias de Issues y actualizar el PNG cuando cambie el estado.
 
 | ID del plan | Issue | Tarea | Responsable propuesto | PBI relacionado | Verificación esperada |
 |---|---|---|---|---|---|

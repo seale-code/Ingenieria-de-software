@@ -1,6 +1,12 @@
 # Sprint 1 — Catálogo, búsqueda y disponibilidad
 
-[← Proyecto](../README.md) · [Tablero Kanban](https://github.com/users/seale-code/projects/1) · [Sprint 2 →](../sprint-2/README.md)
+[← Proyecto](../README.md) · [Tablero Kanban](../docs/07-scrum/tablero-kanban-sprint-1.png) · [Sprint 2 →](../sprint-2/README.md)
+
+## Tablero Kanban
+
+![Tablero Kanban del Sprint 1](../docs/07-scrum/tablero-kanban-sprint-1.png)
+
+Estado de planificación: las 12 tareas están en Por hacer. Actualizar esta imagen según avances verificados.
 
 ## Objetivo
 Permitir al cliente consultar productos y su disponibilidad por sucursal de Inkafarma mediante un flujo integrado de catálogo, búsqueda y filtros.

@@ -1,6 +1,6 @@
 # Sprint 3 — Preparación, entrega y validación del MVP
 
-[← Sprint 2](../sprint-2/README.md) · [Proyecto](../README.md) · [Tablero Kanban](https://github.com/users/seale-code/projects/1)
+[← Sprint 2](../sprint-2/README.md) · [Proyecto](../README.md) · [Tablero Kanban](../docs/07-scrum/tablero-kanban-sprint-1.png)
 
 ## Objetivo
 Completar el flujo de preparación, entrega y seguimiento de pedidos, incorporar soporte básico y validar el MVP mediante una demostración integral.
