@@ -204,3 +204,7 @@ Una actividad estará terminada cuando:
 *Desarrollado en equipo con Scrum y GitHub Projects.*
 
 </div>
+
+## 📋 PBI y planificación del producto
+
+[Guía Scrum: Product Backlog, priorización, Sprint Backlog y tablero](docs/07-scrum/README.md).

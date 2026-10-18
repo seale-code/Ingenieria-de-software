@@ -59,9 +59,8 @@ Completar al ejecutar el sprint; no marcar funcionalidades sin validarlas.
 - Qué debemos mejorar: por completar.
 - Acción de mejora, responsable y fecha: por completar.
 
+## PBI, priorización y trazabilidad
 
+[Product Backlog](../docs/07-scrum/PRODUCT_BACKLOG.md) · [Priorización MoSCoW](../docs/07-scrum/PRIORIZACION.md) · [Relación de las 12 tareas con los PBI](../docs/07-scrum/SPRINT_BACKLOG_1.md) · [Reglas del tablero](../docs/07-scrum/TABLERO.md).
 
-
-
-
-
+La selección se relaciona principalmente con HU01 y la base técnica de HU14. El orden por cercanía de HU01 y los movimientos completos de inventario de HU14 requieren refinamiento; las tareas existentes no acreditan cobertura completa de esas historias.

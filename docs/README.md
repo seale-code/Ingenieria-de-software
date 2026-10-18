@@ -22,3 +22,7 @@ Acceder desde la pestaña Projects del repositorio. Mover manualmente las tarjet
 
 ## Terminado
 Criterios de aceptación cumplidos, revisión de otro integrante, pruebas satisfactorias y resultado demostrable. Guardar acuerdos, revisión y retrospectiva de cada sprint.
+
+## PBI y gestión del backlog
+
+[Guía Scrum](07-scrum/README.md) · [Product Backlog](07-scrum/PRODUCT_BACKLOG.md) · [Priorización MoSCoW](07-scrum/PRIORIZACION.md) · [Sprint Backlog 1](07-scrum/SPRINT_BACKLOG_1.md) · [Tablero](07-scrum/TABLERO.md).
