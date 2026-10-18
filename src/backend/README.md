@@ -1,6 +1,6 @@
 # Backend
 
-Servidor y API de Inkafarma. Lenguaje y framework por definir.
+Servidor y API de Inkafarma. Propuesta: Python con Flask; aún sin servidor implementado.
 
 Organización prevista: src/ para lógica del negocio, acceso a datos y endpoints; tests/ para pruebas del servidor.
 

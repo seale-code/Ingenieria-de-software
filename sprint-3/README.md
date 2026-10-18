@@ -1,6 +1,6 @@
 # Sprint 3 — Preparación, entrega y validación del MVP
 
-[← Sprint 2](../sprint-2/README.md) · [Proyecto](../README.md) · [Tablero Kanban](../docs/07-scrum/tablero-kanban-sprint-1.png)
+[← Sprint 2](../sprint-2/README.md) · [Proyecto](../README.md) · [Tablero S1 (referencia)](../docs/07-scrum/tablero-kanban-sprint-1.png)
 
 ## Objetivo
 Completar el flujo de preparación, entrega y seguimiento de pedidos, incorporar soporte básico y validar el MVP mediante una demostración integral.
@@ -20,9 +20,9 @@ Completar el flujo de preparación, entrega y seguimiento de pedidos, incorporar
 | S3-05 | Sebastian Calderon | Validar MVP, corregir errores y preparar demostración | Ejecutar flujo completo, documentar resultados y coordinar correcciones con sus responsables. | Por hacer |
 
 ## Entregables y ubicación
-- [Frontend](../frontend/): preparación y seguimiento.
-- [Backend](../backend/): estados, entrega y soporte.
-- [Base de datos](../database/): repartidores, entregas e historial.
+- [Frontend](../src/frontend/): preparación y seguimiento.
+- [Backend](../src/backend/): estados, entrega y soporte.
+- [Base de datos](../src/database/): repartidores, entregas e historial.
 - [Pruebas](../tests/): pruebas de integración y aceptación.
 - [Documentación](../docs/): guía de uso, limitaciones y guion de demostración.
 

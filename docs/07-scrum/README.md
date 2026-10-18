@@ -28,4 +28,4 @@ El **Product Backlog** reúne y ordena el trabajo del producto. El **Sprint Back
 
 Los resúmenes de los PBI se derivan del PDF; las prioridades y el orden son una **propuesta de planificación pendiente de validación por el equipo/Product Owner**. No hay estimaciones ni fechas acordadas. La documentación no acredita funcionalidades implementadas.
 
-El archivo [REQUISITOS.md](../01-requisitos/REQUISITOS.md) contiene además ventas, roles y recojo. Es necesario conciliarlo con las historias y el alcance actual antes de incorporar nuevos compromisos al sprint.
+Los [requisitos vigentes](../01-requisitos/REQUISITOS.md) se organizan por sprint y señalan cobertura parcial. Los documentos iniciales de ventas y recojo están conservados en el [histórico](../00-historico/README.md). Consultar la [revisión de cumplimiento](../ESTADO_Y_PENDIENTES.md) antes de declarar un entregable completo.

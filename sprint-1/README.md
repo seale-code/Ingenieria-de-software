@@ -14,7 +14,7 @@ Permitir al cliente consultar productos y su disponibilidad por sucursal de Inka
 ## Planificación
 - Inicio y cierre: por acordar.
 - Estado: planificación; completar avances con evidencias reales.
-- Tecnologías: por acordar con el equipo.
+- Propuesta técnica: HTML/CSS/JavaScript, Python/Flask y SQLite; implementación pendiente.
 
 ## Actividades y responsables propuestos
 | ID | Responsable | Actividad | Criterio de aceptación | Estado |
@@ -33,9 +33,9 @@ Permitir al cliente consultar productos y su disponibilidad por sucursal de Inka
 | S1-12 | Sebastian Calderon | Probar flujo y registrar errores | Registra resultados y reporta defectos reproducibles. | Por hacer |
 
 ## Ubicación de los entregables
-- [Frontend](../frontend/): pantallas y filtros.
-- [Backend](../backend/): consultas y servicios.
-- [Base de datos](../database/): modelo, scripts y datos ficticios.
+- [Frontend](../src/frontend/): pantallas y filtros.
+- [Backend](../src/backend/): consultas y servicios.
+- [Base de datos](../src/database/): modelo, scripts y datos ficticios.
 - [Pruebas](../tests/): casos, resultados y evidencias.
 - [Documentación](../docs/): diseños y acuerdos.
 

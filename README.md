@@ -7,8 +7,8 @@
 
 ![Proyecto académico](https://img.shields.io/badge/Proyecto-Académico-127A50?style=for-the-badge)
 ![Metodología](https://img.shields.io/badge/Scrum-3%20Sprints-F3C623?style=for-the-badge&labelColor=126B48)
-![Estado](https://img.shields.io/badge/Estado-En%20desarrollo-2E86AB?style=for-the-badge)
-![GitHub](https://img.shields.io/badge/Gestión-GitHub%20Projects-24292F?style=for-the-badge&logo=github)
+**Estado: planificación documentada; código pendiente.**
+
 
 <br>
 
@@ -17,6 +17,19 @@
 </div>
 
 ---
+
+## Empezar aquí
+
+| Consulta | Documento |
+|---|---|
+| Qué está listo y qué falta | [Revisión y pendientes](docs/ESTADO_Y_PENDIENTES.md) |
+| Documentación en orden | [Índice](docs/README.md) |
+| Necesidades del producto | [Historias originales](docs/02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf) y [Product Backlog](docs/07-scrum/PRODUCT_BACKLOG.md) |
+| Prioridades y trabajo del sprint | [MoSCoW](docs/07-scrum/PRIORIZACION.md) y [Sprint Backlog 1](docs/07-scrum/SPRINT_BACKLOG_1.md) |
+| Planes | [Sprint 1](sprint-1/README.md) · [Sprint 2](sprint-2/README.md) · [Sprint 3](sprint-3/README.md) |
+| Validación | [Casos de prueba](docs/05-pruebas/CASOS_DE_PRUEBA.md) y [evidencias](docs/06-evidencias/README.md) |
+
+**Todavía no hay una aplicación ejecutable.** Las carpetas de código contienen guías; la implementación, instalación y pruebas están pendientes.
 
 ## 🌿 Sobre nuestro proyecto
 
@@ -48,7 +61,7 @@ La solución contempla interfaces web y móvil. La cobertura concreta de cada pl
 2. Organizar el registro y la asignación de pedidos.
 3. Mantener la trazabilidad desde la solicitud hasta la entrega.
 4. Validar un flujo completo mediante pruebas y una demostración del MVP.
-5. Organizar el trabajo colaborativo mediante **Scrum y GitHub Projects**.
+5. Organizar el trabajo colaborativo mediante **Scrum, Issues y tablero Kanban**.
 
 ## 🔄 Flujo funcional previsto
 
@@ -113,9 +126,9 @@ La siguiente distribución es una propuesta inicial; todos colaboran en las revi
 
 | Ruta | Contenido |
 |:---|:---|
-| [`frontend/`](frontend/) | Interfaz web, pantallas, componentes y conexión con el backend. |
-| [`backend/`](backend/) | API, reglas del negocio y acceso a datos. |
-| [`database/`](database/) | Modelo de datos, scripts y datos ficticios de prueba. |
+| [`src/frontend/`](src/frontend/) | Interfaz web, pantallas, componentes y conexión con el backend. |
+| [`src/backend/`](src/backend/) | API, reglas del negocio y acceso a datos. |
+| [`src/database/`](src/database/) | Modelo de datos, scripts y datos ficticios de prueba. |
 | [`tests/`](tests/) | Casos de prueba, pruebas de integración y evidencias. |
 | [`docs/`](docs/) | Requisitos, historias de usuario, diagramas y acuerdos del equipo. |
 | `README.md` | Presentación y guía general del proyecto. |
@@ -125,15 +138,15 @@ Cada carpeta contiene una guía inicial para orientar el desarrollo.
 ## 🧰 Tecnologías y herramientas
 
 - **Control de versiones:** Git y GitHub.
-- **Gestión del trabajo:** GitHub Projects e Issues.
+- **Gestión del trabajo:** Issues y tablero Kanban en PNG dentro del repositorio.
 - **Revisión de cambios:** Pull Requests.
-- **Frontend, backend y base de datos:** tecnologías pendientes de elección por el equipo.
+- **Propuesta de arranque:** HTML/CSS/JavaScript, Python con Flask y SQLite.
 
-No se establece todavía un framework o motor de base de datos obligatorio.
+La propuesta técnica aún no tiene código ni configuración en el repositorio. La arquitectura, las versiones y los comandos se documentarán al iniciar la implementación.
 
 ## ▶️ Comenzar a trabajar
 
-1. Solicita acceso al repositorio y al Project.
+1. Solicita acceso al repositorio.
 2. Clona el repositorio:
 
    ```bash
@@ -168,7 +181,7 @@ Una actividad estará terminada cuando:
 
 - [x] Crear el repositorio del equipo.
 - [x] Organizar las carpetas iniciales.
-- [x] Vincular el tablero a Projects del repositorio.
+- [x] Guardar y mostrar el tablero Kanban del Sprint 1 en PNG.
 - [x] Cargar las actividades propuestas de los tres sprints.
 - [ ] Completar accesos y asignaciones a cuentas de GitHub.
 - [ ] Acordar tecnologías, fechas y criterios de aceptación.
@@ -187,10 +200,6 @@ Una actividad estará terminada cuando:
 
 **Proyecto académico de Ingeniería de Software • 2026**
 
-*Desarrollado en equipo con Scrum y GitHub Projects.*
+*Desarrollado en equipo con Scrum y tablero Kanban.*
 
 </div>
-
-## 📋 PBI y planificación del producto
-
-[Guía Scrum: Product Backlog, priorización, Sprint Backlog y tablero](docs/07-scrum/README.md).

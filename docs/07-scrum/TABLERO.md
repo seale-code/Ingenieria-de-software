@@ -35,3 +35,7 @@ Las tarjetas muestran el ID S1, el número del Issue, la actividad, el responsab
 4. En la Sprint Review, mostrar el entregable y verificar sus criterios antes de aceptar la tarea.
 
 Si el curso pide Daily en video, guardar la grabación en [evidencias](../06-evidencias/README.md). El PNG documenta el tablero; la grabación documenta la reunión.
+
+## Políticas por acordar
+
+El equipo debe acordar los límites de trabajo en progreso (WIP) y de revisión, cómo resolver bloqueos y quién actualiza el PNG. Esos límites todavía no están aprobados; la imagen representa la planificación inicial.

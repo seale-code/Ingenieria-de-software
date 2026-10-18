@@ -1,22 +1,29 @@
-# Modelo relacional propuesto
+# Modelo de datos conceptual por sprint
 
-```mermaid
-erDiagram
-    USUARIOS { int id PK string nombre string rol string clave_hash }
-    PRODUCTOS { int id PK string nombre decimal precio int stock_minimo }
-    INVENTARIO { int id PK int producto_id FK int cantidad int reservada }
-    VENTAS { int id PK int usuario_id FK datetime fecha decimal total }
-    DETALLE_VENTA { int id PK int venta_id FK int producto_id FK int cantidad decimal precio }
-    PEDIDOS { int id PK int usuario_id FK string codigo string estado datetime fecha }
-    DETALLE_PEDIDO { int id PK int pedido_id FK int producto_id FK int cantidad decimal precio }
-    MOVIMIENTOS { int id PK int producto_id FK string tipo int cantidad datetime fecha }
-    PRODUCTOS ||--|| INVENTARIO : tiene
-    PRODUCTOS ||--o{ DETALLE_VENTA : incluye
-    VENTAS ||--|{ DETALLE_VENTA : contiene
-    PRODUCTOS ||--o{ DETALLE_PEDIDO : incluye
-    PEDIDOS ||--|{ DETALLE_PEDIDO : contiene
-    PRODUCTOS ||--o{ MOVIMIENTOS : genera
-    USUARIOS ||--o{ VENTAS : registra
-```
+[← Documentación](../README.md) · [Base de datos](../../src/database/README.md)
 
-En una implantación real, adicionar sucursales, lotes, vencimientos, auditoría detallada y validaciones regulatorias.
+## Sprint 1: catálogo y disponibilidad por sucursal
+
+| Entidad | Datos mínimos previstos | Relación / regla |
+|---|---|---|
+| Categoría | Identificador, nombre | Una categoría agrupa productos; apoya el filtro del plan S1. |
+| Producto | Identificador, nombre, categoría | Un producto puede tener inventario en varias sucursales. |
+| Sucursal | Identificador, nombre y datos de ubicación por definir | Una sucursal mantiene inventario de varios productos. |
+| Inventario | Producto, sucursal, cantidad de stock | Par producto–sucursal único y cantidad no negativa. |
+
+**Producto 1:N Inventario; Sucursal 1:N Inventario.** La disponibilidad depende del par producto/sucursal; no se usa un único stock global por producto.
+
+Las coordenadas y la referencia del usuario para cercanía deben definirse al refinar HU01. El esquema SQL y los datos de prueba todavía no existen.
+
+## Extensiones previstas
+
+| Sprint | Entidades o datos del plan | Pendientes |
+|---|---|---|
+| 2 | Pedido, DetallePedido, sucursal asignada, reserva de stock | Integridad, concurrencia, plazo de reserva y liberación. |
+| 3 | Repartidor, Entrega, HistorialEstado e incidencias asociadas al pedido | Estados, permisos, fechas y reglas de confirmación. |
+
+## Fuente y límite
+
+Fuente: tareas #6 y #3 de S1, #21 de S2 y #19 de S3; [HU14](../02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf) describe inventario completo, aún sin descomposición suficiente.
+
+Este modelo es una guía conceptual. Falta elaborar y validar el diagrama entidad-relación detallado y los scripts antes de cerrar la tarea de modelado. El [modelo histórico](../00-historico/03-diagramas/MODELO_DATOS.md) se conserva como referencia y no se usa para justificar disponibilidad por sucursal.

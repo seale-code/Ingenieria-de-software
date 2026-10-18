@@ -1,6 +1,6 @@
 # Sprint 2 — Registro y asignación de pedidos
 
-[← Sprint 1](../sprint-1/README.md) · [Proyecto](../README.md) · [Tablero](../docs/07-scrum/tablero-kanban-sprint-1.png) · [Sprint 3 →](../sprint-3/README.md)
+[← Sprint 1](../sprint-1/README.md) · [Proyecto](../README.md) · [Tablero S1 (referencia)](../docs/07-scrum/tablero-kanban-sprint-1.png) · [Sprint 3 →](../sprint-3/README.md)
 
 ## Objetivo
 Registrar pedidos y asignarlos a una sucursal de Inkafarma considerando stock, distancia y capacidad de atención, mediante reglas acordadas y verificables.
@@ -20,9 +20,9 @@ Registrar pedidos y asignarlos a una sucursal de Inkafarma considerando stock, d
 | S2-05 | Sebastian Calderon | Integrar y probar pedidos y asignación | Validar pedido correcto, datos inválidos, stock insuficiente y reservas concurrentes. | Por hacer |
 
 ## Entregables y ubicación
-- [Frontend](../frontend/): formulario, resumen y confirmación.
-- [Backend](../backend/): registro, validación y asignación.
-- [Base de datos](../database/): pedidos, detalles y reservas.
+- [Frontend](../src/frontend/): formulario, resumen y confirmación.
+- [Backend](../src/backend/): registro, validación y asignación.
+- [Base de datos](../src/database/): pedidos, detalles y reservas.
 - [Documentación](../docs/): reglas y ejemplos de asignación.
 - [Pruebas](../tests/): resultados y defectos encontrados.
 

@@ -1,6 +1,6 @@
 # Frontend
 
-Interfaz web del sistema Inkafarma. Framework por definir con el equipo.
+Interfaz web del sistema Inkafarma. Propuesta: HTML/CSS/JavaScript; aún sin archivos de implementación.
 
 Organización prevista: src/ para pantallas, componentes y servicios; public/ para recursos estáticos.
 
