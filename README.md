@@ -20,7 +20,7 @@
 
 ## Empezar aquí
 
-| Consulta | Documento |
+| Consulta | -Documento |
 |---|---|
 | Qué está listo y qué falta | [Revisión y pendientes](docs/ESTADO_Y_PENDIENTES.md) |
 | Documentación en orden | [Índice](docs/README.md) |
