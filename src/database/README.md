@@ -6,7 +6,7 @@ Implementación de las tareas S1-06 (#6, modelo) y S1-07 (#3, creación y datos 
 
 ## Requisitos
 
-Python 3.10 o superior con SQLite 3.24 o superior. Solo utiliza la biblioteca estándar; no requiere instalar paquetes ni un servidor de base de datos.
+Python 3.10 o superior con SQLite 3.24 o superior. Solo utiliza la biblioteca estándar; no requiere instalar paquetes ni un servidor de base de datos adicional.
 
 Ejecutar los siguientes comandos **desde la raíz del repositorio**. En Windows se puede usar `py` en lugar de `python`.
 
