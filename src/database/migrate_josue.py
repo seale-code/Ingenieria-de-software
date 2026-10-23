@@ -1,4 +1,4 @@
-"""Migraciones incrementales de las tareas de Josue, sin destruir la BD v1.
+"""Migraciones incrementales de las tareas de Josue, sin destruir la BD v1
 
 Uso (desde la raíz del proyecto):
     python -m src.database.migrate_josue --db data/inkafarma.sqlite3
