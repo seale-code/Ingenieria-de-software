@@ -1,0 +1,17 @@
+test_conserva_integridad_relacional (test_josue_migrations.MigracionesJosueTests.test_conserva_integridad_relacional) ... ok
+test_consumir_reserva_descuenta_stock_una_sola_vez (test_josue_migrations.MigracionesJosueTests.test_consumir_reserva_descuenta_stock_una_sola_vez) ... ok
+test_entrega_asocia_pedido_repartidor_y_fechas (test_josue_migrations.MigracionesJosueTests.test_entrega_asocia_pedido_repartidor_y_fechas) ... ok
+test_entrega_rechaza_incoherencia_de_fechas (test_josue_migrations.MigracionesJosueTests.test_entrega_rechaza_incoherencia_de_fechas) ... ok
+test_historial_creacion_y_cambios_sin_duplicaciones (test_josue_migrations.MigracionesJosueTests.test_historial_creacion_y_cambios_sin_duplicaciones) ... ok
+test_liberar_reserva_permite_nueva_reserva (test_josue_migrations.MigracionesJosueTests.test_liberar_reserva_permite_nueva_reserva) ... ok
+test_migracion_idempotente_conserva_datos_sprint1 (test_josue_migrations.MigracionesJosueTests.test_migracion_idempotente_conserva_datos_sprint1) ... ok
+test_no_se_puede_reservar_pedido_cancelado (test_josue_migrations.MigracionesJosueTests.test_no_se_puede_reservar_pedido_cancelado) ... ok
+test_rechaza_bases_ajenas (test_josue_migrations.MigracionesJosueTests.test_rechaza_bases_ajenas) ... ok
+test_relaciones_cantidad_y_sucursal_protegidas (test_josue_migrations.MigracionesJosueTests.test_relaciones_cantidad_y_sucursal_protegidas) ... ok
+test_reserva_valida_y_no_sobreventa (test_josue_migrations.MigracionesJosueTests.test_reserva_valida_y_no_sobreventa) ... ok
+test_reservas_no_pueden_superar_stock_si_se_modifica_inventario (test_josue_migrations.MigracionesJosueTests.test_reservas_no_pueden_superar_stock_si_se_modifica_inventario) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.148s
+
+OK
