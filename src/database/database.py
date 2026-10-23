@@ -8,12 +8,13 @@ SQL_DIRECTORY = Path(__file__).resolve().parent
 DEFAULT_DATABASE = SQL_DIRECTORY.parents[1] / "data" / "inkafarma.sqlite3"
 APPLICATION_ID = 1229867841
 SCHEMA_VERSION = 1
+SUPPORTED_SCHEMA_VERSIONS = (1, 2, 3)
 
 
 def _validate_database(db: sqlite3.Connection) -> None:
     if db.execute("PRAGMA application_id").fetchone()[0] != APPLICATION_ID:
         raise ValueError("La base no pertenece a este esquema. Usa init sobre una ruta nueva.")
-    if db.execute("PRAGMA user_version").fetchone()[0] != SCHEMA_VERSION:
+    if db.execute("PRAGMA user_version").fetchone()[0] not in SUPPORTED_SCHEMA_VERSIONS:
         raise ValueError("Versión de base de datos no soportada; no se modificaron los datos.")
 
 
