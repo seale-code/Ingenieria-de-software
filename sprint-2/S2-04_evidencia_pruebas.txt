@@ -1,0 +1,98 @@
+EVIDENCIA DE PRUEBAS LOCALES — SPRINT 2 / S2-04
+Responsable: Anderson Delerna
+Fecha de ejecución: 2026-10-29
+Entorno: Python 3, SQLite, reproducción local del contrato del esquema S1 descrito en el repositorio público.
+Nota: NO se ejecutaron en la rama remota ni se abrió/mezcló un PR.
+
+COMANDO: python -m unittest discover -s tests -p test_pedidos_s2.py -v
+test_01_pedido_valido_y_reserva (test_pedidos_s2.PedidosS2Test.test_01_pedido_valido_y_reserva) ... ok
+test_02_elige_sucursal_que_tiene_producto (test_pedidos_s2.PedidosS2Test.test_02_elige_sucursal_que_tiene_producto) ... ok
+test_03_sin_stock_persistido_sin_reservar (test_pedidos_s2.PedidosS2Test.test_03_sin_stock_persistido_sin_reservar) ... ok
+test_04_stock_parcial_no_hace_reservas (test_pedidos_s2.PedidosS2Test.test_04_stock_parcial_no_hace_reservas) ... ok
+test_05_capacidad_agotada (test_pedidos_s2.PedidosS2Test.test_05_capacidad_agotada) ... ok
+test_06_capacidad_cero (test_pedidos_s2.PedidosS2Test.test_06_capacidad_cero) ... ok
+test_07_cantidad_invalidada_antes_de_insertar (test_pedidos_s2.PedidosS2Test.test_07_cantidad_invalidada_antes_de_insertar) ... ok
+test_08_codigo_inexistente (test_pedidos_s2.PedidosS2Test.test_08_codigo_inexistente) ... ok
+test_09_cliente_vacio (test_pedidos_s2.PedidosS2Test.test_09_cliente_vacio) ... ok
+test_10_coordenadas_invalidas (test_pedidos_s2.PedidosS2Test.test_10_coordenadas_invalidas) ... ok
+test_11_lineas_duplicadas_se_agrupan (test_pedidos_s2.PedidosS2Test.test_11_lineas_duplicadas_se_agrupan) ... ok
+test_12_agregacion_no_sobrevende (test_pedidos_s2.PedidosS2Test.test_12_agregacion_no_sobrevende) ... ok
+test_13_operacion_atomica_revierte_si_falla_reserva (test_pedidos_s2.PedidosS2Test.test_13_operacion_atomica_revierte_si_falla_reserva) ... ok
+test_14_dos_pedidos_concurrentes_no_sobrevenden (test_pedidos_s2.PedidosS2Test.test_14_dos_pedidos_concurrentes_no_sobrevenden) ... ok
+test_15_inicializacion_idempotente (test_pedidos_s2.PedidosS2Test.test_15_inicializacion_idempotente) ... ok
+test_16_modulo_sin_inicializar (test_pedidos_s2.PedidosS2Test.test_16_modulo_sin_inicializar) ... ok
+test_17_pedido_inexistente (test_pedidos_s2.PedidosS2Test.test_17_pedido_inexistente) ... ok
+test_18_sucursal_inexistente (test_pedidos_s2.PedidosS2Test.test_18_sucursal_inexistente) ... ok
+test_19_distancia_y_desempate (test_pedidos_s2.PedidosS2Test.test_19_distancia_y_desempate) ... ok
+test_20_no_modifica_stock_en_sucursal_ajena (test_pedidos_s2.PedidosS2Test.test_20_no_modifica_stock_en_sucursal_ajena) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.431s
+
+OK
+
+DEMOSTRACIÓN CLI
+Comando: python -m src.backend.pedidos_s2_cli --db /mnt/data/s2test/data/demo_s2.sqlite3 init
+{
+  "resultado": "Módulo S2-04 inicializado",
+  "base": "/mnt/data/s2test/data/demo_s2.sqlite3"
+}
+Comando: python -m src.backend.pedidos_s2_cli --db ... capacidad --sucursal DEMO-NORTE --max-pedidos 3
+{
+  "sucursal": "DEMO-NORTE",
+  "capacidad_maxima": 3
+}
+{
+  "sucursal": "DEMO-SUR",
+  "capacidad_maxima": 3
+}
+Comando: python -m src.backend.pedidos_s2_cli --db ... registrar --cliente "Cliente demo" --lat -12 --lon -77.05 --item DEMO-A:2
+{
+  "pedido_id": 1,
+  "estado": "ASIGNADO",
+  "sucursal_codigo": "DEMO-NORTE",
+  "sucursal_nombre": "Norte",
+  "distancia_km": 0.0,
+  "motivo": null,
+  "items": [
+    {
+      "producto_codigo": "DEMO-A",
+      "cantidad": 2
+    }
+  ]
+}
+Comando: python -m src.backend.pedidos_s2_cli --db ... registrar --cliente "Cliente demo" --lat -12 --lon -77.05 --item DEMO-C:1
+{
+  "pedido_id": 2,
+  "estado": "SIN_ASIGNAR",
+  "sucursal_codigo": null,
+  "sucursal_nombre": null,
+  "distancia_km": null,
+  "motivo": "Ninguna sucursal tiene stock suficiente y capacidad libre.",
+  "items": [
+    {
+      "producto_codigo": "DEMO-C",
+      "cantidad": 1
+    }
+  ]
+}
+Comando: python -m src.backend.pedidos_s2_cli --db ... consultar --pedido 1
+{
+  "id": 1,
+  "cliente": "Cliente demo",
+  "latitud": -12.0,
+  "longitud": -77.05,
+  "estado": "ASIGNADO",
+  "creado_en": "2026-10-29T16:26:14.106Z",
+  "distancia_km": 0.0,
+  "motivo_sin_asignar": null,
+  "sucursal_codigo": "DEMO-NORTE",
+  "sucursal_nombre": "Norte",
+  "items": [
+    {
+      "producto_codigo": "DEMO-A",
+      "cantidad": 2,
+      "reservada": 1
+    }
+  ]
+}
