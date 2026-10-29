@@ -4,6 +4,8 @@
 
 **S1-CP-09: cubierto por pruebas automáticas aprobadas de la base de datos.** Los casos de interfaz e integración siguen pendientes; las consultas por consola no acreditan pantallas. Ver [evidencia](../06-evidencias/2026-10-18_base-datos-sprint-1.md).
 
+La especificación detallada de Sebastian para #14 está en [S1-10: pasos, datos y resultados esperados](S1-10-casos-prueba-catalogo.md).
+
 ## Datos ficticios propuestos para las pruebas
 
 Producto A de categoría X: sucursal Norte con stock 5 y Sur con stock 0. Producto B de categoría Y: Norte con stock 0 y Sur con stock 3. Producto C de categoría X: sin stock en ambas sucursales. Se cargan con `python -m src.database init --demo`, usando códigos DEMO-A/B/C, DEMO-X/Y y DEMO-NORTE/SUR.
