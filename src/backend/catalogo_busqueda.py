@@ -7,7 +7,7 @@ SQLite del equipo, así que no necesito crear otra base para mis consultas.
 from src.database.database import DEFAULT_DATABASE, connect_database, get_stock
 
 
-def buscar_productos(nombre: str = "") -> list[dict]:
+def buscar_productos(nombre: str = "", *, db_path=DEFAULT_DATABASE) -> list[dict]:
     """Busco productos por nombre o muestro el catálogo si no paso un filtro.
 
     Hago una búsqueda parcial sin diferenciar mayúsculas y minúsculas.
@@ -30,13 +30,13 @@ def buscar_productos(nombre: str = "") -> list[dict]:
     """
 
     # Paso el nombre como parámetro, sin concatenarlo al texto de SQL.
-    with connect_database(DEFAULT_DATABASE, read_only=True) as conexion:
+    with connect_database(db_path, read_only=True) as conexion:
         conexion.create_function("casefold", 1, str.casefold, deterministic=True)
         filas = conexion.execute(consulta, (nombre.strip(),)).fetchall()
         return [dict(fila) for fila in filas]
 
 
-def consultar_stock(sucursal: str, producto: str | None = None) -> list[dict]:
+def consultar_stock(sucursal: str, producto: str | None = None, *, db_path=DEFAULT_DATABASE) -> list[dict]:
     """Consulto el inventario de una sucursal y, opcionalmente, un producto.
 
     Si la búsqueda no devuelve registros, retorno una lista vacía. No lo
@@ -48,7 +48,7 @@ def consultar_stock(sucursal: str, producto: str | None = None) -> list[dict]:
         raise ValueError("El código del producto no puede estar vacío")
 
     # Reutilizo la consulta de stock que ya tiene nuestro proyecto.
-    filas = get_stock(DEFAULT_DATABASE, branch=sucursal.strip())
+    filas = get_stock(db_path, branch=sucursal.strip())
     if producto is None:
         return filas
 
