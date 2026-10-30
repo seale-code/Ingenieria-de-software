@@ -1,0 +1,85 @@
+test_base_ausente_no_se_crea_ni_filtra_ruta (test_api_catalogo.CatalogoApiTests.test_base_ausente_no_se_crea_ni_filtra_ruta) ... [2026-10-29 22:26:21,376] ERROR in app: Consulta de catálogo no disponible: ValueError
+[2026-10-29 22:26:21,378] ERROR in app: Consulta de catálogo no disponible: ValueError
+[2026-10-29 22:26:21,378] ERROR in app: Consulta de catálogo no disponible: ValueError
+ok
+test_base_invalida (test_api_catalogo.CatalogoApiTests.test_base_invalida) ... [2026-10-29 22:26:21,390] ERROR in app: Consulta de catálogo no disponible: DatabaseError
+ok
+test_base_vacia (test_api_catalogo.CatalogoApiTests.test_base_vacia) ... ok
+test_busqueda_exacta_parcial_y_vacia (test_api_catalogo.CatalogoApiTests.test_busqueda_exacta_parcial_y_vacia) ... ok
+test_catalogo_sin_duplicados (test_api_catalogo.CatalogoApiTests.test_catalogo_sin_duplicados) ... ok
+test_categoria_vacia_y_producto_sin_inventario (test_api_catalogo.CatalogoApiTests.test_categoria_vacia_y_producto_sin_inventario) ... ok
+test_categoria_y_limpiar (test_api_catalogo.CatalogoApiTests.test_categoria_y_limpiar) ... ok
+test_combinacion_de_todos_los_filtros (test_api_catalogo.CatalogoApiTests.test_combinacion_de_todos_los_filtros) ... ok
+test_compatible_con_migraciones_de_josue (test_api_catalogo.CatalogoApiTests.test_compatible_con_migraciones_de_josue) ... ok
+test_disponibles_por_sucursal (test_api_catalogo.CatalogoApiTests.test_disponibles_por_sucursal) ... ok
+test_errores_de_peticion (test_api_catalogo.CatalogoApiTests.test_errores_de_peticion) ... ok
+test_pantalla_y_recursos (test_api_catalogo.CatalogoApiTests.test_pantalla_y_recursos) ... /workspace/scratch/0855a87b467f/Ingenieria-de-software/tests/test_api_catalogo.py:31: ResourceWarning: unclosed file <_io.BufferedReader name='/workspace/scratch/0855a87b467f/Ingenieria-de-software/src/frontend/index.html'>
+  self.assertEqual(self.client.get(path).status_code, 200)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/workspace/scratch/0855a87b467f/Ingenieria-de-software/tests/test_api_catalogo.py:31: ResourceWarning: unclosed file <_io.BufferedReader name='/workspace/scratch/0855a87b467f/Ingenieria-de-software/src/frontend/styles.css'>
+  self.assertEqual(self.client.get(path).status_code, 200)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/workspace/scratch/0855a87b467f/Ingenieria-de-software/tests/test_api_catalogo.py:31: ResourceWarning: unclosed file <_io.BufferedReader name='/workspace/scratch/0855a87b467f/Ingenieria-de-software/src/frontend/catalogo.js'>
+  self.assertEqual(self.client.get(path).status_code, 200)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_stock_actualizado_no_cacheado (test_api_catalogo.CatalogoApiTests.test_stock_actualizado_no_cacheado) ... ok
+test_stock_y_cero (test_api_catalogo.CatalogoApiTests.test_stock_y_cero) ... ok
+test_unicode_y_sql_literal (test_api_catalogo.CatalogoApiTests.test_unicode_y_sql_literal) ... ok
+test_busqueda_parcial_sin_distinguir_mayusculas (test_catalogo_busqueda.TestCatalogoBusqueda.test_busqueda_parcial_sin_distinguir_mayusculas) ... ok
+test_busqueda_sin_resultados (test_catalogo_busqueda.TestCatalogoBusqueda.test_busqueda_sin_resultados) ... ok
+test_catalogo_completo (test_catalogo_busqueda.TestCatalogoBusqueda.test_catalogo_completo) ... ok
+test_entrada_sql_se_trata_como_texto (test_catalogo_busqueda.TestCatalogoBusqueda.test_entrada_sql_se_trata_como_texto) ... ok
+test_stock_de_una_sucursal_y_un_producto (test_catalogo_busqueda.TestCatalogoBusqueda.test_stock_de_una_sucursal_y_un_producto) ... ok
+test_stock_sin_registro (test_catalogo_busqueda.TestCatalogoBusqueda.test_stock_sin_registro) ... ok
+test_sucursal_es_obligatoria (test_catalogo_busqueda.TestCatalogoBusqueda.test_sucursal_es_obligatoria) ... ok
+test_create_and_query_from_command_line (test_database.CommandLineTests.test_create_and_query_from_command_line) ... ok
+test_missing_database_returns_nonzero_and_clear_error (test_database.CommandLineTests.test_missing_database_returns_nonzero_and_clear_error) ... ok
+test_existing_unrelated_database_is_preserved (test_database.DatabaseModuleTests.test_existing_unrelated_database_is_preserved) ... ok
+test_failed_seed_rolls_back_all_inserted_demo_rows (test_database.DatabaseModuleTests.test_failed_seed_rolls_back_all_inserted_demo_rows) ... ok
+test_filters_combine_and_only_available_excludes_zero (test_database.DatabaseModuleTests.test_filters_combine_and_only_available_excludes_zero) ... ok
+test_future_schema_version_is_rejected_without_changes (test_database.DatabaseModuleTests.test_future_schema_version_is_rejected_without_changes) ... ok
+test_initialize_and_seed_can_be_repeated_without_overwriting_stock (test_database.DatabaseModuleTests.test_initialize_and_seed_can_be_repeated_without_overwriting_stock) ... ok
+test_initialize_without_demo_creates_empty_catalog (test_database.DatabaseModuleTests.test_initialize_without_demo_creates_empty_catalog) ... ok
+test_module_connections_enforce_foreign_keys (test_database.DatabaseModuleTests.test_module_connections_enforce_foreign_keys) ... ok
+test_nonexistent_search_or_branch_returns_empty_list (test_database.DatabaseModuleTests.test_nonexistent_search_or_branch_returns_empty_list) ... ok
+test_read_missing_database_does_not_create_a_file (test_database.DatabaseModuleTests.test_read_missing_database_does_not_create_a_file) ... ok
+test_search_is_case_insensitive_for_unicode_names (test_database.DatabaseModuleTests.test_search_is_case_insensitive_for_unicode_names) ... ok
+test_search_treats_sql_quotes_and_wildcards_as_literal_data (test_database.DatabaseModuleTests.test_search_treats_sql_quotes_and_wildcards_as_literal_data) ... ok
+test_seed_requires_initialized_database (test_database.DatabaseModuleTests.test_seed_requires_initialized_database) ... ok
+test_branch_coordinates_have_valid_ranges (test_database.SchemaTests.test_branch_coordinates_have_valid_ranges) ... ok
+test_demo_availability_is_specific_to_each_branch (test_database.SchemaTests.test_demo_availability_is_specific_to_each_branch) ... ok
+test_names_and_codes_cannot_be_blank (test_database.SchemaTests.test_names_and_codes_cannot_be_blank) ... ok
+test_product_branch_pair_cannot_be_duplicated (test_database.SchemaTests.test_product_branch_pair_cannot_be_duplicated) ... ok
+test_product_requires_existing_category (test_database.SchemaTests.test_product_requires_existing_category) ... ok
+test_referenced_records_cannot_be_deleted (test_database.SchemaTests.test_referenced_records_cannot_be_deleted) ... ok
+test_reloading_demo_does_not_reset_updated_stock (test_database.SchemaTests.test_reloading_demo_does_not_reset_updated_stock) ... ok
+test_stock_rejects_invalid_insert (test_database.SchemaTests.test_stock_rejects_invalid_insert) ... ok
+test_stock_rejects_negative_fractional_null_and_text_updates (test_database.SchemaTests.test_stock_rejects_negative_fractional_null_and_text_updates) ... ok
+test_unknown_product_and_branch_are_rejected (test_database.SchemaTests.test_unknown_product_and_branch_are_rejected) ... ok
+test_buscar_por_nombre (test_filtro_categorias.TestFiltroCategorias.test_buscar_por_nombre) ... ok
+test_busqueda_sin_resultados (test_filtro_categorias.TestFiltroCategorias.test_busqueda_sin_resultados) ... ok
+test_categoria_inexistente (test_filtro_categorias.TestFiltroCategorias.test_categoria_inexistente) ... ok
+test_categoria_y_busqueda (test_filtro_categorias.TestFiltroCategorias.test_categoria_y_busqueda) ... ok
+test_filtrar_categoria_demo_x (test_filtro_categorias.TestFiltroCategorias.test_filtrar_categoria_demo_x) ... ok
+test_filtrar_categoria_demo_y (test_filtro_categorias.TestFiltroCategorias.test_filtrar_categoria_demo_y) ... ok
+test_limpiar_filtro (test_filtro_categorias.TestFiltroCategorias.test_limpiar_filtro) ... ok
+test_mostrar_todos (test_filtro_categorias.TestFiltroCategorias.test_mostrar_todos) ... ok
+test_sin_productos_duplicados (test_filtro_categorias.TestFiltroCategorias.test_sin_productos_duplicados) ... ok
+test_conserva_integridad_relacional (test_josue_migrations.MigracionesJosueTests.test_conserva_integridad_relacional) ... ok
+test_consumir_reserva_descuenta_stock_una_sola_vez (test_josue_migrations.MigracionesJosueTests.test_consumir_reserva_descuenta_stock_una_sola_vez) ... ok
+test_entrega_asocia_pedido_repartidor_y_fechas (test_josue_migrations.MigracionesJosueTests.test_entrega_asocia_pedido_repartidor_y_fechas) ... ok
+test_entrega_rechaza_incoherencia_de_fechas (test_josue_migrations.MigracionesJosueTests.test_entrega_rechaza_incoherencia_de_fechas) ... ok
+test_historial_creacion_y_cambios_sin_duplicaciones (test_josue_migrations.MigracionesJosueTests.test_historial_creacion_y_cambios_sin_duplicaciones) ... ok
+test_liberar_reserva_permite_nueva_reserva (test_josue_migrations.MigracionesJosueTests.test_liberar_reserva_permite_nueva_reserva) ... ok
+test_migracion_idempotente_conserva_datos_sprint1 (test_josue_migrations.MigracionesJosueTests.test_migracion_idempotente_conserva_datos_sprint1) ... ok
+test_no_se_puede_reservar_pedido_cancelado (test_josue_migrations.MigracionesJosueTests.test_no_se_puede_reservar_pedido_cancelado) ... ok
+test_rechaza_bases_ajenas (test_josue_migrations.MigracionesJosueTests.test_rechaza_bases_ajenas) ... ok
+test_relaciones_cantidad_y_sucursal_protegidas (test_josue_migrations.MigracionesJosueTests.test_relaciones_cantidad_y_sucursal_protegidas) ... ok
+test_reserva_valida_y_no_sobreventa (test_josue_migrations.MigracionesJosueTests.test_reserva_valida_y_no_sobreventa) ... ok
+test_reservas_no_pueden_superar_stock_si_se_modifica_inventario (test_josue_migrations.MigracionesJosueTests.test_reservas_no_pueden_superar_stock_si_se_modifica_inventario) ... ok
+
+----------------------------------------------------------------------
+Ran 67 tests in 0.909s
+
+OK

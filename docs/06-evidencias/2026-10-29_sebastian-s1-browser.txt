@@ -1,0 +1,21 @@
+test_actualizacion_real_desde_sqlite (test_catalogo_browser.CatalogoBrowserTests.test_actualizacion_real_desde_sqlite) ... 127.0.0.1 - - [29/Oct/2026 22:26:23] "GET / HTTP/1.1" 200 -
+ok
+test_busqueda_y_filtros_combinados (test_catalogo_browser.CatalogoBrowserTests.test_busqueda_y_filtros_combinados) ... 127.0.0.1 - - [29/Oct/2026 22:26:24] "GET / HTTP/1.1" 200 -
+ok
+test_carga_error_y_reintento (test_catalogo_browser.CatalogoBrowserTests.test_carga_error_y_reintento) ... 127.0.0.1 - - [29/Oct/2026 22:26:26] "GET / HTTP/1.1" 200 -
+ok
+test_error_de_filtros_y_stock_recuperable (test_catalogo_browser.CatalogoBrowserTests.test_error_de_filtros_y_stock_recuperable) ... 127.0.0.1 - - [29/Oct/2026 22:26:28] "GET / HTTP/1.1" 200 -
+ok
+test_fixtures_vacios_unicode_y_texto_literal (test_catalogo_browser.CatalogoBrowserTests.test_fixtures_vacios_unicode_y_texto_literal) ... 127.0.0.1 - - [29/Oct/2026 22:26:29] "GET / HTTP/1.1" 200 -
+ok
+test_responsive_teclado_y_capturas (test_catalogo_browser.CatalogoBrowserTests.test_responsive_teclado_y_capturas) ... 127.0.0.1 - - [29/Oct/2026 22:26:32] "GET / HTTP/1.1" 200 -
+ok
+test_respuesta_antigua_no_sobrescribe_busqueda (test_catalogo_browser.CatalogoBrowserTests.test_respuesta_antigua_no_sobrescribe_busqueda) ... 127.0.0.1 - - [29/Oct/2026 22:26:35] "GET / HTTP/1.1" 200 -
+ok
+test_stock_sucursal_y_cero (test_catalogo_browser.CatalogoBrowserTests.test_stock_sucursal_y_cero) ... 127.0.0.1 - - [29/Oct/2026 22:26:36] "GET / HTTP/1.1" 200 -
+ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 15.534s
+
+OK
