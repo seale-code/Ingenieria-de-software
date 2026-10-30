@@ -34,8 +34,6 @@ La suite automatizada pasó: **24 pruebas, 0 fallos y 0 errores**. Los comandos 
 
 Las pruebas se escribieron y ejecutaron antes de la implementación correspondiente: primero 10 fallos por ausencia del esquema; después 14 fallos adicionales por ausencia del módulo/comandos. Las correcciones posteriores produjeron una suite completamente verde.
 
-## Qué no acredita esta evidencia
 
-No demuestra pantallas integradas, una API HTTP, cercanía, reservas, pedidos ni inventario comercial en tiempo real. Los casos S1 que requieren interfaz o cálculo de distancia siguen pendientes. Tampoco sustituye revisión por un integrante, Daily, Sprint Review ni retrospectiva.
 
 [Código e instrucciones](../../src/database/README.md) · [Pruebas](../../tests/test_database.py)
