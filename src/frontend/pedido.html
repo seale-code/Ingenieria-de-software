@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crear pedido · Inkafarma</title>
+  <link rel="stylesheet" href="/assets/styles.css"><link rel="stylesheet" href="/assets/pedido.css">
+  <script src="/assets/pedido.js" defer></script>
+</head>
+<body>
+<header class="top"><div class="header-inner"><a class="brand" href="/" aria-label="Ir al catálogo"><span class="brand-icon">✚</span><span>inka<span class="brand-accent">farma</span></span></a><span class="prototype">PROYECTO ACADÉMICO · DATOS FICTICIOS</span></div></header>
+<main class="shell order-shell">
+  <a href="/" class="order-back">← Volver al catálogo</a>
+  <p class="order-eyebrow">TU PEDIDO, PASO A PASO</p>
+  <h1>Prepara tu pedido</h1>
+  <p class="order-intro">Elige los productos y revisa las cantidades. Al confirmar buscaremos una sucursal que pueda atender todo el pedido.</p>
+  <ol class="order-steps" aria-label="Pasos del pedido"><li id="step-1" aria-current="step"><span>1</span> Elegir</li><li id="step-2"><span>2</span> Revisar</li><li id="step-3"><span>3</span> Confirmar</li></ol>
+  <div id="load-message" class="order-notice" role="status">Cargando productos y puntos de referencia…</div>
+  <div id="order-error" class="order-error hidden" role="alert" tabindex="-1"></div>
+  <section id="edit-view" class="hidden" aria-label="Datos del pedido">
+    <form id="order-form">
+      <fieldset id="edit-fields" class="order-fields">
+        <div class="order-layout">
+          <section class="order-panel"><div class="order-panel-heading"><h2>¿Qué necesitas?</h2><span>01 / Productos</span></div>
+            <p class="order-help">Puedes agregar varios productos. Las cantidades se comprobarán al confirmar.</p>
+            <div id="order-lines"></div>
+            <button type="button" id="add-line" class="order-secondary">+ Añadir otro producto</button>
+          </section>
+          <section class="order-panel order-customer"><div class="order-panel-heading"><h2>Tu información</h2><span>02 / Datos</span></div>
+            <label for="customer">Nombre para el pedido</label><input id="customer" name="cliente" maxlength="120" required autocomplete="off" placeholder="Ej. Cliente de demostración">
+            <label for="reference">Punto de referencia</label><select id="reference" required><option value="">Selecciona un punto</option></select>
+            <p class="order-help">Usaremos la ubicación de este punto para comparar la distancia entre sucursales. La asignación también depende del stock y de la capacidad.</p>
+            <div class="order-demo-note"><strong>Demostración académica</strong><p>Utiliza un nombre ficticio. Este recorrido no realiza cobros ni entregas reales.</p></div>
+            <button class="action order-primary" id="review-order" type="submit">Revisar pedido →</button>
+          </section>
+        </div>
+      </fieldset>
+    </form>
+  </section>
+  <section id="review-view" class="order-panel hidden" aria-labelledby="review-title" tabindex="-1">
+    <div class="order-panel-heading"><h2 id="review-title">Revisa antes de confirmar</h2><span>RESUMEN DEL PEDIDO</span></div>
+    <p class="order-help">Comprueba los productos y cantidades. La disponibilidad se validará de nuevo al confirmar.</p>
+    <dl id="review-customer" class="order-meta"></dl>
+    <div class="order-table-wrap"><table class="order-table"><thead><tr><th scope="col">Producto</th><th scope="col">Cantidad</th></tr></thead><tbody id="review-items"></tbody></table></div>
+    <p id="review-total" class="order-total"></p>
+    <div class="order-review-actions"><button type="button" class="order-secondary" id="edit-order">Editar pedido</button><button type="button" class="action order-primary" id="confirm-order">Confirmar pedido</button></div>
+    <p id="confirm-progress" role="status" class="order-help"></p>
+  </section>
+  <section id="success-view" class="order-panel order-success hidden" aria-labelledby="success-title" tabindex="-1">
+    <span class="order-success-icon" aria-hidden="true">✓</span><p class="order-eyebrow">PEDIDO REGISTRADO</p>
+    <h2 id="success-title">Ya encontramos una sucursal</h2><p id="success-description"></p>
+    <dl id="success-details" class="order-meta"></dl>
+    <h3>Productos confirmados</h3><ul id="success-items"></ul>
+    <p class="order-help">La reserva queda registrada para esta demostración. Conserva el número de pedido para identificar esta solicitud.</p>
+    <button class="action order-primary" type="button" id="new-order">Crear otro pedido</button><a href="/" class="order-back">Volver al catálogo</a>
+  </section>
+  <noscript><p class="order-error">Activa JavaScript para preparar y confirmar el pedido.</p></noscript>
+</main>
+<footer>Proyecto académico no oficial · Datos ficticios · Sin compras reales</footer>
+</body></html>

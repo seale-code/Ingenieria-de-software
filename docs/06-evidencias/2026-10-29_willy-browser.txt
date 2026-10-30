@@ -1,0 +1,17 @@
+test_agregar_quitar_y_agrupar_productos (test_pedido_browser.PedidoBrowserTests.test_agregar_quitar_y_agrupar_productos) ... 127.0.0.1 - - [29/Oct/2026 23:41:42] "GET /pedido HTTP/1.1" 200 -
+ok
+test_cantidad_invalida_y_stock_insuficiente (test_pedido_browser.PedidoBrowserTests.test_cantidad_invalida_y_stock_insuficiente) ... 127.0.0.1 - - [29/Oct/2026 23:41:43] "GET /pedido HTTP/1.1" 200 -
+ok
+test_error_de_carga_y_recuperacion (test_pedido_browser.PedidoBrowserTests.test_error_de_carga_y_recuperacion) ... 127.0.0.1 - - [29/Oct/2026 23:41:44] "GET /pedido HTTP/1.1" 200 -
+ok
+test_responsive_teclado_y_capturas (test_pedido_browser.PedidoBrowserTests.test_responsive_teclado_y_capturas) ... 127.0.0.1 - - [29/Oct/2026 23:41:45] "GET /pedido HTTP/1.1" 200 -
+ok
+test_respuesta_perdida_reintenta_sin_duplicar (test_pedido_browser.PedidoBrowserTests.test_respuesta_perdida_reintenta_sin_duplicar) ... 127.0.0.1 - - [29/Oct/2026 23:41:47] "GET /pedido HTTP/1.1" 200 -
+ok
+test_revisar_editar_y_confirmar_sin_escritura_anticipada (test_pedido_browser.PedidoBrowserTests.test_revisar_editar_y_confirmar_sin_escritura_anticipada) ... 127.0.0.1 - - [29/Oct/2026 23:41:48] "GET /pedido HTTP/1.1" 200 -
+ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 7.290s
+
+OK
