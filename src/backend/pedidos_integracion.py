@@ -44,7 +44,26 @@ def evaluar_sucursales(db, latitud, longitud, productos):
     return resultado
 
 
-def registrar_integrado(db, cliente, latitud, longitud, productos):
+class ConflictoConfirmacion(ValueError):
+    """Un identificador de confirmación ya corresponde a otros datos."""
+
+
+def registrar_integrado(db, cliente, latitud, longitud, productos, confirmacion_id=None):
+    codigo_pedido = 'WEB-' + confirmacion_id if confirmacion_id else 'S2-' + uuid4().hex
+    if confirmacion_id:
+        existente = db.execute('SELECT id FROM pedidos WHERE codigo=?', (codigo_pedido,)).fetchone()
+        if existente:
+            anterior = obtener_integrado(db, existente['id'])
+            items = [dict(producto_codigo=p['codigo'], cantidad=p['cantidad']) for p in productos]
+            if (anterior['cliente'] != cliente or anterior['latitud'] != latitud
+                or anterior['longitud'] != longitud or items != [
+                    dict(producto_codigo=p['producto_codigo'], cantidad=p['cantidad'])
+                    for p in anterior['items']]):
+                raise ConflictoConfirmacion('Esta confirmación ya se utilizó con otros datos.')
+            return dict(pedido_id=anterior['id'], estado=anterior['estado'],
+                sucursal_codigo=anterior['sucursal_codigo'], sucursal_nombre=anterior['sucursal_nombre'],
+                distancia_km=anterior['distancia_km'], motivo=None, motivo_codigo=None, items=items)
+
     asignacion = evaluar_sucursales(db, latitud, longitud, productos)
     codigo = asignacion['sucursal_asignada']
     resultado = dict(pedido_id=None, estado='SIN_ASIGNAR', sucursal_codigo=codigo,
@@ -57,7 +76,7 @@ def registrar_integrado(db, cliente, latitud, longitud, productos):
     sucursal_id = db.execute('SELECT id FROM sucursales WHERE codigo=?', (codigo,)).fetchone()[0]
     detalle = asignacion['detalle_asignacion']
     cursor = db.execute("INSERT INTO pedidos(codigo,sucursal_id,estado) VALUES (?,?,'ASIGNADO')",
-                        ('S2-' + uuid4().hex, sucursal_id))
+                        (codigo_pedido, sucursal_id))
     pedido_id = cursor.lastrowid
     db.execute('INSERT INTO s2_solicitudes VALUES (?,?,?,?,?)',
                (pedido_id, cliente, latitud, longitud, detalle['distancia_km']))

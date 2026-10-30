@@ -12,6 +12,7 @@ from __future__ import annotations
 from math import isfinite
 from pathlib import Path
 import sqlite3
+from uuid import UUID
 
 from src.database.database import DEFAULT_DATABASE, connect_database
 from src.backend.asignacion_sucursal import distancia_km, ordenar_candidatas
@@ -170,7 +171,7 @@ def _seleccionar_sucursal(db: sqlite3.Connection, lat: float, lon: float, produc
     return ordenar_candidatas(candidatas)[0] if candidatas else None
 
 
-def registrar_pedido(solicitud: dict, db_path: str | Path = DEFAULT_DATABASE) -> dict:
+def registrar_pedido(solicitud: dict, db_path: str | Path = DEFAULT_DATABASE, *, confirmacion_id: str | None = None) -> dict:
     """Valida, persiste, asigna y reserva de manera atómica.
 
     En v2/v3 reutiliza las reglas de César y las reservas de Josué sin descontar
@@ -179,12 +180,19 @@ def registrar_pedido(solicitud: dict, db_path: str | Path = DEFAULT_DATABASE) ->
     BEGIN IMMEDIATE serializa selección y persistencia para evitar sobreventa.
     """
     cliente, lat, lon, items = _validar_solicitud(solicitud)
+    if confirmacion_id is not None:
+        try:
+            confirmacion_id = str(UUID(confirmacion_id))
+        except (ValueError, TypeError, AttributeError):
+            raise DatosInvalidos("confirmacion_id debe ser un UUID válido.") from None
     with connect_database(db_path) as db:
         _revisar_modulo(db)
         db.execute("BEGIN IMMEDIATE")
         productos = _productos_validos(db, items)
         if _esquema_oficial(db):
-            return registrar_integrado(db, cliente, lat, lon, productos)
+            return registrar_integrado(db, cliente, lat, lon, productos, confirmacion_id)
+        if confirmacion_id is not None:
+            raise ModuloNoInicializado("La confirmación web requiere el esquema v2/v3 de pedidos.")
         sucursal = _seleccionar_sucursal(db, lat, lon, productos)
         estado = "ASIGNADO" if sucursal else "SIN_ASIGNAR"
         motivo = None if sucursal else "Ninguna sucursal tiene stock suficiente y capacidad libre."

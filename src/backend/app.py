@@ -7,6 +7,7 @@ from pathlib import Path
 from flask import Flask, jsonify, request, send_from_directory
 
 from src.backend.catalogo_busqueda import buscar_productos
+from src.backend.pedidos_web import pedidos_web
 from src.database.database import DEFAULT_DATABASE, connect_database, get_stock
 
 FRONTEND = Path(__file__).resolve().parents[1] / "frontend"
@@ -15,6 +16,13 @@ FRONTEND = Path(__file__).resolve().parents[1] / "frontend"
 def create_app(db_path=None):
     app = Flask(__name__, static_folder=str(FRONTEND), static_url_path="/assets")
     app.config["DATABASE"] = db_path or os.environ.get("INKAFARMA_DB", DEFAULT_DATABASE)
+
+    app.config['MAX_CONTENT_LENGTH'] = 32768
+    app.register_blueprint(pedidos_web)
+
+    @app.get('/pedido')
+    def pedido():
+        return send_from_directory(FRONTEND, 'pedido.html')
 
     @app.get("/")
     def index():
