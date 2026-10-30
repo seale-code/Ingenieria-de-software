@@ -3,7 +3,7 @@
 Tarea de Willy CCatamayo: [Issue #20](https://github.com/seale-code/Ingenieria-de-software/issues/20).
 Estado: [PR #42](https://github.com/seale-code/Ingenieria-de-software/pull/42)
 publicado por `WillyCcV19` desde Brave y enlazado a #20 en Development.
-La tarea está en el Project y requiere revisión de otro integrante; no se hizo merge.
+El PR #42 fue fusionado el 30 de octubre de 2026 y cerró #20. La documentación no acredita por sí sola una revisión de otro integrante.
 
 ## Entrega
 
