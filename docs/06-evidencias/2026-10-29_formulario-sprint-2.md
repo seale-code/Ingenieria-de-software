@@ -48,8 +48,11 @@ reales, sin simular las consultas ni el servicio de registro.
 Parche aplicado sin conflictos sobre `main` en
 `6cb0ae2c2f28afdb15766bc3fd757439fe46b69b`, con PR #36 y #40 fusionados.
 Se repitieron las órdenes de la guía S2-02: **147 pruebas Python/API y 6 de
-navegador aprobadas**. Se verificó la sesión `WillyCcV19` en Brave para publicar
-el PR con `Closes #20`. La tarea permanece pendiente de revisión del equipo.
+navegador aprobadas**. Se verificó la sesión `WillyCcV19` en Brave y se publicó
+el [PR #42](https://github.com/seale-code/Ingenieria-de-software/pull/42) con
+`Closes #20`. Se comprobó el enlace en Development de la tarea #20 del Project;
+su automatización la movió de Por hacer a En progreso. El PR permanece abierto,
+sin merge y pendiente de revisión del equipo.
 
 ## Estado al preparar el parche original
 
