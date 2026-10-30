@@ -1,8 +1,9 @@
 # S2-02 — Formulario, resumen y confirmación del pedido
 
 Tarea de Willy CCatamayo: [Issue #20](https://github.com/seale-code/Ingenieria-de-software/issues/20).
-Estado: implementación y pruebas preparadas para revisión. Cuenta de publicación
-verificada en Brave: `WillyCcV19`. La tarea requiere revisión de otro integrante.
+Estado: [PR #42](https://github.com/seale-code/Ingenieria-de-software/pull/42)
+publicado por `WillyCcV19` desde Brave y enlazado a #20 en Development.
+La tarea está en el Project y requiere revisión de otro integrante; no se hizo merge.
 
 ## Entrega
 
@@ -89,5 +90,5 @@ S3 dentro de esta tarea. La disponibilidad se comprueba al confirmar.
 
 - [x] Validar productos y cantidades; mostrar resumen, confirmación y errores.
 - [x] Adjuntar evidencia del resultado y de las pruebas aplicables.
-- [ ] Publicar el PR desde la cuenta elegida con `Closes #20`.
+- [x] Publicar el PR desde la cuenta elegida con `Closes #20`: PR #42, autor `WillyCcV19`.
 - [ ] Obtener revisión de otro integrante antes de cerrar la tarea.
