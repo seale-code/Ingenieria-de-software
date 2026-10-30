@@ -1,0 +1,137 @@
+test_actualizacion_real_desde_sqlite (test_catalogo_browser.CatalogoBrowserTests.test_actualizacion_real_desde_sqlite) ... 127.0.0.1 - - [30/Oct/2026 12:58:36] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:36] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:36] "GET /assets/catalogo.js HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:36] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:36] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:37] "GET /api/catalogo?buscar=demo+a&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:37] "GET /api/productos/DEMO-A/stock HTTP/1.1" 200 -
+ok
+test_busqueda_y_filtros_combinados (test_catalogo_browser.CatalogoBrowserTests.test_busqueda_y_filtros_combinados) ... 127.0.0.1 - - [30/Oct/2026 12:58:38] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:38] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:38] "GET /assets/catalogo.js HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:38] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:38] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:38] "GET /api/catalogo?buscar=Producto+demo+A&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:38] "GET /api/catalogo?buscar=++DEMO+b++&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:38] "GET /api/catalogo?buscar=++DEMO+b++&categoria=DEMO-Y&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:38] "GET /api/catalogo?buscar=++DEMO+b++&categoria=DEMO-Y&sucursal=DEMO-SUR&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:38] "GET /api/catalogo?buscar=++DEMO+b++&categoria=DEMO-Y&sucursal=DEMO-SUR&solo_disponibles=true HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:38] "GET /api/catalogo?buscar=++DEMO+b++&categoria=DEMO-X&sucursal=DEMO-SUR&solo_disponibles=true HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:38] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:39] "GET /api/catalogo?buscar=&categoria=DEMO-X&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:39] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:39] "GET /api/catalogo?buscar=xyz123&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+ok
+test_carga_error_y_reintento (test_catalogo_browser.CatalogoBrowserTests.test_carga_error_y_reintento) ... 127.0.0.1 - - [30/Oct/2026 12:58:40] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:40] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:40] "GET /assets/catalogo.js HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:40] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:40] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:40] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+ok
+test_error_de_filtros_y_stock_recuperable (test_catalogo_browser.CatalogoBrowserTests.test_error_de_filtros_y_stock_recuperable) ... 127.0.0.1 - - [30/Oct/2026 12:58:41] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:41] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:41] "GET /assets/catalogo.js HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:41] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:41] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:41] "GET /api/catalogo?buscar=demo+a&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:42] "GET /api/productos/DEMO-A/stock HTTP/1.1" 200 -
+ok
+test_fixtures_vacios_unicode_y_texto_literal (test_catalogo_browser.CatalogoBrowserTests.test_fixtures_vacios_unicode_y_texto_literal) ... 127.0.0.1 - - [30/Oct/2026 12:58:42] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:42] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:42] "GET /assets/catalogo.js HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:42] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:42] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:42] "GET /api/catalogo?buscar=&categoria=VACIA&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:43] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:43] "GET /api/catalogo?buscar=Sin+inventario&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:43] "GET /api/productos/SIN-REGISTRO/stock HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:43] "GET /api/catalogo?buscar=ÁCIDO&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:43] "GET /api/catalogo?buscar='+OR+1%3D1+--&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:44] "GET /api/catalogo?buscar=%25&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:44] "GET /api/catalogo?buscar=_&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+ok
+test_responsive_teclado_y_capturas (test_catalogo_browser.CatalogoBrowserTests.test_responsive_teclado_y_capturas) ... 127.0.0.1 - - [30/Oct/2026 12:58:45] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:45] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:45] "GET /assets/catalogo.js HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:45] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:45] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:45] "GET /api/catalogo?buscar=&categoria=&sucursal=DEMO-NORTE&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:45] "GET /api/catalogo?buscar=&categoria=&sucursal=DEMO-NORTE&solo_disponibles=true HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:45] "GET /api/productos/DEMO-A/stock HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:45] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:45] "GET /api/catalogo?buscar=&categoria=&sucursal=DEMO-NORTE&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:45] "GET /api/catalogo?buscar=&categoria=&sucursal=DEMO-NORTE&solo_disponibles=true HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:45] "GET /api/productos/DEMO-A/stock HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:45] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+ok
+test_respuesta_antigua_no_sobrescribe_busqueda (test_catalogo_browser.CatalogoBrowserTests.test_respuesta_antigua_no_sobrescribe_busqueda) ... 127.0.0.1 - - [30/Oct/2026 12:58:46] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:46] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:46] "GET /assets/catalogo.js HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:46] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:46] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:47] "GET /api/catalogo?buscar=demo+a&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:47] "GET /api/catalogo?buscar=demo+b&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+ok
+test_stock_sucursal_y_cero (test_catalogo_browser.CatalogoBrowserTests.test_stock_sucursal_y_cero) ... 127.0.0.1 - - [30/Oct/2026 12:58:48] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:48] "GET /assets/catalogo.js HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:48] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:48] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:48] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:48] "GET /api/catalogo?buscar=&categoria=&sucursal=DEMO-NORTE&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:48] "GET /api/catalogo?buscar=&categoria=&sucursal=DEMO-NORTE&solo_disponibles=true HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:48] "GET /api/productos/DEMO-A/stock HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:48] "GET /api/catalogo?buscar=&categoria=&sucursal=DEMO-SUR&solo_disponibles=true HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:48] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:48] "GET /api/catalogo?buscar=demo+c&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:48] "GET /api/productos/DEMO-C/stock HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:48] "GET /api/catalogo?buscar=demo+c&categoria=&sucursal=&solo_disponibles=true HTTP/1.1" 200 -
+ok
+test_agregar_quitar_y_agrupar_productos (test_pedido_browser.PedidoBrowserTests.test_agregar_quitar_y_agrupar_productos) ... 127.0.0.1 - - [30/Oct/2026 12:58:49] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:49] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:49] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:49] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:49] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:50] "POST /api/pedidos HTTP/1.1" 200 -
+ok
+test_cantidad_invalida_y_stock_insuficiente (test_pedido_browser.PedidoBrowserTests.test_cantidad_invalida_y_stock_insuficiente) ... 127.0.0.1 - - [30/Oct/2026 12:58:51] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:51] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:51] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:51] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:51] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:51] "[31m[1mPOST /api/pedidos HTTP/1.1[0m" 409 -
+127.0.0.1 - - [30/Oct/2026 12:58:51] "POST /api/pedidos HTTP/1.1" 200 -
+ok
+test_error_de_carga_y_recuperacion (test_pedido_browser.PedidoBrowserTests.test_error_de_carga_y_recuperacion) ... 127.0.0.1 - - [30/Oct/2026 12:58:52] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:52] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:52] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:52] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:52] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+ok
+test_responsive_teclado_y_capturas (test_pedido_browser.PedidoBrowserTests.test_responsive_teclado_y_capturas) ... 127.0.0.1 - - [30/Oct/2026 12:58:53] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:53] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:53] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:53] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:53] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:53] "POST /api/pedidos HTTP/1.1" 200 -
+ok
+test_respuesta_perdida_reintenta_sin_duplicar (test_pedido_browser.PedidoBrowserTests.test_respuesta_perdida_reintenta_sin_duplicar) ... 127.0.0.1 - - [30/Oct/2026 12:58:54] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:54] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:54] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:54] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:54] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:54] "POST /api/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:54] "POST /api/pedidos HTTP/1.1" 200 -
+ok
+test_revisar_editar_y_confirmar_sin_escritura_anticipada (test_pedido_browser.PedidoBrowserTests.test_revisar_editar_y_confirmar_sin_escritura_anticipada) ... 127.0.0.1 - - [30/Oct/2026 12:58:55] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:55] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:55] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:55] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:55] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2026 12:58:56] "POST /api/pedidos HTTP/1.1" 200 -
+ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 20.353s
+
+OK

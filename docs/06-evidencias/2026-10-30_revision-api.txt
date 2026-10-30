@@ -1,0 +1,178 @@
+test_base_ausente_no_se_crea_ni_filtra_ruta (test_api_catalogo.CatalogoApiTests.test_base_ausente_no_se_crea_ni_filtra_ruta) ... [2026-10-30 12:58:34,496] ERROR in app: Consulta de catálogo no disponible: ValueError
+[2026-10-30 12:58:34,496] ERROR in app: Consulta de catálogo no disponible: ValueError
+[2026-10-30 12:58:34,497] ERROR in app: Consulta de catálogo no disponible: ValueError
+ok
+test_base_invalida (test_api_catalogo.CatalogoApiTests.test_base_invalida) ... [2026-10-30 12:58:34,507] ERROR in app: Consulta de catálogo no disponible: DatabaseError
+ok
+test_base_vacia (test_api_catalogo.CatalogoApiTests.test_base_vacia) ... ok
+test_busqueda_exacta_parcial_y_vacia (test_api_catalogo.CatalogoApiTests.test_busqueda_exacta_parcial_y_vacia) ... ok
+test_catalogo_sin_duplicados (test_api_catalogo.CatalogoApiTests.test_catalogo_sin_duplicados) ... ok
+test_categoria_vacia_y_producto_sin_inventario (test_api_catalogo.CatalogoApiTests.test_categoria_vacia_y_producto_sin_inventario) ... ok
+test_categoria_y_limpiar (test_api_catalogo.CatalogoApiTests.test_categoria_y_limpiar) ... ok
+test_combinacion_de_todos_los_filtros (test_api_catalogo.CatalogoApiTests.test_combinacion_de_todos_los_filtros) ... ok
+test_compatible_con_migraciones_de_josue (test_api_catalogo.CatalogoApiTests.test_compatible_con_migraciones_de_josue) ... ok
+test_disponibles_por_sucursal (test_api_catalogo.CatalogoApiTests.test_disponibles_por_sucursal) ... ok
+test_errores_de_peticion (test_api_catalogo.CatalogoApiTests.test_errores_de_peticion) ... ok
+test_pantalla_y_recursos (test_api_catalogo.CatalogoApiTests.test_pantalla_y_recursos) ... /workspace/scratch/0855a87b467f/revision-sprint2/tests/test_api_catalogo.py:31: ResourceWarning: unclosed file <_io.BufferedReader name='/workspace/scratch/0855a87b467f/revision-sprint2/src/frontend/index.html'>
+  self.assertEqual(self.client.get(path).status_code, 200)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/workspace/scratch/0855a87b467f/revision-sprint2/tests/test_api_catalogo.py:31: ResourceWarning: unclosed file <_io.BufferedReader name='/workspace/scratch/0855a87b467f/revision-sprint2/src/frontend/styles.css'>
+  self.assertEqual(self.client.get(path).status_code, 200)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/workspace/scratch/0855a87b467f/revision-sprint2/tests/test_api_catalogo.py:31: ResourceWarning: unclosed file <_io.BufferedReader name='/workspace/scratch/0855a87b467f/revision-sprint2/src/frontend/catalogo.js'>
+  self.assertEqual(self.client.get(path).status_code, 200)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_stock_actualizado_no_cacheado (test_api_catalogo.CatalogoApiTests.test_stock_actualizado_no_cacheado) ... ok
+test_stock_y_cero (test_api_catalogo.CatalogoApiTests.test_stock_y_cero) ... ok
+test_unicode_y_sql_literal (test_api_catalogo.CatalogoApiTests.test_unicode_y_sql_literal) ... ok
+test_busqueda_parcial_sin_distinguir_mayusculas (test_catalogo_busqueda.TestCatalogoBusqueda.test_busqueda_parcial_sin_distinguir_mayusculas) ... ok
+test_busqueda_sin_resultados (test_catalogo_busqueda.TestCatalogoBusqueda.test_busqueda_sin_resultados) ... ok
+test_catalogo_completo (test_catalogo_busqueda.TestCatalogoBusqueda.test_catalogo_completo) ... ok
+test_entrada_sql_se_trata_como_texto (test_catalogo_busqueda.TestCatalogoBusqueda.test_entrada_sql_se_trata_como_texto) ... ok
+test_stock_de_una_sucursal_y_un_producto (test_catalogo_busqueda.TestCatalogoBusqueda.test_stock_de_una_sucursal_y_un_producto) ... ok
+test_stock_sin_registro (test_catalogo_busqueda.TestCatalogoBusqueda.test_stock_sin_registro) ... ok
+test_sucursal_es_obligatoria (test_catalogo_busqueda.TestCatalogoBusqueda.test_sucursal_es_obligatoria) ... ok
+test_create_and_query_from_command_line (test_database.CommandLineTests.test_create_and_query_from_command_line) ... ok
+test_missing_database_returns_nonzero_and_clear_error (test_database.CommandLineTests.test_missing_database_returns_nonzero_and_clear_error) ... ok
+test_existing_unrelated_database_is_preserved (test_database.DatabaseModuleTests.test_existing_unrelated_database_is_preserved) ... ok
+test_failed_seed_rolls_back_all_inserted_demo_rows (test_database.DatabaseModuleTests.test_failed_seed_rolls_back_all_inserted_demo_rows) ... ok
+test_filters_combine_and_only_available_excludes_zero (test_database.DatabaseModuleTests.test_filters_combine_and_only_available_excludes_zero) ... ok
+test_future_schema_version_is_rejected_without_changes (test_database.DatabaseModuleTests.test_future_schema_version_is_rejected_without_changes) ... ok
+test_initialize_and_seed_can_be_repeated_without_overwriting_stock (test_database.DatabaseModuleTests.test_initialize_and_seed_can_be_repeated_without_overwriting_stock) ... ok
+test_initialize_without_demo_creates_empty_catalog (test_database.DatabaseModuleTests.test_initialize_without_demo_creates_empty_catalog) ... ok
+test_module_connections_enforce_foreign_keys (test_database.DatabaseModuleTests.test_module_connections_enforce_foreign_keys) ... ok
+test_nonexistent_search_or_branch_returns_empty_list (test_database.DatabaseModuleTests.test_nonexistent_search_or_branch_returns_empty_list) ... ok
+test_read_missing_database_does_not_create_a_file (test_database.DatabaseModuleTests.test_read_missing_database_does_not_create_a_file) ... ok
+test_search_is_case_insensitive_for_unicode_names (test_database.DatabaseModuleTests.test_search_is_case_insensitive_for_unicode_names) ... ok
+test_search_treats_sql_quotes_and_wildcards_as_literal_data (test_database.DatabaseModuleTests.test_search_treats_sql_quotes_and_wildcards_as_literal_data) ... ok
+test_seed_requires_initialized_database (test_database.DatabaseModuleTests.test_seed_requires_initialized_database) ... ok
+test_branch_coordinates_have_valid_ranges (test_database.SchemaTests.test_branch_coordinates_have_valid_ranges) ... ok
+test_demo_availability_is_specific_to_each_branch (test_database.SchemaTests.test_demo_availability_is_specific_to_each_branch) ... ok
+test_names_and_codes_cannot_be_blank (test_database.SchemaTests.test_names_and_codes_cannot_be_blank) ... ok
+test_product_branch_pair_cannot_be_duplicated (test_database.SchemaTests.test_product_branch_pair_cannot_be_duplicated) ... ok
+test_product_requires_existing_category (test_database.SchemaTests.test_product_requires_existing_category) ... ok
+test_referenced_records_cannot_be_deleted (test_database.SchemaTests.test_referenced_records_cannot_be_deleted) ... ok
+test_reloading_demo_does_not_reset_updated_stock (test_database.SchemaTests.test_reloading_demo_does_not_reset_updated_stock) ... ok
+test_stock_rejects_invalid_insert (test_database.SchemaTests.test_stock_rejects_invalid_insert) ... ok
+test_stock_rejects_negative_fractional_null_and_text_updates (test_database.SchemaTests.test_stock_rejects_negative_fractional_null_and_text_updates) ... ok
+test_unknown_product_and_branch_are_rejected (test_database.SchemaTests.test_unknown_product_and_branch_are_rejected) ... ok
+test_buscar_por_nombre (test_filtro_categorias.TestFiltroCategorias.test_buscar_por_nombre) ... ok
+test_busqueda_sin_resultados (test_filtro_categorias.TestFiltroCategorias.test_busqueda_sin_resultados) ... ok
+test_categoria_inexistente (test_filtro_categorias.TestFiltroCategorias.test_categoria_inexistente) ... ok
+test_categoria_y_busqueda (test_filtro_categorias.TestFiltroCategorias.test_categoria_y_busqueda) ... ok
+test_filtrar_categoria_demo_x (test_filtro_categorias.TestFiltroCategorias.test_filtrar_categoria_demo_x) ... ok
+test_filtrar_categoria_demo_y (test_filtro_categorias.TestFiltroCategorias.test_filtrar_categoria_demo_y) ... ok
+test_limpiar_filtro (test_filtro_categorias.TestFiltroCategorias.test_limpiar_filtro) ... ok
+test_mostrar_todos (test_filtro_categorias.TestFiltroCategorias.test_mostrar_todos) ... ok
+test_sin_productos_duplicados (test_filtro_categorias.TestFiltroCategorias.test_sin_productos_duplicados) ... ok
+test_compatible_con_busqueda_nombre (test_filtro_sucursal_stock.TestFiltroSucursalStock.test_compatible_con_busqueda_nombre) ... ok
+test_compatible_con_categoria (test_filtro_sucursal_stock.TestFiltroSucursalStock.test_compatible_con_categoria) ... ok
+test_compatible_con_todos_los_filtros (test_filtro_sucursal_stock.TestFiltroSucursalStock.test_compatible_con_todos_los_filtros) ... ok
+test_filtrar_por_sucursal_norte (test_filtro_sucursal_stock.TestFiltroSucursalStock.test_filtrar_por_sucursal_norte) ... ok
+test_filtrar_por_sucursal_sur (test_filtro_sucursal_stock.TestFiltroSucursalStock.test_filtrar_por_sucursal_sur) ... ok
+test_informa_cuando_no_hay_resultados (test_filtro_sucursal_stock.TestFiltroSucursalStock.test_informa_cuando_no_hay_resultados) ... ok
+test_informa_cuando_si_hay_resultados (test_filtro_sucursal_stock.TestFiltroSucursalStock.test_informa_cuando_si_hay_resultados) ... ok
+test_limpiar_filtro_sucursal_vacia (test_filtro_sucursal_stock.TestFiltroSucursalStock.test_limpiar_filtro_sucursal_vacia) ... ok
+test_solo_disponibles_excluye_stock_cero (test_filtro_sucursal_stock.TestFiltroSucursalStock.test_solo_disponibles_excluye_stock_cero) ... ok
+test_sucursal_y_solo_disponibles (test_filtro_sucursal_stock.TestFiltroSucursalStock.test_sucursal_y_solo_disponibles) ... ok
+test_busqueda_inexistente_con_filtros_muestra_mensaje_sin_resultados (test_filtros_combinados.TestFiltrosCombinados.test_busqueda_inexistente_con_filtros_muestra_mensaje_sin_resultados) ... ok
+test_busqueda_parcial_minusculas_combinada_con_filtros (test_filtros_combinados.TestFiltrosCombinados.test_busqueda_parcial_minusculas_combinada_con_filtros) ... ok
+test_caracteres_sql_en_busqueda_combinada_se_tratan_como_texto (test_filtros_combinados.TestFiltrosCombinados.test_caracteres_sql_en_busqueda_combinada_se_tratan_como_texto) ... ok
+test_espacios_en_blanco_se_normalizan_correctamente (test_filtros_combinados.TestFiltrosCombinados.test_espacios_en_blanco_se_normalizan_correctamente) ... ok
+test_registro_de_filtros_aplicados_en_respuesta (test_filtros_combinados.TestFiltrosCombinados.test_registro_de_filtros_aplicados_en_respuesta) ... ok
+test_s1_cp_05_filtrar_categoria_x_y_luego_limpiar_recupera_demas_filtros (test_filtros_combinados.TestFiltrosCombinados.test_s1_cp_05_filtrar_categoria_x_y_luego_limpiar_recupera_demas_filtros)
+S1-CP-05: Elegir categoría X y luego limpiar el filtro conservando sucursal Norte. ... ok
+test_s1_cp_06_elegir_norte_y_solo_disponibles_incluye_a_excluye_b_c (test_filtros_combinados.TestFiltrosCombinados.test_s1_cp_06_elegir_norte_y_solo_disponibles_incluye_a_excluye_b_c)
+S1-CP-06: Elegir Norte y activar solo disponibles -> Incluir A; excluir B y C. ... ok
+test_s1_cp_07_busqueda_b_categoria_x_sur_disponibles_sin_resultados (test_filtros_combinados.TestFiltrosCombinados.test_s1_cp_07_busqueda_b_categoria_x_sur_disponibles_sin_resultados)
+S1-CP-07 (parte 2): Buscar B con categoría X y sucursal Sur, solo disponibles -> Sin resultados. ... ok
+test_s1_cp_07_busqueda_b_categoria_y_sur_disponibles_encuentra_b (test_filtros_combinados.TestFiltrosCombinados.test_s1_cp_07_busqueda_b_categoria_y_sur_disponibles_encuentra_b)
+S1-CP-07 (parte 1): Buscar B con categoría Y y sucursal Sur, solo disponibles -> Mostrar B. ... ok
+test_validacion_rechaza_tipos_invalidos_en_parametros (test_filtros_combinados.TestFiltrosCombinados.test_validacion_rechaza_tipos_invalidos_en_parametros) ... ok
+test_base_con_pedidos_provisionales_exige_conciliacion (test_integracion_sprint2.IntegracionSprint2Tests.test_base_con_pedidos_provisionales_exige_conciliacion) ... ok
+test_base_v2_sin_historial_tambien_funciona (test_integracion_sprint2.IntegracionSprint2Tests.test_base_v2_sin_historial_tambien_funciona) ... ok
+test_capacidad_concurrente_no_se_excede (test_integracion_sprint2.IntegracionSprint2Tests.test_capacidad_concurrente_no_se_excede) ... ok
+test_capacidad_usa_pedidos_oficiales_y_permite_cero (test_integracion_sprint2.IntegracionSprint2Tests.test_capacidad_usa_pedidos_oficiales_y_permite_cero) ... ok
+test_cli_real_registra_y_consulta_en_esquema_oficial (test_integracion_sprint2.IntegracionSprint2Tests.test_cli_real_registra_y_consulta_en_esquema_oficial) ... ok
+test_consumir_reserva_no_descuenta_dos_veces (test_integracion_sprint2.IntegracionSprint2Tests.test_consumir_reserva_no_descuenta_dos_veces) ... ok
+test_datos_invalidos_no_insertan_ni_reservan (test_integracion_sprint2.IntegracionSprint2Tests.test_datos_invalidos_no_insertan_ni_reservan) ... ok
+test_desempate_por_stock_de_cesar (test_integracion_sprint2.IntegracionSprint2Tests.test_desempate_por_stock_de_cesar) ... ok
+test_dos_clientes_concurrentes_no_sobrevenden (test_integracion_sprint2.IntegracionSprint2Tests.test_dos_clientes_concurrentes_no_sobrevenden) ... ok
+test_fallo_segunda_reserva_revierte_todo (test_integracion_sprint2.IntegracionSprint2Tests.test_fallo_segunda_reserva_revierte_todo) ... ok
+test_lineas_duplicadas_se_suman_antes_de_asignar (test_integracion_sprint2.IntegracionSprint2Tests.test_lineas_duplicadas_se_suman_antes_de_asignar) ... ok
+test_pedido_multiproducto_no_se_divide_entre_sucursales (test_integracion_sprint2.IntegracionSprint2Tests.test_pedido_multiproducto_no_se_divide_entre_sucursales) ... ok
+test_registro_usa_pedidos_y_reservas_oficiales (test_integracion_sprint2.IntegracionSprint2Tests.test_registro_usa_pedidos_y_reservas_oficiales) ... ok
+test_reiniciar_no_borra_pedidos_ni_crea_otro_sistema (test_integracion_sprint2.IntegracionSprint2Tests.test_reiniciar_no_borra_pedidos_ni_crea_otro_sistema) ... ok
+test_reserva_ajena_reduce_disponible_sin_error_sql (test_integracion_sprint2.IntegracionSprint2Tests.test_reserva_ajena_reduce_disponible_sin_error_sql) ... ok
+test_stock_insuficiente_sin_registros_parciales (test_integracion_sprint2.IntegracionSprint2Tests.test_stock_insuficiente_sin_registros_parciales) ... ok
+test_conserva_integridad_relacional (test_josue_migrations.MigracionesJosueTests.test_conserva_integridad_relacional) ... ok
+test_consumir_reserva_descuenta_stock_una_sola_vez (test_josue_migrations.MigracionesJosueTests.test_consumir_reserva_descuenta_stock_una_sola_vez) ... ok
+test_entrega_asocia_pedido_repartidor_y_fechas (test_josue_migrations.MigracionesJosueTests.test_entrega_asocia_pedido_repartidor_y_fechas) ... ok
+test_entrega_rechaza_incoherencia_de_fechas (test_josue_migrations.MigracionesJosueTests.test_entrega_rechaza_incoherencia_de_fechas) ... ok
+test_historial_creacion_y_cambios_sin_duplicaciones (test_josue_migrations.MigracionesJosueTests.test_historial_creacion_y_cambios_sin_duplicaciones) ... ok
+test_liberar_reserva_permite_nueva_reserva (test_josue_migrations.MigracionesJosueTests.test_liberar_reserva_permite_nueva_reserva) ... ok
+test_migracion_idempotente_conserva_datos_sprint1 (test_josue_migrations.MigracionesJosueTests.test_migracion_idempotente_conserva_datos_sprint1) ... ok
+test_no_se_puede_reservar_pedido_cancelado (test_josue_migrations.MigracionesJosueTests.test_no_se_puede_reservar_pedido_cancelado) ... ok
+test_rechaza_bases_ajenas (test_josue_migrations.MigracionesJosueTests.test_rechaza_bases_ajenas) ... ok
+test_relaciones_cantidad_y_sucursal_protegidas (test_josue_migrations.MigracionesJosueTests.test_relaciones_cantidad_y_sucursal_protegidas) ... ok
+test_reserva_valida_y_no_sobreventa (test_josue_migrations.MigracionesJosueTests.test_reserva_valida_y_no_sobreventa) ... ok
+test_reservas_no_pueden_superar_stock_si_se_modifica_inventario (test_josue_migrations.MigracionesJosueTests.test_reservas_no_pueden_superar_stock_si_se_modifica_inventario) ... ok
+test_01_pedido_valido_y_reserva (test_pedidos_s2.PedidosS2Test.test_01_pedido_valido_y_reserva) ... ok
+test_02_elige_sucursal_que_tiene_producto (test_pedidos_s2.PedidosS2Test.test_02_elige_sucursal_que_tiene_producto) ... ok
+test_03_sin_stock_persistido_sin_reservar (test_pedidos_s2.PedidosS2Test.test_03_sin_stock_persistido_sin_reservar) ... ok
+test_04_stock_parcial_no_hace_reservas (test_pedidos_s2.PedidosS2Test.test_04_stock_parcial_no_hace_reservas) ... ok
+test_05_capacidad_agotada (test_pedidos_s2.PedidosS2Test.test_05_capacidad_agotada) ... ok
+test_06_capacidad_cero (test_pedidos_s2.PedidosS2Test.test_06_capacidad_cero) ... ok
+test_07_cantidad_invalidada_antes_de_insertar (test_pedidos_s2.PedidosS2Test.test_07_cantidad_invalidada_antes_de_insertar) ... ok
+test_08_codigo_inexistente (test_pedidos_s2.PedidosS2Test.test_08_codigo_inexistente) ... ok
+test_09_cliente_vacio (test_pedidos_s2.PedidosS2Test.test_09_cliente_vacio) ... ok
+test_10_coordenadas_invalidas (test_pedidos_s2.PedidosS2Test.test_10_coordenadas_invalidas) ... ok
+test_11_lineas_duplicadas_se_agrupan (test_pedidos_s2.PedidosS2Test.test_11_lineas_duplicadas_se_agrupan) ... ok
+test_12_agregacion_no_sobrevende (test_pedidos_s2.PedidosS2Test.test_12_agregacion_no_sobrevende) ... ok
+test_13_operacion_atomica_revierte_si_falla_reserva (test_pedidos_s2.PedidosS2Test.test_13_operacion_atomica_revierte_si_falla_reserva) ... ok
+test_14_dos_pedidos_concurrentes_no_sobrevenden (test_pedidos_s2.PedidosS2Test.test_14_dos_pedidos_concurrentes_no_sobrevenden) ... ok
+test_15_inicializacion_idempotente (test_pedidos_s2.PedidosS2Test.test_15_inicializacion_idempotente) ... ok
+test_16_modulo_sin_inicializar (test_pedidos_s2.PedidosS2Test.test_16_modulo_sin_inicializar) ... ok
+test_17_pedido_inexistente (test_pedidos_s2.PedidosS2Test.test_17_pedido_inexistente) ... ok
+test_18_sucursal_inexistente (test_pedidos_s2.PedidosS2Test.test_18_sucursal_inexistente) ... ok
+test_19_distancia_y_desempate (test_pedidos_s2.PedidosS2Test.test_19_distancia_y_desempate) ... ok
+test_20_no_modifica_stock_en_sucursal_ajena (test_pedidos_s2.PedidosS2Test.test_20_no_modifica_stock_en_sucursal_ajena) ... ok
+test_base_ausente_no_expone_ruta_ni_crea_archivo (test_pedidos_web.PedidosWebTests.test_base_ausente_no_expone_ruta_ni_crea_archivo) ... [2026-10-30 12:58:35,868] ERROR in pedidos_web: Confirmación no disponible: ValueError
+ok
+test_base_v1_requiere_esquema_oficial (test_pedidos_web.PedidosWebTests.test_base_v1_requiere_esquema_oficial) ... [2026-10-30 12:58:35,892] ERROR in pedidos_web: Confirmación no disponible: ModuloNoInicializado
+ok
+test_cantidades_y_productos_invalidos (test_pedidos_web.PedidosWebTests.test_cantidades_y_productos_invalidos) ... ok
+test_clave_reutilizada_con_datos_distintos_se_rechaza (test_pedidos_web.PedidosWebTests.test_clave_reutilizada_con_datos_distintos_se_rechaza) ... ok
+test_confirmar_persiste_reserva_y_sucursal (test_pedidos_web.PedidosWebTests.test_confirmar_persiste_reserva_y_sucursal) ... ok
+test_dos_confirmaciones_no_sobrevenden (test_pedidos_web.PedidosWebTests.test_dos_confirmaciones_no_sobrevenden) ... ok
+test_formulario_y_opciones_no_escriben (test_pedidos_web.PedidosWebTests.test_formulario_y_opciones_no_escriben) ... /workspace/scratch/0855a87b467f/revision-sprint2/tests/test_pedidos_web.py:37: ResourceWarning: unclosed file <_io.BufferedReader name='/workspace/scratch/0855a87b467f/revision-sprint2/src/frontend/pedido.html'>
+  self.assertEqual(self.client.get('/pedido').status_code, 200)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/workspace/scratch/0855a87b467f/revision-sprint2/tests/test_pedidos_web.py:38: ResourceWarning: unclosed file <_io.BufferedReader name='/workspace/scratch/0855a87b467f/revision-sprint2/src/frontend/pedido.js'>
+  self.assertEqual(self.client.get('/assets/pedido.js').status_code, 200)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_misma_clave_concurrente_crea_un_solo_pedido (test_pedidos_web.PedidosWebTests.test_misma_clave_concurrente_crea_un_solo_pedido) ... ok
+test_no_acepta_solicitud_sin_clave_ni_json (test_pedidos_web.PedidosWebTests.test_no_acepta_solicitud_sin_clave_ni_json) ... ok
+test_repetir_confirmacion_recupera_mismo_pedido (test_pedidos_web.PedidosWebTests.test_repetir_confirmacion_recupera_mismo_pedido) ... ok
+test_rollback_permite_reintento_con_la_misma_clave (test_pedidos_web.PedidosWebTests.test_rollback_permite_reintento_con_la_misma_clave) ... [2026-10-30 12:58:36,067] ERROR in pedidos_web: Confirmación no disponible: IntegrityError
+ok
+test_sin_stock_es_error_claro_sin_insertar (test_pedidos_web.PedidosWebTests.test_sin_stock_es_error_claro_sin_insertar) ... ok
+test_asigna_sucursal_mas_cercana_cuando_ambas_son_elegibles (test_reglas_asignacion.TestReglasAsignacion.test_asigna_sucursal_mas_cercana_cuando_ambas_son_elegibles) ... ok
+test_calculo_distancia_haversine_mismo_punto_es_cero (test_reglas_asignacion.TestReglasAsignacion.test_calculo_distancia_haversine_mismo_punto_es_cero) ... ok
+test_descarta_sucursal_cercana_con_capacidad_agotada (test_reglas_asignacion.TestReglasAsignacion.test_descarta_sucursal_cercana_con_capacidad_agotada) ... ok
+test_descarta_sucursal_cercana_sin_stock_y_asigna_siguiente (test_reglas_asignacion.TestReglasAsignacion.test_descarta_sucursal_cercana_sin_stock_y_asigna_siguiente) ... ok
+test_descarta_sucursal_por_stock_parcial_en_pedido_multiproducto (test_reglas_asignacion.TestReglasAsignacion.test_descarta_sucursal_por_stock_parcial_en_pedido_multiproducto) ... ok
+test_desempate_nivel_1_mayor_capacidad_disponible (test_reglas_asignacion.TestReglasAsignacion.test_desempate_nivel_1_mayor_capacidad_disponible) ... ok
+test_desempate_nivel_2_mayor_stock_disponible (test_reglas_asignacion.TestReglasAsignacion.test_desempate_nivel_2_mayor_stock_disponible) ... ok
+test_desempate_nivel_3_orden_alfabetico_por_codigo (test_reglas_asignacion.TestReglasAsignacion.test_desempate_nivel_3_orden_alfabetico_por_codigo) ... ok
+test_rechazo_cuando_lista_de_sucursales_esta_vacia (test_reglas_asignacion.TestReglasAsignacion.test_rechazo_cuando_lista_de_sucursales_esta_vacia) ... ok
+test_rechazo_cuando_ninguna_sucursal_tiene_stock (test_reglas_asignacion.TestReglasAsignacion.test_rechazo_cuando_ninguna_sucursal_tiene_stock) ... ok
+test_rechazo_cuando_sucursales_con_stock_no_tienen_capacidad (test_reglas_asignacion.TestReglasAsignacion.test_rechazo_cuando_sucursales_con_stock_no_tienen_capacidad) ... ok
+test_validaciones_rechazan_coordenadas_o_cantidades_invalidas (test_reglas_asignacion.TestReglasAsignacion.test_validaciones_rechazan_coordenadas_o_cantidades_invalidas) ... ok
+
+----------------------------------------------------------------------
+Ran 147 tests in 1.627s
+
+OK
