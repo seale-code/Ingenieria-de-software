@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import sqlite3
 import sys
+from contextlib import closing
 from pathlib import Path
 
 APPLICATION_ID = 1229867841
@@ -21,7 +22,6 @@ MIGRATIONS = (
     (3, '003_entregas_historial.sql'),
 )
 
-
 def migrar(ruta: str | Path, hasta: int = 3) -> list[int]:
     """Migra una BD existente, preserva datos, y detiene errores sin recrearla."""
     archivo = Path(ruta).expanduser().resolve()
@@ -29,9 +29,10 @@ def migrar(ruta: str | Path, hasta: int = 3) -> list[int]:
         raise ValueError(f'No existe la base {archivo}; inicialícela antes con --demo.')
     if hasta not in (2, 3):
         raise ValueError('La versión destino debe ser 2 o 3.')
-
     avanzadas: list[int] = []
-    with sqlite3.connect(archivo.as_uri() + '?mode=rw', uri=True, timeout=15) as db:
+    # El contexto de sqlite3 confirma/revierte transacciones, pero NO cierra
+    # automáticamente la conexión. closing() la libera también si hay error.
+    with closing(sqlite3.connect(archivo.as_uri() + '?mode=rw', uri=True, timeout=15)) as db, db:
         db.execute('PRAGMA foreign_keys = ON')
         id_actual = db.execute('PRAGMA application_id').fetchone()[0]
         version = db.execute('PRAGMA user_version').fetchone()[0]
@@ -56,7 +57,6 @@ def migrar(ruta: str | Path, hasta: int = 3) -> list[int]:
             avanzadas.append(numero)
     return avanzadas
 
-
 def main() -> int:
     parser = argparse.ArgumentParser(description='Migrar esquema Inkafarma v1 a v2/v3')
     parser.add_argument('--db', default=str(DEFAULT_DB))
@@ -72,7 +72,6 @@ def main() -> int:
     except (ValueError, sqlite3.Error, OSError) as error:
         print('Error:', error, file=sys.stderr)
         return 1
-
 
 if __name__ == '__main__':
     raise SystemExit(main())

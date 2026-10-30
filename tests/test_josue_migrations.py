@@ -2,6 +2,7 @@
 import sqlite3
 import tempfile
 import unittest
+from contextlib import closing
 from pathlib import Path
 
 from src.database.migrate_josue import migrar
@@ -9,13 +10,13 @@ from src.database.migrate_josue import migrar
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_V1 = ROOT / 'src/database/schema.sql'
 
-
 class MigracionesJosueTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.archivo = Path(self.temp.name) / 'inkafarma.sqlite3'
-        with sqlite3.connect(self.archivo) as con:
+        # Es importante cerrar antes de borrar el directorio temporal en Windows.
+        with closing(sqlite3.connect(self.archivo)) as con, con:
             con.execute('PRAGMA foreign_keys = ON')
             con.executescript(SCHEMA_V1.read_text(encoding='utf-8'))
             con.execute("INSERT INTO categorias(codigo,nombre) VALUES('CAT','Medicamentos de prueba')")
@@ -130,14 +131,13 @@ class MigracionesJosueTests(unittest.TestCase):
 
     def test_rechaza_bases_ajenas(self):
         otra = Path(self.temp.name) / 'ajena.sqlite3'
-        with sqlite3.connect(otra) as con:
+        with closing(sqlite3.connect(otra)) as con, con:
             con.execute('CREATE TABLE ejemplo (id INTEGER)')
         with self.assertRaises(ValueError):
             migrar(otra)
-        with sqlite3.connect(otra) as con:
-            self.assertEqual(con.execute('PRAGMA user_version').fetchone()[0],0)
-            self.assertEqual(con.execute('SELECT COUNT(*) FROM sqlite_master WHERE name="ejemplo"').fetchone()[0],1)
-
+        with closing(sqlite3.connect(otra)) as con, con:
+            self.assertEqual(con.execute('PRAGMA user_version').fetchone()[0], 0)
+            self.assertEqual(con.execute('SELECT COUNT(*) FROM sqlite_master WHERE name="ejemplo"').fetchone()[0], 1)
 
 if __name__ == '__main__':
     unittest.main()
