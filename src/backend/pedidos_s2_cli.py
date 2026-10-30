@@ -18,7 +18,7 @@ def main(argv=None) -> int:
     parser.add_argument("--db", type=Path, default=DEFAULT_DATABASE,
                         help="Base SQLite del proyecto (por defecto data/inkafarma.sqlite3)")
     comandos = parser.add_subparsers(dest="comando", required=True)
-    comandos.add_parser("init", help="Agregar tablas aisladas del módulo S2-04")
+    comandos.add_parser("init", help="Inicializar el módulo de pedidos para la versión de la base")
 
     capacidad = comandos.add_parser("capacidad", help="Definir capacidad máxima de una sucursal")
     capacidad.add_argument("--sucursal", required=True)

@@ -16,7 +16,23 @@ import sqlite3
 from src.database.database import DEFAULT_DATABASE, connect_database
 from src.backend.asignacion_sucursal import distancia_km, ordenar_candidatas
 
+from src.backend.pedidos_integracion import registrar_integrado, obtener_integrado
+
 SCRIPT = Path(__file__).with_name("pedidos_s2_schema.sql")
+SCRIPT_INTEGRACION = Path(__file__).with_name("pedidos_s2_integracion.sql")
+
+
+def _esquema_oficial(db):
+    return db.execute("PRAGMA user_version").fetchone()[0] >= 2
+
+
+def _verificar_transicion(db):
+    existe = db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='s2_pedidos'").fetchone()
+    if existe and db.execute("SELECT count(*) FROM s2_pedidos").fetchone()[0]:
+        raise ModuloNoInicializado(
+            "La base migrada conserva pedidos provisionales s2_pedidos. "
+            "Requiere conciliar sus datos antes de usar el esquema oficial; no se modificaron."
+        )
 
 
 class DatosInvalidos(ValueError):
@@ -72,9 +88,13 @@ def _validar_solicitud(solicitud: dict) -> tuple[str, float, float, list[tuple[s
 
 
 def iniciar_modulo(db_path: str | Path = DEFAULT_DATABASE) -> None:
-    """Agrega las tablas S2 a una base S1 existente; no altera su versión ni datos."""
+    """Inicializa integración v2/v3; conserva el modo provisional para bases v1."""
     with connect_database(db_path) as db:
-        db.executescript(SCRIPT.read_text(encoding="utf-8"))
+        script = SCRIPT
+        if _esquema_oficial(db):
+            _verificar_transicion(db)
+            script = SCRIPT_INTEGRACION
+        db.executescript(script.read_text(encoding="utf-8"))
 
 
 def _revisar_modulo(db: sqlite3.Connection) -> None:
@@ -82,6 +102,9 @@ def _revisar_modulo(db: sqlite3.Connection) -> None:
         "SELECT name FROM sqlite_master WHERE type='table' AND name LIKE 's2_%'"
     )}
     esperadas = {"s2_capacidades", "s2_pedidos", "s2_pedido_detalles", "s2_reservas"}
+    if _esquema_oficial(db):
+        _verificar_transicion(db)
+        esperadas = {"s2_capacidades", "s2_solicitudes"}
     if not esperadas.issubset(tablas):
         raise ModuloNoInicializado("Ejecuta primero: python -m src.backend.pedidos_s2_cli init")
 
@@ -150,15 +173,18 @@ def _seleccionar_sucursal(db: sqlite3.Connection, lat: float, lon: float, produc
 def registrar_pedido(solicitud: dict, db_path: str | Path = DEFAULT_DATABASE) -> dict:
     """Valida, persiste, asigna y reserva de manera atómica.
 
-    Si no existe sucursal elegible, persiste un pedido SIN_ASIGNAR, sin reservas.
-    No reduce stock hasta comprobar todos los productos y la capacidad de la tienda.
-    BEGIN IMMEDIATE serializa escritores concurrentes y evita sobreventa.
+    En v2/v3 reutiliza las reglas de César y las reservas de Josué sin descontar
+    stock físico. Sin sucursal retorna SIN_ASIGNAR con pedido_id=None (el esquema
+    exige sucursal). En v1 conserva el contrato provisional de Anderson.
+    BEGIN IMMEDIATE serializa selección y persistencia para evitar sobreventa.
     """
     cliente, lat, lon, items = _validar_solicitud(solicitud)
     with connect_database(db_path) as db:
         _revisar_modulo(db)
         db.execute("BEGIN IMMEDIATE")
         productos = _productos_validos(db, items)
+        if _esquema_oficial(db):
+            return registrar_integrado(db, cliente, lat, lon, productos)
         sucursal = _seleccionar_sucursal(db, lat, lon, productos)
         estado = "ASIGNADO" if sucursal else "SIN_ASIGNAR"
         motivo = None if sucursal else "Ninguna sucursal tiene stock suficiente y capacidad libre."
@@ -201,6 +227,8 @@ def obtener_pedido(pedido_id: int, db_path: str | Path = DEFAULT_DATABASE) -> di
     _entero_positivo(pedido_id, campo="pedido_id")
     with connect_database(db_path, read_only=True) as db:
         _revisar_modulo(db)
+        if _esquema_oficial(db):
+            return obtener_integrado(db, pedido_id)
         pedido = db.execute("""
             SELECT p.id, p.cliente, p.latitud, p.longitud, p.estado, p.creado_en,
                    p.distancia_km, p.motivo_sin_asignar,

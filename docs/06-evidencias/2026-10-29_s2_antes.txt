@@ -1,0 +1,39 @@
+test_desempate_por_stock_de_cesar (test_integracion_sprint2.IntegracionSprint2Tests.test_desempate_por_stock_de_cesar) ... FAIL
+test_registro_usa_pedidos_y_reservas_oficiales (test_integracion_sprint2.IntegracionSprint2Tests.test_registro_usa_pedidos_y_reservas_oficiales) ... FAIL
+test_reserva_ajena_reduce_disponible_sin_error_sql (test_integracion_sprint2.IntegracionSprint2Tests.test_reserva_ajena_reduce_disponible_sin_error_sql) ... ERROR
+
+======================================================================
+ERROR: test_reserva_ajena_reduce_disponible_sin_error_sql (test_integracion_sprint2.IntegracionSprint2Tests.test_reserva_ajena_reduce_disponible_sin_error_sql)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repositorio>/tests/test_integracion_sprint2.py", line 59, in test_reserva_ajena_reduce_disponible_sin_error_sql
+    result = registrar_pedido(solicitud(cantidad=2), self.path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repositorio>/src/backend/pedidos_s2.py", line 178, in registrar_pedido
+    actualizado = db.execute("""
+                  ^^^^^^^^^^^^^^
+sqlite3.IntegrityError: El stock no puede ser menor a lo reservado
+
+======================================================================
+FAIL: test_desempate_por_stock_de_cesar (test_integracion_sprint2.IntegracionSprint2Tests.test_desempate_por_stock_de_cesar)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repositorio>/tests/test_integracion_sprint2.py", line 69, in test_desempate_por_stock_de_cesar
+    self.assertEqual(registrar_pedido(solicitud(), self.path)['sucursal_codigo'], 'DEMO-SUR')
+AssertionError: 'DEMO-NORTE' != 'DEMO-SUR'
+- DEMO-NORTE
++ DEMO-SUR
+
+
+======================================================================
+FAIL: test_registro_usa_pedidos_y_reservas_oficiales (test_integracion_sprint2.IntegracionSprint2Tests.test_registro_usa_pedidos_y_reservas_oficiales)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repositorio>/tests/test_integracion_sprint2.py", line 52, in test_registro_usa_pedidos_y_reservas_oficiales
+    self.assertEqual(self.scalar('SELECT count(*) FROM pedidos'), 1)
+AssertionError: 0 != 1
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.108s
+
+FAILED (failures=2, errors=1)
