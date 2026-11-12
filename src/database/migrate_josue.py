@@ -1,10 +1,8 @@
-"""Migraciones incrementales de las tareas de Josue, sin destruir la BD v1.
+"""Migraciones incrementales de pedidos, entregas y soporte (S2/S3).
 
-Uso (desde la raíz del proyecto):
-    python -m src.database.migrate_josue --db data/inkafarma.sqlite3
-
-Para el usuario con código del Sprint 1, aplicar primero
-`compatibilidad_versiones.patch` a src/database/database.py.
+La versión 4 agrega las incidencias del issue #22. Conservo el destino
+predeterminado en v3 para no cambiar los comandos documentados de S2.
+Para S3-04 se debe indicar explícitamente --hasta 4.
 """
 from __future__ import annotations
 
@@ -20,6 +18,7 @@ DEFAULT_DB = Path('data/inkafarma.sqlite3')
 MIGRATIONS = (
     (2, '002_pedidos_reservas.sql'),
     (3, '003_entregas_historial.sql'),
+    (4, '004_soporte_incidencias.sql'),
 )
 
 def migrar(ruta: str | Path, hasta: int = 3) -> list[int]:
@@ -27,8 +26,8 @@ def migrar(ruta: str | Path, hasta: int = 3) -> list[int]:
     archivo = Path(ruta).expanduser().resolve()
     if not archivo.is_file():
         raise ValueError(f'No existe la base {archivo}; inicialícela antes con --demo.')
-    if hasta not in (2, 3):
-        raise ValueError('La versión destino debe ser 2 o 3.')
+    if hasta not in (2, 3, 4):
+        raise ValueError('La versión destino debe ser 2, 3 o 4.')
     avanzadas: list[int] = []
     # El contexto de sqlite3 confirma/revierte transacciones, pero NO cierra
     # automáticamente la conexión. closing() la libera también si hay error.
@@ -36,7 +35,7 @@ def migrar(ruta: str | Path, hasta: int = 3) -> list[int]:
         db.execute('PRAGMA foreign_keys = ON')
         id_actual = db.execute('PRAGMA application_id').fetchone()[0]
         version = db.execute('PRAGMA user_version').fetchone()[0]
-        if id_actual != APPLICATION_ID or version not in (1, 2, 3):
+        if id_actual != APPLICATION_ID or version not in (1, 2, 3, 4):
             raise ValueError('BD ajena o versión no admitida: operación cancelada.')
         if version > hasta:
             raise ValueError('La base ya tiene una versión mayor. No se realizan retrocesos.')
@@ -58,9 +57,9 @@ def migrar(ruta: str | Path, hasta: int = 3) -> list[int]:
     return avanzadas
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description='Migrar esquema Inkafarma v1 a v2/v3')
+    parser = argparse.ArgumentParser(description='Migrar esquema Inkafarma v1 a v2/v3/v4')
     parser.add_argument('--db', default=str(DEFAULT_DB))
-    parser.add_argument('--hasta', type=int, choices=[2, 3], default=3)
+    parser.add_argument('--hasta', type=int, choices=[2, 3, 4], default=3)
     opciones = parser.parse_args()
     try:
         avanzadas = migrar(opciones.db, opciones.hasta)
