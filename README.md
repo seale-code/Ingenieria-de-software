@@ -27,6 +27,7 @@
 | Necesidades del producto | [Historias originales](docs/02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf) y [Product Backlog](docs/07-scrum/PRODUCT_BACKLOG.md) |
 | Prioridades y trabajo del sprint | [MoSCoW](docs/07-scrum/PRIORIZACION.md) y [Sprint Backlog 1](docs/07-scrum/SPRINT_BACKLOG_1.md) |
 | Planes | [Sprint 1](sprint-1/README.md) · [Sprint 2](sprint-2/README.md) · [Sprint 3](sprint-3/README.md) |
+| Modelos UML del sistema | [Diagramas por grupos de historias](docs/03-diagramas/uml/README.md) |
 | Validación | [Casos de prueba](docs/05-pruebas/CASOS_DE_PRUEBA.md) y [evidencias](docs/06-evidencias/README.md) |
 
 **Ejecuta la interfaz de catálogo y pedidos** con la [guía de demostración](sprint-3/DEMO_MVP.md). El [informe S3-05](sprint-3/S3-05_Sebastian_Calderon.md) reúne los resultados de integración y las dependencias para completar el recorrido de entrega.

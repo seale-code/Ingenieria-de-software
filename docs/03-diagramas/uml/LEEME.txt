@@ -1,0 +1,20 @@
+INKAFARMA - MODELO UML POR GRUPOS DE HISTORIAS
+
+Abre Inkafarma-modelo-UML.drawio en https://app.diagrams.net/
+(Archivo > Abrir desde > Dispositivo). Tiene 17 pestañas editables.
+Los mismos 17 diagramas están separados en generales/ y grupos/.
+Inkafarma-modelo-UML.pdf permite leer y presentar los 17 diagramas.
+
+G01 Consulta y comparación: HU01, HU07, HU13
+G02 Compra y asistencia: HU04, HU08, HU10, HU11, HU12
+G03 Reservas y asignación: HU02, HU03, HU09
+G04 Seguimiento y entrega: HU05, HU15
+G05 Inventario y alertas: HU06, HU14
+
+Total: 1 MCU general + 1 componentes general + 5 actividades +
+5 secuencia + 5 colaboración = 17 diagramas.
+La matriz trazabilidad.csv relaciona los 46 criterios de aceptación.
+Modelo de análisis funcional, no acreditación de funciones implementadas.
+
+Fuente: HistoriasdeUsuario-Inkafarma.pdf, páginas 2-16.
+Repositorio: https://github.com/seale-code/Ingenieria-de-software
