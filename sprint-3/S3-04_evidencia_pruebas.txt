@@ -1,0 +1,45 @@
+EVIDENCIA LOCAL — S3-04 / Issue #22
+Responsable: Anderson Delerna
+
+1) Pruebas específicas del módulo
+Comando:
+python -m unittest tests.test_soporte_pedidos_s3 -v
+
+Resultado:
+Ran 25 tests in 0.469s
+OK
+
+2) Regresión de módulos disponibles sin Flask
+Comando:
+python -m unittest tests.test_catalogo_busqueda tests.test_entregas_s3 tests.test_fechas_entregas_s3 tests.test_filtro_categorias tests.test_filtro_sucursal_stock tests.test_filtros_combinados tests.test_integracion_sprint2 tests.test_josue_migrations tests.test_pedidos_s2 tests.test_preparacion_pedidos tests.test_reglas_asignacion tests.test_repartidores_s3 tests.test_soporte_pedidos_s3
+
+Resultado de la última ejecución:
+Ran 160 tests in 10.378s
+OK
+
+3) Alcance de la validación
+Las 25 pruebas específicas incluyen:
+- Transiciones PREPARADO -> EN_CAMINO -> ENTREGADO.
+- Verificación del repartidor asignado y rechazo de roles no autorizados.
+- Registro de salida y recepción antes de cada transición.
+- Consumo de reservas al salir, sin doble descuento de inventario.
+- Cancelación previa a la salida y liberación de reservas sin descontar stock.
+- Registro, consulta y resolución de incidencias.
+- Restricción de consulta por sucursal y repartidor.
+- Validación de categorías, descripciones y estados.
+
+La suite completa del repositorio no quedó certificada en este entorno:
+- No estaba instalada Flask, requerida por test_api_catalogo, test_integracion_mvp_s3 y test_pedidos_web.
+- La prueba de CLI de test_database detectó una salida de arranque adicional del entorno de ejecución.
+
+Para repetir la validación completa en el equipo:
+python -m pip install -r requirements-test.txt
+python -m unittest discover -s tests -v
+
+Los resultados corresponden a bases SQLite temporales con datos ficticios. No se modificó una base de producción ni se hizo merge a main.
+
+4) Prueba rápida de la interfaz CLI
+Se ejecutó la migración desde la CLI sobre una base temporal:
+- Migraciones aplicadas: 2, 3 y 4.
+- Versión destino: 4.
+También se registró una incidencia de prueba desde el comando `incidencia`; la CLI devolvió el registro creado en estado ABIERTA.
