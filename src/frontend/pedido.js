@@ -132,6 +132,22 @@ function showOrderSuccess(pedido) {
   orderElement('success-description').textContent = `El pedido #${pedido.pedido_id} está registrado en ${pedido.sucursal_nombre}.`;
   orderElement('success-details').replaceChildren(textNode('dt', 'Número de pedido'), textNode('dd', `#${pedido.pedido_id}`), textNode('dt', 'Sucursal'), textNode('dd', pedido.sucursal_nombre), textNode('dt', 'Estado'), textNode('dd', pedido.estado.replaceAll('_', ' ')));
   orderElement('success-items').replaceChildren(...pedido.items.map(item => textNode('li', `${orderProducts.find(p => p.producto_codigo === item.producto_codigo)?.producto || item.producto_codigo} · ${item.cantidad} unidad(es)`)));
+  let tracking = document.getElementById('order-tracking-link');
+  if (!tracking) {
+    tracking = document.createElement('a');
+    tracking.id = 'order-tracking-link';
+    orderElement('success-view').append(tracking);
+  }
+  const code = 'WEB-' + confirmationId;
+  tracking.href = '/seguimiento#' + encodeURIComponent(code);
+  tracking.textContent = 'Ver seguimiento del pedido';
+  let codeNote = document.getElementById('order-tracking-code');
+  if (!codeNote) {
+    codeNote = document.createElement('p');
+    codeNote.id = 'order-tracking-code';
+    orderElement('success-view').append(codeNote);
+  }
+  codeNote.textContent = 'Guarda tu código de seguimiento: ' + code;
   orderElement('success-view').focus();
 }
 async function confirmOrder() {
@@ -191,3 +207,4 @@ orderElement('new-order').onclick = () => {
   orderElement('customer').focus();
 };
 loadOrderOptions();
+
