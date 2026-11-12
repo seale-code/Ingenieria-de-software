@@ -2,7 +2,13 @@
 
 Responsable: Sebastian Calderon (`seale-code`). Tarea [#17](https://github.com/seale-code/Ingenieria-de-software/issues/17), en el [Project Inkafarma](https://github.com/users/seale-code/projects/1). Trazabilidad: PBI-05, PBI-15 y soporte parcial PBI-11.
 
-## Resultado de esta propuesta
+## Ampliación del 12 de noviembre de 2026
+
+El PR #48 ya está integrado, al igual que preparación (#47). Se amplía la validación sobre el seguimiento de Willy (#49, todavía abierto): **211 pruebas Python/API y 24 recorridos Chromium aprobados**. Incluye 6 casos API nuevos, 9 casos de navegador, copia del código de seguimiento y una demo que compara la API pública con el historial real de preparación. [Evidencia actual](../docs/06-evidencias/2026-11-12_seguimiento-validacion-mvp.md).
+
+Queda por completar #22 y repetir el recorrido hasta ENTREGADO; las comprobaciones siguientes del 11 de noviembre se conservan como historial.
+
+## Resultado de la propuesta inicial
 
 Se añadieron 12 pruebas de integración entre catálogo, confirmación, reservas, repartidores e historial, un recorrido de navegador entre catálogo y pedido, y una demostración técnica reproducible. Se detectó y corrigió que el catálogo mostraba stock físico como disponibilidad aun cuando existían reservas activas.
 
@@ -23,7 +29,7 @@ La rama de #47 era anterior a #46. Para la validación compuesta se fusionó `or
 
 [Casos](../docs/05-pruebas/S3-05-validacion-mvp.md) · [Logs y defectos](../docs/06-evidencias/2026-11-11_validacion-mvp-sprint-3.md) · [Demo](DEMO_MVP.md).
 
-## Dependencias para cerrar #17
+## Dependencias registradas el 11 de noviembre (ver actualización anterior)
 
 - #16 / PR #47: revisión e integración de preparación; faltan pantallas para el personal en main.
 - #15: seguimiento del pedido para el cliente todavía sin interfaz/endpoint en main revisado.
@@ -40,4 +46,4 @@ No se asigna una implementación a otro integrante ni se cierran sus tareas desd
 - [ ] Validar el recorrido completo hasta ENTREGADO con seguimiento y soporte.
 - [ ] Obtener revisión del equipo y registrar aceptación del MVP.
 
-La tarea #17 permanece abierta hasta completar estas dependencias. No se inventan reuniones, participantes ni resultados de aceptación.
+El merge de #48 cerró automáticamente #17. La ampliación documenta por separado la validación de seguimiento y la dependencia restante #22; el cierre por merge no acredita la aceptación del recorrido completo. No se inventan reuniones, participantes ni resultados de aceptación.
