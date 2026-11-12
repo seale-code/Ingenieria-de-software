@@ -1,0 +1,67 @@
+test_agregar_quitar_y_agrupar_productos (test_pedido_browser.PedidoBrowserTests.test_agregar_quitar_y_agrupar_productos) ... 127.0.0.1 - - [11/Nov/2026 19:54:57] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:54:57] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:54:57] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:54:57] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:54:57] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:54:57] "POST /api/pedidos HTTP/1.1" 200 -
+ok
+test_cantidad_invalida_y_stock_insuficiente (test_pedido_browser.PedidoBrowserTests.test_cantidad_invalida_y_stock_insuficiente) ... 127.0.0.1 - - [11/Nov/2026 19:54:58] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:54:58] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:54:58] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:54:58] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:54:58] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:54:58] "[31m[1mPOST /api/pedidos HTTP/1.1[0m" 409 -
+127.0.0.1 - - [11/Nov/2026 19:54:59] "POST /api/pedidos HTTP/1.1" 200 -
+ok
+test_catalogo_refleja_reserva_despues_de_confirmar (test_pedido_browser.PedidoBrowserTests.test_catalogo_refleja_reserva_despues_de_confirmar)
+S3-05: recorrido conjunto S1 -> S2 -> disponibilidad actualizada. ... 127.0.0.1 - - [11/Nov/2026 19:54:59] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:54:59] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:54:59] "GET /assets/catalogo.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:00] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:00] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:00] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:00] "[36mGET /assets/styles.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Nov/2026 19:55:00] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:00] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:00] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:00] "POST /api/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:00] "[36mGET / HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Nov/2026 19:55:00] "[36mGET /assets/styles.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Nov/2026 19:55:00] "[36mGET /assets/catalogo.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Nov/2026 19:55:00] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:00] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:00] "GET /api/productos/DEMO-A/stock HTTP/1.1" 200 -
+ok
+test_error_de_carga_y_recuperacion (test_pedido_browser.PedidoBrowserTests.test_error_de_carga_y_recuperacion) ... 127.0.0.1 - - [11/Nov/2026 19:55:01] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:01] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:01] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:01] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:01] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+ok
+test_responsive_teclado_y_capturas (test_pedido_browser.PedidoBrowserTests.test_responsive_teclado_y_capturas) ... 127.0.0.1 - - [11/Nov/2026 19:55:02] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:02] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:02] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:02] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:02] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:02] "POST /api/pedidos HTTP/1.1" 200 -
+ok
+test_respuesta_perdida_reintenta_sin_duplicar (test_pedido_browser.PedidoBrowserTests.test_respuesta_perdida_reintenta_sin_duplicar) ... 127.0.0.1 - - [11/Nov/2026 19:55:03] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:03] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:03] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:03] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:03] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:03] "POST /api/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:03] "POST /api/pedidos HTTP/1.1" 200 -
+ok
+test_revisar_editar_y_confirmar_sin_escritura_anticipada (test_pedido_browser.PedidoBrowserTests.test_revisar_editar_y_confirmar_sin_escritura_anticipada) ... 127.0.0.1 - - [11/Nov/2026 19:55:04] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:04] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:04] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:04] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:04] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:55:04] "POST /api/pedidos HTTP/1.1" 200 -
+ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 8.451s
+
+OK
