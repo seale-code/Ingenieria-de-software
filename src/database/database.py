@@ -8,7 +8,7 @@ SQL_DIRECTORY = Path(__file__).resolve().parent
 DEFAULT_DATABASE = SQL_DIRECTORY.parents[1] / "data" / "inkafarma.sqlite3"
 APPLICATION_ID = 1229867841
 SCHEMA_VERSION = 1
-SUPPORTED_SCHEMA_VERSIONS = (1, 2, 3)
+SUPPORTED_SCHEMA_VERSIONS = (1, 2, 3, 4)
 
 
 def _validate_database(db: sqlite3.Connection) -> None:
