@@ -1,0 +1,32 @@
+{
+  "alcance": "VALIDACION_PARCIAL_NO_CIERRE_MVP",
+  "catalogo": {
+    "antes": 5,
+    "reservado": 2,
+    "disponible": 3
+  },
+  "confirmacion": {
+    "pedido_id": 1,
+    "reintento_sin_duplicar": true
+  },
+  "preparacion": {
+    "estado": "PENDIENTE",
+    "dependencia": "PR #47 / tarea #16"
+  },
+  "entrega": {
+    "entrega_id": 1,
+    "fecha_salida": "2026-11-12T00:54:56.742Z",
+    "fecha_recepcion": "2026-11-12T00:54:56.742Z",
+    "estado_pedido": "ASIGNADO",
+    "estado_entrega": "ASIGNADA"
+  },
+  "estados_registrados": [
+    "ASIGNADO"
+  ],
+  "eventos_entrega": 4,
+  "pendientes": [
+    "#15: seguimiento web del cliente",
+    "#22: transiciones de reparto, permisos e incidencias",
+    "#17: aceptación del recorrido hasta ENTREGADO e integración web S3"
+  ]
+}

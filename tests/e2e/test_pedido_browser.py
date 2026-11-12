@@ -75,6 +75,34 @@ class PedidoBrowserTests(unittest.IsolatedAsyncioTestCase):
         await expect(self.page.locator('#success-items')).to_contain_text('3 unidad(es)')
         self.assertEqual(self.total(), 1)
 
+    async def test_catalogo_refleja_reserva_despues_de_confirmar(self):
+        """S3-05: recorrido conjunto S1 -> S2 -> disponibilidad actualizada."""
+        raiz = self.url.removesuffix('/pedido')
+        await self.page.goto(raiz)
+        await expect(self.page.locator('.product')).to_have_count(3)
+        producto = self.page.locator('.product').filter(has_text='Producto demo A')
+        await expect(producto.locator('.availability')).to_contain_text('5 unidades')
+        await self.page.get_by_role('link', name='Crear un pedido').click()
+        await expect(self.page.locator('#edit-view')).to_be_visible()
+        await self.page.locator('.order-product').select_option('DEMO-A')
+        await self.page.locator('.order-quantity').fill('2')
+        await self.page.locator('#customer').fill('Cliente de demostración')
+        await self.page.locator('#reference').select_option('DEMO-NORTE')
+        await self.review()
+        await self.page.locator('#confirm-order').click()
+        await expect(self.page.locator('#success-view')).to_be_visible()
+        self.assertEqual(self.total(), 1)
+        await self.page.goto(raiz)
+        await expect(self.page.locator('.product')).to_have_count(3)
+        producto = self.page.locator('.product').filter(has_text='Producto demo A')
+        await expect(producto.locator('.availability')).to_contain_text('3 unidades')
+        await producto.locator('.detail-toggle').click()
+        await expect(producto.locator('.detail')).to_contain_text('3 unidades')
+        if os.environ.get('EVIDENCE_DIR'):
+            dest = Path(os.environ['EVIDENCE_DIR'])
+            dest.mkdir(parents=True, exist_ok=True)
+            await self.page.screenshot(path=str(dest / 's3-catalogo-reservado.png'), full_page=True)
+
     async def test_cantidad_invalida_y_stock_insuficiente(self):
         await self.open_form(cantidad='0')
         await self.page.get_by_role('button', name='Revisar pedido').click()

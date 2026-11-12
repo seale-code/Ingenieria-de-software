@@ -1,0 +1,60 @@
+test_agotado_por_reservas_no_aparece_en_disponibles (test_integracion_mvp_s3.IntegracionMvpS3Tests.test_agotado_por_reservas_no_aparece_en_disponibles) ... FAIL
+test_confirmacion_invalida_no_escribe (test_integracion_mvp_s3.IntegracionMvpS3Tests.test_confirmacion_invalida_no_escribe) ... ok
+test_consumir_no_descuenta_dos_veces_en_catalogo (test_integracion_mvp_s3.IntegracionMvpS3Tests.test_consumir_no_descuenta_dos_veces_en_catalogo) ... ok
+test_fechas_no_equivalen_a_transiciones_de_estado (test_integracion_mvp_s3.IntegracionMvpS3Tests.test_fechas_no_equivalen_a_transiciones_de_estado) ... ok
+test_historial_rechaza_modificacion_y_borrado (test_integracion_mvp_s3.IntegracionMvpS3Tests.test_historial_rechaza_modificacion_y_borrado) ... ok
+test_liberar_restablece_disponibilidad_sin_consumo (test_integracion_mvp_s3.IntegracionMvpS3Tests.test_liberar_restablece_disponibilidad_sin_consumo) ... ok
+test_pedido_web_se_relaciona_con_repartidor_e_historial (test_integracion_mvp_s3.IntegracionMvpS3Tests.test_pedido_web_se_relaciona_con_repartidor_e_historial) ... ok
+test_reintento_no_duplica_pedido_reserva_ni_historial (test_integracion_mvp_s3.IntegracionMvpS3Tests.test_reintento_no_duplica_pedido_reserva_ni_historial) ... FAIL
+test_reserva_confirmada_reduce_disponibilidad_del_catalogo (test_integracion_mvp_s3.IntegracionMvpS3Tests.test_reserva_confirmada_reduce_disponibilidad_del_catalogo) ... FAIL
+test_reservas_de_otro_producto_no_reducen_disponibilidad (test_integracion_mvp_s3.IntegracionMvpS3Tests.test_reservas_de_otro_producto_no_reducen_disponibilidad) ... ok
+test_sin_stock_no_deja_pedido_ni_historial_parcial (test_integracion_mvp_s3.IntegracionMvpS3Tests.test_sin_stock_no_deja_pedido_ni_historial_parcial) ... ok
+test_stock_por_sucursal_refleja_reservas (test_integracion_mvp_s3.IntegracionMvpS3Tests.test_stock_por_sucursal_refleja_reservas) ... FAIL
+
+======================================================================
+FAIL: test_agotado_por_reservas_no_aparece_en_disponibles (test_integracion_mvp_s3.IntegracionMvpS3Tests.test_agotado_por_reservas_no_aparece_en_disponibles)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/0855a87b467f/Ingenieria-de-software/tests/test_integracion_mvp_s3.py", line 62, in test_agotado_por_reservas_no_aparece_en_disponibles
+    self.assertEqual(response.json['productos'], [])
+AssertionError: Lists differ: [{'cantidad': 5, 'categoria': 'Categoría d[93 chars]-A'}] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+{'cantidad': 5, 'categoria': 'Categoría demo X', 'categoria_codigo': 'DEMO-X', 'producto': 'Producto demo A', 'producto_codigo': 'DEMO-A'}
+
++ []
+- [{'cantidad': 5,
+-   'categoria': 'Categoría demo X',
+-   'categoria_codigo': 'DEMO-X',
+-   'producto': 'Producto demo A',
+-   'producto_codigo': 'DEMO-A'}]
+
+======================================================================
+FAIL: test_reintento_no_duplica_pedido_reserva_ni_historial (test_integracion_mvp_s3.IntegracionMvpS3Tests.test_reintento_no_duplica_pedido_reserva_ni_historial)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/0855a87b467f/Ingenieria-de-software/tests/test_integracion_mvp_s3.py", line 85, in test_reintento_no_duplica_pedido_reserva_ni_historial
+    self.assertEqual(self.cantidad_catalogo(), 3)
+AssertionError: 5 != 3
+
+======================================================================
+FAIL: test_reserva_confirmada_reduce_disponibilidad_del_catalogo (test_integracion_mvp_s3.IntegracionMvpS3Tests.test_reserva_confirmada_reduce_disponibilidad_del_catalogo)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/0855a87b467f/Ingenieria-de-software/tests/test_integracion_mvp_s3.py", line 49, in test_reserva_confirmada_reduce_disponibilidad_del_catalogo
+    self.assertEqual(self.cantidad_catalogo(), 3)
+AssertionError: 5 != 3
+
+======================================================================
+FAIL: test_stock_por_sucursal_refleja_reservas (test_integracion_mvp_s3.IntegracionMvpS3Tests.test_stock_por_sucursal_refleja_reservas)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/0855a87b467f/Ingenieria-de-software/tests/test_integracion_mvp_s3.py", line 57, in test_stock_por_sucursal_refleja_reservas
+    self.assertEqual(response.json['stock'][0]['cantidad'], 3)
+AssertionError: 5 != 3
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.111s
+
+FAILED (failures=4)

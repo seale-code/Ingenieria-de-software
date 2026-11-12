@@ -7,7 +7,7 @@
 
 ![Proyecto académico](https://img.shields.io/badge/Proyecto-Académico-127A50?style=for-the-badge)
 ![Metodología](https://img.shields.io/badge/Scrum-3%20Sprints-F3C623?style=for-the-badge&labelColor=126B48)
-**Estado: base de datos implementada y probada; revisión del equipo pendiente.**
+**Catálogo y pedidos web funcionales · Integración del Sprint 3 en revisión.**
 
 
 <br>
@@ -29,7 +29,7 @@
 | Planes | [Sprint 1](sprint-1/README.md) · [Sprint 2](sprint-2/README.md) · [Sprint 3](sprint-3/README.md) |
 | Validación | [Casos de prueba](docs/05-pruebas/CASOS_DE_PRUEBA.md) y [evidencias](docs/06-evidencias/README.md) |
 
-**La base de datos ya es ejecutable por consola.** Incluye categorías, productos, sucursales e inventario, datos ficticios y 24 pruebas aprobadas. Consulta la [guía de uso](src/database/README.md). La API y las pantallas siguen pendientes.
+**Ejecuta la interfaz de catálogo y pedidos** con la [guía de demostración](sprint-3/DEMO_MVP.md). El [informe S3-05](sprint-3/S3-05_Sebastian_Calderon.md) reúne los resultados de integración y las dependencias para completar el recorrido de entrega.
 
 ## 🌿 Sobre nuestro proyecto
 
@@ -49,7 +49,7 @@ El alcance comprende exclusivamente **sucursales de Inkafarma**.
 | 🔎 Catálogo y búsqueda | Consultar productos, buscar por nombre y filtrar por categoría. |
 | 🏪 Disponibilidad | Consultar stock por sucursal y mostrar productos disponibles. |
 | 🛒 Pedidos | Registrar productos y cantidades solicitadas, validando disponibilidad. |
-| ⚙️ Asignación de sucursal | Evaluar stock, distancia y capacidad de atención. Las reglas y sus pesos están pendientes de definición. |
+| ⚙️ Asignación de sucursal | Evaluar stock, distancia y capacidad de atención. Reglas y desempates documentados en [S2-01](docs/REGLAS_ASIGNACION_S2.md). |
 | 📦 Preparación y entrega | Gestionar la preparación del pedido, el reparto y la confirmación de entrega. |
 | 📍 Seguimiento y soporte | Consultar estados del pedido y registrar incidencias básicas. |
 

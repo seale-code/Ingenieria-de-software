@@ -1,0 +1,34 @@
+{
+  "alcance": "VALIDACION_PARCIAL_NO_CIERRE_MVP",
+  "catalogo": {
+    "antes": 5,
+    "reservado": 2,
+    "disponible": 3
+  },
+  "confirmacion": {
+    "pedido_id": 1,
+    "reintento_sin_duplicar": true
+  },
+  "preparacion": {
+    "estado": "VALIDADO",
+    "ultimo_estado": "PREPARADO"
+  },
+  "entrega": {
+    "entrega_id": 1,
+    "fecha_salida": "2026-11-12T00:55:35.531Z",
+    "fecha_recepcion": "2026-11-12T00:55:35.531Z",
+    "estado_pedido": "PREPARADO",
+    "estado_entrega": "ASIGNADA"
+  },
+  "estados_registrados": [
+    "ASIGNADO",
+    "EN_PREPARACION",
+    "PREPARADO"
+  ],
+  "eventos_entrega": 6,
+  "pendientes": [
+    "#15: seguimiento web del cliente",
+    "#22: transiciones de reparto, permisos e incidencias",
+    "#17: aceptación del recorrido hasta ENTREGADO e integración web S3"
+  ]
+}

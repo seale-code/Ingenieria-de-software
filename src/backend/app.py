@@ -63,7 +63,7 @@ def create_app(db_path=None):
         path = app.config["DATABASE"]
         productos = buscar_productos(nombre, db_path=path)
         stock = get_stock(path, search=nombre, category=categoria or None,
-                          branch=sucursal or None)
+                          branch=sucursal or None, effective=True)
         por_producto = {}
         for fila in stock:
             por_producto.setdefault(fila["producto_codigo"], []).append(fila)
@@ -88,7 +88,8 @@ def create_app(db_path=None):
             existe = db.execute("SELECT 1 FROM productos WHERE codigo = ?", (codigo,)).fetchone()
         if not existe:
             return jsonify(error="Producto no encontrado."), 404
-        filas = [fila for fila in get_stock(path) if fila["producto_codigo"] == codigo]
+        filas = [fila for fila in get_stock(path, effective=True)
+                 if fila["producto_codigo"] == codigo]
         return jsonify(stock=filas)
 
     return app

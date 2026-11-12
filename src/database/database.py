@@ -68,12 +68,15 @@ def get_stock(
     category: str | None = None,
     branch: str | None = None,
     available_only: bool = False,
+    effective: bool = False,
 ) -> list[dict]:
     """Consulta filas producto/sucursal; una búsqueda vacía incluye todas.
 
     Categoría y sucursal se filtran por código exacto. La búsqueda parcial
     distingue acentos, pero no mayúsculas; %, _ y apóstrofos son literales.
     Las sucursales sin un registro de inventario no aparecen en esta vista.
+    effective=True resta reservas ACTIVAS en v2/v3 para mostrar disponibilidad
+    vendible. Por defecto se conserva la consulta de inventario físico de S1.
     """
     conditions = ["instr(casefold(producto), casefold(?)) > 0"]
     parameters: list = [search.strip()]
@@ -85,11 +88,26 @@ def get_stock(
         parameters.append(branch)
     if available_only:
         conditions.append("cantidad > 0")
-    query = (
-        "SELECT * FROM v_disponibilidad WHERE "
-        + " AND ".join(conditions)
-        + " ORDER BY producto_codigo, sucursal_codigo"
-    )
     with connect_database(path, read_only=True) as db:
+        source = 'v_disponibilidad'
+        if effective and db.execute('PRAGMA user_version').fetchone()[0] >= 2:
+            # Una sola consulta/snapshot: el filtro de disponibles se aplica
+            # después de restar reservas; las consumidas ya redujeron inventario.
+            source = '''(
+                SELECT p.codigo AS producto_codigo, p.nombre AS producto,
+                       c.codigo AS categoria_codigo, c.nombre AS categoria,
+                       s.codigo AS sucursal_codigo, s.nombre AS sucursal,
+                       s.latitud, s.longitud,
+                       i.cantidad - COALESCE((SELECT SUM(r.cantidad)
+                           FROM reservas_stock r
+                           WHERE r.producto_id=i.producto_id
+                             AND r.sucursal_id=i.sucursal_id
+                             AND r.estado='ACTIVA'), 0) AS cantidad
+                FROM inventario i JOIN productos p ON p.id=i.producto_id
+                JOIN categorias c ON c.id=p.categoria_id
+                JOIN sucursales s ON s.id=i.sucursal_id
+            )'''
+        query = ('SELECT * FROM ' + source + ' WHERE ' + ' AND '.join(conditions)
+                 + ' ORDER BY producto_codigo, sucursal_codigo')
         db.create_function("casefold", 1, str.casefold, deterministic=True)
         return [dict(row) for row in db.execute(query, parameters).fetchall()]
