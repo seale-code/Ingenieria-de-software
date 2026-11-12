@@ -1,0 +1,47 @@
+﻿Grupo,HU,Criterio,Resumen del criterio,Acciones de actividad,Mensajes secuencia/colaboracion,IDs de mensajes
+G01,HU01,CA1,Buscar por nombre y mostrar sucursales con disponibilidad.,"a,b","1,3","buscar,stock"
+G01,HU01,CA2,Ordenar primero las sucursales más cercanas.,d,"5,6","ordenar,opciones"
+G01,HU01,CA3,Informar cuando no hay stock.,h,10,agotado
+G01,HU07,CA1,Mostrar precios y disponibilidad.,"b,e","3,7","stock,comparar"
+G01,HU07,CA2,Organizar claramente las opciones.,"d,e","6,7","opciones,comparar"
+G01,HU07,CA3,Iniciar compra al confirmar una opción.,"f,g","8,9","elegir,compra"
+G01,HU13,CA1,Mostrar alternativas cuando no haya disponibilidad.,"i,j","11,13","alternativas,mostrarAlt"
+G01,HU13,CA2,Mostrar información básica de equivalentes.,"i,l","12,14,15","fichas,consultaAsesor,orientacion"
+G01,HU13,CA3,Registrar la alternativa elegida como un nuevo pedido.,"m,n","16,17","confAlt,nuevo"
+G02,HU04,CA1,"Con cuenta registrada, agregar medicamentos al carrito.","a,b,h","1,3,8,9,10","acceso,cuenta,agregar,item,guardarItem"
+G02,HU04,CA2,Confirmar el pedido tras seleccionar productos.,"q,r,t,w","28,30,31","registrar,guardar,confirmacion"
+G02,HU04,CA3,Entregar información de entrega.,w,"31,32","confirmacion,recibir"
+G02,HU08,CA1,Presentar opciones simples.,e,7,simple
+G02,HU08,CA2,Permitir solicitar asistencia.,"j,k,n","17,18,21","pregunta,soporte,derivar"
+G02,HU08,CA3,Explicar claramente la confirmación.,w,"31,32","confirmacion,recibir"
+G02,HU10,CA1,Mostrar pedidos anteriores del usuario.,"b,g","11,12,13","historial,previos,pedidos"
+G02,HU10,CA2,Agregar productos al repetir una compra.,g,"15,16","repetir,carrito"
+G02,HU10,CA3,Proteger la información personal al consultar.,"b,c,d","2,3,5","identidad,cuenta,rechazo"
+G02,HU11,CA1,Escribir consulta y recibir respuesta.,"k,l","17,20","pregunta,respuesta"
+G02,HU11,CA2,Consultar el estado de un pedido desde soporte.,l,"18,19","soporte,contexto"
+G02,HU11,CA3,Derivar a asesor cuando requiera atención especializada.,"m,n","21,22","derivar,asesoria"
+G02,HU12,CA1,Consultar información actualizada desde aplicación o sucursal.,"a,h",6,opciones
+G02,HU12,CA2,Conservar datos del pedido al cambiar de canal.,"o,p","23,24,25,26","cambiar,conservar,restaurar,continuar"
+G02,HU12,CA3,Mostrar las opciones de atención.,"e,h","6,27","opciones,seleccion"
+G03,HU02,CA1,Bloquear temporalmente stock al confirmar la reserva.,"e,h","6,9","bloquear,reserva"
+G03,HU02,CA2,Notificar la solicitud a la sucursal.,h,10,notificar
+G03,HU02,CA3,Liberar stock al vencer sin concretar compra.,"o,q","20,21","liberar,vencida"
+G03,HU03,CA1,Evaluar distancia y disponibilidad.,b,"2,3","evaluar,candidatas"
+G03,HU03,CA2,Priorizar cercanía y stock.,e,4,priorizar
+G03,HU03,CA3,Asignar una alternativa si la sucursal no puede atender.,"k,l,m","14,15,16","buscarotra,reasignar,avisonueva"
+G03,HU09,CA1,Alertar si la sucursal no confirma stock.,"i,j","11,12","falla,alertar"
+G03,HU09,CA2,Reasignar automáticamente si hay alternativa.,"k,l,m","14,15","buscarotra,reasignar"
+G03,HU09,CA3,Registrar la solución y el cambio de estado.,m,15,reasignar
+G04,HU05,CA1,Mostrar el estado del pedido confirmado.,"d,n","8,9,10,22","ver,consultar,mostrar,final"
+G04,HU05,CA2,Notificar cambios de estado.,"d,h,m","7,14,21","aviso,avisocamino,avisofinal"
+G04,HU05,CA3,Avisar cuando esté listo para recoger.,"j,k","16,17","listo,avisorecojo"
+G04,HU15,CA1,Seleccionar sucursal con disponibilidad para entrega a domicilio.,"a,b","1,3","modalidad,asignacion"
+G04,HU15,CA2,Considerar distancia y capacidad de atención.,b,3,asignacion
+G04,HU15,CA3,Actualizar al cliente durante el reparto.,h,"13,14","camino,avisocamino"
+G04,HU15,CA4,Registrar la confirmación final de entrega.,"i,m","15,20","confirmar,entregado"
+G05,HU06,CA1,Registrar alerta para un medicamento agotado.,"b,c","1,2,3","alerta,suscribir,registrada"
+G05,HU06,CA2,Notificar la reposición de stock.,"j,l,m,n","8,11,12","ingreso,consultar,notificar"
+G05,HU06,CA3,Permitir iniciar compra desde el aviso.,o,13,abrir
+G05,HU14,CA1,Actualizar automáticamente stock al registrar una venta.,"d,i","4,7","movimiento,venta"
+G05,HU14,CA2,Aumentar disponibilidad al registrar ingreso.,"d,j,l","8,10","ingreso,publicar"
+G05,HU14,CA3,Permitir correcciones autorizadas del inventario.,"e,k","5,9","validar,corregir"

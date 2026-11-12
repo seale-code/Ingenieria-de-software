@@ -1,0 +1,160 @@
+{
+  "diagramas": [
+    {
+      "id": "MCU",
+      "page": 1,
+      "path": "generales/MCU.drawio",
+      "nodes": 39,
+      "edges": 24,
+      "width": 2050,
+      "height": 2470
+    },
+    {
+      "id": "COMP",
+      "page": 2,
+      "path": "generales/componentes.drawio",
+      "nodes": 15,
+      "edges": 15,
+      "width": 1950,
+      "height": 1790
+    },
+    {
+      "id": "G01-ACT",
+      "page": 3,
+      "path": "grupos/G01/actividades.drawio",
+      "nodes": 32,
+      "edges": 23,
+      "width": 1100,
+      "height": 2057
+    },
+    {
+      "id": "G01-SEC",
+      "page": 4,
+      "path": "grupos/G01/secuencia.drawio",
+      "nodes": 33,
+      "edges": 23,
+      "width": 1860,
+      "height": 1944
+    },
+    {
+      "id": "G01-COL",
+      "page": 5,
+      "path": "grupos/G01/colaboracion.drawio",
+      "nodes": 17,
+      "edges": 5,
+      "width": 2100,
+      "height": 2480
+    },
+    {
+      "id": "G02-ACT",
+      "page": 6,
+      "path": "grupos/G02/actividades.drawio",
+      "nodes": 44,
+      "edges": 32,
+      "width": 1100,
+      "height": 2999
+    },
+    {
+      "id": "G02-SEC",
+      "page": 7,
+      "path": "grupos/G02/secuencia.drawio",
+      "nodes": 59,
+      "edges": 39,
+      "width": 1860,
+      "height": 3506
+    },
+    {
+      "id": "G02-COL",
+      "page": 8,
+      "path": "grupos/G02/colaboracion.drawio",
+      "nodes": 18,
+      "edges": 6,
+      "width": 2100,
+      "height": 2555
+    },
+    {
+      "id": "G03-ACT",
+      "page": 9,
+      "path": "grupos/G03/actividades.drawio",
+      "nodes": 35,
+      "edges": 25,
+      "width": 1523,
+      "height": 2149
+    },
+    {
+      "id": "G03-SEC",
+      "page": 10,
+      "path": "grupos/G03/secuencia.drawio",
+      "nodes": 52,
+      "edges": 32,
+      "width": 1860,
+      "height": 2850
+    },
+    {
+      "id": "G03-COL",
+      "page": 11,
+      "path": "grupos/G03/colaboracion.drawio",
+      "nodes": 17,
+      "edges": 5,
+      "width": 2100,
+      "height": 2605
+    },
+    {
+      "id": "G04-ACT",
+      "page": 12,
+      "path": "grupos/G04/actividades.drawio",
+      "nodes": 29,
+      "edges": 20,
+      "width": 1100,
+      "height": 2044
+    },
+    {
+      "id": "G04-SEC",
+      "page": 13,
+      "path": "grupos/G04/secuencia.drawio",
+      "nodes": 34,
+      "edges": 28,
+      "width": 1860,
+      "height": 2140
+    },
+    {
+      "id": "G04-COL",
+      "page": 14,
+      "path": "grupos/G04/colaboracion.drawio",
+      "nodes": 17,
+      "edges": 5,
+      "width": 2100,
+      "height": 2455
+    },
+    {
+      "id": "G05-ACT",
+      "page": 15,
+      "path": "grupos/G05/actividades.drawio",
+      "nodes": 33,
+      "edges": 22,
+      "width": 1312,
+      "height": 1958
+    },
+    {
+      "id": "G05-SEC",
+      "page": 16,
+      "path": "grupos/G05/secuencia.drawio",
+      "nodes": 35,
+      "edges": 21,
+      "width": 1860,
+      "height": 1888
+    },
+    {
+      "id": "G05-COL",
+      "page": 17,
+      "path": "grupos/G05/colaboracion.drawio",
+      "nodes": 16,
+      "edges": 4,
+      "width": 2100,
+      "height": 2530
+    }
+  ],
+  "total": 17,
+  "historias": 15,
+  "criterios": 46
+}

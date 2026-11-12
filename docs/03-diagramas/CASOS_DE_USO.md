@@ -1,5 +1,7 @@
 # Casos de uso del alcance actual
 
+El [modelo UML editable por grupos](uml/README.md) incluye el **MCU general**, componentes y actividades, secuencia y colaboración de los cinco procesos. También está disponible en [PDF](uml/Inkafarma-modelo-UML.pdf). La tabla siguiente se conserva como resumen del alcance de los sprints.
+
 [← Documentación](../README.md) · [Historias originales](../02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf)
 
 Catálogo conceptual de casos de uso. La tabla no se presenta como un diagrama UML formal ni como funcionalidad implementada.
