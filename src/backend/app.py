@@ -8,6 +8,7 @@ from flask import Flask, jsonify, request, send_from_directory
 
 from src.backend.catalogo_busqueda import buscar_productos
 from src.backend.pedidos_web import pedidos_web
+from src.backend.seguimiento import seguimiento
 from src.database.database import DEFAULT_DATABASE, connect_database, get_stock
 
 FRONTEND = Path(__file__).resolve().parents[1] / "frontend"
@@ -19,6 +20,13 @@ def create_app(db_path=None):
 
     app.config['MAX_CONTENT_LENGTH'] = 32768
     app.register_blueprint(pedidos_web)
+    app.register_blueprint(seguimiento)
+
+    @app.get("/seguimiento")
+    def ver_seguimiento():
+        response = send_from_directory(FRONTEND, "seguimiento.html")
+        response.headers["Referrer-Policy"] = "no-referrer"
+        return response
 
     @app.get('/pedido')
     def pedido():
@@ -97,3 +105,4 @@ def create_app(db_path=None):
 
 if __name__ == "__main__":
     create_app().run(host="127.0.0.1", port=5000, debug=False)
+
