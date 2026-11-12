@@ -67,39 +67,20 @@ def demostrar():
         registrar_fecha_salida(entrega['id'], db_path=path)
         fechada = registrar_fecha_entrega(entrega['id'], db_path=path)
         historial = obtener_historial_pedido(pedido['pedido_id'], path)
-        seguimiento = {'estado': 'PENDIENTE', 'dependencia': 'PR #49 / tarea #15'}
-        if '/api/seguimiento' in {rule.rule for rule in app.url_map.iter_rules()}:
-            consulta = client.get('/api/seguimiento', headers={
-                'X-Codigo-Pedido': 'WEB-' + payload['confirmacion_id']})
-            if consulta.status_code != 200:
-                raise RuntimeError(f'Error al consultar seguimiento: HTTP {consulta.status_code}')
-            datos = consulta.json['pedido']
-            estados = [r['estado'] for r in datos['historial']]
-            if (datos['numero'] != pedido['pedido_id']
-                    or datos['estado'] != historial[-1]['estado_nuevo']
-                    or estados != [r['estado_nuevo'] for r in historial]):
-                raise RuntimeError('Seguimiento incoherente con la preparación e historial')
-            seguimiento = dict(estado='VALIDADO', numero=datos['numero'],
-                ultimo_estado=datos['estado'], estados=estados)
-        pendientes = ['#22: transiciones de reparto, permisos e incidencias',
-                      '#17: aceptación del recorrido hasta ENTREGADO e integración web S3']
-        if preparacion['estado'] == 'PENDIENTE':
-            pendientes.insert(0, preparacion['dependencia'])
-        if seguimiento['estado'] == 'PENDIENTE':
-            pendientes.insert(0, seguimiento['dependencia'])
         return dict(
             alcance='VALIDACION_PARCIAL_NO_CIERRE_MVP',
             catalogo=dict(antes=inicial, reservado=2, disponible=disponible),
             confirmacion=dict(pedido_id=pedido['pedido_id'], reintento_sin_duplicar=True),
             preparacion=preparacion,
-            seguimiento=seguimiento,
             entrega=dict(entrega_id=entrega['id'], fecha_salida=fechada['fecha_salida'],
                          fecha_recepcion=fechada['fecha_entrega'],
                          estado_pedido=fechada['estado_pedido'],
                          estado_entrega=fechada['estado_entrega']),
             estados_registrados=[r['estado_nuevo'] for r in historial],
             eventos_entrega=len(obtener_historial_entrega(entrega['id'], path)),
-            pendientes=pendientes,
+            pendientes=['#15: seguimiento web del cliente',
+                        '#22: transiciones de reparto, permisos e incidencias',
+                        '#17: aceptación del recorrido hasta ENTREGADO e integración web S3'],
         )
 
 

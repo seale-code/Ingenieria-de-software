@@ -32,14 +32,3 @@ python -m scripts.validar_mvp
 ```
 
 Para capturas, definir `EVIDENCE_DIR=.test-tmp/capturas-s3` al ejecutar los E2E. [Resultados y defectos](../06-evidencias/2026-11-11_validacion-mvp-sprint-3.md).
-
-## Ampliación con seguimiento — 12 de noviembre
-
-MVP-16 ya fue ejecutado sobre la propuesta de #49: confirmado en navegador, incluyendo preparación por funciones reales. Esto sustituye el bloqueo por falta de interfaz indicado en la matriz histórica; MVP-15 continúa pendiente de #22.
-
-| Grupo nuevo | Casos y alcance |
-|---|---|
-| Integración API (6) | Preparación e historial; idempotencia y lectura sin escrituras; privacidad; código por cabecera; transición inválida sin evento falso; pedidos S2 del CLI |
-| Navegador (9) | Confirmación → seguimiento; copiar código y crear otro pedido; alternativa de copia; preparación real; códigos erróneos y corregir; desconexión y reintento; carga y 503; móvil/teclado; respuesta de confirmación perdida |
-
-Archivos: [API integrada](../../tests/test_integracion_seguimiento_s3.py) y [navegador](../../tests/e2e/test_seguimiento_browser.py). [Resultados actuales](../06-evidencias/2026-11-12_seguimiento-validacion-mvp.md).

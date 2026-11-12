@@ -6,18 +6,18 @@
 Completar el flujo de preparación, entrega y seguimiento de pedidos, incorporar soporte básico y validar el MVP mediante una demostración integral.
 
 ## Planificación y dependencias
-- Inicio y cierre: por acordar. Estado: preparación y entregas integradas; seguimiento propuesto en PR #49 y validado con navegador en la ampliación de S3-05. El cierre del MVP depende de transiciones de reparto, permisos e incidencias.
+- Inicio y cierre: por acordar. Estado: validación incremental en curso; entregas S3-03 integradas. Cierre del MVP pendiente de preparación, seguimiento y transiciones de reparto.
 - Requiere registro y asignación de pedidos del Sprint 2.
 - Acordar estados del pedido, transiciones permitidas, permisos y tratamiento de incidencias antes de implementar.
 
 ## Actividades y responsables propuestos
 | ID | Responsable | Actividad | Criterios de aceptación | Estado |
 |:---|:---|:---|:---|:---|
-| S3-01 | Cesar Milla | Gestionar preparación de pedidos | Consultar pedidos asignados y registrar preparación mediante transiciones válidas. | PR #47 integrado; Issue #16 cerrado |
-| S3-02 | Willy CCatamayo | Seguimiento para el cliente | Mostrar estado e historial del pedido con mensajes claros. | PR #49 abierto; seguimiento verificado con pruebas API y navegador |
+| S3-01 | Cesar Milla | Gestionar preparación de pedidos | Consultar pedidos asignados y registrar preparación mediante transiciones válidas. | PR #47 abierto; integración local comprobada |
+| S3-02 | Willy CCatamayo | Seguimiento para el cliente | Mostrar estado e historial del pedido con mensajes claros. | Por hacer |
 | S3-03 | Josue Mogollon | Registrar repartidor, entrega e historial | Relacionar entrega con pedido y repartidor, y almacenar fechas e historial. | PR #46 integrado; Issue #19 cerrado |
 | S3-04 | Anderson Delerna | Cambios de estado y soporte básico | Validar transiciones y permisos acordados; vincular incidencias al pedido. | Por hacer |
-| S3-05 | Sebastian Calderon | Validar MVP, corregir errores y preparar demostración | Ejecutar flujo completo, documentar resultados y coordinar correcciones con sus responsables. | PR #48 integrado; ampliación de validación sobre #49 en #17; recorrido final depende de #22 e integración de seguimiento |
+| S3-05 | Sebastian Calderon | Validar MVP, corregir errores y preparar demostración | Ejecutar flujo completo, documentar resultados y coordinar correcciones con sus responsables. | Pruebas, corrección y demo propuestas en #17; recorrido final depende de #15, #16 y #22 |
 
 ## Entregables y ubicación
 - [Frontend](../src/frontend/): preparación y seguimiento.
@@ -41,7 +41,7 @@ Completar con pruebas y resultados reales.
 
 | Entregable | Issue o Pull Request | Evidencia o versión | Resultado |
 |:---|:---|:---|:---|
-| Validación S3-05 y corrección de disponibilidad | #17 | [Informe](S3-05_Sebastian_Calderon.md) y [evidencia](../docs/06-evidencias/2026-11-11_validacion-mvp-sprint-3.md) | [Ampliación con seguimiento](../docs/06-evidencias/2026-11-12_seguimiento-validacion-mvp.md): 211 pruebas API/Python y 24 E2E OK; MVP final pendiente |
+| Validación S3-05 y corrección de disponibilidad | #17 | [Informe](S3-05_Sebastian_Calderon.md) y [evidencia](../docs/06-evidencias/2026-11-11_validacion-mvp-sprint-3.md) | 187 pruebas API/Python OK; 15 recorridos E2E verificados entre las suites; MVP final pendiente |
 
 ## Revisión y demostración final
 - Fecha y participantes: por completar.
@@ -58,5 +58,3 @@ Completar con pruebas y resultados reales.
 ## Ejecutar y revisar
 
 [Guion de demostración](DEMO_MVP.md) · [Casos S3-05](../docs/05-pruebas/S3-05-validacion-mvp.md). Los resultados corresponden al 11 de noviembre de 2026, `main` en `06211a6` y PR #47 en `4968c06`, con la propuesta S3-05 aplicada. No acreditan aceptación de las tareas pendientes ni una Sprint Review.
-
-Actualización del 12 de noviembre: #47 y #48 ya están integrados en main `ba028b5`. La ampliación prueba #49 en `9f41300`; sus resultados no significan que #49 se haya fusionado ni que #22 esté terminado.

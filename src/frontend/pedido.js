@@ -148,28 +148,6 @@ function showOrderSuccess(pedido) {
     orderElement('success-view').append(codeNote);
   }
   codeNote.textContent = 'Guarda tu código de seguimiento: ' + code;
-  codeNote.style.overflowWrap = 'anywhere';
-  let copyButton = document.getElementById('order-copy-tracking');
-  let copyStatus = document.getElementById('order-copy-status');
-  if (!copyButton) {
-    copyButton = textNode('button', 'Copiar código de seguimiento');
-    copyButton.id = 'order-copy-tracking';
-    copyButton.type = 'button';
-    copyButton.className = 'order-secondary';
-    copyStatus = document.createElement('p');
-    copyStatus.id = 'order-copy-status';
-    copyStatus.setAttribute('role', 'status');
-    orderElement('success-view').append(copyButton, copyStatus);
-  }
-  copyStatus.textContent = '';
-  copyButton.onclick = async () => {
-    try {
-      await navigator.clipboard.writeText(code);
-      copyStatus.textContent = 'Código copiado. Guárdalo para consultar tu pedido.';
-    } catch {
-      copyStatus.textContent = 'No pudimos copiarlo. Selecciona y copia el código que aparece arriba.';
-    }
-  };
   orderElement('success-view').focus();
 }
 async function confirmOrder() {
