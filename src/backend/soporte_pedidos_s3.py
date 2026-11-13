@@ -195,75 +195,80 @@ def cambiar_estado_pedido(
     with connect_database(db_path) as db:
         _verificar_esquema_soporte(db)
         db.execute("BEGIN IMMEDIATE")
-        pedido = _pedido(db, pedido_id)
-        entrega = db.execute(
+        return _cambiar_estado_en_db(db, pedido_id, nuevo_estado, actor_id)
+
+
+def _cambiar_estado_en_db(db, pedido_id, nuevo_estado, actor_id):
+    """Transición dentro de la transacción del servicio que la invoca."""
+    pedido = _pedido(db, pedido_id)
+    entrega = db.execute(
+        """
+        SELECT id, repartidor_id, estado, fecha_salida, fecha_entrega
+          FROM entregas
+         WHERE pedido_id = ?
+        """,
+        (pedido_id,),
+    ).fetchone()
+
+    if entrega is None:
+        raise TransicionPedidoInvalida(
+            "El pedido todavía no tiene una entrega asignada."
+        )
+    if entrega["repartidor_id"] != actor_id:
+        raise PermisoDenegado(
+            "Solo el repartidor asignado a este pedido puede cambiar su estado."
+        )
+
+    if pedido["estado"] == "PREPARADO" and nuevo_estado == "EN_CAMINO":
+        if entrega["estado"] != "ASIGNADA" or not entrega["fecha_salida"]:
+            raise TransicionPedidoInvalida(
+                "Primero debo registrar la fecha de salida de la entrega."
+            )
+        estado_entrega = "EN_CAMINO"
+        # Cuando el pedido sale de la sucursal, consumo las reservas activas.
+        # El trigger de la migración 002 descuenta el inventario una sola vez.
+        reservas_consumidas = db.execute(
             """
-            SELECT id, repartidor_id, estado, fecha_salida, fecha_entrega
-              FROM entregas
-             WHERE pedido_id = ?
+            UPDATE reservas_stock
+               SET estado = 'CONSUMIDA',
+                   fecha_cierre = strftime('%Y-%m-%dT%H:%M:%fZ','now')
+             WHERE pedido_id = ? AND estado = 'ACTIVA'
             """,
             (pedido_id,),
-        ).fetchone()
-
-        if entrega is None:
+        ).rowcount
+    elif pedido["estado"] == "EN_CAMINO" and nuevo_estado == "ENTREGADO":
+        if (
+            entrega["estado"] != "EN_CAMINO"
+            or not entrega["fecha_salida"]
+            or not entrega["fecha_entrega"]
+        ):
             raise TransicionPedidoInvalida(
-                "El pedido todavía no tiene una entrega asignada."
+                "Primero debo registrar la salida y la recepción del pedido."
             )
-        if entrega["repartidor_id"] != actor_id:
-            raise PermisoDenegado(
-                "Solo el repartidor asignado a este pedido puede cambiar su estado."
-            )
-
-        if pedido["estado"] == "PREPARADO" and nuevo_estado == "EN_CAMINO":
-            if entrega["estado"] != "ASIGNADA" or not entrega["fecha_salida"]:
-                raise TransicionPedidoInvalida(
-                    "Primero debo registrar la fecha de salida de la entrega."
-                )
-            estado_entrega = "EN_CAMINO"
-            # Cuando el pedido sale de la sucursal, consumo las reservas activas.
-            # El trigger de la migración 002 descuenta el inventario una sola vez.
-            reservas_consumidas = db.execute(
-                """
-                UPDATE reservas_stock
-                   SET estado = 'CONSUMIDA',
-                       fecha_cierre = strftime('%Y-%m-%dT%H:%M:%fZ','now')
-                 WHERE pedido_id = ? AND estado = 'ACTIVA'
-                """,
-                (pedido_id,),
-            ).rowcount
-        elif pedido["estado"] == "EN_CAMINO" and nuevo_estado == "ENTREGADO":
-            if (
-                entrega["estado"] != "EN_CAMINO"
-                or not entrega["fecha_salida"]
-                or not entrega["fecha_entrega"]
-            ):
-                raise TransicionPedidoInvalida(
-                    "Primero debo registrar la salida y la recepción del pedido."
-                )
-            estado_entrega = "ENTREGADA"
-            reservas_consumidas = 0
-        else:
-            raise TransicionPedidoInvalida(
-                f"No permito cambiar el pedido de {pedido['estado']} a {nuevo_estado}."
-            )
-
-        db.execute(
-            "UPDATE pedidos SET estado = ? WHERE id = ?",
-            (nuevo_estado, pedido_id),
+        estado_entrega = "ENTREGADA"
+        reservas_consumidas = 0
+    else:
+        raise TransicionPedidoInvalida(
+            f"No permito cambiar el pedido de {pedido['estado']} a {nuevo_estado}."
         )
-        db.execute(
-            "UPDATE entregas SET estado = ? WHERE id = ?",
-            (estado_entrega, entrega["id"]),
-        )
-        return {
-            "pedido_id": pedido_id,
-            "pedido_codigo": pedido["codigo"],
-            "estado_anterior": pedido["estado"],
-            "estado_nuevo": nuevo_estado,
-            "estado_entrega": estado_entrega,
-            "repartidor_id": actor_id,
-            "reservas_consumidas": reservas_consumidas,
-        }
+
+    db.execute(
+        "UPDATE pedidos SET estado = ? WHERE id = ?",
+        (nuevo_estado, pedido_id),
+    )
+    db.execute(
+        "UPDATE entregas SET estado = ? WHERE id = ?",
+        (estado_entrega, entrega["id"]),
+    )
+    return {
+        "pedido_id": pedido_id,
+        "pedido_codigo": pedido["codigo"],
+        "estado_anterior": pedido["estado"],
+        "estado_nuevo": nuevo_estado,
+        "estado_entrega": estado_entrega,
+        "repartidor_id": actor_id,
+        "reservas_consumidas": reservas_consumidas,
+    }
 
 
 def cancelar_pedido(

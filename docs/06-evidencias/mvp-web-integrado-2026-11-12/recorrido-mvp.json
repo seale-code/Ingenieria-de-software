@@ -1,0 +1,31 @@
+{
+  "alcance": "RECORRIDO_TECNICO_MVP_COMPLETO",
+  "schema": 4,
+  "catalogo": {
+    "antes": 5,
+    "tras_reserva": 3,
+    "tras_entrega": 3,
+    "fisico": 3
+  },
+  "confirmacion": {
+    "pedido_id": 1,
+    "reintento_sin_duplicar": true
+  },
+  "estados_registrados": [
+    "ASIGNADO",
+    "EN_PREPARACION",
+    "PREPARADO",
+    "EN_CAMINO",
+    "ENTREGADO"
+  ],
+  "entrega": {
+    "estado_pedido": "ENTREGADO",
+    "estado_entrega": "ENTREGADA",
+    "salida": "2026-11-13T01:29:17.439Z",
+    "recepcion": "2026-11-13T01:29:17.445Z"
+  },
+  "soporte": "RESUELTA",
+  "cancelacion": "RESERVA_LIBERADA_SIN_CONSUMO",
+  "integridad": "ok",
+  "aceptacion_equipo": "PENDIENTE_DE_REVISION"
+}

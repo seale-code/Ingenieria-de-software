@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Operaciones · Inkafarma</title>
+  <link rel="stylesheet" href="/assets/styles.css"><link rel="stylesheet" href="/assets/operaciones.css">
+  <script src="/assets/navegacion.js" defer></script><script src="/assets/operaciones.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="top"><div class="header-inner">
+  <a class="brand" href="/" aria-label="Ir al catálogo"><span class="brand-icon" aria-hidden="true">✚</span><span>inka<span class="brand-accent">farma</span></span></a>
+  <nav class="main-nav" aria-label="Navegación principal"><a href="/">Catálogo</a><a href="/pedido">Crear pedido</a><a href="/seguimiento">Seguimiento</a><a href="/operaciones" aria-current="page">Operaciones</a></nav>
+</div></header>
+<main class="shell operations-shell" id="main">
+  <div class="page-heading"><div><p class="section-kicker">SPRINT 3 · DEMOSTRACIÓN</p><h1>Centro de operaciones</h1><p class="muted">Del pedido asignado a la entrega, en un mismo lugar.</p></div><div class="heading-actions" id="session-actions" hidden><button class="secondary-btn" id="refresh" type="button">Actualizar</button><button class="text-btn" id="logout" type="button">Cerrar sesión</button></div></div>
+  <p class="demo-banner"><span aria-hidden="true">ⓘ</span> Panel del expositor · Simula los roles de sucursal, repartidor y soporte con datos ficticios.</p>
+  <p id="ops-message" class="ops-message" role="status" aria-live="polite">Comprobando la sesión…</p>
+  <section id="login-panel" class="login-panel panel" hidden aria-labelledby="login-title">
+    <span class="section-kicker">ACCESO A LA DEMOSTRACIÓN</span><h2 id="login-title">Continuar como expositor</h2><p>Introduce la clave de esta sesión para gestionar los pedidos de prueba.</p>
+    <form id="login-form"><label for="demo-key">Clave de demostración</label><input type="password" id="demo-key" required autocomplete="off" maxlength="200"><button class="action" id="login-button">Entrar al panel</button></form>
+    <a href="/" class="inline-link">Explorar el catálogo →</a>
+  </section>
+  <div id="workspace" hidden>
+    <section class="metrics" aria-label="Resumen de operaciones">
+      <article><span>Pedidos activos</span><strong id="metric-active">—</strong><small>En preparación y reparto</small></article>
+      <article><span>En camino</span><strong id="metric-delivery">—</strong><small>Fuera de la sucursal</small></article>
+      <article><span>Entregados</span><strong id="metric-done">—</strong><small>Recorrido completado</small></article>
+      <article><span>Incidencias pendientes</span><strong id="metric-incidents">—</strong><small>Abiertas o en revisión</small></article>
+    </section>
+    <div class="operations-layout">
+      <aside class="panel inbox" aria-labelledby="inbox-title">
+        <div class="panel-top"><h2 id="inbox-title">Bandeja de pedidos</h2><span id="inbox-count" class="muted"></span></div>
+        <label class="sr-only" for="order-search">Buscar por número, nombre o sucursal</label><input id="order-search" type="search" placeholder="Buscar pedido o sucursal…" autocomplete="off">
+        <label class="sr-only" for="order-state">Filtrar pedidos por estado</label><select id="order-state"><option value="">Todos los estados</option><option value="ASIGNADO">Asignados</option><option value="EN_PREPARACION">En preparación</option><option value="PREPARADO">Preparados</option><option value="EN_CAMINO">En camino</option><option value="ENTREGADO">Entregados</option><option value="CANCELADO">Cancelados</option></select>
+        <p id="inbox-empty" class="empty-note" hidden>No hay pedidos con estos filtros.</p><div id="order-list" class="order-list" aria-label="Pedidos"></div>
+        <p class="inbox-foot">Hasta 100 pedidos recientes. <a href="/pedido">Crear un pedido</a></p>
+      </aside>
+      <section id="order-detail" class="panel detail-panel" aria-label="Detalle del pedido" aria-busy="false"><div class="empty-detail"><span aria-hidden="true">▤</span><h2>Todo empieza con un pedido</h2><p>Selecciona uno de la bandeja para ver sus productos y continuar el recorrido.</p><a href="/pedido" class="primary-link">Crear pedido →</a></div></section>
+    </div>
+  </div>
+  <noscript><p class="ops-message error">Activa JavaScript para gestionar la demostración.</p></noscript>
+</main>
+<dialog id="cancel-dialog"><form method="dialog"><h2>¿Cancelar este pedido?</h2><p>Se liberarán sus reservas. El pedido conservará el historial de lo ocurrido.</p><div class="dialog-actions"><button value="no" class="secondary-btn">Volver</button><button value="yes" class="danger-btn">Confirmar cancelación</button></div></form></dialog>
+<footer>Proyecto académico no oficial · Datos ficticios · Sin compras ni entregas reales</footer>
+</body></html>

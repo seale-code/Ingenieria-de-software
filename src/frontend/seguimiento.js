@@ -27,6 +27,19 @@ async function loadTracking(event) {
     const pedido = data.pedido;
     document.getElementById('tracking-title').textContent = `Pedido #${pedido.numero}`;
     document.getElementById('tracking-state').textContent = pedido.etiqueta;
+    document.getElementById('tracking-state').dataset.state = pedido.estado;
+    const stages = ['ASIGNADO', 'EN_PREPARACION', 'PREPARADO', 'EN_CAMINO', 'ENTREGADO'];
+    const labels = ['Asignado', 'En preparación', 'Preparado', 'En camino', 'Entregado'];
+    const progress = document.getElementById('tracking-progress');
+    progress.replaceChildren();
+    progress.hidden = pedido.estado === 'CANCELADO';
+    stages.forEach((state, index) => {
+      const step = document.createElement('li');
+      step.textContent = labels[index];
+      if (index <= stages.indexOf(pedido.estado)) step.className = 'complete';
+      if (state === pedido.estado) step.setAttribute('aria-current', 'step');
+      progress.append(step);
+    });
     document.getElementById('tracking-description').textContent = pedido.mensaje;
     document.getElementById('tracking-branch').textContent = `Sucursal: ${pedido.sucursal}`;
     const history = document.getElementById('tracking-history');

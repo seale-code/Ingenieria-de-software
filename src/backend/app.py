@@ -2,6 +2,8 @@
 
 import os
 import sqlite3
+import secrets
+from datetime import timedelta
 from pathlib import Path
 
 from flask import Flask, jsonify, request, send_from_directory
@@ -9,18 +11,37 @@ from flask import Flask, jsonify, request, send_from_directory
 from src.backend.catalogo_busqueda import buscar_productos
 from src.backend.pedidos_web import pedidos_web
 from src.backend.seguimiento import seguimiento
+from src.backend.operaciones_demo import operaciones
 from src.database.database import DEFAULT_DATABASE, connect_database, get_stock
 
 FRONTEND = Path(__file__).resolve().parents[1] / "frontend"
 
 
-def create_app(db_path=None):
+def create_app(db_path=None, *, demo_key=None):
     app = Flask(__name__, static_folder=str(FRONTEND), static_url_path="/assets")
     app.config["DATABASE"] = db_path or os.environ.get("INKAFARMA_DB", DEFAULT_DATABASE)
+    app.config['DEMO_KEY'] = demo_key if demo_key is not None else os.environ.get('INKAFARMA_DEMO_KEY')
+    app.secret_key = secrets.token_hex(32)
+    app.config.update(SESSION_COOKIE_HTTPONLY=True, SESSION_COOKIE_SAMESITE='Strict',
+                      PERMANENT_SESSION_LIFETIME=timedelta(hours=2))
 
     app.config['MAX_CONTENT_LENGTH'] = 32768
     app.register_blueprint(pedidos_web)
     app.register_blueprint(seguimiento)
+    app.register_blueprint(operaciones)
+
+    @app.get('/operaciones')
+    def panel_demo():
+        if not app.config['DEMO_KEY']:
+            from flask import abort
+            abort(404)
+        response = send_from_directory(FRONTEND, 'operaciones.html')
+        response.headers['Cache-Control'] = 'no-store'
+        return response
+
+    @app.get('/api/contexto')
+    def contexto():
+        return jsonify(operaciones_demo=bool(app.config['DEMO_KEY']))
 
     @app.get("/seguimiento")
     def ver_seguimiento():
@@ -40,6 +61,9 @@ def create_app(db_path=None):
     def no_cache(response):
         if request.path.startswith("/api/"):
             response.headers["Cache-Control"] = "no-store"
+        response.headers['X-Content-Type-Options'] = 'nosniff'
+        response.headers['Referrer-Policy'] = 'no-referrer'
+        response.headers['X-Frame-Options'] = 'DENY'
         return response
 
     def db_error(error):
