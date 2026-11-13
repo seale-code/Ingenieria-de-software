@@ -6,18 +6,18 @@
 Completar el flujo de preparación, entrega y seguimiento de pedidos, incorporar soporte básico y validar el MVP mediante una demostración integral.
 
 ## Planificación y dependencias
-- Inicio y cierre: por acordar. Estado: preparación y entregas integradas; seguimiento propuesto en PR #49 y validado con navegador en la ampliación de S3-05. El cierre del MVP depende de transiciones de reparto, permisos e incidencias.
+- Inicio y cierre formal: por registrar. Preparación (#47), reparto (#46), seguimiento (#49) y soporte (#52) están integrados. La ampliación S3-05 valida el recorrido completo y añade un panel del expositor. Aceptación del equipo pendiente de revisión.
 - Requiere registro y asignación de pedidos del Sprint 2.
-- Acordar estados del pedido, transiciones permitidas, permisos y tratamiento de incidencias antes de implementar.
+- Estados, transiciones y reglas de incidencias implementados en los servicios; el panel local simula los roles con acceso protegido por clave.
 
 ## Actividades y responsables propuestos
 | ID | Responsable | Actividad | Criterios de aceptación | Estado |
 |:---|:---|:---|:---|:---|
 | S3-01 | Cesar Milla | Gestionar preparación de pedidos | Consultar pedidos asignados y registrar preparación mediante transiciones válidas. | PR #47 integrado; Issue #16 cerrado |
-| S3-02 | Willy CCatamayo | Seguimiento para el cliente | Mostrar estado e historial del pedido con mensajes claros. | PR #49 abierto; seguimiento verificado con pruebas API y navegador |
+| S3-02 | Willy CCatamayo | Seguimiento para el cliente | Mostrar estado e historial del pedido con mensajes claros. | PR #49 integrado; seguimiento verificado con pruebas API y navegador |
 | S3-03 | Josue Mogollon | Registrar repartidor, entrega e historial | Relacionar entrega con pedido y repartidor, y almacenar fechas e historial. | PR #46 integrado; Issue #19 cerrado |
-| S3-04 | Anderson Delerna | Cambios de estado y soporte básico | Validar transiciones y permisos acordados; vincular incidencias al pedido. | Por hacer |
-| S3-05 | Sebastian Calderon | Validar MVP, corregir errores y preparar demostración | Ejecutar flujo completo, documentar resultados y coordinar correcciones con sus responsables. | PR #48 integrado; ampliación de validación sobre #49 en #17; recorrido final depende de #22 e integración de seguimiento |
+| S3-04 | Anderson Delerna | Cambios de estado y soporte básico | Validar transiciones y permisos acordados; vincular incidencias al pedido. | PR #52 integrado; migración v4 y soporte disponibles |
+| S3-05 | Sebastian Calderon | Validar MVP, corregir errores y preparar demostración | Ejecutar flujo completo, documentar resultados y coordinar correcciones con sus responsables. | Ampliaciones #48/#50 integradas; nueva validación hasta ENTREGADO y panel web en #17, pendiente de revisión |
 
 ## Entregables y ubicación
 - [Frontend](../src/frontend/): preparación y seguimiento.
@@ -37,7 +37,8 @@ El código se mantiene en las carpetas compartidas; este README registra el trab
 - [ ] Cambios revisados y demostración final preparada.
 
 ## Resultados y evidencias
-Completar con pruebas y resultados reales.
+
+[Integración web actual, capturas y comprobaciones](../docs/06-evidencias/2026-11-12_mvp-web-integrado.md). [Demo en un comando](DEMO_MVP.md). La tabla siguiente conserva la evidencia de la etapa anterior.
 
 | Entregable | Issue o Pull Request | Evidencia o versión | Resultado |
 |:---|:---|:---|:---|
@@ -48,14 +49,14 @@ Completar con pruebas y resultados reales.
 - Versión o commit demostrado: por completar.
 - Funcionalidades aceptadas: por completar.
 - Defectos pendientes y limitaciones: por completar.
-- Enlace a guía y demostración: por completar.
+- Enlace a guía y demostración: [DEMO_MVP.md](DEMO_MVP.md).
 
 ## Retrospectiva
 - Qué funcionó: por completar.
 - Qué debemos mejorar: por completar.
 - Acciones futuras y responsables: por completar.
 
-## Ejecutar y revisar
+## Validaciones anteriores (histórico)
 
 [Guion de demostración](DEMO_MVP.md) · [Casos S3-05](../docs/05-pruebas/S3-05-validacion-mvp.md). Los resultados corresponden al 11 de noviembre de 2026, `main` en `06211a6` y PR #47 en `4968c06`, con la propuesta S3-05 aplicada. No acreditan aceptación de las tareas pendientes ni una Sprint Review.
 

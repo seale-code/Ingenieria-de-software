@@ -79,7 +79,8 @@ async function loadOrderOptions() {
     orderElement('reference').replaceChildren(new Option('Selecciona un punto', ''));
     for (const p of orderPoints) orderElement('reference').add(new Option(p.nombre, p.codigo));
     orderElement('order-lines').replaceChildren();
-    addOrderLine();
+    const requestedProduct = new URLSearchParams(location.search).get('producto');
+    addOrderLine(orderProducts.some(p => p.producto_codigo === requestedProduct) ? requestedProduct : '');
     message.classList.add('hidden');
     orderView('edit', 1);
   } catch {

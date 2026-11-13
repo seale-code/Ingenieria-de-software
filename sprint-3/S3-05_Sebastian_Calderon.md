@@ -2,6 +2,16 @@
 
 Responsable: Sebastian Calderon (`seale-code`). Tarea [#17](https://github.com/seale-code/Ingenieria-de-software/issues/17), en el [Project Inkafarma](https://github.com/users/seale-code/projects/1). Trazabilidad: PBI-05, PBI-15 y soporte parcial PBI-11.
 
+## Integración final del programa — 12 de noviembre de 2026
+
+Sobre `main` en `d8ce762` (incluye Anderson #52 y UML #53), se añade el panel web del expositor, navegación común, acceso desde producto al formulario y seguimiento con etapas visuales. La demostración completa se inicia con `python -m scripts.demo_web` y una clave temporal.
+
+El nuevo servicio de reparto guarda fecha, estado del pedido, estado de entrega, consumo de reserva e historial en una sola transacción. Los reintentos de salida/recepción no repiten el descuento. Se comprueban también cancelación con liberación, incidencias y privacidad del seguimiento.
+
+[Guion actual](DEMO_MVP.md) · [Evidencias actuales](../docs/06-evidencias/2026-11-12_mvp-web-integrado.md). La revisión y aceptación del equipo todavía deben registrarse. Las siguientes secciones conservan los resultados de las entregas previas; sus dependencias pendientes corresponden a esas fechas.
+
+## Historial de entregas anteriores
+
 ## Ampliación del 12 de noviembre de 2026
 
 El PR #48 ya está integrado, al igual que preparación (#47). Se amplía la validación sobre el seguimiento de Willy (#49, todavía abierto): **211 pruebas Python/API y 24 recorridos Chromium aprobados**. Incluye 6 casos API nuevos, 9 casos de navegador, copia del código de seguimiento y una demo que compara la API pública con el historial real de preparación. [Evidencia actual](../docs/06-evidencias/2026-11-12_seguimiento-validacion-mvp.md).

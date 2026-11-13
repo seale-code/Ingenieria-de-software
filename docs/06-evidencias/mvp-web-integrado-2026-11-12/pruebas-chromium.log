@@ -1,0 +1,480 @@
+test_actualizacion_real_desde_sqlite (test_catalogo_browser.CatalogoBrowserTests.test_actualizacion_real_desde_sqlite) ... 127.0.0.1 - - [12/Nov/2026 20:26:30] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:30] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:30] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:30] "GET /assets/catalogo.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:30] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:30] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:30] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:30] "GET /api/catalogo?buscar=demo+a&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:30] "GET /api/productos/DEMO-A/stock HTTP/1.1" 200 -
+ok
+test_busqueda_y_filtros_combinados (test_catalogo_browser.CatalogoBrowserTests.test_busqueda_y_filtros_combinados) ... 127.0.0.1 - - [12/Nov/2026 20:26:31] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:31] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:31] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:31] "GET /assets/catalogo.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:31] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:31] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:31] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:32] "GET /api/catalogo?buscar=Producto+demo+A&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:32] "GET /api/catalogo?buscar=++DEMO+b++&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:32] "GET /api/catalogo?buscar=++DEMO+b++&categoria=DEMO-Y&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:32] "GET /api/catalogo?buscar=++DEMO+b++&categoria=DEMO-Y&sucursal=DEMO-SUR&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:32] "GET /api/catalogo?buscar=++DEMO+b++&categoria=DEMO-Y&sucursal=DEMO-SUR&solo_disponibles=true HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:32] "GET /api/catalogo?buscar=++DEMO+b++&categoria=DEMO-X&sucursal=DEMO-SUR&solo_disponibles=true HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:32] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:32] "GET /api/catalogo?buscar=&categoria=DEMO-X&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:32] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:33] "GET /api/catalogo?buscar=xyz123&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+ok
+test_carga_error_y_reintento (test_catalogo_browser.CatalogoBrowserTests.test_carga_error_y_reintento) ... 127.0.0.1 - - [12/Nov/2026 20:26:33] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:33] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:33] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:33] "GET /assets/catalogo.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:33] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:33] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:33] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:34] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+ok
+test_error_de_filtros_y_stock_recuperable (test_catalogo_browser.CatalogoBrowserTests.test_error_de_filtros_y_stock_recuperable) ... 127.0.0.1 - - [12/Nov/2026 20:26:34] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:34] "GET /assets/catalogo.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:34] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:34] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:34] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:35] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:35] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:35] "GET /api/catalogo?buscar=demo+a&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:35] "GET /api/productos/DEMO-A/stock HTTP/1.1" 200 -
+ok
+test_fixtures_vacios_unicode_y_texto_literal (test_catalogo_browser.CatalogoBrowserTests.test_fixtures_vacios_unicode_y_texto_literal) ... 127.0.0.1 - - [12/Nov/2026 20:26:36] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:36] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:36] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:36] "GET /assets/catalogo.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:36] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:36] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:36] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:36] "GET /api/catalogo?buscar=&categoria=VACIA&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:36] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:36] "GET /api/catalogo?buscar=Sin+inventario&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:36] "GET /api/productos/SIN-REGISTRO/stock HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:36] "GET /api/catalogo?buscar=ÁCIDO&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:37] "GET /api/catalogo?buscar='+OR+1%3D1+--&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:37] "GET /api/catalogo?buscar=%25&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:37] "GET /api/catalogo?buscar=_&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+ok
+test_responsive_teclado_y_capturas (test_catalogo_browser.CatalogoBrowserTests.test_responsive_teclado_y_capturas) ... 127.0.0.1 - - [12/Nov/2026 20:26:38] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:38] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:38] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:38] "GET /assets/catalogo.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:38] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:38] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:38] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:38] "GET /api/catalogo?buscar=&categoria=&sucursal=DEMO-NORTE&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:38] "GET /api/catalogo?buscar=&categoria=&sucursal=DEMO-NORTE&solo_disponibles=true HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:38] "GET /api/productos/DEMO-A/stock HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:39] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:39] "GET /api/catalogo?buscar=&categoria=&sucursal=DEMO-NORTE&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:39] "GET /api/catalogo?buscar=&categoria=&sucursal=DEMO-NORTE&solo_disponibles=true HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:39] "GET /api/productos/DEMO-A/stock HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:39] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+ok
+test_respuesta_antigua_no_sobrescribe_busqueda (test_catalogo_browser.CatalogoBrowserTests.test_respuesta_antigua_no_sobrescribe_busqueda) ... 127.0.0.1 - - [12/Nov/2026 20:26:40] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:40] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:40] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:40] "GET /assets/catalogo.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:40] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:40] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:40] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:40] "GET /api/catalogo?buscar=demo+a&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:40] "GET /api/catalogo?buscar=demo+b&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+ok
+test_stock_sucursal_y_cero (test_catalogo_browser.CatalogoBrowserTests.test_stock_sucursal_y_cero) ... 127.0.0.1 - - [12/Nov/2026 20:26:41] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:41] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:41] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:41] "GET /assets/catalogo.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:41] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:41] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:41] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:41] "GET /api/catalogo?buscar=&categoria=&sucursal=DEMO-NORTE&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:41] "GET /api/catalogo?buscar=&categoria=&sucursal=DEMO-NORTE&solo_disponibles=true HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:41] "GET /api/productos/DEMO-A/stock HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:41] "GET /api/catalogo?buscar=&categoria=&sucursal=DEMO-SUR&solo_disponibles=true HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:41] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:42] "GET /api/catalogo?buscar=demo+c&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:42] "GET /api/productos/DEMO-C/stock HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:42] "GET /api/catalogo?buscar=demo+c&categoria=&sucursal=&solo_disponibles=true HTTP/1.1" 200 -
+ok
+test_bandeja_vacia_busqueda_y_vista_movil (test_operaciones_browser.OperacionesBrowserTests.test_bandeja_vacia_busqueda_y_vista_movil) ... 127.0.0.1 - - [12/Nov/2026 20:26:43] "GET /operaciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:43] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:43] "GET /assets/operaciones.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:43] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:43] "GET /assets/operaciones.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:43] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:43] "GET /api/demo/sesion HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:43] "POST /api/demo/sesion HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:43] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:43] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:43] "GET /api/demo/pedidos/1 HTTP/1.1" 200 -
+ok
+test_cancelar_requiere_confirmacion_y_actualiza_seguimiento (test_operaciones_browser.OperacionesBrowserTests.test_cancelar_requiere_confirmacion_y_actualiza_seguimiento) ... 127.0.0.1 - - [12/Nov/2026 20:26:44] "GET /operaciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:44] "GET /assets/operaciones.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:44] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:44] "GET /assets/operaciones.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:44] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:44] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:44] "GET /api/demo/sesion HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:44] "POST /api/demo/sesion HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:44] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:44] "GET /api/demo/pedidos/1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:45] "POST /api/demo/pedidos/1/acciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:45] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:45] "GET /api/demo/pedidos/1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:45] "GET /seguimiento HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:45] "[36mGET /assets/styles.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:45] "GET /assets/seguimiento.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:45] "GET /assets/seguimiento.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:45] "[36mGET /assets/navegacion.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:45] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:45] "GET /api/seguimiento HTTP/1.1" 200 -
+ok
+test_catalogo_enlaza_producto_preseleccionado (test_operaciones_browser.OperacionesBrowserTests.test_catalogo_enlaza_producto_preseleccionado) ... 127.0.0.1 - - [12/Nov/2026 20:26:46] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:46] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:46] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:46] "GET /assets/catalogo.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:46] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:46] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:46] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:46] "GET /pedido?producto=DEMO-A HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:46] "[36mGET /assets/styles.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:46] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:46] "[36mGET /assets/navegacion.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:46] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:46] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:46] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:46] "GET /pedido?producto=NO-EXISTE HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:46] "[36mGET /assets/pedido.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:46] "[36mGET /assets/styles.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:46] "[36mGET /assets/pedido.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:46] "[36mGET /assets/navegacion.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:46] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:46] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+ok
+test_clave_incorrecta_sesion_persistente_y_salida (test_operaciones_browser.OperacionesBrowserTests.test_clave_incorrecta_sesion_persistente_y_salida) ... 127.0.0.1 - - [12/Nov/2026 20:26:47] "GET /operaciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "GET /assets/operaciones.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "GET /assets/operaciones.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "GET /api/demo/sesion HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "[31m[1mPOST /api/demo/sesion HTTP/1.1[0m" 401 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "POST /api/demo/sesion HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "GET /api/demo/pedidos/1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "GET /operaciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "[36mGET /assets/styles.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "[36mGET /assets/operaciones.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "[36mGET /assets/operaciones.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "[36mGET /assets/navegacion.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "GET /api/demo/sesion HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "GET /api/demo/pedidos/1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "DELETE /api/demo/sesion HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "GET /operaciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "[36mGET /assets/styles.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "[36mGET /assets/operaciones.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "[36mGET /assets/navegacion.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "[36mGET /assets/operaciones.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:47] "GET /api/demo/sesion HTTP/1.1" 200 -
+ok
+test_incidencias_completas_y_texto_sin_ejecutar_html (test_operaciones_browser.OperacionesBrowserTests.test_incidencias_completas_y_texto_sin_ejecutar_html) ... 127.0.0.1 - - [12/Nov/2026 20:26:48] "GET /operaciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:48] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:48] "GET /assets/operaciones.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:48] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:48] "GET /assets/operaciones.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:48] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:48] "GET /api/demo/sesion HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:48] "POST /api/demo/sesion HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:48] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:48] "GET /api/demo/pedidos/1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:48] "[35m[1mPOST /api/demo/pedidos/1/incidencias HTTP/1.1[0m" 201 -
+127.0.0.1 - - [12/Nov/2026 20:26:48] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:48] "GET /api/demo/pedidos/1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:48] "POST /api/demo/incidencias/1/atender HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:48] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:48] "GET /api/demo/pedidos/1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:48] "POST /api/demo/incidencias/1/atender HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:49] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:49] "GET /api/demo/pedidos/1 HTTP/1.1" 200 -
+ok
+test_pedido_web_panel_y_seguimiento_hasta_entregado (test_operaciones_browser.OperacionesBrowserTests.test_pedido_web_panel_y_seguimiento_hasta_entregado) ... 127.0.0.1 - - [12/Nov/2026 20:26:49] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:49] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:49] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:49] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:49] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:49] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:49] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:49] "POST /api/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /seguimiento HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /assets/seguimiento.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /assets/seguimiento.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /api/seguimiento HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /operaciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "[36mGET /assets/styles.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "[36mGET /assets/navegacion.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /assets/operaciones.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /assets/operaciones.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /api/demo/sesion HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "POST /api/demo/sesion HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /api/demo/pedidos/1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "POST /api/demo/pedidos/1/acciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /api/demo/pedidos/1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "POST /api/demo/pedidos/1/acciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /api/demo/pedidos/1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "POST /api/demo/pedidos/1/acciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /api/demo/pedidos/1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "POST /api/demo/pedidos/1/acciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /api/demo/pedidos/1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /api/seguimiento HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "POST /api/demo/pedidos/1/acciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:50] "GET /api/demo/pedidos/1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:51] "GET /api/seguimiento HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:51] "[31m[1mGET /api/demo/pedidos HTTP/1.1[0m" 401 -
+ok
+test_salida_aceptada_con_respuesta_perdida_se_recupera (test_operaciones_browser.OperacionesBrowserTests.test_salida_aceptada_con_respuesta_perdida_se_recupera) ... 127.0.0.1 - - [12/Nov/2026 20:26:52] "GET /operaciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "GET /assets/operaciones.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "GET /assets/operaciones.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "GET /api/demo/sesion HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "POST /api/demo/sesion HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "GET /api/demo/pedidos/1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "POST /api/demo/pedidos/1/acciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "GET /api/demo/pedidos/1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "POST /api/demo/pedidos/1/acciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "GET /api/demo/pedidos/1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "POST /api/demo/pedidos/1/acciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "GET /api/demo/pedidos/1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "POST /api/demo/pedidos/1/acciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "GET /api/demo/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:52] "GET /api/demo/pedidos/1 HTTP/1.1" 200 -
+ok
+test_agregar_quitar_y_agrupar_productos (test_pedido_browser.PedidoBrowserTests.test_agregar_quitar_y_agrupar_productos) ... 127.0.0.1 - - [12/Nov/2026 20:26:53] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:53] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:53] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:53] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:53] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:53] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:53] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:53] "POST /api/pedidos HTTP/1.1" 200 -
+ok
+test_cantidad_invalida_y_stock_insuficiente (test_pedido_browser.PedidoBrowserTests.test_cantidad_invalida_y_stock_insuficiente) ... 127.0.0.1 - - [12/Nov/2026 20:26:54] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:54] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:54] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:54] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:54] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:54] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:54] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:55] "[31m[1mPOST /api/pedidos HTTP/1.1[0m" 409 -
+127.0.0.1 - - [12/Nov/2026 20:26:55] "POST /api/pedidos HTTP/1.1" 200 -
+ok
+test_catalogo_refleja_reserva_despues_de_confirmar (test_pedido_browser.PedidoBrowserTests.test_catalogo_refleja_reserva_despues_de_confirmar)
+S3-05: recorrido conjunto S1 -> S2 -> disponibilidad actualizada. ... 127.0.0.1 - - [12/Nov/2026 20:26:55] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:55] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:55] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:55] "GET /assets/catalogo.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:55] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:56] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:56] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:56] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:56] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:56] "[36mGET /assets/styles.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:56] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:56] "[36mGET /assets/navegacion.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:56] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:56] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:56] "POST /api/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:56] "[36mGET / HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:56] "[36mGET /assets/navegacion.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:56] "[36mGET /assets/styles.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:56] "[36mGET /assets/catalogo.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:26:56] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:56] "GET /api/filtros HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:56] "GET /api/catalogo?buscar=&categoria=&sucursal=&solo_disponibles=false HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:56] "GET /api/productos/DEMO-A/stock HTTP/1.1" 200 -
+ok
+test_error_de_carga_y_recuperacion (test_pedido_browser.PedidoBrowserTests.test_error_de_carga_y_recuperacion) ... 127.0.0.1 - - [12/Nov/2026 20:26:57] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:57] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:57] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:57] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:57] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:57] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:57] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+ok
+test_responsive_teclado_y_capturas (test_pedido_browser.PedidoBrowserTests.test_responsive_teclado_y_capturas) ... 127.0.0.1 - - [12/Nov/2026 20:26:58] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:58] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:58] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:58] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:58] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:58] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:58] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:58] "POST /api/pedidos HTTP/1.1" 200 -
+ok
+test_respuesta_perdida_reintenta_sin_duplicar (test_pedido_browser.PedidoBrowserTests.test_respuesta_perdida_reintenta_sin_duplicar) ... 127.0.0.1 - - [12/Nov/2026 20:26:59] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:59] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:59] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:59] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:59] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:59] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:59] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:59] "POST /api/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:26:59] "POST /api/pedidos HTTP/1.1" 200 -
+ok
+test_revisar_editar_y_confirmar_sin_escritura_anticipada (test_pedido_browser.PedidoBrowserTests.test_revisar_editar_y_confirmar_sin_escritura_anticipada) ... 127.0.0.1 - - [12/Nov/2026 20:27:00] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:00] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:00] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:00] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:00] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:00] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:00] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:01] "POST /api/pedidos HTTP/1.1" 200 -
+ok
+test_carga_y_error_503_recuperable (test_seguimiento_browser.SeguimientoBrowserTests.test_carga_y_error_503_recuperable) ... 127.0.0.1 - - [12/Nov/2026 20:27:01] "GET /seguimiento HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:01] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:01] "GET /assets/seguimiento.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:01] "GET /assets/seguimiento.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:01] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:01] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:02] "GET /api/seguimiento HTTP/1.1" 200 -
+ok
+test_codigo_incorrecto_inexistente_y_corregir (test_seguimiento_browser.SeguimientoBrowserTests.test_codigo_incorrecto_inexistente_y_corregir) ... 127.0.0.1 - - [12/Nov/2026 20:27:03] "GET /seguimiento HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:03] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:03] "GET /assets/seguimiento.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:03] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:03] "GET /assets/seguimiento.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:03] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:03] "[31m[1mGET /api/seguimiento HTTP/1.1[0m" 400 -
+127.0.0.1 - - [12/Nov/2026 20:27:03] "[33mGET /api/seguimiento HTTP/1.1[0m" 404 -
+127.0.0.1 - - [12/Nov/2026 20:27:03] "GET /api/seguimiento HTTP/1.1" 200 -
+ok
+test_confirmacion_enlaza_pedido_correcto_sin_codigo_en_url_http (test_seguimiento_browser.SeguimientoBrowserTests.test_confirmacion_enlaza_pedido_correcto_sin_codigo_en_url_http) ... 127.0.0.1 - - [12/Nov/2026 20:27:04] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:04] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:04] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:04] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:04] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:04] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:04] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:04] "POST /api/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:04] "GET /seguimiento HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:04] "GET /assets/seguimiento.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:04] "[36mGET /assets/styles.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:27:04] "GET /assets/seguimiento.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:04] "[36mGET /assets/navegacion.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:27:04] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:04] "GET /api/seguimiento HTTP/1.1" 200 -
+ok
+test_copiar_codigo_y_crear_otro_pedido_no_reutiliza_anterior (test_seguimiento_browser.SeguimientoBrowserTests.test_copiar_codigo_y_crear_otro_pedido_no_reutiliza_anterior) ... 127.0.0.1 - - [12/Nov/2026 20:27:05] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:05] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:05] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:05] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:05] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:05] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:05] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:05] "POST /api/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:05] "POST /api/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:05] "GET /seguimiento HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:05] "GET /assets/seguimiento.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:05] "[36mGET /assets/styles.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:27:05] "GET /assets/seguimiento.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:05] "[36mGET /assets/navegacion.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:27:05] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:05] "GET /api/seguimiento HTTP/1.1" 200 -
+ok
+test_desconexion_oculta_datos_viejos_y_permite_reintento (test_seguimiento_browser.SeguimientoBrowserTests.test_desconexion_oculta_datos_viejos_y_permite_reintento) ... 127.0.0.1 - - [12/Nov/2026 20:27:06] "GET /seguimiento HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:06] "GET /assets/seguimiento.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:06] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:06] "GET /assets/seguimiento.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:06] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:06] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:06] "GET /api/seguimiento HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:06] "GET /api/seguimiento HTTP/1.1" 200 -
+ok
+test_portapapeles_bloqueado_muestra_alternativa (test_seguimiento_browser.SeguimientoBrowserTests.test_portapapeles_bloqueado_muestra_alternativa) ... 127.0.0.1 - - [12/Nov/2026 20:27:07] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:07] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:07] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:07] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:07] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:07] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:07] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:07] "POST /api/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:07] "GET /seguimiento HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:07] "GET /assets/seguimiento.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:07] "GET /assets/seguimiento.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:07] "[36mGET /assets/navegacion.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:27:07] "[36mGET /assets/styles.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:27:07] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:07] "GET /api/seguimiento HTTP/1.1" 200 -
+ok
+test_preparacion_real_actualiza_estado_e_historial (test_seguimiento_browser.SeguimientoBrowserTests.test_preparacion_real_actualiza_estado_e_historial) ... 127.0.0.1 - - [12/Nov/2026 20:27:08] "GET /seguimiento HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:08] "GET /assets/seguimiento.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:08] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:08] "GET /assets/seguimiento.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:08] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:08] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:08] "GET /api/seguimiento HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:08] "GET /api/seguimiento HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:08] "GET /api/seguimiento HTTP/1.1" 200 -
+ok
+test_respuesta_confirmacion_perdida_recupera_mismo_seguimiento (test_seguimiento_browser.SeguimientoBrowserTests.test_respuesta_confirmacion_perdida_recupera_mismo_seguimiento) ... 127.0.0.1 - - [12/Nov/2026 20:27:09] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:09] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:09] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:09] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:09] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:09] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:09] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:10] "POST /api/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:10] "POST /api/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:10] "GET /seguimiento HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:10] "[36mGET /assets/styles.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:27:10] "GET /assets/seguimiento.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:10] "GET /assets/seguimiento.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:10] "[36mGET /assets/navegacion.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:27:10] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:10] "GET /api/seguimiento HTTP/1.1" 200 -
+ok
+test_vista_movil_confirmacion_y_seguimiento_sin_desbordar (test_seguimiento_browser.SeguimientoBrowserTests.test_vista_movil_confirmacion_y_seguimiento_sin_desbordar) ... 127.0.0.1 - - [12/Nov/2026 20:27:11] "GET /pedido HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:11] "GET /assets/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:11] "GET /assets/pedido.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:11] "GET /assets/pedido.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:11] "GET /assets/navegacion.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:11] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:11] "GET /api/pedidos/opciones HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:11] "POST /api/pedidos HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:11] "GET /seguimiento HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:11] "[36mGET /assets/styles.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:27:11] "GET /assets/seguimiento.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:11] "GET /assets/seguimiento.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:11] "[36mGET /assets/navegacion.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Nov/2026 20:27:11] "GET /api/contexto HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2026 20:27:11] "GET /api/seguimiento HTTP/1.1" 200 -
+ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 41.715s
+
+OK

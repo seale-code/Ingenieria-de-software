@@ -68,6 +68,13 @@ function render(data) {
     const amount = p.cantidad === null ? 'Disponibilidad no registrada' : `${p.cantidad} unidades ${$('branch').value ? 'en sucursal seleccionada' : 'en las sucursales registradas'}`;
     article.innerHTML = `<div class="art" aria-hidden="true">✚</div><div class="product-body"><span class="tag">${safe(p.categoria)}</span><h3>${safe(p.producto)}</h3><p class="code">Código: ${safe(p.producto_codigo)}</p><div><span class="pill ${available ? '' : 'off'}">${label}</span></div><div class="bottom"><p class="availability">${amount}</p><button class="action detail-toggle" type="button" aria-expanded="false">Ver stock por sucursal</button><div class="detail hidden" aria-live="polite"></div></div></div>`;
     article.querySelector('button').onclick = event => detail(event.currentTarget, p.producto_codigo);
+    if (available) {
+      const order = document.createElement('a');
+      order.className = 'product-order';
+      order.textContent = 'Pedir este producto →';
+      order.href = '/pedido?producto=' + encodeURIComponent(p.producto_codigo);
+      article.querySelector('.bottom').append(order);
+    }
     $('products').append(article);
   }
 }

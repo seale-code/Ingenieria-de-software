@@ -1,50 +1,63 @@
-# Ejecutar y demostrar el MVP
+# Demostración web del Sprint 3
 
-## Interfaz en Windows
+Actualización: 12 de noviembre de 2026. Tarea [#17](https://github.com/seale-code/Ingenieria-de-software/issues/17). Los PR de preparación (#47), seguimiento (#49) y soporte de Anderson (#52) ya están integrados. Esta ampliación conecta sus servicios a un panel del expositor y comprueba el recorrido hasta **ENTREGADO**.
 
-Desde la raíz de una copia del repositorio con esta propuesta, crea una base nueva de demostración. No uses una base con pedidos del equipo para este guion.
+## Abrir la demostración
 
-```powershell
+Desde la raíz del repositorio, con Python 3.10 o superior:
+
+```bash
 python -m pip install -r requirements.txt
-python -m src.database init --demo --db .test-tmp/demo-s3.sqlite3
-python -m src.database.migrate_josue --db .test-tmp/demo-s3.sqlite3 --hasta 3
-python -m src.backend.pedidos_s2_cli --db .test-tmp/demo-s3.sqlite3 init
-$env:INKAFARMA_DB = '.test-tmp/demo-s3.sqlite3'
-python -m src.backend.app
+python -m scripts.demo_web
 ```
 
-En Bash, reemplaza las dos últimas líneas por `INKAFARMA_DB=.test-tmp/demo-s3.sqlite3 python -m src.backend.app`. Abre http://127.0.0.1:5000 en ese mismo equipo y conserva la terminal abierta. Ctrl+C detiene el servidor. Para repetir con stock inicial, utiliza otro nombre de base; los comandos preservan los pedidos existentes.
+1. Abre `http://127.0.0.1:5000/` para ver el catálogo.
+2. Entra en **Operaciones demo**, o abre `http://127.0.0.1:5000/operaciones`.
+3. Copia la **clave de esta demostración** que imprime la terminal e introdúcela en el panel.
 
-La pantalla de seguimiento de los pasos siguientes requiere PR #49 y la ampliación de validación S3-05. PR #49 todavía estaba abierto al revisar esta versión.
+El comando crea una base temporal v4, seis productos ficticios, dos repartidores y tres pedidos en distintas etapas. También deja una incidencia de ejemplo. La clave cambia en cada ejecución. Al terminar con **Ctrl+C**, se eliminan estos datos; no se modifica `data/inkafarma.sqlite3`. Si el puerto está ocupado, usa `python -m scripts.demo_web --port 5001`.
 
-## Recorrido visual disponible
+El panel está deshabilitado en el arranque habitual `python -m src.backend.app`. La demostración solo escucha en la dirección local `127.0.0.1`.
 
-1. Buscar «demo a»: disponibilidad inicial de 5 unidades.
-2. Consultar stock por sucursal: Norte 5, Sur 0.
-3. Entrar a «Crear un pedido». Elegir DEMO-A, cantidad 2, cliente ficticio y referencia Norte.
-4. Revisar el resumen y volver a editar para mostrar que no hay confirmación anticipada.
-5. Confirmar: mostrar número de pedido, sucursal y estado ASIGNADO.
-6. Pulsar «Copiar código de seguimiento» y guardarlo. Si el portapapeles está bloqueado, copiar manualmente el código mostrado.
-7. Abrir «Ver seguimiento del pedido»: debe mostrar Asignado e historial. El fragmento del código se elimina de la barra; una recarga permite volver a introducir el código guardado.
-8. Volver al catálogo y recargar. DEMO-A debe mostrar 3 unidades; abrir su detalle para comprobarlo.
-9. En otro pedido, cantidad 0 impide avanzar; una cantidad superior a lo disponible muestra error sin crear un pedido parcial.
+## Guion para exponer en 4–5 minutos
 
-El [recorrido automatizado](../tests/e2e/test_pedido_browser.py) ejecuta catálogo → formulario → confirmación → catálogo y verifica el cambio 5 → 3.
+| Paso | Qué hacer | Qué explicar |
+|---|---|---|
+| 1. Catálogo | Buscar un producto y consultar stock por sucursal. | La disponibilidad ya considera las reservas activas. |
+| 2. Crear pedido | Pulsar **Pedir este producto**, indicar un nombre ficticio, una cantidad y un punto de referencia; revisar y confirmar. | El servidor elige una sucursal por stock, distancia y capacidad. No se realizan cobros. |
+| 3. Seguimiento | Copiar el código y abrir el seguimiento en otra pestaña. | El código privado identifica este pedido; el cliente ve estado e historial. |
+| 4. Preparación | En el panel, pulsar **Actualizar**, seleccionar el pedido e **Iniciar preparación** → **Marcar como preparado**. | Cada paso agrega su evento al historial. |
+| 5. Reparto | Elegir repartidor, **Asignar repartidor** y **Registrar salida**. | Salida, estado, reserva e inventario se guardan juntos. El stock físico se descuenta una vez. |
+| 6. Entrega | **Confirmar entrega**, volver a la pestaña del cliente y consultar de nuevo. | Pedido ENTREGADO, entrega ENTREGADA y cinco estados visibles. La consulta se actualiza al pulsar el botón. |
+| 7. Soporte | Reportar una incidencia, iniciar su revisión, escribir la resolución y resolverla. | La incidencia conserva su relación con el pedido y la solución documentada. |
+| 8. Cancelación | Crear otro pedido y cancelarlo con el diálogo de confirmación antes de la salida. | Las reservas se liberan sin consumir stock; el historial se conserva. |
 
-## Demo técnica de integración S3
+Los tres pedidos precargados permiten empezar en una etapa intermedia si hay poco tiempo. La bandeja filtra por nombre, número, sucursal y estado. Los contadores resumen los pedidos de toda la base, mientras la bandeja muestra hasta 100 recientes.
+
+## Comprobación técnica reproducible
 
 ```bash
 python -m scripts.validar_mvp
 ```
 
-El comando utiliza el cliente HTTP de Flask y una base temporal que elimina al terminar. Muestra JSON con disponibilidad, reintento sin duplicación, repartidor, fechas e historial. No escribe en la base de la interfaz ni utiliza servicios externos.
+Ejecuta sobre otra base temporal el registro HTTP, reintento de confirmación, preparación, asignación de repartidor, salida y entrega atómicas, reintentos sin doble consumo, seguimiento, resolución de incidencia y cancelación. También comprueba integridad y claves foráneas. Debe devolver `RECORRIDO_TECNICO_MVP_COMPLETO`, los cinco estados y stock físico/disponible coherente.
 
-El comando detecta los módulos disponibles. En la versión ampliada, ejecuta ASIGNADO → EN_PREPARACION → PREPARADO con el servicio de César y consulta la API de Willy para comprobar estado e historial del mismo pedido. La respuesta pública no expone datos personales ni observaciones internas. Si no está instalado el seguimiento de #49, lo indica como pendiente.
+Para repetir las pruebas:
 
-La entrega conserva ASIGNADA: registrar una fecha no implementa las transiciones de #22. El resultado se identifica como `VALIDACION_PARCIAL_NO_CIERRE_MVP`; la salida correcta del comando acredita únicamente los componentes comprobados. No existe una bandeja web del personal que avance estados desde esta pantalla del cliente.
+```bash
+python -m pip install -r requirements-test.txt
+python -m unittest discover -s tests -v
+python -m playwright install chromium-headless-shell
+python -m unittest discover -s tests/e2e -v
+```
 
-## Demostración final pendiente
+[Resultados y capturas](../docs/06-evidencias/2026-11-12_mvp-web-integrado.md).
 
-Al integrar seguimiento (#49) y completar #22, ampliar el guion con bandeja de preparación, salida, entrega confirmada, consulta de historial desde la pantalla del cliente, permisos e incidencia asociada al pedido. Revisar que reserva e inventario se cierren sin doble consumo. Registrar versión demostrada, resultados, participantes y aprobación reales antes de cerrar #17.
+## Alcance de la demostración
 
-Las ubicaciones y nombres son ficticios. Esta ejecución es local y no publica un sitio web.
+- El expositor tiene una sesión protegida por clave y simula las acciones de sucursal, repartidor y soporte. Esto permite demostrar el proceso; no representa cuentas reales de empleados ni una implementación completa de permisos por usuario.
+- El cliente consulta con un código privado. No se incluyen en esa respuesta nombres, coordenadas ni observaciones internas.
+- No hay cobros, notificaciones push, rastreo GPS, precios, autenticación completa del cliente ni canales externos. Las coordenadas y los productos son ficticios.
+- Tras un error de conexión del panel, pulsa **Actualizar** para comprobar qué se guardó antes de repetir una acción. El registro de incidencias no tiene idempotencia propia.
+- El formulario conserva la confirmación incierta en la pestaña actual; no recupera ese borrador tras recargarla.
+- La aprobación de la Sprint Review y la revisión por otro integrante se registran cuando el equipo realmente las realice.

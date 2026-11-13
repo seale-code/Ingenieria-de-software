@@ -7,7 +7,7 @@
 
 ![Proyecto académico](https://img.shields.io/badge/Proyecto-Académico-127A50?style=for-the-badge)
 ![Metodología](https://img.shields.io/badge/Scrum-3%20Sprints-F3C623?style=for-the-badge&labelColor=126B48)
-**Catálogo y pedidos web funcionales · Integración del Sprint 3 en revisión.**
+**MVP web: catálogo, pedidos, preparación, reparto, seguimiento y soporte básico.**
 
 
 <br>
@@ -30,7 +30,16 @@
 | Modelos UML del sistema | [Diagramas por grupos de historias](docs/03-diagramas/uml/README.md) |
 | Validación | [Casos de prueba](docs/05-pruebas/CASOS_DE_PRUEBA.md) y [evidencias](docs/06-evidencias/README.md) |
 
-**Ejecuta la interfaz de catálogo y pedidos** con la [guía de demostración](sprint-3/DEMO_MVP.md). El [informe S3-05](sprint-3/S3-05_Sebastian_Calderon.md) reúne los resultados de integración y las dependencias para completar el recorrido de entrega.
+**Abre la demostración completa** desde la raíz del repositorio:
+
+```bash
+python -m pip install -r requirements.txt
+python -m scripts.demo_web
+```
+
+Visita `http://127.0.0.1:5000/`. La terminal muestra la clave del panel **Operaciones demo**. Incluye datos ficticios temporales y pedidos de ejemplo. [Guía y recorrido](sprint-3/DEMO_MVP.md) · [Resultados S3-05](sprint-3/S3-05_Sebastian_Calderon.md).
+
+El panel del expositor simula roles para demostrar el proceso; no implementa cuentas reales de empleados. La validación técnica está documentada y la aceptación del equipo se registra por separado.
 
 ## 🌿 Sobre nuestro proyecto
 

@@ -1,12 +1,13 @@
-# Interfaz integrada — Sprint 1
+# Interfaz web del MVP
 
-`index.html`, `styles.css` y `catalogo.js` conectan el diseño S1-04 de Willy
-(`docs/04-diseño/Inkafarma_S1-04_demo.html`, conservado) con la API de consulta.
-No contienen listas de productos ni stock precargados. Las opciones, resultados y
-el detalle se obtienen del backend. Incluye filtros combinados, limpiar, carga,
-sin resultados, sin inventario, error y reintento, en móvil y escritorio.
+- `index.html`, `catalogo.js`, `styles.css`: búsqueda, filtros y disponibilidad efectiva por sucursal. Los productos disponibles enlazan al formulario con el producto preseleccionado.
+- `pedido.html`, `pedido.css`, `pedido.js`: elegir, revisar y confirmar; reintento con el mismo UUID ante resultado incierto; código privado y enlace de seguimiento.
+- `seguimiento.html`, `seguimiento.css`, `seguimiento.js`: estado, etapas e historial en hora de Lima; consulta manual por código enviado en cabecera, sin datos personales ni observaciones internas.
+- `operaciones.html`, `operaciones.css`, `operaciones.js`: sesión del expositor, bandeja, siguiente paso, reparto, cancelación con confirmación e incidencias. Solo funciona cuando el servidor habilita la demostración.
+- `navegacion.js`: muestra el acceso al panel cuando está habilitado; no constituye una protección de acceso. El servidor verifica sesión y CSRF.
 
-Para ejecutar, seguir [Backend](../backend/README.md) y abrir http://127.0.0.1:5000.
-No se necesita npm. No abrir el HTML directamente: necesita la API del mismo origen.
-La búsqueda espera 250 ms entre pulsaciones y descarta respuestas anteriores.
-El prototipo original conserva sus controles de simulación únicamente en docs.
+No requiere npm ni servicios externos. Los datos se consultan al backend; no se mantienen inventarios ficticios en JavaScript. Se conservan los selectores del formulario y catálogo existentes.
+
+Para ejecutarlo: [guía de demostración](../../sprint-3/DEMO_MVP.md). No abrir los HTML directamente: necesitan la API del mismo origen.
+
+Se verificaron carga, vacío, error, recuperación de conexión, texto tratado como contenido, navegación por teclado y vistas de escritorio/móvil. [Evidencias](../../docs/06-evidencias/2026-11-12_mvp-web-integrado.md).

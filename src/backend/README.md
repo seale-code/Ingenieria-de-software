@@ -1,11 +1,17 @@
-# Backend — integración del catálogo S1-11
+# Backend — integración del MVP S1/S2/S3
 
 Tarea de integración: [#13](https://github.com/seale-code/Ingenieria-de-software/issues/13).
 Reutiliza `catalogo_busqueda.py` de Anderson y las consultas SQLite del equipo.
 El filtro de categoría del endpoint se aplica al catálogo completo para conservar
 productos sin inventario; `filtro_categorias.py` de César conserva su contrato original.
 
-## Ejecutar desde la raíz del repositorio
+## Demostración completa
+
+`python -m scripts.demo_web` crea una base temporal v4 con los módulos integrados, datos de ejemplo y clave aleatoria del expositor. Solo escucha en `127.0.0.1`. [Guía](../../sprint-3/DEMO_MVP.md).
+
+`python -m scripts.validar_mvp` comprueba sin navegador el recorrido HTTP completo, soporte y cancelación sobre otra base temporal.
+
+## Ejecutar el catálogo sobre una base propia
 
 Requiere Python 3.10 o superior. Se recomienda un entorno virtual.
 
@@ -17,7 +23,7 @@ python -m src.backend.app
 
 Abrir http://127.0.0.1:5000. La pantalla se sirve desde Flask; no abrir el HTML
 con file://. SQLite se crea explícitamente con init; el servidor no crea ni
-sobrescribe bases. El servidor local no activa debug ni expone escrituras.
+sobrescribe bases. El servidor local no activa debug. El registro público de pedidos requiere las migraciones y el módulo S2; las operaciones internas de demostración permanecen deshabilitadas por defecto.
 
 Base alternativa (PowerShell):
 
@@ -53,6 +59,28 @@ El detalle consulta de nuevo SQLite cada vez que se abre.
 python -m unittest discover -s tests -v
 ```
 
-Fuera de esta entrega: pedidos, reserva, autenticación y orden por cercanía.
-En S2 se deberá distinguir stock físico de stock reservable antes de habilitar compras.
+## Pedidos y seguimiento
+
+El módulo S2 debe inicializarse después de migrar la base oficial. `POST /api/pedidos` valida el UUID de confirmación y reserva con `BEGIN IMMEDIATE`; el reintento del mismo contenido devuelve el pedido existente. La disponibilidad HTTP resta las reservas activas; el consumo físico ocurre al iniciar el reparto.
+
+`GET /api/seguimiento` exige `X-Codigo-Pedido`; no acepta el ID numérico como autorización y no devuelve datos personales ni observaciones. La consulta es de solo lectura.
+
+## Panel local del expositor
+
+`operaciones_demo.py` solo habilita sus rutas si se configura `DEMO_KEY` en la fábrica o `INKAFARMA_DEMO_KEY` en el entorno. El comando de demo proporciona automáticamente una clave aleatoria. No guardar claves en el repositorio.
+
+| Ruta | Función |
+|---|---|
+| `GET/POST/DELETE /api/demo/sesion` | Consultar sesión, entrar con clave y salir. |
+| `GET /api/demo/pedidos` | Últimos 100 pedidos, repartidores activos y resumen global. |
+| `GET /api/demo/pedidos/<id>` | Productos, entrega, reservas, historial e incidencias. |
+| `POST /api/demo/pedidos/<id>/acciones` | Preparar, marcar listo, asignar repartidor, salir, entregar o cancelar. |
+| `POST /api/demo/pedidos/<id>/incidencias` | Reportar un problema del pedido. |
+| `POST /api/demo/incidencias/<id>/atender` | Revisar y resolver con explicación. |
+
+La cookie de sesión caduca tras dos horas sin uso, es HttpOnly/SameSite=Strict y necesita un token CSRF para escribir. Se comprueban JSON y origen; los roles/actores no se aceptan como campos del cliente. El expositor simula las acciones de los roles y no representa cuentas reales del personal.
+
+`reparto_integrado.avanzar_reparto` combina fecha y transición con los servicios de Anderson dentro de una única transacción. Una falla revierte fecha, estados, historial y consumo; los reintentos y las solicitudes concurrentes del mismo paso no repiten efectos. Los comandos previos de fechas conservan su contrato independiente.
+
+La autenticación de clientes y empleados, cuentas con permisos individuales y despliegue público están fuera del alcance de esta demostración.
 Este servidor es para demostración académica local, no despliegue de producción.

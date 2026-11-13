@@ -1,5 +1,18 @@
 # Revisión de cumplimiento y pendientes
 
+## Estado actual — integración web del Sprint 3
+
+El código integrado incluye catálogo, registro/asignación/reserva, preparación, reparto, seguimiento e incidencias. La ampliación S3-05 incorpora el panel de demostración y valida el recorrido hasta ENTREGADO. Los modelos UML están agrupados en 17 diagramas editables.
+
+[Ejecutar el programa](../sprint-3/DEMO_MVP.md) · [Evidencia actual](06-evidencias/2026-11-12_mvp-web-integrado.md) · [Modelos UML](03-diagramas/uml/README.md).
+
+Siguen pendientes la revisión/aceptación del equipo y, fuera de este prototipo local, las cuentas reales, permisos por identidad, precios/pagos, notificaciones y canales externos. El panel simula roles y se habilita explícitamente con una clave temporal.
+
+## Auditoría y avances anteriores (histórico)
+
+Las afirmaciones siguientes sobre interfaces o pruebas pendientes describen la auditoría inicial y sus incrementos; no sustituyen el estado actual enlazado arriba.
+
+
 **Fecha:** 18 de octubre de 2026.  
 **Base revisada:** commit `02331f21943c09bdd7a14e1802bcf7a8e2b3b807`, archivos de la rama principal, 25 Issues y sus relaciones de sub-issues.
 
