@@ -4,20 +4,17 @@
   <title>Operaciones · Inkafarma</title>
   <link rel="stylesheet" href="/assets/styles.css"><link rel="stylesheet" href="/assets/operaciones.css">
   <script src="/assets/navegacion.js" defer></script><script src="/assets/operaciones.js" defer></script>
-</head>
+<link rel="stylesheet" href="/assets/tienda.css"><script src="/assets/tienda.js" defer></script></head>
 <body>
 <a class="skip-link" href="#main">Saltar al contenido</a>
-<header class="top"><div class="header-inner">
-  <a class="brand" href="/" aria-label="Ir al catálogo"><span class="brand-icon" aria-hidden="true">✚</span><span>inka<span class="brand-accent">farma</span></span></a>
-  <nav class="main-nav" aria-label="Navegación principal"><a href="/">Catálogo</a><a href="/pedido">Crear pedido</a><a href="/seguimiento">Seguimiento</a><a href="/operaciones" aria-current="page">Operaciones</a></nav>
-</div></header>
+<div class="utility-bar"><div class="header-container"><span>Tu bienestar, más cerca.</span><div><a href="/ayuda">¿Necesitas ayuda?</a><a href="/seguimiento">Sigue tu pedido</a></div></div></div>
+<header class="top"><div class="header-inner"><a class="brand" href="/" aria-label="Inkafarma, ir al catálogo"><img src="/assets/imagenes/inkafarma.svg" alt="Inkafarma" width="176" height="28"></a><form class="header-search" action="/" role="search"><label for="search" class="sr-only">Buscar producto</label><input id="search" name="buscar" type="search" placeholder="Busca un producto, medicamento o marca" autocomplete="off"><button type="submit" aria-label="Buscar"><svg aria-hidden="true"><use href="/assets/iconos.svg#search"/></svg></button></form><div class="header-tools"><a href="/seguimiento" class="tracking-nav" aria-label="Seguir mi pedido"><svg aria-hidden="true"><use href="/assets/iconos.svg#truck"/></svg><span>Mi pedido</span></a><button type="button" id="cart-open" class="cart-open" aria-label="Abrir carrito"><svg aria-hidden="true"><use href="/assets/iconos.svg#bag"/></svg><span>Mi carrito</span><b data-cart-count>0</b></button></div></div><nav class="catalog-nav" aria-label="Categorías de productos"><div><a href="/#catalogo">Todos los productos</a><a href="/?categoria=DERMO#catalogo">Dermocosmética</a><a href="/?categoria=SALUD#catalogo">Medicamentos</a><a href="/?categoria=PERSONAL#catalogo">Cuidado personal</a><a href="/?categoria=SOLAR#catalogo">Protección solar</a><a href="/?categoria=BEBE#catalogo">Bebés y maternidad</a></div></nav></header>
 <main class="shell operations-shell" id="main">
-  <div class="page-heading"><div><p class="section-kicker">SPRINT 3 · DEMOSTRACIÓN</p><h1>Centro de operaciones</h1><p class="muted">Del pedido asignado a la entrega, en un mismo lugar.</p></div><div class="heading-actions" id="session-actions" hidden><button class="secondary-btn" id="refresh" type="button">Actualizar</button><button class="text-btn" id="logout" type="button">Cerrar sesión</button></div></div>
-  <p class="demo-banner"><span aria-hidden="true">ⓘ</span> Panel del expositor · Simula los roles de sucursal, repartidor y soporte con datos ficticios.</p>
+  <div class="page-heading"><div><p class="section-kicker">GESTIÓN DE PEDIDOS</p><h1>Centro de operaciones</h1><p class="muted">Del pedido asignado a la entrega, en un mismo lugar.</p></div><div class="heading-actions" id="session-actions" hidden><button class="secondary-btn" id="refresh" type="button">Actualizar</button><button class="text-btn" id="logout" type="button">Cerrar sesión</button></div></div>
   <p id="ops-message" class="ops-message" role="status" aria-live="polite">Comprobando la sesión…</p>
   <section id="login-panel" class="login-panel panel" hidden aria-labelledby="login-title">
-    <span class="section-kicker">ACCESO A LA DEMOSTRACIÓN</span><h2 id="login-title">Continuar como expositor</h2><p>Introduce la clave de esta sesión para gestionar los pedidos de prueba.</p>
-    <form id="login-form"><label for="demo-key">Clave de demostración</label><input type="password" id="demo-key" required autocomplete="off" maxlength="200"><button class="action" id="login-button">Entrar al panel</button></form>
+    <span class="section-kicker">ACCESO A OPERACIONES</span><h2 id="login-title">Ingresa a tu espacio de trabajo</h2><p>Accede para gestionar la preparación, el reparto y la atención de pedidos.</p>
+    <form id="login-form"><label for="demo-key">Clave de acceso</label><input type="password" id="demo-key" required autocomplete="off" maxlength="200"><button class="action" id="login-button">Entrar al panel</button></form>
     <a href="/" class="inline-link">Explorar el catálogo →</a>
   </section>
   <div id="workspace" hidden>
@@ -38,8 +35,9 @@
       <section id="order-detail" class="panel detail-panel" aria-label="Detalle del pedido" aria-busy="false"><div class="empty-detail"><span aria-hidden="true">▤</span><h2>Todo empieza con un pedido</h2><p>Selecciona uno de la bandeja para ver sus productos y continuar el recorrido.</p><a href="/pedido" class="primary-link">Crear pedido →</a></div></section>
     </div>
   </div>
-  <noscript><p class="ops-message error">Activa JavaScript para gestionar la demostración.</p></noscript>
+  <noscript><p class="ops-message error">Activa JavaScript para gestionar los pedidos.</p></noscript>
 </main>
 <dialog id="cancel-dialog"><form method="dialog"><h2>¿Cancelar este pedido?</h2><p>Se liberarán sus reservas. El pedido conservará el historial de lo ocurrido.</p><div class="dialog-actions"><button value="no" class="secondary-btn">Volver</button><button value="yes" class="danger-btn">Confirmar cancelación</button></div></form></dialog>
-<footer>Proyecto académico no oficial · Datos ficticios · Sin compras ni entregas reales</footer>
+<footer class="site-footer"><div class="footer-inner"><div><a href="/" aria-label="Inkafarma, inicio"><img src="/assets/imagenes/inkafarma.svg" alt="Inkafarma" width="176" height="28" loading="lazy"></a><p>Cuidarte, todos los días.<br>Salud, cuidado personal y bienestar en un mismo lugar.</p></div><div><h2>Tu compra</h2><a href="/#catalogo">Explorar productos</a><a href="/pedido">Preparar mi pedido</a><a href="/seguimiento">Seguir mi pedido</a></div><div><h2>Estamos para ayudarte</h2><a href="/ayuda">Preguntas frecuentes</a><a href="/privacidad">Privacidad de tus datos</a><a href="/operaciones" data-demo-nav hidden>Ingreso a operaciones</a></div></div><div class="footer-bottom"><span>Inkafarma · Salud y bienestar</span><span>Hecho para estar más cerca de ti.</span></div></footer>
+<dialog id="cart-dialog" class="cart-dialog" aria-labelledby="cart-title"><div class="cart-heading"><div><p class="section-kicker">TUS ESENCIALES</p><h2 id="cart-title">Mi carrito</h2></div><button type="button" id="cart-close" class="dialog-close" aria-label="Cerrar carrito">×</button></div><p id="cart-message" role="status"></p><div id="cart-items"></div><div id="cart-totals"></div><a id="cart-checkout" class="primary-link" href="/pedido?carrito=1" hidden>Continuar con mi pedido <span aria-hidden="true">→</span></a><button type="button" class="cart-continue" id="cart-continue">Seguir explorando</button></dialog><div id="cart-toast" class="cart-toast" role="status" aria-live="polite" hidden></div>
 </body></html>

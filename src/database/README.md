@@ -1,5 +1,12 @@
 # Base de datos SQLite — Sprint 1
 
+## Catálogo comercial (v5)
+
+El arranque `python -m scripts.iniciar_tienda` utiliza `data/inkafarma-comercial.sqlite3`. Inicializa el esquema, aplica migraciones hasta v5 y carga [productos.json](catalogo/productos.json) conservando los registros operados. La migración [005_catalogo_comercial.sql](migrations/005_catalogo_comercial.sql) añade metadatos, datos de entrega y precios confirmados; no modifica pedidos, reservas o historial anteriores.
+
+Los importes se guardan en céntimos enteros. El inventario de la aplicación se conserva al reiniciar. [Contrato y fuentes](../../docs/CATALOGO_COMERCIAL.md).
+
+
 [← Código](../README.md) · [Modelo y relaciones](../../docs/03-diagramas/MODELO_DATOS.md) · [Pruebas realizadas](../../docs/06-evidencias/2026-10-18_base-datos-sprint-1.md)
 
 Implementación de las tareas S1-06 (#6, modelo) y S1-07 (#3, creación y datos ficticios). Lista para revisión del equipo. Responsable propuesto en el plan: Josue Mogollon.
