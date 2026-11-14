@@ -1,12 +1,7 @@
-"""Demostración aislada: python -m scripts.demo_web [--port 5000].
+"""Entrada compatible con el arranque de la tienda comercial.
 
-Solo escucha en 127.0.0.1. La base temporal y la clave nueva duran hasta Ctrl+C.
-No acepta una ruta a bases del usuario ni modifica data/inkafarma.sqlite3.
+El helper preparar_demo se conserva como fixture para las pruebas S3 anteriores.
 """
-import argparse
-import secrets
-import tempfile
-from pathlib import Path
 
 from src.backend.app import create_app
 from src.backend.entregas_s3 import registrar_entrega
@@ -46,17 +41,9 @@ def preparar_demo(path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Abrir la demo web local del Sprint 3')
-    parser.add_argument('--port', type=int, default=5000)
-    args = parser.parse_args()
-    if not 1 <= args.port <= 65535:
-        parser.error('El puerto debe estar entre 1 y 65535.')
-    with tempfile.TemporaryDirectory(prefix='inkafarma-demo-web-') as directory:
-        path = Path(directory) / 'demo.sqlite3'
-        preparar_demo(path)
-        key = secrets.token_urlsafe(24)
-        print(f'\nCatálogo: http://127.0.0.1:{args.port}/\nPanel: http://127.0.0.1:{args.port}/operaciones\nClave de esta demostración: {key}\n\nDatos ficticios y temporales. Ctrl+C para terminar.\n', flush=True)
-        create_app(path,demo_key=key).run(host='127.0.0.1',port=args.port,debug=False,use_reloader=False)
+    # Compatibilidad con las instrucciones de arranque anteriores.
+    from scripts.iniciar_tienda import main as iniciar
+    iniciar()
 
 
 if __name__ == '__main__':

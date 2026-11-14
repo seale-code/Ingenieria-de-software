@@ -82,7 +82,7 @@ class PedidoBrowserTests(unittest.IsolatedAsyncioTestCase):
         await expect(self.page.locator('.product')).to_have_count(3)
         producto = self.page.locator('.product').filter(has_text='Producto demo A')
         await expect(producto.locator('.availability')).to_contain_text('5 unidades')
-        await self.page.get_by_role('link', name='Crear un pedido').click()
+        await self.page.get_by_role('link', name='Preparar mi pedido', exact=True).click()
         await expect(self.page.locator('#edit-view')).to_be_visible()
         await self.page.locator('.order-product').select_option('DEMO-A')
         await self.page.locator('.order-quantity').fill('2')

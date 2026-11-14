@@ -1,6 +1,12 @@
 # Revisión de cumplimiento y pendientes
 
-## Estado actual — integración web del Sprint 3
+## Actualización del producto — 13 de noviembre de 2026
+
+Se incorpora el catálogo comercial v5: 16 productos, fotografías locales, precios, carrito, dirección, cotización y precios confirmados. La interfaz utiliza textos y componentes de una propuesta comercial; el arranque principal guarda pedidos e inventario de manera persistente.
+
+[Fuentes y reglas comerciales](CATALOGO_COMERCIAL.md) · [Resultados y capturas](06-evidencias/2026-11-13_tienda-comercial.md). Las referencias siguientes a precios o datos ficticios corresponden a las etapas anteriores.
+
+## Integración web anterior del Sprint 3
 
 El código integrado incluye catálogo, registro/asignación/reserva, preparación, reparto, seguimiento e incidencias. La ampliación S3-05 incorpora el panel de demostración y valida el recorrido hasta ENTREGADO. Los modelos UML están agrupados en 17 diagramas editables.
 
