@@ -107,6 +107,7 @@ class PedidoBrowserTests(unittest.IsolatedAsyncioTestCase):
         await self.open_form(cantidad='0')
         await self.page.get_by_role('button', name='Revisar pedido').click()
         await expect(self.page.locator('#review-view')).not_to_be_visible()
+        await expect(self.page.locator('#order-error')).to_contain_text('Ingresa una cantidad entera')
         self.assertEqual(self.total(), 0)
         await self.page.locator('.order-quantity').fill('6')
         await self.review()

@@ -33,9 +33,12 @@ Para utilizar una clave propia en operaciones, configura `INKAFARMA_OPERATIONS_K
 2. **Arma tu pedido:** agrega productos al carrito, ajusta cantidades y consulta subtotal, envío y total.
 3. **Confirma:** completa tus datos de entrega y revisa el importe calculado por el servidor. El método disponible es pago al recibir.
 4. **Sigue la entrega:** conserva tu código y consulta preparación, salida y entrega.
-5. **Gestiona:** el panel de operaciones permite preparar, asignar repartidor, confirmar entrega y atender incidencias.
+5. **Gestiona:** el panel de operaciones permite preparar, reasignar entre sucursales, asignar repartidor, confirmar entrega y atender incidencias.
+6. **Controla existencias:** registra ingresos y ajustes por conteo; consulta stock físico, reservas, disponible e historial de movimientos.
 
 La aplicación asigna una sucursal según disponibilidad, distancia y capacidad. Las reservas evitan sobreventa; el consumo se registra una vez al salir el pedido. Los importes confirmados quedan guardados aunque el precio del catálogo cambie después.
+
+La sucursal dispone de 15 minutos para aceptar la atención al iniciar la preparación. El supervisor busca otra sucursal cuando vence ese plazo; si ninguna puede atender el pedido completo, lo cancela y libera las reservas. El plazo para futuras asignaciones puede configurarse con `--reserva-minutos`.
 
 ## Arquitectura
 
@@ -59,4 +62,4 @@ Las pruebas usan bases temporales independientes de los datos de la aplicación.
 
 ## Documentación
 
-[Catálogo, fuentes y reglas comerciales](docs/CATALOGO_COMERCIAL.md) · [Resultados y capturas](docs/06-evidencias/2026-11-13_tienda-comercial.md) · [Modelos UML](docs/03-diagramas/uml/README.md) · [Índice del proyecto](docs/README.md) · [Project Inkafarma](https://github.com/users/seale-code/projects/1)
+[Reglas de sucursales, reservas e inventario](docs/LOGISTICA_SUCURSALES.md) · [Resultados de validación](docs/06-evidencias/2026-11-16_logistica-sucursales.md) · [Catálogo y fuentes](docs/CATALOGO_COMERCIAL.md) · [Modelos UML](docs/03-diagramas/uml/README.md) · [Índice del proyecto](docs/README.md) · [Project Inkafarma](https://github.com/users/seale-code/projects/1)

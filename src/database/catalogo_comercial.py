@@ -20,7 +20,7 @@ def cargar_catalogo(path):
     productos=json.loads(PRODUCTOS.read_text(encoding='utf-8'))
     with connect_database(path) as db:
         db.execute('BEGIN IMMEDIATE')
-        if db.execute('PRAGMA user_version').fetchone()[0] != 5:
+        if db.execute('PRAGMA user_version').fetchone()[0] < 5:
             raise ValueError('Aplica las migraciones hasta la versión 5 antes de cargar el catálogo.')
         for codigo,nombre in CATEGORIAS.items():
             db.execute('INSERT INTO categorias(codigo,nombre) VALUES(?,?) ON CONFLICT(codigo) DO NOTHING',(codigo,nombre))

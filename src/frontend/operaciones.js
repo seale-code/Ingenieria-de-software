@@ -4,6 +4,7 @@ const labels = {REGISTRADO:'Registrado', ASIGNADO:'Asignado', EN_PREPARACION:'En
 const stages = ['ASIGNADO','EN_PREPARACION','PREPARADO','EN_CAMINO','ENTREGADO'];
 const dates = new Intl.DateTimeFormat('es-PE', {dateStyle:'medium', timeStyle:'short', timeZone:'America/Lima'});
 let csrf = '', orders = [], drivers = [], selected = null, busy = false, detailSequence = 0;
+let logisticsEnabled = false, inventory = {existencias:[], movimientos:[]}, movement = null;
 
 function node(tag, text, className) {
   const result = document.createElement(tag);
@@ -26,7 +27,7 @@ function badge(state) {
 }
 function lock(value) {
   busy = value;
-  document.querySelectorAll('#workspace button, #workspace select, #workspace textarea, #session-actions button').forEach(el => el.disabled = value);
+  document.querySelectorAll('#workspace button, #workspace select, #workspace textarea, #workspace input, #movement-dialog button, #movement-dialog select, #movement-dialog input, #movement-dialog textarea, #session-actions button').forEach(el => el.disabled = value);
 }
 async function api(path, method = 'GET', body) {
   const response = await fetch(path, {method, cache:'no-store', credentials:'same-origin',
@@ -46,6 +47,9 @@ function showSession(authenticated) {
   if (!authenticated) {
     csrf = ''; orders = []; drivers = []; selected = null; ++detailSequence;
     ui('order-list').replaceChildren(); ui('order-detail').replaceChildren();
+    inventory = {existencias:[],movimientos:[]}; movement = null; logisticsEnabled = false;
+    ui('inventory-rows').replaceChildren(); ui('inventory-history').replaceChildren();
+    ui('movement-dialog').close();
   }
 }
 function renderInbox() {
@@ -70,6 +74,11 @@ function renderInbox() {
 async function loadInbox() {
   const data = await api('/api/demo/pedidos');
   orders = data.pedidos; drivers = data.repartidores;
+  logisticsEnabled = data.logistica_habilitada;
+  ui('tab-inventory').hidden = !logisticsEnabled;
+  ui('reservation-notice').hidden = !logisticsEnabled;
+  const pending = data.pendientes_aceptacion || 0;
+  ui('pending-acceptance').textContent = `${pending} ${pending === 1 ? 'pedido pendiente' : 'pedidos pendientes'} de aceptación. Los plazos vencidos buscan otra sucursal de forma automática.`;
   for (const [id, key] of [['active','activos'],['delivery','en_camino'],['done','entregados'],['incidents','incidencias']]) {
     ui('metric-' + id).textContent = data.resumen[key];
   }
@@ -84,6 +93,7 @@ async function refresh() {
   lock(true); message('Actualizando operaciones…');
   try {
     await loadInbox();
+    if (logisticsEnabled) await loadInventory();
     if (selected !== null) await loadDetail(selected);
     else if (orders.length) await loadDetail(orders[0].pedido_id);
     else {
@@ -110,16 +120,18 @@ async function perform(path, body, success) {
   if (busy) return false;
   lock(true); message('Guardando el cambio…');
   try {
-    await api(path, 'POST', body);
+    const result = await api(path, 'POST', body);
     await loadInbox();
     await loadDetail(selected);
-    message(success); return true;
+    if (logisticsEnabled) await loadInventory();
+    message(typeof success === 'function' ? success(result) : success); return true;
   } catch (error) { showError(error); return false; }
   finally { lock(false); }
 }
 function actionButton(text, action, order, className = 'action', extra = {}) {
   const button = node('button', text, className); button.type = 'button';
-  button.onclick = () => perform(`/api/demo/pedidos/${order.pedido_id}/acciones`, {accion:action, ...extra}, 'Cambio registrado. El seguimiento del cliente ya está actualizado.');
+  const generation = order.logistica ? {asignacion_id:order.logistica.asignacion_id} : {};
+  button.onclick = () => perform(`/api/demo/pedidos/${order.pedido_id}/acciones`, {accion:action, ...generation, ...extra}, 'Cambio registrado. El seguimiento del cliente ya está actualizado.');
   return button;
 }
 function renderDetail(p) {
@@ -152,8 +164,10 @@ function renderDetail(p) {
     if(item.imagen){const image=node('img');image.src=item.imagen;image.alt='';image.width=42;image.height=48;image.className='ops-product-image';name.prepend(image);}
     name.append(node('small',`${item.producto_codigo} · ${reserve}`)); row.append(name,node('td',item.cantidad)); table.tBodies[0].append(row);
   } panel.append(table, renderNextStep(p));
+  if (p.logistica) panel.append(renderLogistics(p));
   const tools = node('div',undefined,'detail-tools');
-  const tracking = node('a','Abrir seguimiento del cliente ↗','inline-link'); tracking.href = '/seguimiento#' + encodeURIComponent(p.pedido_codigo); tracking.target = '_blank'; tracking.rel = 'noopener noreferrer'; tools.append(tracking);
+  const tracking = node('a','Ver seguimiento del cliente','inline-link');
+  tracking.href = '/seguimiento#' + encodeURIComponent(p.pedido_codigo); tools.append(tracking);
   if (['REGISTRADO','ASIGNADO','EN_PREPARACION','PREPARADO'].includes(p.estado) && !p.entrega?.fecha_salida) {
     const cancel = node('button','Cancelar pedido','text-btn'); cancel.type = 'button';
     cancel.onclick = () => {
@@ -205,6 +219,123 @@ function renderNextStep(p) {
   if (button) section.append(button);
   return section;
 }
+function renderLogistics(p) {
+  const section = node('section',undefined,'assignment-area');
+  section.append(node('h3','Atención por sucursal','subheading'));
+  const control = p.logistica;
+  if (['REGISTRADO','ASIGNADO'].includes(p.estado)) {
+    section.append(node('p',`Aceptar antes de ${date(control.fecha_limite)} (hora de Lima). Iniciar la preparación confirma la atención.`,'acceptance-deadline'));
+  } else if (control.aceptada_en) section.append(node('p',`Atención aceptada: ${date(control.aceptada_en)}.`,'order-help'));
+  if (['REGISTRADO','ASIGNADO','EN_PREPARACION'].includes(p.estado) && !p.entrega) {
+    const details = node('details'); details.append(node('summary','La sucursal no puede atender'));
+    details.append(node('p','Se buscará otra sucursal con todos los productos y capacidad. Si no hay alternativa, se cancelará el pedido y se liberarán sus reservas.','order-help'));
+    const form = node('form'); form.id = 'reassignment-form';
+    const label = node('label','Motivo de la falta de atención'); label.htmlFor = 'reassignment-reason';
+    const input = node('textarea'); input.id = label.htmlFor; input.required = true; input.minLength = 5; input.maxLength = 240;
+    const submit = node('button','Buscar otra sucursal','secondary-btn');
+    const operationId = crypto.randomUUID();
+    form.append(label,input,submit);
+    form.onsubmit = event => {
+      event.preventDefault();
+      perform(`/api/demo/pedidos/${p.pedido_id}/acciones`,{accion:'rechazar',asignacion_id:control.asignacion_id,
+        motivo:input.value,solicitud_id:operationId},result => result.resultado.reasignado ?
+          `Pedido reasignado a ${result.resultado.sucursal_nombre}. Se conservaron su código y sus importes.` :
+          'No hay una sucursal alternativa disponible. Pedido cancelado y reservas liberadas.');
+    };
+    details.append(form); section.append(details);
+  }
+  const list = node('ol',undefined,'assignment-history');
+  for (const event of control.historial) {
+    const item = node('li');
+    const text = event.sucursal_origen ? `${event.sucursal_origen} → ${event.sucursal_destino || 'Cancelación sin alternativa'}` : `Asignado a ${event.sucursal_destino}`;
+    item.append(node('strong',text),node('small',date(event.fecha)),node('p',event.observacion)); list.append(item);
+  }
+  section.append(list); return section;
+}
+
+async function loadInventory() {
+  inventory = await api('/api/demo/inventario');
+  const select = ui('inventory-branch'), previous = select.value;
+  const branches = new Map(inventory.existencias.map(row => [row.sucursal_codigo,row.sucursal_nombre]));
+  select.replaceChildren(...[...branches].map(([code,name]) => new Option(name,code)));
+  if (branches.has(previous)) select.value = previous;
+  renderInventory();
+}
+function renderInventory() {
+  const branch = ui('inventory-branch').value, search = ui('inventory-search').value.trim().toLocaleLowerCase('es');
+  const visible = inventory.existencias.filter(row => row.sucursal_codigo === branch &&
+    `${row.producto_nombre} ${row.producto_codigo}`.toLocaleLowerCase('es').includes(search));
+  ui('inventory-empty').hidden = visible.length > 0;
+  ui('inventory-rows').replaceChildren(...visible.map(row => {
+    const tr = node('tr'); tr.dataset.productCode = row.producto_codigo;
+    const name = node('td',row.producto_nombre); name.append(node('small',row.producto_codigo));
+    const action = node('td'), button = node('button','Registrar movimiento','secondary-btn'); button.type = 'button';
+    button.setAttribute('aria-label',`Registrar movimiento de ${row.producto_nombre}`);
+    button.onclick = () => openMovement(row); action.append(button);
+    tr.append(name,node('td',row.fisico),node('td',row.reservado),node('td',row.disponible),action); return tr;
+  }));
+  const names = {APERTURA:'Saldo inicial',ENTRADA:'Entrada',AJUSTE:'Ajuste',SALIDA_PEDIDO:'Salida de pedido'};
+  const movements = inventory.movimientos.filter(row => row.sucursal_codigo === branch &&
+    `${row.producto_nombre} ${row.producto_codigo}`.toLocaleLowerCase('es').includes(search));
+  ui('inventory-history').replaceChildren(...movements.map(row => {
+    const item = node('li'), top = node('div',undefined,'ledger-heading');
+    top.append(node('strong',`${names[row.tipo]} · ${row.variacion > 0 ? '+' : ''}${row.variacion} ud.`),node('small',date(row.fecha)));
+    item.append(top,node('p',row.producto_nombre),node('small',`Saldo: ${row.cantidad_anterior} → ${row.cantidad_nueva}${row.pedido_id ? ` · Pedido #${row.pedido_id}` : ''}`),node('p',row.motivo,'ledger-reason')); return item;
+  }));
+  if (!movements.length) ui('inventory-history').append(node('li','No hay movimientos recientes con estos filtros.','empty-note'));
+}
+function openMovement(row) {
+  if (busy) return;
+  movement = {row, id:crypto.randomUUID()};
+  ui('movement-form').reset(); ui('movement-message').textContent = '';
+  ui('movement-product').textContent = `${row.producto_nombre} · ${row.sucursal_nombre}`;
+  ui('movement-balance').textContent = `Físico: ${row.fisico} · Reservado: ${row.reservado} · Disponible: ${row.disponible}`;
+  movementType(); ui('movement-dialog').showModal(); ui('movement-quantity').focus();
+}
+function movementType() {
+  const adjustment = ui('movement-type').value === 'AJUSTE';
+  ui('movement-quantity-label').textContent = adjustment ? 'Conteo físico final' : 'Unidades recibidas';
+  ui('movement-quantity').min = adjustment ? '0' : '1';
+}
+function switchArea(inventoryArea) {
+  if (busy) return;
+  ui('orders-view').hidden = inventoryArea; ui('inventory-view').hidden = !inventoryArea;
+  ui('tab-orders').setAttribute('aria-pressed', String(!inventoryArea));
+  ui('tab-inventory').setAttribute('aria-pressed', String(inventoryArea));
+}
+ui('tab-orders').onclick = () => switchArea(false);
+ui('tab-inventory').onclick = () => switchArea(true);
+ui('inventory-branch').onchange = renderInventory; ui('inventory-search').oninput = renderInventory;
+ui('movement-type').onchange = movementType;
+ui('movement-close').onclick = () => ui('movement-dialog').close();
+ui('movement-dialog').addEventListener('cancel', event => { if (busy) event.preventDefault(); });
+ui('movement-form').onsubmit = async event => {
+  event.preventDefault(); if (busy || !movement) return;
+  const row = movement.row, type = ui('movement-type').value;
+  const body = {producto_codigo:row.producto_codigo,sucursal_codigo:row.sucursal_codigo,tipo:type,
+    cantidad:Number(ui('movement-quantity').value),motivo:ui('movement-reason').value,solicitud_id:movement.id};
+  if (type === 'AJUSTE') body.cantidad_esperada = row.fisico;
+  lock(true); ui('movement-message').textContent = 'Guardando movimiento…';
+  try {
+    const result = await api('/api/demo/inventario/movimientos','POST',body);
+    await loadInventory(); ui('movement-dialog').close();
+    message(result.movimiento.reintento ? 'El movimiento ya estaba registrado; se conserva un único cambio.' : 'Movimiento registrado. El catálogo utiliza el nuevo stock disponible.');
+    movement = null; ui('inventory-search').focus();
+  } catch (error) {
+    ui('movement-message').textContent = error instanceof TypeError || error.name === 'TimeoutError' ?
+      'No pudimos comprobar el resultado. Reintenta con los mismos datos para conservar una sola operación.' : error.message;
+  } finally { lock(false); }
+};
+ui('check-expirations').onclick = async () => {
+  if (busy) return;
+  lock(true);
+  try {
+    const result = await api('/api/demo/reservas/procesar','POST',{});
+    await loadInbox(); if (selected !== null) await loadDetail(selected); await loadInventory();
+    message(`${result.procesados} reservas vencidas procesadas. Las asignaciones están actualizadas.`);
+  } catch (error) { showError(error); }
+  finally { lock(false); }
+};
 function renderIncidents(p) {
   const section = node('section',undefined,'incident-area'); section.append(node('h3',`Soporte e incidencias (${p.incidencias.length})`,'subheading'));
   const details = node('details'), summary = node('summary','+ Reportar una incidencia'), form = node('form'); form.id = 'incident-form';

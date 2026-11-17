@@ -44,7 +44,9 @@ async function loadTracking(event) {
     document.getElementById('tracking-branch').textContent = `Sucursal: ${pedido.sucursal}`;
     const history = document.getElementById('tracking-history');
     history.replaceChildren();
-    for (const item of pedido.historial) {
+    const events = [...pedido.historial,...(pedido.cambios_sucursal || []).map(item => ({...item,etiqueta:item.mensaje}))]
+      .sort((a,b) => a.fecha.localeCompare(b.fecha));
+    for (const item of events) {
       const row = document.createElement('li');
       row.textContent = `${item.etiqueta} · ${formatDate(item.fecha)}`;
       history.append(row);

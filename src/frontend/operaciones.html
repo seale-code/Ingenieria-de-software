@@ -2,7 +2,7 @@
 <html lang="es">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Operaciones · Inkafarma</title>
-  <link rel="stylesheet" href="/assets/styles.css"><link rel="stylesheet" href="/assets/operaciones.css">
+  <link rel="stylesheet" href="/assets/styles.css"><link rel="stylesheet" href="/assets/operaciones.css"><link rel="stylesheet" href="/assets/logistica.css">
   <script src="/assets/navegacion.js" defer></script><script src="/assets/operaciones.js" defer></script>
 <link rel="stylesheet" href="/assets/tienda.css"><script src="/assets/tienda.js" defer></script></head>
 <body>
@@ -18,6 +18,9 @@
     <a href="/" class="inline-link">Explorar el catálogo →</a>
   </section>
   <div id="workspace" hidden>
+    <nav class="ops-tabs" aria-label="Área de operaciones"><button type="button" id="tab-orders" aria-pressed="true">Pedidos</button><button type="button" id="tab-inventory" aria-pressed="false" hidden>Inventario</button></nav>
+    <div id="orders-view">
+    <div id="reservation-notice" class="reservation-notice" hidden><p id="pending-acceptance"></p><button id="check-expirations" class="secondary-btn" type="button">Revisar vencimientos</button></div>
     <section class="metrics" aria-label="Resumen de operaciones">
       <article><span>Pedidos activos</span><strong id="metric-active">—</strong><small>En preparación y reparto</small></article>
       <article><span>En camino</span><strong id="metric-delivery">—</strong><small>Fuera de la sucursal</small></article>
@@ -34,9 +37,18 @@
       </aside>
       <section id="order-detail" class="panel detail-panel" aria-label="Detalle del pedido" aria-busy="false"><div class="empty-detail"><span aria-hidden="true">▤</span><h2>Todo empieza con un pedido</h2><p>Selecciona uno de la bandeja para ver sus productos y continuar el recorrido.</p><a href="/pedido" class="primary-link">Crear pedido →</a></div></section>
     </div>
+    </div>
+    <section id="inventory-view" class="panel inventory-panel" aria-labelledby="inventory-title" hidden>
+      <div class="panel-top"><div><p class="section-kicker">CONTROL DE EXISTENCIAS</p><h2 id="inventory-title">Inventario por sucursal</h2><p class="muted">Disponible = stock físico − reservas activas.</p></div></div>
+      <div class="inventory-filters"><div><label for="inventory-branch">Sucursal</label><select id="inventory-branch"></select></div><div><label for="inventory-search">Buscar producto</label><input id="inventory-search" type="search" placeholder="Nombre o código" autocomplete="off"></div></div>
+      <p id="inventory-empty" class="empty-note" hidden>No hay productos con estos filtros.</p>
+      <div class="inventory-scroll" role="region" aria-label="Existencias de productos" tabindex="0"><table class="products-table inventory-table"><caption class="sr-only">Inventario de la sucursal seleccionada</caption><thead><tr><th scope="col">Producto</th><th scope="col">Físico</th><th scope="col">Reservado</th><th scope="col">Disponible</th><th scope="col">Acción</th></tr></thead><tbody id="inventory-rows"></tbody></table></div>
+      <section class="stock-ledger"><h3>Movimientos de inventario</h3><p class="muted">Hasta 100 movimientos recientes, filtrados por sucursal. Cada registro conserva su motivo y saldo.</p><ol id="inventory-history" class="inventory-history"></ol></section>
+    </section>
   </div>
   <noscript><p class="ops-message error">Activa JavaScript para gestionar los pedidos.</p></noscript>
 </main>
+<dialog id="movement-dialog" class="movement-dialog" aria-labelledby="movement-title"><form id="movement-form"><h2 id="movement-title">Registrar movimiento</h2><p id="movement-product"></p><p id="movement-balance" class="muted"></p><label for="movement-type">Tipo de movimiento</label><select id="movement-type"><option value="ENTRADA">Entrada de mercadería</option><option value="AJUSTE">Ajuste por conteo físico</option></select><label for="movement-quantity" id="movement-quantity-label">Unidades recibidas</label><input id="movement-quantity" type="number" required min="1" max="1000000000" step="1" inputmode="numeric"><label for="movement-reason">Motivo o referencia</label><textarea id="movement-reason" required minlength="5" maxlength="240" placeholder="Ej.: recepción de mercadería, guía 001-024"></textarea><p id="movement-message" role="status" aria-live="polite"></p><div class="dialog-actions"><button id="movement-close" type="button" class="secondary-btn">Volver</button><button id="movement-save" class="action">Guardar movimiento</button></div></form></dialog>
 <dialog id="cancel-dialog"><form method="dialog"><h2>¿Cancelar este pedido?</h2><p>Se liberarán sus reservas. El pedido conservará el historial de lo ocurrido.</p><div class="dialog-actions"><button value="no" class="secondary-btn">Volver</button><button value="yes" class="danger-btn">Confirmar cancelación</button></div></form></dialog>
 <footer class="site-footer"><div class="footer-inner"><div><a href="/" aria-label="Inkafarma, inicio"><img src="/assets/imagenes/inkafarma.svg" alt="Inkafarma" width="176" height="28" loading="lazy"></a><p>Cuidarte, todos los días.<br>Salud, cuidado personal y bienestar en un mismo lugar.</p></div><div><h2>Tu compra</h2><a href="/#catalogo">Explorar productos</a><a href="/pedido">Preparar mi pedido</a><a href="/seguimiento">Seguir mi pedido</a></div><div><h2>Estamos para ayudarte</h2><a href="/ayuda">Preguntas frecuentes</a><a href="/privacidad">Privacidad de tus datos</a><a href="/operaciones" data-demo-nav hidden>Ingreso a operaciones</a></div></div><div class="footer-bottom"><span>Inkafarma · Salud y bienestar</span><span>Hecho para estar más cerca de ti.</span></div></footer>
 <dialog id="cart-dialog" class="cart-dialog" aria-labelledby="cart-title"><div class="cart-heading"><div><p class="section-kicker">TUS ESENCIALES</p><h2 id="cart-title">Mi carrito</h2></div><button type="button" id="cart-close" class="dialog-close" aria-label="Cerrar carrito">×</button></div><p id="cart-message" role="status"></p><div id="cart-items"></div><div id="cart-totals"></div><a id="cart-checkout" class="primary-link" href="/pedido?carrito=1" hidden>Continuar con mi pedido <span aria-hidden="true">→</span></a><button type="button" class="cart-continue" id="cart-continue">Seguir explorando</button></dialog><div id="cart-toast" class="cart-toast" role="status" aria-live="polite" hidden></div>
