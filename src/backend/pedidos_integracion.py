@@ -4,6 +4,7 @@ Las funciones reciben una conexión con BEGIN IMMEDIATE adquirido por pedidos_s2
 El stock físico se descuenta al consumir la reserva mediante el trigger de Josué.
 """
 from uuid import uuid4
+from src.backend.comercio import (cotizar, comprobar_reintento, guardar_resumen, obtener_resumen, CotizacionActualizada)
 
 from src.backend.reglas_asignacion import (
     CAPACIDAD_MAXIMA_DEFAULT, ESTADOS_PEDIDO_ACTIVO, asignar_sucursal_pedido,
@@ -48,21 +49,31 @@ class ConflictoConfirmacion(ValueError):
     """Un identificador de confirmación ya corresponde a otros datos."""
 
 
-def registrar_integrado(db, cliente, latitud, longitud, productos, confirmacion_id=None):
+def registrar_integrado(db, cliente, latitud, longitud, productos, confirmacion_id=None, comercial=None):
     codigo_pedido = 'WEB-' + confirmacion_id if confirmacion_id else 'S2-' + uuid4().hex
     if confirmacion_id:
         existente = db.execute('SELECT id FROM pedidos WHERE codigo=?', (codigo_pedido,)).fetchone()
         if existente:
             anterior = obtener_integrado(db, existente['id'])
+            comprobar_reintento(db, existente['id'], comercial)
             items = [dict(producto_codigo=p['codigo'], cantidad=p['cantidad']) for p in productos]
             if (anterior['cliente'] != cliente or anterior['latitud'] != latitud
                 or anterior['longitud'] != longitud or items != [
                     dict(producto_codigo=p['producto_codigo'], cantidad=p['cantidad'])
                     for p in anterior['items']]):
                 raise ConflictoConfirmacion('Esta confirmación ya se utilizó con otros datos.')
-            return dict(pedido_id=anterior['id'], estado=anterior['estado'],
+            respuesta = dict(pedido_id=anterior['id'], estado=anterior['estado'],
                 sucursal_codigo=anterior['sucursal_codigo'], sucursal_nombre=anterior['sucursal_nombre'],
                 distancia_km=anterior['distancia_km'], motivo=None, motivo_codigo=None, items=items)
+            if comercial is not None:
+                respuesta['comercio'] = obtener_resumen(db, anterior['id'])
+            return respuesta
+
+    cotizacion = None
+    if comercial is not None:
+        cotizacion = cotizar(db, [dict(producto_codigo=p['codigo'],cantidad=p['cantidad']) for p in productos])
+        if cotizacion['cotizacion_id'] != comercial['cotizacion_id']:
+            raise CotizacionActualizada('El precio cambió. Revisa el resumen actualizado antes de confirmar.')
 
     asignacion = evaluar_sucursales(db, latitud, longitud, productos)
     codigo = asignacion['sucursal_asignada']
@@ -86,6 +97,9 @@ def registrar_integrado(db, cliente, latitud, longitud, productos, confirmacion_
         db.execute('''INSERT INTO reservas_stock(pedido_id,producto_id,sucursal_id,cantidad)
                       VALUES (?,?,?,?)''',
                    (pedido_id, producto['id'], sucursal_id, producto['cantidad']))
+    if cotizacion is not None:
+        guardar_resumen(db, pedido_id, comercial, cotizacion)
+        resultado['comercio'] = obtener_resumen(db, pedido_id)
     resultado.update(pedido_id=pedido_id, estado='ASIGNADO', motivo=None,
                      sucursal_nombre=detalle['nombre'], distancia_km=detalle['distancia_km'])
     return resultado

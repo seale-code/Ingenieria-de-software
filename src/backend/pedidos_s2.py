@@ -171,7 +171,7 @@ def _seleccionar_sucursal(db: sqlite3.Connection, lat: float, lon: float, produc
     return ordenar_candidatas(candidatas)[0] if candidatas else None
 
 
-def registrar_pedido(solicitud: dict, db_path: str | Path = DEFAULT_DATABASE, *, confirmacion_id: str | None = None) -> dict:
+def registrar_pedido(solicitud: dict, db_path: str | Path = DEFAULT_DATABASE, *, confirmacion_id: str | None = None, comercial: dict | None = None) -> dict:
     """Valida, persiste, asigna y reserva de manera atómica.
 
     En v2/v3 reutiliza las reglas de César y las reservas de Josué sin descontar
@@ -190,7 +190,7 @@ def registrar_pedido(solicitud: dict, db_path: str | Path = DEFAULT_DATABASE, *,
         db.execute("BEGIN IMMEDIATE")
         productos = _productos_validos(db, items)
         if _esquema_oficial(db):
-            return registrar_integrado(db, cliente, lat, lon, productos, confirmacion_id)
+            return registrar_integrado(db, cliente, lat, lon, productos, confirmacion_id, comercial)
         if confirmacion_id is not None:
             raise ModuloNoInicializado("La confirmación web requiere el esquema v2/v3 de pedidos.")
         sucursal = _seleccionar_sucursal(db, lat, lon, productos)

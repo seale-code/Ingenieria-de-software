@@ -1,4 +1,4 @@
-"""Integración S1-11: interfaz y API de consulta sobre la SQLite del equipo."""
+"""Aplicación Inkafarma: catálogo, pedidos, seguimiento y operaciones."""
 
 import os
 import sqlite3
@@ -13,14 +13,16 @@ from src.backend.pedidos_web import pedidos_web
 from src.backend.seguimiento import seguimiento
 from src.backend.operaciones_demo import operaciones
 from src.database.database import DEFAULT_DATABASE, connect_database, get_stock
+from src.backend.comercio import disponible, metadatos
 
 FRONTEND = Path(__file__).resolve().parents[1] / "frontend"
 
 
-def create_app(db_path=None, *, demo_key=None):
+def create_app(db_path=None, *, demo_key=None, operations_key=None):
     app = Flask(__name__, static_folder=str(FRONTEND), static_url_path="/assets")
     app.config["DATABASE"] = db_path or os.environ.get("INKAFARMA_DB", DEFAULT_DATABASE)
-    app.config['DEMO_KEY'] = demo_key if demo_key is not None else os.environ.get('INKAFARMA_DEMO_KEY')
+    app.config['DEMO_KEY'] = operations_key if operations_key is not None else (
+        demo_key if demo_key is not None else os.environ.get('INKAFARMA_OPERATIONS_KEY',os.environ.get('INKAFARMA_DEMO_KEY')))
     app.secret_key = secrets.token_hex(32)
     app.config.update(SESSION_COOKIE_HTTPONLY=True, SESSION_COOKIE_SAMESITE='Strict',
                       PERMANENT_SESSION_LIFETIME=timedelta(hours=2))
@@ -42,6 +44,14 @@ def create_app(db_path=None, *, demo_key=None):
     @app.get('/api/contexto')
     def contexto():
         return jsonify(operaciones_demo=bool(app.config['DEMO_KEY']))
+
+    @app.get('/ayuda')
+    def ayuda():
+        return send_from_directory(FRONTEND,'ayuda.html')
+
+    @app.get('/privacidad')
+    def privacidad():
+        return send_from_directory(FRONTEND,'privacidad.html')
 
     @app.get("/seguimiento")
     def ver_seguimiento():
@@ -76,6 +86,14 @@ def create_app(db_path=None, *, demo_key=None):
     @app.get("/api/filtros")
     def filtros():
         with connect_database(app.config["DATABASE"], read_only=True) as db:
+            if disponible(db):
+                categorias=[dict(row) for row in db.execute('''SELECT c.codigo,c.nombre FROM categorias c
+                    WHERE EXISTS(SELECT 1 FROM productos p JOIN catalogo_comercial m ON m.producto_id=p.id
+                        WHERE p.categoria_id=c.id) ORDER BY c.nombre,c.codigo''')]
+                sucursales=[dict(row) for row in db.execute('''SELECT s.codigo,s.nombre FROM sucursales s
+                    WHERE EXISTS(SELECT 1 FROM inventario i JOIN catalogo_comercial m ON m.producto_id=i.producto_id
+                        WHERE i.sucursal_id=s.id) ORDER BY s.codigo''')]
+                return jsonify(categorias=categorias,sucursales=sucursales)
             categorias = [dict(row) for row in db.execute(
                 "SELECT codigo, nombre FROM categorias ORDER BY nombre, codigo"
             )]
@@ -94,7 +112,16 @@ def create_app(db_path=None, *, demo_key=None):
         sucursal = request.args.get("sucursal", "").strip()
         path = app.config["DATABASE"]
         productos = buscar_productos(nombre, db_path=path)
-        stock = get_stock(path, search=nombre, category=categoria or None,
+        with connect_database(path, read_only=True) as db:
+            extras=metadatos(db)
+            comercial=disponible(db)
+        if comercial:
+            productos=[p for p in productos if p['producto_codigo'] in extras]
+        if nombre and extras:
+            termino=nombre.casefold()
+            productos=[p for p in buscar_productos('',db_path=path) if p['producto_codigo'] in extras and (
+                termino in p['producto'].casefold() or termino in extras[p['producto_codigo']]['marca'].casefold())]
+        stock = get_stock(path, search="" if extras else nombre, category=categoria or None,
                           branch=sucursal or None, effective=True)
         por_producto = {}
         for fila in stock:
@@ -110,7 +137,7 @@ def create_app(db_path=None, *, demo_key=None):
             cantidad = sum(fila["cantidad"] for fila in filas) if filas else None
             if solo == "true" and not (cantidad is not None and cantidad > 0):
                 continue
-            resultado.append({**producto, "cantidad": cantidad})
+            resultado.append({**producto, "cantidad": cantidad, **extras.get(producto['producto_codigo'],{})})
         return jsonify(productos=resultado, total=len(resultado))
 
     @app.get("/api/productos/<codigo>/stock")

@@ -2,7 +2,11 @@
 
 [← Documentación](../README.md) · [Estado y pendientes](../ESTADO_Y_PENDIENTES.md)
 
-## Evidencia actual del MVP
+## Evidencia comercial actual
+
+- [Tienda, catálogo fotográfico, carrito y precios confirmados](2026-11-13_tienda-comercial.md).
+
+## Evidencia de integración anterior
 
 - [Integración web del Sprint 3, recorrido hasta ENTREGADO y capturas](2026-11-12_mvp-web-integrado.md).
 - [Validación anterior de seguimiento](2026-11-12_seguimiento-validacion-mvp.md).

@@ -1,224 +1,62 @@
 <div align="center">
 
-# 💚 INKAFARMA
-### Sistema de Gestión de Pedidos entre Sucursales
+# Inkafarma
 
-**Proyecto académico de Ingeniería de Software**
+### Salud, cuidado personal y bienestar en un mismo lugar
 
-![Proyecto académico](https://img.shields.io/badge/Proyecto-Académico-127A50?style=for-the-badge)
-![Metodología](https://img.shields.io/badge/Scrum-3%20Sprints-F3C623?style=for-the-badge&labelColor=126B48)
-**MVP web: catálogo, pedidos, preparación, reparto, seguimiento y soporte básico.**
-
-
-<br>
-
-[📘 Documentación](docs/) · [📋 Issues](https://github.com/seale-code/Ingenieria-de-software/issues) · [🗂️ Tablero del proyecto](docs/07-scrum/tablero-kanban-sprint-1.png)
+Catálogo visual, carrito, pedidos y gestión de entregas.
 
 </div>
 
----
+## Iniciar la aplicación
 
-## Empezar aquí
-
-| Consulta | -Documento |
-|---|---|
-| Qué está listo y qué falta | [Revisión y pendientes](docs/ESTADO_Y_PENDIENTES.md) |
-| Documentación en orden | [Índice](docs/README.md) |
-| Necesidades del producto | [Historias originales](docs/02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf) y [Product Backlog](docs/07-scrum/PRODUCT_BACKLOG.md) |
-| Prioridades y trabajo del sprint | [MoSCoW](docs/07-scrum/PRIORIZACION.md) y [Sprint Backlog 1](docs/07-scrum/SPRINT_BACKLOG_1.md) |
-| Planes | [Sprint 1](sprint-1/README.md) · [Sprint 2](sprint-2/README.md) · [Sprint 3](sprint-3/README.md) |
-| Modelos UML del sistema | [Diagramas por grupos de historias](docs/03-diagramas/uml/README.md) |
-| Validación | [Casos de prueba](docs/05-pruebas/CASOS_DE_PRUEBA.md) y [evidencias](docs/06-evidencias/README.md) |
-
-**Abre la demostración completa** desde la raíz del repositorio:
+Desde la raíz del repositorio, con Python 3.10 o superior:
 
 ```bash
 python -m pip install -r requirements.txt
-python -m scripts.demo_web
+python -m scripts.iniciar_tienda
 ```
 
-Visita `http://127.0.0.1:5000/`. La terminal muestra la clave del panel **Operaciones demo**. Incluye datos ficticios temporales y pedidos de ejemplo. [Guía y recorrido](sprint-3/DEMO_MVP.md) · [Resultados S3-05](sprint-3/S3-05_Sebastian_Calderon.md).
+Abre **http://127.0.0.1:5000/**. La terminal muestra la dirección y la clave de acceso al panel de operaciones. El catálogo inicial incluye 16 productos con fotografía, marca, presentación y precio en soles.
 
-El panel del expositor simula roles para demostrar el proceso; no implementa cuentas reales de empleados. La validación técnica está documentada y la aceptación del equipo se registra por separado.
-
-## 🌿 Sobre nuestro proyecto
-
-**Inkafarma — Sistema de Gestión de Pedidos entre Sucursales** es una propuesta desarrollada para el curso de **Ingeniería de Software de la Universidad Peruana Cayetano Heredia**.
-
-El sistema busca facilitar la consulta de productos y disponibilidad, el registro de pedidos y su asignación a una sucursal de Inkafarma, considerando **stock, distancia y capacidad de atención**. También contempla la preparación, entrega y seguimiento de los pedidos.
-
-El alcance comprende exclusivamente **sucursales de Inkafarma**.
-
-> [!NOTE]
-> Proyecto académico no oficial, sin relación comercial con Inkafarma. Las demostraciones utilizarán datos ficticios.
-
-## ✨ Funcionalidades previstas
-
-| Módulo | Funcionalidades |
-|:---|:---|
-| 🔎 Catálogo y búsqueda | Consultar productos, buscar por nombre y filtrar por categoría. |
-| 🏪 Disponibilidad | Consultar stock por sucursal y mostrar productos disponibles. |
-| 🛒 Pedidos | Registrar productos y cantidades solicitadas, validando disponibilidad. |
-| ⚙️ Asignación de sucursal | Evaluar stock, distancia y capacidad de atención. Reglas y desempates documentados en [S2-01](docs/REGLAS_ASIGNACION_S2.md). |
-| 📦 Preparación y entrega | Gestionar la preparación del pedido, el reparto y la confirmación de entrega. |
-| 📍 Seguimiento y soporte | Consultar estados del pedido y registrar incidencias básicas. |
-
-La solución contempla interfaces web y móvil. La cobertura concreta de cada plataforma se acordará según el alcance del MVP.
-
-## 🎯 Objetivos
-
-1. Facilitar la búsqueda de productos y la consulta de disponibilidad por sucursal.
-2. Organizar el registro y la asignación de pedidos.
-3. Mantener la trazabilidad desde la solicitud hasta la entrega.
-4. Validar un flujo completo mediante pruebas y una demostración del MVP.
-5. Organizar el trabajo colaborativo mediante **Scrum, Issues y tablero Kanban**.
-
-## 🔄 Flujo funcional previsto
-
-```mermaid
-flowchart TD
-    A["Consultar catálogo y buscar productos"] --> B["Consultar disponibilidad por sucursal"]
-    B --> C{"¿Existe stock suficiente?"}
-    C -->|No| D["Informar falta de disponibilidad"]
-    D --> A
-    C -->|Sí| E["Registrar pedido"]
-    E --> F["Evaluar stock, distancia y capacidad"]
-    F --> G{"¿Existe una sucursal elegible?"}
-    G -->|No| H["Informar que no se pudo asignar"]
-    G -->|Sí| I["Asignar sucursal y confirmar disponibilidad"]
-    I --> J["Preparar pedido"]
-    J --> K["Gestionar entrega"]
-    K --> L["Confirmar entrega y actualizar seguimiento"]
-```
-
-*Este flujo representa el comportamiento propuesto; no implica que las funcionalidades estén implementadas.*
-
-## 🏃 Organización con Scrum
-
-El proyecto se divide en **3 sprints**. Las fechas y la duración se acordarán con el equipo.
-
-| Sprint | Objetivo | Resultado esperado |
-|:---|:---|:---|
-| **Sprint 1** | Catálogo, búsqueda y disponibilidad | Consultar productos y stock por sucursal, con filtros y mensajes sin resultados. |
-| **Sprint 2** | Registro y asignación de pedidos | Registrar pedidos y asignarlos a una sucursal según las reglas acordadas. |
-| **Sprint 3** | Preparación, entrega y validación | Completar el seguimiento, soporte básico y pruebas del flujo del MVP. |
-
-En cada sprint realizaremos planificación, seguimiento del trabajo, revisión del resultado y una retrospectiva breve.
-
-## 🗂️ Tablero Kanban
-
-El tablero del Sprint 1 está guardado como PNG en este repositorio y se muestra aquí mismo.
-
-![Tablero Kanban del Sprint 1](docs/07-scrum/tablero-kanban-sprint-1.png)
-
-Hay **10 tareas Por hacer y 2 En revisión**: S1-06 y S1-07, correspondientes al modelo y la base de datos. Las demás columnas son **En progreso**, **En revisión** y **Terminado**. Es una vista estática; actualizar el PNG cuando cambie el avance, después de verificar revisión y pruebas.
-
-[Reglas y detalle del tablero](docs/07-scrum/TABLERO.md) · [Tareas, responsables y PBI](docs/07-scrum/SPRINT_BACKLOG_1.md)
-
-## 👥 Nuestro equipo
-
-La siguiente distribución es una propuesta inicial; todos colaboran en las revisiones y pruebas.
-
-| Integrante | Enfoque principal | Actividades del Sprint 1 |
-|:---|:---|:---|
-| **Cesar Milla** | Filtros del catálogo | Filtrar por categoría, sucursal y productos con stock; validar filtros junto con la búsqueda. |
-| **Willy CCatamayo** | Interfaz de usuario | Diseñar e implementar pantallas de catálogo, búsqueda y disponibilidad, incluyendo mensajes sin resultados. |
-| **Josue Mogollon** | Base de datos | Modelar Producto, Sucursal e Inventario; crear la base de datos y cargar datos ficticios de prueba. |
-| **Anderson Delerna** | Backend | Implementar consultas de catálogo, búsqueda por nombre y stock por sucursal. |
-| **Sebastian Calderon** | Integración y pruebas | Preparar casos de prueba, conectar las pantallas con los servicios y validar el flujo completo. |
-
-**Curso:** Ingeniería de Software  
-**Institución:** Universidad Peruana Cayetano Heredia  
-**Metodología:** Scrum con tablero Kanban  
-**Cantidad de sprints:** 3
-
-## 📂 Organización del repositorio
-
-| Ruta | Contenido |
-|:---|:---|
-| [`src/frontend/`](src/frontend/) | Interfaz web, pantallas, componentes y conexión con el backend. |
-| [`src/backend/`](src/backend/) | API, reglas del negocio y acceso a datos. |
-| [`src/database/`](src/database/) | Modelo de datos, scripts y datos ficticios de prueba. |
-| [`tests/`](tests/) | Casos de prueba, pruebas de integración y evidencias. |
-| [`docs/`](docs/) | Requisitos, historias de usuario, diagramas y acuerdos del equipo. |
-| `README.md` | Presentación y guía general del proyecto. |
-
-La carpeta de base de datos contiene código ejecutable; frontend y backend conservan sus guías iniciales.
-
-## 🧰 Tecnologías y herramientas
-
-- **Control de versiones:** Git y GitHub.
-- **Gestión del trabajo:** Issues y tablero Kanban en PNG dentro del repositorio.
-- **Revisión de cambios:** Pull Requests.
-- **Propuesta de arranque:** HTML/CSS/JavaScript, Python con Flask y SQLite.
-
-La base usa Python 3.10+ y SQLite 3.24+, sin paquetes externos. Flask y la interfaz web siguen como propuesta pendiente de implementación.
-
-## ▶️ Comenzar a trabajar
-
-1. Solicita acceso al repositorio.
-2. Clona el repositorio:
-
-   ```bash
-   git clone https://github.com/seale-code/Ingenieria-de-software.git
-   cd Ingenieria-de-software
-   ```
-
-3. Revisa la documentación de tu carpeta.
-4. Selecciona una actividad del sprint y muévela a **En progreso**.
-5. Crea una rama para desarrollar el cambio:
-
-   ```bash
-   git switch -c feature/descripcion-de-la-tarea
-   ```
-
-6. Implementa, prueba y abre un Pull Request para revisión.
-
-Para crear la base con datos ficticios desde la raíz del repositorio:
+Los pedidos, precios confirmados e inventario se conservan en `data/inkafarma-comercial.sqlite3`. Reiniciar la aplicación no restaura el stock ni reemplaza los precios operados. Puedes elegir otra ruta o puerto:
 
 ```bash
-python -m src.database init --demo
-python -m src.database stock --sucursal DEMO-NORTE --solo-disponibles
-python -m unittest discover -s tests -v
+python -m scripts.iniciar_tienda --port 5001 --db data/mi-tienda.sqlite3
 ```
 
-Más opciones en la [guía de base de datos](src/database/README.md).
+Para utilizar una clave propia en operaciones, configura `INKAFARMA_OPERATIONS_KEY` en el entorno del servidor. No publiques claves en el repositorio.
 
-## ✅ Definición de terminado
+## Recorrido del producto
 
-Una actividad estará terminada cuando:
+1. **Explora:** busca por producto o marca, elige categoría, ordena por precio y consulta stock por sucursal.
+2. **Arma tu pedido:** agrega productos al carrito, ajusta cantidades y consulta subtotal, envío y total.
+3. **Confirma:** completa tus datos de entrega y revisa el importe calculado por el servidor. El método disponible es pago al recibir.
+4. **Sigue la entrega:** conserva tu código y consulta preparación, salida y entrega.
+5. **Gestiona:** el panel de operaciones permite preparar, asignar repartidor, confirmar entrega y atender incidencias.
 
-- Cumpla sus criterios de aceptación.
-- Haya sido revisada por otro integrante.
-- Supere las pruebas correspondientes.
-- Se integre correctamente con las partes relacionadas.
-- Incluya la documentación necesaria.
-- Pueda demostrarse su resultado.
+La aplicación asigna una sucursal según disponibilidad, distancia y capacidad. Las reservas evitan sobreventa; el consumo se registra una vez al salir el pedido. Los importes confirmados quedan guardados aunque el precio del catálogo cambie después.
 
-## 🧭 Estado y hoja de ruta
+## Arquitectura
 
-- [x] Crear el repositorio del equipo.
-- [x] Organizar las carpetas iniciales.
-- [x] Guardar y mostrar el tablero Kanban del Sprint 1 en PNG.
-- [x] Cargar las actividades propuestas de los tres sprints.
-- [ ] Completar accesos y asignaciones a cuentas de GitHub.
-- [ ] Acordar tecnologías, fechas y criterios de aceptación.
-- [x] Implementar y probar la base de datos del Sprint 1 (revisión del equipo pendiente).
-- [ ] Implementar catálogo, búsqueda y disponibilidad.
-- [ ] Implementar registro y asignación de pedidos.
-- [ ] Implementar preparación, entrega y seguimiento.
-- [ ] Validar el MVP y preparar la demostración final.
+| Capa | Tecnología | Ubicación |
+|---|---|---|
+| Interfaz | HTML, CSS y JavaScript | [src/frontend](src/frontend/README.md) |
+| Servicios y API | Python y Flask | [src/backend](src/backend/README.md) |
+| Persistencia | SQLite, migraciones incrementales | [src/database](src/database/README.md) |
+| Verificación | unittest y Playwright | [tests](tests/README.md) |
 
-**Estado actual:** base SQLite implementada con 24 pruebas aprobadas. Quedan revisión del equipo, API, interfaz e integración del Sprint 1.
+## Pruebas
 
----
+```bash
+python -m pip install -r requirements-test.txt
+python -m unittest discover -s tests -v
+python -m playwright install chromium-headless-shell
+python -m unittest discover -s tests/e2e -v
+```
 
-<div align="center">
+Las pruebas usan bases temporales independientes de los datos de la aplicación.
 
-### 💚 Tecnología para una gestión más ordenada
+## Documentación
 
-**Proyecto académico de Ingeniería de Software • 2026**
-
-*Desarrollado en equipo con Scrum y tablero Kanban.*
-
-</div>
+[Catálogo, fuentes y reglas comerciales](docs/CATALOGO_COMERCIAL.md) · [Resultados y capturas](docs/06-evidencias/2026-11-13_tienda-comercial.md) · [Modelos UML](docs/03-diagramas/uml/README.md) · [Índice del proyecto](docs/README.md) · [Project Inkafarma](https://github.com/users/seale-code/projects/1)

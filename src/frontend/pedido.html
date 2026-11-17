@@ -5,15 +5,16 @@
   <title>Crear pedido · Inkafarma</title>
   <link rel="stylesheet" href="/assets/styles.css"><link rel="stylesheet" href="/assets/pedido.css">
   <script src="/assets/pedido.js" defer></script>
-<script src="/assets/navegacion.js" defer></script></head>
+<script src="/assets/navegacion.js" defer></script><link rel="stylesheet" href="/assets/tienda.css"><script src="/assets/tienda.js" defer></script></head>
 <body>
 <a class="skip-link" href="#main">Saltar al contenido</a>
-<header class="top"><div class="header-inner"><a class="brand" href="/" aria-label="Ir al catálogo"><span class="brand-icon" aria-hidden="true">✚</span><span>inka<span class="brand-accent">farma</span></span></a><nav class="main-nav" aria-label="Navegación principal"><a href="/">Catálogo</a><a href="/pedido" aria-current="page">Crear pedido</a><a href="/seguimiento">Seguimiento</a><a href="/operaciones" data-demo-nav hidden>Operaciones demo</a></nav></div></header>
+<div class="utility-bar"><div class="header-container"><span>Tu bienestar, más cerca.</span><div><a href="/ayuda">¿Necesitas ayuda?</a><a href="/seguimiento">Sigue tu pedido</a></div></div></div>
+<header class="top"><div class="header-inner"><a class="brand" href="/" aria-label="Inkafarma, ir al catálogo"><img src="/assets/imagenes/inkafarma.svg" alt="Inkafarma" width="176" height="28"></a><form class="header-search" action="/" role="search"><label for="search" class="sr-only">Buscar producto</label><input id="search" name="buscar" type="search" placeholder="Busca un producto, medicamento o marca" autocomplete="off"><button type="submit" aria-label="Buscar"><svg aria-hidden="true"><use href="/assets/iconos.svg#search"/></svg></button></form><div class="header-tools"><a href="/seguimiento" class="tracking-nav" aria-label="Seguir mi pedido"><svg aria-hidden="true"><use href="/assets/iconos.svg#truck"/></svg><span>Mi pedido</span></a><button type="button" id="cart-open" class="cart-open" aria-label="Abrir carrito"><svg aria-hidden="true"><use href="/assets/iconos.svg#bag"/></svg><span>Mi carrito</span><b data-cart-count>0</b></button></div></div><nav class="catalog-nav" aria-label="Categorías de productos"><div><a href="/#catalogo">Todos los productos</a><a href="/?categoria=DERMO#catalogo">Dermocosmética</a><a href="/?categoria=SALUD#catalogo">Medicamentos</a><a href="/?categoria=PERSONAL#catalogo">Cuidado personal</a><a href="/?categoria=SOLAR#catalogo">Protección solar</a><a href="/?categoria=BEBE#catalogo">Bebés y maternidad</a></div></nav></header>
 <main class="shell order-shell" id="main">
   <a href="/" class="order-back">← Volver al catálogo</a>
   <p class="order-eyebrow">TU PEDIDO, PASO A PASO</p>
-  <h1>Prepara tu pedido</h1>
-  <p class="order-intro">Elige los productos y revisa las cantidades. Al confirmar buscaremos una sucursal que pueda atender todo el pedido.</p>
+  <h1>Completa tu pedido</h1>
+  <p class="order-intro">Revisa tus productos y dinos dónde quieres recibirlos. Nosotros nos encargamos del siguiente paso.</p>
   <ol class="order-steps" aria-label="Pasos del pedido"><li id="step-1" aria-current="step"><span>1</span> Elegir</li><li id="step-2"><span>2</span> Revisar</li><li id="step-3"><span>3</span> Confirmar</li></ol>
   <div id="load-message" class="order-notice" role="status">Cargando productos y puntos de referencia…</div>
   <div id="order-error" class="order-error hidden" role="alert" tabindex="-1"></div>
@@ -21,16 +22,22 @@
     <form id="order-form">
       <fieldset id="edit-fields" class="order-fields">
         <div class="order-layout">
-          <section class="order-panel"><div class="order-panel-heading"><h2>¿Qué necesitas?</h2><span>01 / Productos</span></div>
-            <p class="order-help">Puedes agregar varios productos. Las cantidades se comprobarán al confirmar.</p>
+          <section class="order-panel"><div class="order-panel-heading"><h2>Tus productos</h2><span>01 / Productos</span></div>
+            <p class="order-help">Añade tus esenciales y ajusta las cantidades antes de continuar.</p>
             <div id="order-lines"></div>
             <button type="button" id="add-line" class="order-secondary">+ Añadir otro producto</button>
           </section>
-          <section class="order-panel order-customer"><div class="order-panel-heading"><h2>Tu información</h2><span>02 / Datos</span></div>
-            <label for="customer">Nombre para el pedido</label><input id="customer" name="cliente" maxlength="120" required autocomplete="off" placeholder="Ej. Cliente de demostración">
-            <label for="reference">Punto de referencia</label><select id="reference" required><option value="">Selecciona un punto</option></select>
-            <p class="order-help">Usaremos la ubicación de este punto para comparar la distancia entre sucursales. La asignación también depende del stock y de la capacidad.</p>
-            <div class="order-demo-note"><strong>Demostración académica</strong><p>Utiliza un nombre ficticio. Este recorrido no realiza cobros ni entregas reales.</p></div>
+          <section class="order-panel order-customer"><div class="order-panel-heading"><h2>Datos de entrega</h2><span>02 / Datos</span></div>
+            <label for="customer">Nombre completo</label><input id="customer" name="cliente" maxlength="120" required autocomplete="name" placeholder="Nombres y apellidos">
+            <label for="reference">Distrito de entrega</label><select id="reference" required><option value="">Selecciona un distrito</option></select>
+            <p class="order-help">Selecciona la zona donde quieres recibir tu pedido. Comprobaremos la disponibilidad para atenderte.</p>
+
+            <div id="commercial-fields" class="delivery-fields" hidden>
+              <label for="phone">Celular de contacto</label><input id="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="Ej. 987654321" pattern="9[0-9]{8}" maxlength="9" required disabled>
+              <label for="address">Dirección de entrega</label><input id="address" autocomplete="street-address" placeholder="Av. o calle, número y departamento" minlength="8" maxlength="240" required disabled>
+              <div class="payment-note"><strong>Pago al recibir</strong><small>El importe de tu pedido queda detallado antes de confirmar.</small></div>
+              <div id="edit-summary" class="checkout-summary" aria-live="polite"></div>
+            </div>
             <button class="action order-primary" id="review-order" type="submit">Revisar pedido →</button>
           </section>
         </div>
@@ -42,7 +49,7 @@
     <p class="order-help">Comprueba los productos y cantidades. La disponibilidad se validará de nuevo al confirmar.</p>
     <dl id="review-customer" class="order-meta"></dl>
     <div class="order-table-wrap"><table class="order-table"><thead><tr><th scope="col">Producto</th><th scope="col">Cantidad</th></tr></thead><tbody id="review-items"></tbody></table></div>
-    <p id="review-total" class="order-total"></p>
+    <p id="review-total" class="order-total"></p><div id="review-prices"></div>
     <div class="order-review-actions"><button type="button" class="order-secondary" id="edit-order">Editar pedido</button><button type="button" class="action order-primary" id="confirm-order">Confirmar pedido</button></div>
     <p id="confirm-progress" role="status" class="order-help"></p>
   </section>
@@ -50,11 +57,12 @@
     <span class="order-success-icon" aria-hidden="true">✓</span><p class="order-eyebrow">PEDIDO REGISTRADO</p>
     <h2 id="success-title">Ya encontramos una sucursal</h2><p id="success-description"></p>
     <dl id="success-details" class="order-meta"></dl>
-    <h3>Productos confirmados</h3><ul id="success-items"></ul>
-    <p class="order-help">La reserva queda registrada para esta demostración. Conserva el número de pedido para identificar esta solicitud.</p>
+    <div id="success-prices"></div><h3>Productos confirmados</h3><ul id="success-items"></ul>
+    <p class="order-help">Conserva tu código de seguimiento para consultar el estado y los detalles de tu pedido.</p>
     <button class="action order-primary" type="button" id="new-order">Crear otro pedido</button><a href="/" class="order-back">Volver al catálogo</a>
   </section>
   <noscript><p class="order-error">Activa JavaScript para preparar y confirmar el pedido.</p></noscript>
 </main>
-<footer>Proyecto académico no oficial · Datos ficticios · Sin compras reales</footer>
+<footer class="site-footer"><div class="footer-inner"><div><a href="/" aria-label="Inkafarma, inicio"><img src="/assets/imagenes/inkafarma.svg" alt="Inkafarma" width="176" height="28" loading="lazy"></a><p>Cuidarte, todos los días.<br>Salud, cuidado personal y bienestar en un mismo lugar.</p></div><div><h2>Tu compra</h2><a href="/#catalogo">Explorar productos</a><a href="/pedido">Preparar mi pedido</a><a href="/seguimiento">Seguir mi pedido</a></div><div><h2>Estamos para ayudarte</h2><a href="/ayuda">Preguntas frecuentes</a><a href="/privacidad">Privacidad de tus datos</a><a href="/operaciones" data-demo-nav hidden>Ingreso a operaciones</a></div></div><div class="footer-bottom"><span>Inkafarma · Salud y bienestar</span><span>Hecho para estar más cerca de ti.</span></div></footer>
+<dialog id="cart-dialog" class="cart-dialog" aria-labelledby="cart-title"><div class="cart-heading"><div><p class="section-kicker">TUS ESENCIALES</p><h2 id="cart-title">Mi carrito</h2></div><button type="button" id="cart-close" class="dialog-close" aria-label="Cerrar carrito">×</button></div><p id="cart-message" role="status"></p><div id="cart-items"></div><div id="cart-totals"></div><a id="cart-checkout" class="primary-link" href="/pedido?carrito=1" hidden>Continuar con mi pedido <span aria-hidden="true">→</span></a><button type="button" class="cart-continue" id="cart-continue">Seguir explorando</button></dialog><div id="cart-toast" class="cart-toast" role="status" aria-live="polite" hidden></div>
 </body></html>

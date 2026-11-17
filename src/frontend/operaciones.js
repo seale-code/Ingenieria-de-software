@@ -61,7 +61,7 @@ function renderInbox() {
     button.setAttribute('aria-pressed', String(selected === p.pedido_id));
     const top = node('div', undefined, 'order-row-top');
     top.append(node('strong', `Pedido #${p.pedido_id}`), badge(p.estado));
-    button.append(top, node('p', p.cliente || 'Pedido de demostración'), node('small', `${p.sucursal_nombre} · ${p.unidades || 0} ud.`));
+    button.append(top, node('p', p.cliente || 'Pedido registrado'), node('small', `${p.sucursal_nombre} · ${p.unidades || 0} ud.`));
     button.disabled = busy;
     button.onclick = () => { if (!busy) loadDetail(p.pedido_id).catch(showError); };
     return button;
@@ -130,7 +130,13 @@ function renderDetail(p) {
   for (const [title, value] of [['Cliente', p.cliente || 'Datos no registrados'], ['Sucursal',p.sucursal_nombre], ['Creado',date(p.fecha_creacion)], ['Repartidor',p.entrega?.repartidor_nombre || 'Pendiente de asignación']]) {
     const group = node('div'); group.append(node('dt',title),node('dd',value)); meta.append(group);
   }
+  if(p.comercio){
+    for(const [label,value] of [['Dirección',p.comercio.entrega.direccion],['Distrito',p.comercio.entrega.distrito],['Celular',p.comercio.entrega.telefono]]){
+      const group=node('div');group.append(node('dt',label),node('dd',value));meta.append(group);
+    }
+  }
   panel.append(meta);
+  if(p.comercio)panel.append(Tienda.totals(p.comercio),node('p','Forma de pago: pago al recibir.','order-help'));
   const progress = node('ol', undefined, 'process-steps'); progress.setAttribute('aria-label','Avance del pedido');
   stages.forEach((state, index) => {
     const li = node('li', labels[state]);
@@ -143,6 +149,7 @@ function renderDetail(p) {
   for (const item of p.items) {
     const row = node('tr'), name = node('td',item.producto_nombre);
     const reserve = {ACTIVA:'Reserva activa',CONSUMIDA:'Stock consumido',LIBERADA:'Reserva liberada'}[item.estado_reserva] || 'Sin reserva';
+    if(item.imagen){const image=node('img');image.src=item.imagen;image.alt='';image.width=42;image.height=48;image.className='ops-product-image';name.prepend(image);}
     name.append(node('small',`${item.producto_codigo} · ${reserve}`)); row.append(name,node('td',item.cantidad)); table.tBodies[0].append(row);
   } panel.append(table, renderNextStep(p));
   const tools = node('div',undefined,'detail-tools');
@@ -187,7 +194,7 @@ function renderNextStep(p) {
     text = 'Al salir se registrará la fecha y se consumirá la reserva una sola vez.';
     button = actionButton('Registrar salida','salir',p);
   } else if (p.estado === 'EN_CAMINO') {
-    text = 'Confirma únicamente cuando se haya recibido el pedido de la demostración.';
+    text = 'Confirma únicamente cuando se haya recibido el pedido.';
     button = actionButton('Confirmar entrega','entregar',p);
   } else {
     text = p.estado === 'ENTREGADO' ? 'Recorrido completado. La entrega y el historial quedaron registrados.' : 'Pedido cancelado. Se conserva su historial y se liberaron las reservas activas.';
@@ -244,6 +251,6 @@ ui('order-search').oninput = renderInbox; ui('order-state').onchange = renderInb
 (async () => {
   try {
     const result = await api('/api/demo/sesion'); csrf = result.csrf || ''; showSession(result.autenticado);
-    if (result.autenticado) await refresh(); else message('Introduce la clave de esta sesión.');
+    if (result.autenticado) await refresh(); else message('Ingresa tu clave de acceso.');
   } catch (error) { showError(error); }
 })();

@@ -14,7 +14,13 @@ Registrar por caso: identificador, pasos, datos, resultado esperado, resultado o
 Sprint 2: pedido válido, stock insuficiente, asignación y concurrencia de reservas.
 Sprint 3: transiciones de estado, entrega, seguimiento y flujo completo del MVP.
 
-## Suite actual de integración
+## Catálogo comercial y compra
+
+`test_comercio.py` verifica cotizaciones, importes en céntimos, envío, cambios de precio, reintentos, concurrencia, rollback, privacidad, migración y persistencia. `e2e/test_tienda_browser.py` recorre carrito, confirmación y entrega con los productos reales del catálogo, comprueba fotografías locales y las vistas de 320, 390 y 1440 px.
+
+[Evidencia comercial actual](../docs/06-evidencias/2026-11-13_tienda-comercial.md).
+
+## Suite de integración anterior
 
 Instala `requirements-test.txt` y ejecuta `python -m unittest discover -s tests -v`. Para navegador: `python -m playwright install chromium-headless-shell` y `python -m unittest discover -s tests/e2e -v`. Las pruebas crean bases temporales; no usan los datos del usuario.
 

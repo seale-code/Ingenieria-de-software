@@ -5,7 +5,15 @@ Reutiliza `catalogo_busqueda.py` de Anderson y las consultas SQLite del equipo.
 El filtro de categoría del endpoint se aplica al catálogo completo para conservar
 productos sin inventario; `filtro_categorias.py` de César conserva su contrato original.
 
-## Demostración completa
+## Aplicación comercial
+
+`python -m scripts.iniciar_tienda` prepara la base persistente v5, carga los productos iniciales y habilita el acceso a operaciones. [Guía de inicio](../../README.md) · [Precios, fuentes y contrato comercial](../../docs/CATALOGO_COMERCIAL.md).
+
+El catálogo público incorpora marca, presentación, fotografía, precio de lista y precio de venta. La búsqueda incluye marcas; la disponibilidad sigue descontando las reservas activas. `POST /api/pedidos/cotizacion` devuelve los importes calculados por el servidor. En v5, la confirmación exige cotización y datos de entrega; guarda sus precios dentro de la misma transacción del pedido. Un precio cambiado exige otra revisión y un reintento ya confirmado conserva el importe original.
+
+La dirección y celular se muestran únicamente en el detalle autorizado de operaciones. El seguimiento público mantiene su contrato de privacidad.
+
+## Comandos de integración anteriores
 
 `python -m scripts.demo_web` crea una base temporal v4 con los módulos integrados, datos de ejemplo y clave aleatoria del expositor. Solo escucha en `127.0.0.1`. [Guía](../../sprint-3/DEMO_MVP.md).
 

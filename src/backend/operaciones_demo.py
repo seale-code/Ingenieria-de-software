@@ -22,6 +22,7 @@ from src.backend.soporte_pedidos_s3 import (
     actualizar_estado_incidencia, cancelar_pedido, listar_incidencias, registrar_incidencia,
 )
 from src.database.database import connect_database
+from src.backend.comercio import disponible, obtener_resumen, metadatos
 
 operaciones = Blueprint('operaciones_demo', __name__)
 
@@ -48,7 +49,7 @@ def proteger_panel():
         if request.method in ('GET', 'POST'):
             return None
     if not _sesion_valida():
-        return jsonify(error='Inicia la sesión de demostración.'), 401
+        return jsonify(error='Inicia sesión para continuar.'), 401
     if request.method not in ('GET', 'HEAD', 'OPTIONS'):
         token = request.headers.get('X-CSRF-Token', '')
         esperado = session.get('demo_csrf', '')
@@ -94,7 +95,7 @@ def sesion_demo():
         datos = _datos({'clave'}, {'clave'})
         clave = datos['clave']
         if not isinstance(clave, str) or not hmac.compare_digest(clave.encode(), _clave().encode()):
-            return jsonify(error='La clave de demostración no es correcta.'), 401
+            return jsonify(error='La clave de acceso no es correcta.'), 401
         session.clear()
         session.permanent = True
         session['demo_autorizada'] = True
@@ -128,6 +129,13 @@ def detalle(pedido_id):
     with connect_database(path, read_only=True) as db:
         entrega = db.execute('''SELECT e.*,r.nombre AS repartidor_nombre FROM entregas e
             JOIN repartidores r ON r.id=e.repartidor_id WHERE e.pedido_id=?''', (pedido_id,)).fetchone()
+        if disponible(db):
+            extras=metadatos(db)
+            pedido['items']=[dict(item,**extras.get(item['producto_codigo'],{})) for item in pedido['items']]
+            comercio=obtener_resumen(db,pedido_id)
+            datos_entrega=db.execute('SELECT telefono,direccion,distrito FROM pedidos_comerciales WHERE pedido_id=?',(pedido_id,)).fetchone()
+            if comercio:
+                pedido['comercio']=dict(comercio,entrega=dict(datos_entrega))
     pedido['entrega'] = dict(entrega) if entrega else None
     pedido['incidencias'] = listar_incidencias('ADMINISTRADOR', pedido_id=pedido_id, db_path=path)
     return jsonify(pedido=pedido)
