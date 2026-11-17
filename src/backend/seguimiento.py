@@ -3,6 +3,7 @@ import re
 import sqlite3
 from flask import Blueprint, current_app, jsonify, request
 from src.database.database import connect_database
+from src.backend.logistica import obtener_logistica
 
 seguimiento = Blueprint('seguimiento', __name__)
 ESTADOS = {
@@ -32,10 +33,26 @@ def consultar():
             historial = db.execute("""SELECT estado_nuevo, fecha_cambio FROM historial_estados
                 WHERE pedido_id=? ORDER BY fecha_cambio, id""", (pedido['id'],)).fetchall()
             etiqueta, mensaje = ESTADOS.get(pedido['estado'], ('En actualización', 'Estamos actualizando tu pedido.'))
-            return jsonify(pedido=dict(numero=pedido['id'], estado=pedido['estado'],
+            logistica = obtener_logistica(db, pedido['id'])
+            cambios = []
+            if logistica:
+                for evento in logistica['historial']:
+                    if evento['causa'] in ('INICIAL', 'MIGRACION'):
+                        continue
+                    destino = evento['sucursal_destino']
+                    texto = (f"Reasignamos tu pedido a {destino} para continuar la atención." if destino
+                             else 'Cancelamos el pedido porque ninguna sucursal alternativa puede atenderlo. Las reservas fueron liberadas.')
+                    cambios.append(dict(fecha=evento['fecha'], mensaje=texto))
+                if cambios and (pedido['estado']=='ASIGNADO' or
+                    (pedido['estado']=='CANCELADO' and logistica['historial'][-1]['sucursal_destino_id'] is None)):
+                    mensaje = cambios[-1]['mensaje']
+            resultado = dict(numero=pedido['id'], estado=pedido['estado'],
                 etiqueta=etiqueta, mensaje=mensaje, sucursal=pedido['sucursal'],
                 historial=[dict(estado=h['estado_nuevo'], fecha=h['fecha_cambio'],
-                    etiqueta=ESTADOS.get(h['estado_nuevo'], ('En actualización', ''))[0]) for h in historial]))
+                    etiqueta=ESTADOS.get(h['estado_nuevo'], ('En actualización', ''))[0]) for h in historial])
+            if logistica:
+                resultado['cambios_sucursal'] = cambios
+            return jsonify(pedido=resultado)
     except (sqlite3.Error, OSError, ValueError):
         current_app.logger.warning('Seguimiento temporalmente no disponible')
         return jsonify(error='No pudimos consultar el seguimiento. Inténtalo de nuevo en unos momentos.'), 503

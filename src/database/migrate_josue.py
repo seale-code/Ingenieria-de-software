@@ -20,6 +20,7 @@ MIGRATIONS = (
     (3, '003_entregas_historial.sql'),
     (4, '004_soporte_incidencias.sql'),
     (5, '005_catalogo_comercial.sql'),
+    (6, '006_logistica_inventario.sql'),
 )
 
 def migrar(ruta: str | Path, hasta: int = 3) -> list[int]:
@@ -27,8 +28,8 @@ def migrar(ruta: str | Path, hasta: int = 3) -> list[int]:
     archivo = Path(ruta).expanduser().resolve()
     if not archivo.is_file():
         raise ValueError(f'No existe la base {archivo}; inicialícela antes con --demo.')
-    if hasta not in (2, 3, 4, 5):
-        raise ValueError('La versión destino debe ser 2, 3, 4 o 5.')
+    if hasta not in (2, 3, 4, 5, 6):
+        raise ValueError('La versión destino debe ser 2, 3, 4, 5 o 6.')
     avanzadas: list[int] = []
     # El contexto de sqlite3 confirma/revierte transacciones, pero NO cierra
     # automáticamente la conexión. closing() la libera también si hay error.
@@ -36,7 +37,7 @@ def migrar(ruta: str | Path, hasta: int = 3) -> list[int]:
         db.execute('PRAGMA foreign_keys = ON')
         id_actual = db.execute('PRAGMA application_id').fetchone()[0]
         version = db.execute('PRAGMA user_version').fetchone()[0]
-        if id_actual != APPLICATION_ID or version not in (1, 2, 3, 4, 5):
+        if id_actual != APPLICATION_ID or version not in (1, 2, 3, 4, 5, 6):
             raise ValueError('BD ajena o versión no admitida: operación cancelada.')
         if version > hasta:
             raise ValueError('La base ya tiene una versión mayor. No se realizan retrocesos.')
@@ -58,9 +59,9 @@ def migrar(ruta: str | Path, hasta: int = 3) -> list[int]:
     return avanzadas
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description='Migrar esquema Inkafarma v1 a v2/v3/v4/v5')
+    parser = argparse.ArgumentParser(description='Migrar esquema Inkafarma v1 a v2/v3/v4/v5/v6')
     parser.add_argument('--db', default=str(DEFAULT_DB))
-    parser.add_argument('--hasta', type=int, choices=[2, 3, 4, 5], default=3)
+    parser.add_argument('--hasta', type=int, choices=[2, 3, 4, 5, 6], default=3)
     opciones = parser.parse_args()
     try:
         avanzadas = migrar(opciones.db, opciones.hasta)

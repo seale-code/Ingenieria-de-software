@@ -1,0 +1,11 @@
+{
+  "resultado": "LOGISTICA_VERIFICADA",
+  "reasignacion": "MIRAFLORES → SAN-ISIDRO",
+  "entrega": "ENTREGADO",
+  "salidas_del_pedido": 1,
+  "entrada": 5,
+  "ajuste": -1,
+  "vencimientos_procesados": 1,
+  "integridad": "ok",
+  "claves_foraneas": "ok"
+}

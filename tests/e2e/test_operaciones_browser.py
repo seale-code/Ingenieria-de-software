@@ -124,7 +124,7 @@ class OperacionesBrowserTests(unittest.IsolatedAsyncioTestCase):
         await self.page.get_by_role('button',name='Cancelar pedido',exact=True).click()
         await self.page.get_by_role('button',name='Confirmar cancelación',exact=True).click()
         await expect(self.page.locator('.detail-heading .state-badge')).to_have_text('Cancelado')
-        await expect(self.page.locator('.products-table')).to_contain_text('Reserva liberada')
+        await expect(self.page.locator('#order-detail .products-table')).to_contain_text('Reserva liberada')
         await self.page.goto(self.url+'/seguimiento#'+code)
         await expect(self.page.locator('#tracking-state')).to_have_text('Cancelado')
         await expect(self.page.locator('#tracking-progress')).to_be_hidden()

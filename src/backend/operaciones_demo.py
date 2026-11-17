@@ -13,7 +13,7 @@ from flask import Blueprint, abort, current_app, jsonify, request, session
 from src.backend.entregas_s3 import DatosEntregaInvalidos, EntregaDuplicada, registrar_entrega
 from src.backend.preparacion_pedidos import (
     ErrorPreparacionPedido,
-    completar_preparacion_pedido, iniciar_preparacion_pedido, obtener_pedido_preparacion,
+    completar_preparacion_pedido, iniciar_preparacion_pedido, obtener_pedido_preparacion, _consultar_pedido_por_id,
 )
 from src.backend.repartidores_s3 import listar_repartidores
 from src.backend.reparto_integrado import avanzar_reparto
@@ -23,6 +23,10 @@ from src.backend.soporte_pedidos_s3 import (
 )
 from src.database.database import connect_database
 from src.backend.comercio import disponible, obtener_resumen, metadatos
+from src.backend.logistica import (
+    disponible as logistica_disponible, identificador, resolver_falta_atencion, procesar_vencimientos,
+)
+from src.backend.inventario import consultar_inventario, registrar_movimiento
 
 operaciones = Blueprint('operaciones_demo', __name__)
 
@@ -117,7 +121,11 @@ def bandeja():
             ORDER BY p.id DESC LIMIT 100""").fetchall()
         estados = {r['estado']: r['n'] for r in db.execute('SELECT estado,count(*) n FROM pedidos GROUP BY estado')}
         abiertas = db.execute("SELECT count(*) FROM incidencias_pedido WHERE estado!='RESUELTA'").fetchone()[0]
+        logistica = logistica_disponible(db)
+        pendientes = db.execute("""SELECT count(*) FROM control_reservas c JOIN pedidos p ON p.id=c.pedido_id
+            WHERE c.aceptada_en IS NULL AND p.estado IN ('REGISTRADO','ASIGNADO')""").fetchone()[0] if logistica else 0
     return jsonify(pedidos=[dict(r) for r in filas], repartidores=listar_repartidores(True, current_app.config['DATABASE']),
+                   logistica_habilitada=logistica, pendientes_aceptacion=pendientes,
                    resumen=dict(activos=sum(n for e, n in estados.items() if e not in ('ENTREGADO', 'CANCELADO')),
                                 en_camino=estados.get('EN_CAMINO', 0), entregados=estados.get('ENTREGADO', 0), incidencias=abiertas))
 
@@ -125,8 +133,9 @@ def bandeja():
 @operaciones.get('/api/demo/pedidos/<int:pedido_id>')
 def detalle(pedido_id):
     path = current_app.config['DATABASE']
-    pedido = obtener_pedido_preparacion(pedido_id, path)
     with connect_database(path, read_only=True) as db:
+        db.execute('BEGIN')
+        pedido = _consultar_pedido_por_id(db, pedido_id)
         entrega = db.execute('''SELECT e.*,r.nombre AS repartidor_nombre FROM entregas e
             JOIN repartidores r ON r.id=e.repartidor_id WHERE e.pedido_id=?''', (pedido_id,)).fetchone()
         if disponible(db):
@@ -143,13 +152,20 @@ def detalle(pedido_id):
 
 @operaciones.post('/api/demo/pedidos/<int:pedido_id>/acciones')
 def actuar(pedido_id):
-    datos = _datos({'accion', 'repartidor_id'}, {'accion'})
+    datos = _datos({'accion', 'repartidor_id', 'asignacion_id', 'motivo', 'solicitud_id'}, {'accion'})
     accion = datos['accion']
     path = current_app.config['DATABASE']
+    with connect_database(path, read_only=True) as db:
+        logistica = logistica_disponible(db)
+    if logistica and accion in ('preparar', 'listo', 'rechazar'):
+        identificador(datos.get('asignacion_id'), 'asignacion_id')
     if accion == 'preparar':
-        resultado = iniciar_preparacion_pedido(pedido_id, path)
+        resultado = iniciar_preparacion_pedido(pedido_id, path, asignacion_id=datos.get('asignacion_id'))
     elif accion == 'listo':
-        resultado = completar_preparacion_pedido(pedido_id, path)
+        resultado = completar_preparacion_pedido(pedido_id, path, asignacion_id=datos.get('asignacion_id'))
+    elif accion == 'rechazar':
+        resultado = resolver_falta_atencion(pedido_id, datos.get('asignacion_id'), datos.get('motivo'),
+            datos.get('solicitud_id'), db_path=path)
     elif accion == 'asignar':
         pedido = obtener_pedido_preparacion(pedido_id, path)
         if pedido['estado'] != 'PREPARADO':
@@ -167,6 +183,26 @@ def actuar(pedido_id):
     else:
         return jsonify(error='La acción no está disponible.'), 400
     return jsonify(resultado=resultado)
+
+
+@operaciones.get('/api/demo/inventario')
+def inventario():
+    return jsonify(consultar_inventario(current_app.config['DATABASE']))
+
+
+@operaciones.post('/api/demo/inventario/movimientos')
+def mover_inventario():
+    datos = _datos({'producto_codigo', 'sucursal_codigo', 'tipo', 'cantidad', 'motivo', 'solicitud_id', 'cantidad_esperada'},
+                   {'producto_codigo', 'sucursal_codigo', 'tipo', 'cantidad', 'motivo', 'solicitud_id'})
+    resultado = registrar_movimiento(**datos, db_path=current_app.config['DATABASE'])
+    return jsonify(movimiento=resultado)
+
+
+@operaciones.post('/api/demo/reservas/procesar')
+def revisar_reservas():
+    _datos(set())
+    resultados = procesar_vencimientos(current_app.config['DATABASE'])
+    return jsonify(procesados=len(resultados), resultados=resultados)
 
 
 @operaciones.post('/api/demo/pedidos/<int:pedido_id>/incidencias')

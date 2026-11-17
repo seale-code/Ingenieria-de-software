@@ -256,6 +256,19 @@ async function confirmOrder() {
   }
 }
 orderElement('order-form').addEventListener('submit', reviewOrder);
+orderElement('order-form').addEventListener('invalid', event => {
+  // Mantiene las restricciones HTML y presenta el error dentro de la página.
+  event.preventDefault();
+  const field = event.target;
+  field.setAttribute('aria-invalid','true');
+  const first = orderElement('order-form').querySelector('input:invalid,select:invalid,textarea:invalid');
+  if (field !== first) return;
+  const label = field.labels?.[0]?.textContent || 'los datos del pedido';
+  const detail = field.classList.contains('order-quantity') ?
+    `Ingresa una cantidad entera entre ${field.min} y ${field.max}.` : `Revisa el campo «${label}» antes de continuar.`;
+  showOrderError(detail); field.focus();
+}, true);
+orderElement('order-form').addEventListener('input', event => event.target.removeAttribute('aria-invalid'));
 orderElement('add-line').onclick = () => {
   if (orderElement('order-lines').children.length < 100) addOrderLine();
   else showOrderError('Puedes incluir hasta 100 líneas en un pedido.');

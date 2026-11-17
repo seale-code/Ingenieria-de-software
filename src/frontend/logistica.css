@@ -1,0 +1,55 @@
+.ops-tabs { display:flex; gap:8px; margin:0 0 22px; border-bottom:1px solid var(--line); }
+.ops-tabs button { padding:12px 22px; border:0; border-bottom:3px solid transparent; background:none; color:var(--muted); font:inherit; font-weight:700; cursor:pointer; }
+.ops-tabs button[aria-pressed=true] { border-color:#087443; color:#075d38; }
+.reservation-notice { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:16px 20px; margin:0 0 22px; background:#eef7f2; border:1px solid #cce5d7; border-radius:12px; }
+.reservation-notice p { margin:0; font-size:14px; }
+.reservation-notice button { flex-shrink:0; }
+.assignment-area { margin-top:24px; }
+.acceptance-deadline { padding:12px 16px; border-left:3px solid #cda642; background:#fffbef; font-size:14px; }
+.assignment-area details { padding:14px; border:1px solid var(--line); border-radius:8px; }
+.assignment-area summary { cursor:pointer; font-size:14px; font-weight:700; }
+.assignment-area form { display:grid; gap:10px; margin-top:14px; }
+.assignment-area textarea { width:100%; min-height:80px; padding:10px; border:1px solid var(--line); border-radius:8px; font:inherit; }
+.assignment-history { list-style:none; padding:0; margin:20px 0; }
+.assignment-history li { padding:12px 0; border-bottom:1px solid var(--line); font-size:13px; }
+.assignment-history small { display:block; margin-top:4px; color:var(--muted); }
+.assignment-history p { margin:6px 0 0; color:var(--muted); }
+.inventory-panel { min-width:0; }
+.inventory-panel .panel-top { align-items:flex-start; }
+.inventory-panel .panel-top h2 { font-size:22px; }
+.inventory-panel .panel-top .section-kicker { margin:0 0 8px; }
+.inventory-panel .panel-top .muted { margin-top:10px; font-size:14px; }
+.inventory-filters { display:grid; grid-template-columns:minmax(180px,1fr) minmax(220px,2fr); gap:20px; padding:0 24px 24px; }
+.inventory-filters label,.movement-dialog label { display:block; margin-bottom:6px; font-size:13px; font-weight:700; }
+.inventory-filters input,.inventory-filters select,.movement-dialog input,.movement-dialog select,.movement-dialog textarea { width:100%; padding:12px; background:#fff; border:1px solid var(--line); border-radius:8px; font:inherit; color:var(--ink); }
+.inventory-scroll { overflow-x:auto; margin:0 24px; }
+.inventory-table { min-width:640px; width:100%; }
+.inventory-table th { white-space:nowrap; }
+.inventory-table td:first-child { min-width:190px; }
+.inventory-table td small { display:block; color:var(--muted); margin-top:6px; }
+.inventory-table td:not(:first-child) { text-align:center; }
+.inventory-table .secondary-btn { font-size:12px; padding:9px; white-space:nowrap; }
+.stock-ledger { padding:24px; }
+.stock-ledger>h3 { font-size:18px; }
+.stock-ledger>.muted { font-size:13px; }
+.inventory-history { list-style:none; padding:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; max-height:540px; overflow:auto; }
+.inventory-history li { padding:16px; background:#f7f9f8; border:1px solid var(--line); border-radius:8px; overflow-wrap:anywhere; }
+.inventory-history p { margin:8px 0; font-size:13px; }
+.inventory-history small { color:var(--muted); font-size:12px; }
+.ledger-heading { display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; font-size:13px; }
+.inventory-history .ledger-reason { margin-bottom:0; color:var(--muted); }
+.movement-dialog { width:min(540px,calc(100% - 32px)); max-height:90vh; padding:28px; border:1px solid var(--line); border-radius:16px; overflow:auto; }
+.movement-dialog::backdrop { background:rgba(13,36,25,.45); }
+.movement-dialog h2 { font-size:22px; margin-top:0; }
+.movement-dialog p { font-size:14px; overflow-wrap:anywhere; }
+.movement-dialog input,.movement-dialog select,.movement-dialog textarea { margin:0 0 16px; }
+.movement-dialog textarea { min-height:88px; resize:vertical; }
+#movement-message { color:#96382d; }
+@media (max-width:700px) {
+  .reservation-notice { align-items:flex-start; flex-direction:column; gap:12px; }
+  .inventory-filters { grid-template-columns:1fr; padding:0 16px 16px; gap:12px; }
+  .inventory-scroll { margin:0 16px; }
+  .inventory-history { grid-template-columns:1fr; }
+  .stock-ledger { padding:16px; }
+  .movement-dialog { padding:20px; }
+}

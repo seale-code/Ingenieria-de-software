@@ -11,7 +11,7 @@ from src.backend.reglas_asignacion import (
 )
 
 
-def evaluar_sucursales(db, latitud, longitud, productos):
+def evaluar_sucursales(db, latitud, longitud, productos, *, excluir_ids=()):
     estados = sorted(ESTADOS_PEDIDO_ACTIVO)
     placeholders = ','.join('?' for _ in estados)
     sucursales = []
@@ -23,6 +23,8 @@ def evaluar_sucursales(db, latitud, longitud, productos):
         ORDER BY s.codigo
     """, [CAPACIDAD_MAXIMA_DEFAULT, *estados]).fetchall()
     for fila in filas:
+        if fila['id'] in excluir_ids:
+            continue
         if fila['capacidad_maxima'] == 0:
             continue  # Configuración explícita: sucursal deshabilitada.
         disponibles = db.execute("""
@@ -39,7 +41,10 @@ def evaluar_sucursales(db, latitud, longitud, productos):
         }})
     resultado = asignar_sucursal_pedido(sucursales,
         {p['codigo']: p['cantidad'] for p in productos}, latitud, longitud)
-    if filas and not sucursales:
+    if filas and not sucursales and excluir_ids:
+        resultado.update(motivo_rechazo='SIN_SUCURSAL_ALTERNATIVA',
+                         mensaje='No hay otra sucursal habilitada para atender el pedido.')
+    elif filas and not sucursales:
         resultado.update(motivo_rechazo='SIN_CAPACIDAD_DISPONIBLE',
                          mensaje='Todas las sucursales están deshabilitadas por capacidad.')
     return resultado
@@ -89,14 +94,17 @@ def registrar_integrado(db, cliente, latitud, longitud, productos, confirmacion_
     cursor = db.execute("INSERT INTO pedidos(codigo,sucursal_id,estado) VALUES (?,?,'ASIGNADO')",
                         (codigo_pedido, sucursal_id))
     pedido_id = cursor.lastrowid
+    logistica = db.execute('PRAGMA user_version').fetchone()[0] >= 6
+    vencimiento = (db.execute('SELECT fecha_limite FROM control_reservas WHERE pedido_id=?',
+                             (pedido_id,)).fetchone()[0] if logistica else None)
     db.execute('INSERT INTO s2_solicitudes VALUES (?,?,?,?,?)',
                (pedido_id, cliente, latitud, longitud, detalle['distancia_km']))
     for producto in productos:
         db.execute('INSERT INTO detalles_pedido(pedido_id,producto_id,cantidad) VALUES (?,?,?)',
                    (pedido_id, producto['id'], producto['cantidad']))
-        db.execute('''INSERT INTO reservas_stock(pedido_id,producto_id,sucursal_id,cantidad)
-                      VALUES (?,?,?,?)''',
-                   (pedido_id, producto['id'], sucursal_id, producto['cantidad']))
+        db.execute('''INSERT INTO reservas_stock(pedido_id,producto_id,sucursal_id,cantidad,fecha_vencimiento)
+                      VALUES (?,?,?,?,?)''',
+                   (pedido_id, producto['id'], sucursal_id, producto['cantidad'], vencimiento))
     if cotizacion is not None:
         guardar_resumen(db, pedido_id, comercial, cotizacion)
         resultado['comercio'] = obtener_resumen(db, pedido_id)
@@ -120,6 +128,7 @@ def obtener_integrado(db, pedido_id):
             CASE WHEN r.estado='ACTIVA' THEN 1 ELSE 0 END AS reservada
         FROM detalles_pedido d JOIN productos p ON p.id=d.producto_id
         LEFT JOIN reservas_stock r ON r.pedido_id=d.pedido_id AND r.producto_id=d.producto_id
+            AND r.id=(SELECT max(id) FROM reservas_stock WHERE pedido_id=d.pedido_id AND producto_id=d.producto_id)
         WHERE d.pedido_id=? ORDER BY p.codigo
     ''', (pedido_id,)).fetchall()
     return {**dict(pedido), 'motivo_sin_asignar': None, 'items': [dict(r) for r in items]}

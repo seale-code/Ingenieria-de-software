@@ -11,6 +11,7 @@ from pathlib import Path
 import sqlite3
 
 from src.database.database import DEFAULT_DATABASE, connect_database
+from src.backend.logistica import aceptar_en_db, obtener_logistica
 
 ESTADOS_GESTION_PREPARACION = ("REGISTRADO", "ASIGNADO", "EN_PREPARACION", "PREPARADO")
 
@@ -76,6 +77,8 @@ def _obtener_items_pedido(db: sqlite3.Connection, pedido_id: int) -> list[dict]:
           JOIN productos AS p ON p.id = d.producto_id
           LEFT JOIN reservas_stock AS r
             ON r.pedido_id = d.pedido_id AND r.producto_id = d.producto_id
+            AND r.id = (SELECT max(id) FROM reservas_stock
+                WHERE pedido_id=d.pedido_id AND producto_id=d.producto_id)
          WHERE d.pedido_id = ?
          ORDER BY p.codigo
         """,
@@ -148,6 +151,9 @@ def _consultar_pedido_por_id(db: sqlite3.Connection, pedido_id: int) -> dict:
     pedido = dict(fila)
     pedido["items"] = _obtener_items_pedido(db, pedido_id)
     pedido["historial"] = _obtener_historial_pedido(db, pedido_id)
+    logistica = obtener_logistica(db, pedido_id)
+    if logistica is not None:
+        pedido['logistica'] = logistica
     return pedido
 
 
@@ -212,6 +218,7 @@ def registrar_avance_preparacion(
     pedido_id: int,
     nuevo_estado: str,
     db_path: str | Path = DEFAULT_DATABASE,
+    *, asignacion_id: int | None = None,
 ) -> dict:
     """Actualiza el estado de preparacion del pedido aplicando validacion de transiciones."""
     if isinstance(pedido_id, bool) or not isinstance(pedido_id, int) or pedido_id <= 0:
@@ -229,6 +236,7 @@ def registrar_avance_preparacion(
         estado_anterior = actual["estado"]
         validar_transicion_preparacion(estado_anterior, nuevo_estado)
         destino = nuevo_estado.strip()
+        aceptar_en_db(db, pedido_id, asignacion_id)
 
         detalles = db.execute(
             "SELECT count(*) FROM detalles_pedido WHERE pedido_id = ?",
@@ -256,22 +264,26 @@ def registrar_avance_preparacion(
 def iniciar_preparacion_pedido(
     pedido_id: int,
     db_path: str | Path = DEFAULT_DATABASE,
+    *, asignacion_id: int | None = None,
 ) -> dict:
     """Pasa un pedido asignado al estado EN_PREPARACION."""
     return registrar_avance_preparacion(
         pedido_id=pedido_id,
         nuevo_estado="EN_PREPARACION",
         db_path=db_path,
+        asignacion_id=asignacion_id,
     )
 
 
 def completar_preparacion_pedido(
     pedido_id: int,
     db_path: str | Path = DEFAULT_DATABASE,
+    *, asignacion_id: int | None = None,
 ) -> dict:
     """Pasa un pedido en preparacion al estado PREPARADO."""
     return registrar_avance_preparacion(
         pedido_id=pedido_id,
         nuevo_estado="PREPARADO",
         db_path=db_path,
+        asignacion_id=asignacion_id,
     )

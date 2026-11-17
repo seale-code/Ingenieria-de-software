@@ -20,6 +20,12 @@ Sprint 3: transiciones de estado, entrega, seguimiento y flujo completo del MVP.
 
 [Evidencia comercial actual](../docs/06-evidencias/2026-11-13_tienda-comercial.md).
 
+## Sucursales, vencimientos e inventario
+
+`test_logistica.py` y `test_logistica_web.py` verifican reasignación sin duplicar reservas, concurrencia, reversión de fallos, plazos, permisos, movimientos y protección de saldos. `e2e/test_logistica_browser.py` recorre el cambio de sucursal hasta la entrega, entradas y conteos, respuesta perdida, pantallas desactualizadas y vistas de 320/390 px.
+
+Ejecuta también `python -m scripts.validar_logistica` para un recorrido con precios confirmados, reasignación, entrega, entrada, ajuste y vencimiento en una base temporal. [Reglas y configuración](../docs/LOGISTICA_SUCURSALES.md) · [Resultados de validación](../docs/06-evidencias/2026-11-16_logistica-sucursales.md).
+
 ## Suite de integración anterior
 
 Instala `requirements-test.txt` y ejecuta `python -m unittest discover -s tests -v`. Para navegador: `python -m playwright install chromium-headless-shell` y `python -m unittest discover -s tests/e2e -v`. Las pruebas crean bases temporales; no usan los datos del usuario.

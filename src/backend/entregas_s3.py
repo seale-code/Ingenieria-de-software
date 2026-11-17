@@ -123,6 +123,9 @@ def registrar_entrega(
                     "No se puede asignar una entrega a un pedido cerrado."
                 )
 
+            if db.execute('PRAGMA user_version').fetchone()[0] >= 6 and pedido['estado'] != 'PREPARADO':
+                raise DatosEntregaInvalidos('Termina la preparación antes de asignar el reparto.')
+
             repartidor = db.execute(
                 """
                 SELECT id, activo
