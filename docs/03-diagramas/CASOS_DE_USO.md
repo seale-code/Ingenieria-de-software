@@ -1,23 +1,23 @@
-# Casos de uso del alcance actual
+# Casos de uso: implementación y sistema objetivo
 
-El [modelo UML editable por grupos](uml/README.md) incluye el **MCU general**, componentes y actividades, secuencia y colaboración de los cinco procesos. También está disponible en [PDF](uml/Inkafarma-modelo-UML.pdf). La tabla siguiente se conserva como resumen del alcance de los sprints.
+[UML editable](uml/README.md) · [Trazabilidad](../01-requisitos/TRAZABILIDAD_IMPLEMENTACION.md)
 
-[← Documentación](../README.md) · [Historias originales](../02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf)
+## Recorridos disponibles en v6
 
-Catálogo conceptual de casos de uso. La tabla no se presenta como un diagrama UML formal ni como funcionalidad implementada.
-
-| Actor | Caso de uso | Referencia |
+| Actor | Caso de uso | Entrada / evidencia |
 |---|---|---|
-| Cliente | Buscar productos y consultar sucursales con disponibilidad y cercanía | HU01, Sprint 1 |
-| Cliente | Reservar productos | HU02, Sprint 2 |
-| Cliente / sistema | Solicitar y recibir asignación de sucursal | HU03, Sprint 2 |
-| Cliente | Registrar y confirmar pedido digital | HU04, Sprint 2 |
-| Personal de sucursal | Preparar pedido | Plan Sprint 3 |
-| Cliente | Consultar estado y recibir actualizaciones | HU05, Sprint 3 |
-| Personal de sucursal / repartidor | Registrar entrega y confirmación | HU15, Sprint 3 |
-| Administrador de sucursal | Actualizar inventario | HU14; cobertura parcial en planes |
-| Cliente / asesor | Solicitar soporte y atender incidencias | HU11; soporte básico previsto en S3 |
+| Cliente | Buscar, filtrar, consultar precio/stock | `/`, API de catálogo; HU01/HU07. |
+| Cliente | Carrito, cotización y confirmación | `/pedido`; contacto, precios y reservas transaccionales. |
+| Cliente con código | Consultar avance/cambios de sucursal | `/seguimiento`; omite contactos y motivos internos. |
+| Operador | Aceptar, preparar y marcar listo | `/operaciones`; generación y reservas vigentes. |
+| Operador | Declarar incapacidad de la sucursal | Alternativa completa o cancelación/liberación. |
+| Supervisor | Resolver plazo no aceptado | Arranque/cada 30 s o CLI planificada. |
+| Operador | Repartidor, despacho y recepción | Fechas/estados/stock/historial coherentes. |
+| Operador | Cancelar antes de salida y gestionar incidencias | Reserva liberada y resolución registrada. |
+| Operador | Registrar entrada/conteo | Motivo, saldos, idempotencia y protección de reservas. |
 
-Los casos opcionales y diferidos se conservan en el [Product Backlog](../07-scrum/PRODUCT_BACKLOG.md). Permisos y responsables de cada acción deben detallarse al implementar.
+Personal de sucursal, Repartidor, Asesor y Administrador son actores de negocio en servicios/UML. La sesión web es de operador central; no corresponde a cuentas individuales ya implementadas.
 
-El esquema antiguo de ventas y recojo se conserva en el [histórico](../00-historico/03-diagramas/CASOS_DE_USO.md).
+El MCU cubre las 15 HU, incluidas cuentas, repetición, multicanal, chat, alertas de reposición y alternativas. Esas funciones del sistema objetivo no quedan implementadas por aparecer en un diagrama. La matriz distingue implementado, adaptado, parcial y pendiente.
+
+La aceptación docente del agrupamiento no consta en el repositorio. Se conserva la agrupación solicitada sin atribuir una aprobación.

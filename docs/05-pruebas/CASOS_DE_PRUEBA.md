@@ -1,3 +1,5 @@
+> **Registro de una etapa anterior.** La [validación vigente de v6](VALIDACION_V6.md) y su trazabilidad sustituyen las afirmaciones de integración pendiente como descripción del producto actual. Se conserva el contenido fechado original como evidencia.
+
 # Casos de prueba del Sprint 1
 
 [← Documentación](../README.md) · [Requisitos](../01-requisitos/REQUISITOS.md) · [Evidencias](../06-evidencias/README.md)

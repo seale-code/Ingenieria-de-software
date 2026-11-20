@@ -1,57 +1,65 @@
-# Requisitos trazables al alcance actual
+# Requisitos de la implementación v6
 
-[← Documentación](../README.md) · [Alcance](ALCANCE_Y_OBJETIVOS.md) · [Product Backlog](../07-scrum/PRODUCT_BACKLOG.md)
+[Alcance](ALCANCE_Y_OBJETIVOS.md) · [Trazabilidad](TRAZABILIDAD_IMPLEMENTACION.md) · [Estado](../ESTADO_Y_PENDIENTES.md)
 
-## Criterio de uso
+**20 de noviembre de 2026.** Se conservan los IDs RF-S1/S2/S3. «Implementado» acredita el comportamiento indicado, no aceptación de toda la HU original.
 
-Este documento organiza lo ya previsto en historias y sprints. La base de RF-S1-05 está implementada y probada, pendiente de revisión del equipo; los flujos integrados restantes siguen pendientes. Los IDs RF-S1/S2/S3 identifican esta versión y no reutilizan los RF-01–RF-12 del [documento histórico](../00-historico/01-requisitos/REQUISITOS.md).
+## Actores y acceso
 
-Los criterios completos del [PDF HU01–HU15](../02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf) prevalecen sobre estos resúmenes. PBI y prioridad detallados están en el backlog.
-
-## Actores
-
-| Actor | Participación prevista |
+| Actor de negocio | Acceso disponible |
 |---|---|
-| Cliente | Buscar, consultar disponibilidad, solicitar pedido y consultar estado. |
-| Personal de sucursal / almacén | Preparar pedidos y gestionar inventario según permisos por definir. |
-| Repartidor | Participar en la entrega, según el plan S3. |
-| Administrador / asesor | Gestión autorizada y soporte; alcance por refinar. |
+| Cliente | Catálogo, carrito y confirmación; seguimiento con código privado completo. |
+| Personal de sucursal | Preparación/inventario según alcance del servicio. El panel utiliza operador central. |
+| Repartidor | Asignación y acciones verificadas en servicios; la web obtiene el actor en el servidor. |
+| Administrador / asesor | Gestión y soporte con políticas de servicio; sin cuentas individuales web. |
+| Supervisor | Resolución de plazos pendientes vencidos. |
 
-## Requisitos funcionales por sprint
+## Requisitos funcionales
 
-| ID | Requisito | Fuente | Cobertura de planificación |
+| ID | Comportamiento | Fuente | Estado v6 |
 |---|---|---|---|
-| RF-S1-01 | Consultar catálogo y buscar por nombre, informando si no hay coincidencias. | HU01 / PBI-01; plan S1 | Tareas #5, #4, #7, #13, #14, #11. |
-| RF-S1-02 | Filtrar por categoría, sucursal y solo productos con stock; combinar con búsqueda. | Descomposición del plan S1, apoyo a HU01 | #1, #2, #8. |
-| RF-S1-03 | Consultar disponibilidad del producto por sucursal. | HU01 / PBI-01 | #10 y tareas de interfaz e integración. |
-| RF-S1-04 | Mostrar primero las sucursales más cercanas con disponibilidad. | HU01, criterio 2 | Falta tarea específica y definición de ubicación/distancia. |
-| RF-S1-05 | Modelar Producto, Sucursal e Inventario y cargar datos ficticios. | Plan S1; base de HU14 | #6, #3; cobertura parcial de HU14. |
-| RF-S2-01 | Registrar y confirmar un pedido con sus productos y cantidades. | HU04 / PBI-04 | #20, #18, #12; refinar cuenta, carrito y plataforma. |
-| RF-S2-02 | Reservar stock y liberarlo al vencer el plazo; notificar a la sucursal. | HU02 / PBI-02 | #21, #18; expiración y notificación requieren detalle. |
-| RF-S2-03 | Asignar sucursal considerando stock, distancia y capacidad; gestionar falta de alternativa. | HU03 y HU15 | #9, #18, #12; acordar reglas y desempates. |
-| RF-S3-01 | Gestionar preparación y cambios de estado autorizados. | Plan S3; HU05 y HU15 | #16, #22. |
-| RF-S3-02 | Mostrar estado e historial e informar cambios al cliente. | HU05 / PBI-05 | #15, #19, #22; notificaciones por detallar. |
-| RF-S3-03 | Registrar repartidor, entrega y confirmación final. | HU15 / PBI-15 | #19, #22, #17. |
-| RF-S3-04 | Registrar incidencias y soporte básico asociado al pedido. | Plan S3; relación parcial con HU11 | #22; no cubre todavía un chat completo. |
+| RF-S1-01 | Buscar por nombre/marca y mostrar resultados o ausencia. | HU01 | Implementado. |
+| RF-S1-02 | Combinar categoría, sucursal, búsqueda y disponibles; ordenar catálogo por precio. | S1 / HU07 | Implementado. |
+| RF-S1-03 | Consultar disponibilidad efectiva por sucursal. | HU01 / HU14 | Implementado. |
+| RF-S1-04 | Ordenar las sucursales del catálogo por cercanía del usuario. | HU01 CA2 | Pendiente en consulta pública; la asignación sí usa distancia. |
+| RF-S1-05 | Categorías, productos, sucursales e inventario con integridad. | HU14 | Implementado y ampliado. |
+| RF-S2-01 | Cotizar y confirmar productos, cantidades y datos de entrega. | HU04 | Implementado sin cuenta de cliente; CA1 parcial. |
+| RF-S2-02 | Reservar con plazo hasta aceptación y mostrar solicitud en bandeja. | HU02 | Adaptado a entrega; no equivale a reserva para recojo sin compra. |
+| RF-S2-03 | Asignar con stock completo/capacidad y elegir por distancia. | HU03 / HU15 | Implementado con centro del distrito. |
+| RF-S3-01 | ASIGNADO → EN_PREPARACION → PREPARADO. | HU05 / HU15 | Implementado con generación y reservas vigentes. |
+| RF-S3-02 | Consultar estado/historial por código sin datos de contacto. | HU05 | Implementado por consulta; sin avisos externos/recojo. |
+| RF-S3-03 | Repartidor activo y salida/entrega coherentes con fechas e inventario. | HU15 | Implementado; una entrega por pedido. |
+| RF-S3-04 | Registrar/revisar/resolver incidencias. | S3 / HU11 | Operaciones implementado; sin chat del cliente. |
+| RF-LOG-01 | Reasignar por incapacidad o falta de aceptación. | HU03 / HU09 | Implementado sin volver a sucursales intentadas. |
+| RF-LOG-02 | Cancelar y liberar si no hay alternativa completa. | HU09 | Implementado. |
+| RF-INV-01 | Entradas/conteos con saldo, motivo e idempotencia. | HU14 | Implementado; protege reservas y rechaza conteo obsoleto. |
+| RF-COM-01 | Conservar precios, dirección e importes ante reintentos/reasignación. | HU04 / HU07 | Implementado en céntimos y snapshots inmutables. |
 
-## Historias que requieren refinamiento adicional
+## Reglas de negocio
 
-- HU14: entradas, salidas y correcciones de inventario; la carga inicial no las implementa.
-- HU08: sencillez, asistencia y explicación clara; las pantallas aportan cobertura parcial.
-- HU09: alertas por falta de confirmación y reasignación automática.
-- HU06, HU07, HU10, HU12 y HU13: conservar en el backlog según su prioridad propuesta; no hay sprint comprometido para su cobertura completa.
+1. Un pedido se atiende completo desde una sucursal; no divide líneas entre locales.
+2. Disponible = físico − reservas ACTIVA. Liberar no reduce físico; consumir al salir lo reduce una vez.
+3. Se conservan reservas liberadas. Solo una reserva ACTIVA o CONSUMIDA por línea.
+4. Las escrituras relacionadas se serializan con `BEGIN IMMEDIATE`.
+5. Confirmación con UUID; otra solicitud con ese UUID se rechaza. Reasignación y preparación validan la asignación esperada.
+6. Plazo inicial de 15 minutos; aceptar al preparar excluye del vencimiento automático.
+7. Entrada suma unidades; ajuste establece conteo final y exige el saldo visto por el operador.
+8. El servidor calcula precios; el navegador no determina el importe aceptado.
+9. La API del panel obtiene roles/actores en el servidor y rechaza esos campos enviados por el cliente.
 
-## Calidad y reglas que deben validarse
+## Condiciones de calidad
 
-- Búsqueda y filtros coherentes; mensajes de carga, vacío y error comprensibles.
-- Stock no negativo y un inventario único por producto y sucursal.
-- Las reservas no pueden superar el stock disponible; operaciones concurrentes deben preservar esa regla.
-- Los cambios de estado y de inventario requieren permisos cuando se implemente autenticación.
-- Impedir entrega duplicada y registrar las transiciones relevantes.
-- Usar datos ficticios; demostrar integración mediante pruebas reproducibles.
+| ID | Condición | Evidencia / criterio |
+|---|---|---|
+| RNF-01 Integridad | Sin sobre-reserva ni escrituras parciales en escenarios cubiertos. | Concurrencia, rollback, `foreign_key_check` e `integrity_check`. |
+| RNF-02 Privacidad | Seguimiento omite nombre, teléfono, dirección, motivos internos y actores. | Pruebas HTTP. |
+| RNF-03 Acceso | Sesión para operaciones; JSON/CSRF/origen en escrituras. | Pruebas de acceso y análisis de seguridad; no acredita identidad individual. |
+| RNF-04 Recuperación | Copia/restauración conserva estado y existencias. | Recorrido a ruta nueva, sin sobrescribir bases existentes. |
+| RNF-05 Rendimiento | Latencias con muestras, percentiles y entorno. | Medición local; sin afirmar SLA ni mejora frente a la operación de Inkafarma. |
+| RNF-06 Usabilidad | Escritorio/móvil, errores recuperables y teclado probados. | Chromium; validación con usuarios destinatarios por registrar. |
+| RNF-07 Mantenibilidad | HU/diagramas/código/pruebas/resultados/PR enlazados. | Matriz de 46 criterios. |
+| RNF-08 Seguridad | Alcance, evidencia, riesgo, remediación y retest. | Informe acotado; pruebas funcionales no equivalen a ausencia de vulnerabilidades. |
 
-Autenticación, roles, reportes, ventas de mostrador y alertas de stock mínimo proceden también de la versión histórica. Deben refinarse antes de tratarlos como compromisos adicionales del MVP.
+Los objetivos de disponibilidad, tiempos de producción, recuperación y retención deben acordarse con quien acepte el producto; no se presentan como compromisos aprobados.
 
-## Validación
-
-[Casos de prueba](../05-pruebas/CASOS_DE_PRUEBA.md) · [Estado y pendientes](../ESTADO_Y_PENDIENTES.md). Ya están registrados los [resultados de la base de datos](../06-evidencias/2026-10-18_base-datos-sprint-1.md); no acreditan la aplicación integrada.
+HU06, HU10, HU12 y HU13 permanecen diferidas. HU08/HU11 disponen de apoyos de interfaz/operaciones, sin validación específica de adultos mayores o chat especializado. La matriz describe cada criterio sin convertir una prueba parcial en aceptación de toda la historia.
