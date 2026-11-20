@@ -74,6 +74,12 @@ def registrar_integrado(db, cliente, latitud, longitud, productos, confirmacion_
                 respuesta['comercio'] = obtener_resumen(db, anterior['id'])
             return respuesta
 
+    if comercial and comercial.get('_limitar_reservas'):
+        activos = db.execute("""SELECT count(*) FROM pedidos_comerciales c JOIN pedidos p ON p.id=c.pedido_id
+            WHERE c.telefono=? AND p.estado NOT IN ('ENTREGADO','CANCELADO')""",(comercial['telefono'],)).fetchone()[0]
+        if activos >= 2:
+            from src.backend.comercio import DatosComercialesInvalidos
+            raise DatosComercialesInvalidos('Ya tienes dos pedidos activos. Espera a que finalice uno.')
     cotizacion = None
     if comercial is not None:
         cotizacion = cotizar(db, [dict(producto_codigo=p['codigo'],cantidad=p['cantidad']) for p in productos])
@@ -97,6 +103,11 @@ def registrar_integrado(db, cliente, latitud, longitud, productos, confirmacion_
     logistica = db.execute('PRAGMA user_version').fetchone()[0] >= 6
     vencimiento = (db.execute('SELECT fecha_limite FROM control_reservas WHERE pedido_id=?',
                              (pedido_id,)).fetchone()[0] if logistica else None)
+    if comercial and comercial.get('_limitar_reservas') and logistica:
+        db.execute("INSERT INTO plazos_compra(pedido_id,limite) VALUES(?,strftime('%Y-%m-%dT%H:%M:%fZ','now','+45 minutes'))",(pedido_id,))
+        techo=db.execute('SELECT limite FROM plazos_compra WHERE pedido_id=?',(pedido_id,)).fetchone()[0]
+        vencimiento=min(techo,vencimiento)
+        db.execute('UPDATE control_reservas SET fecha_limite=? WHERE pedido_id=?',(vencimiento,pedido_id))
     db.execute('INSERT INTO s2_solicitudes VALUES (?,?,?,?,?)',
                (pedido_id, cliente, latitud, longitud, detalle['distancia_km']))
     for producto in productos:

@@ -8,7 +8,7 @@ from uuid import uuid4
 
 from scripts.iniciar_tienda import preparar_tienda
 from scripts.respaldo_base import copiar,verificar
-from src.backend.app import create_app
+from scripts.fixture_sprints import create_fixture as create_app
 from src.backend.inventario import registrar_movimiento
 from src.database.database import connect_database
 

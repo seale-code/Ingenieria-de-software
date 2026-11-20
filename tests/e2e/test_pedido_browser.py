@@ -8,7 +8,7 @@ from pathlib import Path
 from playwright.async_api import async_playwright, expect
 from werkzeug.serving import make_server
 
-from src.backend.app import create_app
+from scripts.fixture_sprints import create_fixture as create_app
 from src.backend.pedidos_s2 import iniciar_modulo
 from src.database.database import connect_database, initialize_database
 from src.database.migrate_josue import migrar
@@ -29,7 +29,7 @@ class PedidoBrowserTests(unittest.IsolatedAsyncioTestCase):
         self.url = f'http://127.0.0.1:{self.server.server_port}/pedido'
         self.pw = await async_playwright().start()
         self.addAsyncCleanup(self.pw.stop)
-        self.browser = await self.pw.chromium.launch()
+        self.browser = await self.pw.chromium.launch(executable_path=os.environ.get('CHROMIUM_BIN'))
         self.addAsyncCleanup(self.browser.close)
         self.page = await self.browser.new_page(viewport={'width': 1366, 'height': 900})
         self.js_errors = []

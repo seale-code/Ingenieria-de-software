@@ -11,6 +11,7 @@ from werkzeug.serving import make_server
 
 from scripts.iniciar_tienda import preparar_tienda
 from src.backend.app import create_app
+from src.backend.seguridad import guardar_usuario, emitir_codigo
 from src.backend.inventario import consultar_inventario
 from src.backend.logistica import resolver_falta_atencion
 from src.backend.preparacion_pedidos import obtener_pedido_preparacion
@@ -21,18 +22,22 @@ class LogisticaBrowserTests(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
         temp=tempfile.TemporaryDirectory(); self.addCleanup(temp.cleanup)
         self.path=Path(temp.name)/'logistica.sqlite3'; preparar_tienda(self.path)
-        self.key='clave-de-pruebas-para-operaciones'; app=create_app(self.path,operations_key=self.key)
+        self.key='clave-de-pruebas-para-operaciones'; app=create_app(self.path)
+        guardar_usuario(self.path,"central",self.key)
         cliente=app.test_client()
         quote=cliente.post('/api/pedidos/cotizacion',json={'items':[{'producto_codigo':'023735','cantidad':2}]}).json['cotizacion']
         self.token=str(uuid4())
-        self.order=cliente.post('/api/pedidos',json=dict(cliente='Cliente de prueba',confirmacion_id=self.token,
+        cliente.post('/api/pedidos/verificacion',json=dict(telefono='987654321',confirmacion_id=self.token))
+        with app.app_context():
+            _,codigo=emitir_codigo(self.token)
+        self.order=cliente.post('/api/pedidos',json=dict(cliente='Cliente de prueba',codigo_celular=codigo,confirmacion_id=self.token,
             items=[dict(producto_codigo='023735',cantidad=2)],comercio=dict(cotizacion_id=quote['cotizacion_id'],
                 telefono='987654321',direccion='Calle de prueba 123',distrito='MIRAFLORES'))).json['pedido']['pedido_id']
         self.server=make_server('127.0.0.1',0,app,threaded=True)
         self.thread=threading.Thread(target=self.server.serve_forever,daemon=True); self.thread.start(); self.addCleanup(self.stop)
         self.url=f'http://127.0.0.1:{self.server.server_port}'
         self.pw=await async_playwright().start(); self.addAsyncCleanup(self.pw.stop)
-        self.browser=await self.pw.chromium.launch(); self.addAsyncCleanup(self.browser.close)
+        self.browser=await self.pw.chromium.launch(executable_path=os.environ.get('CHROMIUM_BIN')); self.addAsyncCleanup(self.browser.close)
         self.page=await self.browser.new_page(viewport={'width':1440,'height':1000})
         self.errors=[]; self.page.on('pageerror',lambda e:self.errors.append(str(e)))
 
@@ -43,6 +48,7 @@ class LogisticaBrowserTests(unittest.IsolatedAsyncioTestCase):
 
     async def login(self):
         await self.page.goto(self.url+'/operaciones')
+        await self.page.locator('#usuario').fill('central')
         await self.page.locator('#demo-key').fill(self.key); await self.page.locator('#login-button').click()
         await expect(self.page.locator('#refresh')).to_be_enabled()
         await expect(self.page.locator('#order-detail')).to_contain_text('Miraflores')

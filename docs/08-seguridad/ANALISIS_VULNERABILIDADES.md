@@ -1,5 +1,7 @@
 # Informe de análisis de vulnerabilidades — versión 6
 
+**Seguimiento.** Esta página conserva la línea base del PR #57. La [remediación y las pruebas posteriores](REMEDIACION.md) documentan la versión que la sucede.
+
 **Fecha:** 20 de noviembre de 2026. **Código funcional:** `53b6ff85a4904c6c3f1beb6c73ab4601c4b14886`. **Entorno:** Linux, Python 3.12.14, Flask 3.1.3, SQLite esquema v6. [Metodología](METODOLOGIA.md) · [Evidencias](../06-evidencias/documentacion-seguridad-2026-11-20/README.md) · [Plan de cierre](PLAN_REMEDIACION.md).
 
 ## Conclusión ejecutiva

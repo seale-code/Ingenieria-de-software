@@ -1,5 +1,7 @@
 # Requisitos de la implementación v6
 
+**Actualización posterior al informe v6.** Se implementaron las cinco correcciones de seguridad. Consultar [controles vigentes y resultados de la verificación](../08-seguridad/REMEDIACION.md).
+
 [Alcance](ALCANCE_Y_OBJETIVOS.md) · [Trazabilidad](TRAZABILIDAD_IMPLEMENTACION.md) · [Estado](../ESTADO_Y_PENDIENTES.md)
 
 **20 de noviembre de 2026.** Se conservan los IDs RF-S1/S2/S3. «Implementado» acredita el comportamiento indicado, no aceptación de toda la HU original.
@@ -58,7 +60,7 @@
 | RNF-05 Rendimiento | Latencias con muestras, percentiles y entorno. | Medición local; sin afirmar SLA ni mejora frente a la operación de Inkafarma. |
 | RNF-06 Usabilidad | Escritorio/móvil, errores recuperables y teclado probados. | Chromium; validación con usuarios destinatarios por registrar. |
 | RNF-07 Mantenibilidad | HU/diagramas/código/pruebas/resultados/PR enlazados. | Matriz de 46 criterios. |
-| RNF-08 Seguridad | Alcance, evidencia, riesgo, remediación y retest. | [Informe ejecutado](../08-seguridad/ANALISIS_VULNERABILIDADES.md), cinco hallazgos abiertos y [retest pendiente de correcciones](../08-seguridad/PLAN_REMEDIACION.md). |
+| RNF-08 Seguridad | Alcance, evidencia, riesgo, remediación y retest. | [Informe ejecutado](../08-seguridad/ANALISIS_VULNERABILIDADES.md), cinco correcciones con [verificación posterior](../08-seguridad/REMEDIACION.md). |
 
 Los objetivos de disponibilidad, tiempos de producción, recuperación y retención deben acordarse con quien acepte el producto; no se presentan como compromisos aprobados.
 

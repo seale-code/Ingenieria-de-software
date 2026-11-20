@@ -4,7 +4,6 @@ python -m scripts.iniciar_tienda [--port 5000] [--db data/inkafarma-comercial.sq
 """
 import argparse
 import os
-import secrets
 from pathlib import Path
 
 from src.backend.app import create_app
@@ -42,10 +41,12 @@ def main():
     preparar_tienda(path)
     if args.reserva_minutos is not None:
         configurar_plazo(args.reserva_minutos,path)
-    key=os.environ.get('INKAFARMA_OPERATIONS_KEY') or secrets.token_urlsafe(24)
-    print(f'\nTienda: http://127.0.0.1:{args.port}/\nOperaciones: http://127.0.0.1:{args.port}/operaciones\nClave de acceso al panel: {key}\n\nCtrl+C para detener el servidor. Los pedidos y el inventario se conservan.\n',flush=True)
+    if os.environ.get('INKAFARMA_PERFIL') == 'produccion':
+        parser.error('Utiliza el servidor WSGI con TLS para producción.')
+    print(f'Tienda: http://127.0.0.1:{args.port}/ · Panel: /operaciones',flush=True)
+    print(f'Cuenta personal: python -m scripts.operadores --db "{path}" guardar USUARIO --central')
     with vigilar_reservas(path):
-        create_app(path,operations_key=key).run(host='127.0.0.1',port=args.port,debug=False,use_reloader=False)
+        create_app(path).run(host='127.0.0.1',port=args.port,debug=False,use_reloader=False)
 
 
 if __name__=='__main__':

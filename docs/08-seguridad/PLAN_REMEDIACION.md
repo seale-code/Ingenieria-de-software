@@ -1,5 +1,7 @@
 # Plan de remediación y verificación posterior
 
+**Seguimiento.** Esta página conserva la línea base del PR #57. La [remediación y las pruebas posteriores](REMEDIACION.md) documentan la versión que la sucede.
+
 [Informe](ANALISIS_VULNERABILIDADES.md) · [Registro CSV](HALLAZGOS.csv) · [Metodología](METODOLOGIA.md).
 
 **Estado al 20 de noviembre de 2026:** todos los hallazgos están abiertos. El análisis está ejecutado; las siguientes acciones son trabajo futuro, sin fechas ni responsables personales inventados. El equipo debe asignar personas y estimar esfuerzo en su siguiente planificación. P1 debe completarse antes del uso indicado; P2 antes de ampliar el entorno de pruebas correspondiente.

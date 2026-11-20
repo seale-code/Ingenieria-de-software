@@ -1,5 +1,7 @@
 # Metodología de análisis de seguridad
 
+**Seguimiento.** Esta página conserva la línea base del PR #57. La [remediación y las pruebas posteriores](REMEDIACION.md) documentan la versión que la sucede.
+
 [Informe](ANALISIS_VULNERABILIDADES.md) · [Plan](PLAN_REMEDIACION.md) · [Evidencias](../06-evidencias/documentacion-seguridad-2026-11-20/README.md).
 
 ## Objetivo y alcance autorizado

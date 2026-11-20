@@ -9,7 +9,7 @@ import tempfile
 from pathlib import Path
 from uuid import uuid4
 
-from src.backend.app import create_app
+from scripts.fixture_sprints import create_fixture as create_app
 from src.backend.pedidos_s2 import iniciar_modulo
 from src.backend.repartidores_s3 import registrar_repartidor
 from src.database.database import initialize_database, connect_database, get_stock
