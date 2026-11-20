@@ -67,3 +67,7 @@ python -m scripts.verificar_documentacion
 ```
 
 Las pruebas y mediciones crean bases temporales, independientes de la base operativa. Los percentiles locales no son un SLA de Internet ni un benchmark de los sistemas reales de Inkafarma.
+
+## Repetir el análisis de seguridad
+
+La [metodología](../08-seguridad/METODOLOGIA.md) detalla inventarios, comandos y límites. Instalar `requirements-security.txt` en el entorno de evaluación y ejecutar `python -m scripts.analizar_seguridad`: utiliza bases temporales y no abre puertos. El [informe](../08-seguridad/ANALISIS_VULNERABILIDADES.md) mantiene cinco hallazgos abiertos y el [plan](../08-seguridad/PLAN_REMEDIACION.md) define sus retests. Un resultado de controles aprobados no cierra esas carencias.

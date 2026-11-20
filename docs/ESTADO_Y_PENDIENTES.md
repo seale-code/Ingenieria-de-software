@@ -19,7 +19,7 @@ La versión integrada tiene [322 pruebas Python/API y 44 recorridos Chromium reg
 | Información | Catálogo local con fuentes; sin sincronización comercial interna de Inkafarma. |
 | Cobros | Pago al recibir registrado; sin pasarela ni acreditación de pago. |
 | UML | 17 diagramas agrupados del objetivo; no acreditan funciones futuras como implementadas. |
-| Seguridad | Controles y hallazgos del informe acotado; sin certificación ni acreditación de despliegue público. |
+| Seguridad | [Análisis ejecutado](08-seguridad/ANALISIS_VULNERABILIDADES.md): 23 controles aprobados, cinco hallazgos abiertos y dos observaciones; correcciones/retest por implementar. |
 
 ## Validaciones del equipo
 

@@ -35,7 +35,7 @@ Los manuales de [usuario](09-manuales/USUARIO.md) y [operación técnica](09-man
 
 ## 6. Seguridad
 
-Los controles y resultados del análisis se documentan en [seguridad](08-seguridad/README.md). Sesión, CSRF y consultas parametrizadas aportan protección, pero las pruebas funcionales no acreditan ausencia de vulnerabilidades. La clave compartida y la configuración de un despliegue público requieren una evaluación contextual. Esta primera fase documental no presenta un pentest ya concluido.
+El [análisis local de vulnerabilidades](08-seguridad/ANALISIS_VULNERABILIDADES.md) registra 23 controles aprobados, triaje de 37 alertas estáticas y auditoría de once paquetes Python sin avisos reportados. Una revisión adicional identificó instaladores macOS inseguros incluidos en la herramienta de pruebas. Cinco hallazgos permanecen abiertos: identidad/privilegios, abuso de reservas, intentos de acceso, despliegue e instaladores. El [plan de remediación](08-seguridad/PLAN_REMEDIACION.md) especifica corrección y retest; estos cambios no se presentan como aplicados. La evaluación no certifica una infraestructura pública ni ausencia de vulnerabilidades.
 
 ## 7. Decisiones y continuidad
 

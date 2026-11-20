@@ -10,6 +10,7 @@
 | Chromium | **44 recorridos aprobados** sobre la aplicación v6. | [Pruebas Chromium](../06-evidencias/documentacion-seguridad-2026-11-20/pruebas-chromium.txt) |
 | Trazabilidad | 46 criterios; referencias de código, diagramas y métodos comprobadas. | [Matriz](../01-requisitos/TRAZABILIDAD_IMPLEMENTACION.md) |
 | Diccionario | 20 tablas generadas desde SQLite temporal v6. | [Diccionario](../03-diagramas/DICCIONARIO_DATOS_V6.md) |
+| Seguridad, segunda fase | 23 controles locales aprobados; 37 alertas estáticas revisadas; cinco hallazgos abiertos. | [Informe y límites](../08-seguridad/ANALISIS_VULNERABILIDADES.md) |
 | Rendimiento local | Catálogo p50 **3.33 ms**, p95 **4.351 ms**. | [Medición JSON](../06-evidencias/documentacion-seguridad-2026-11-20/rendimiento.json) |
 
 Los registros con fecha de noviembre anterior conservan sus resultados originales. Las advertencias de persistencia en casos de fallos inyectados son esperadas y se comprueba la reversión/error controlado.

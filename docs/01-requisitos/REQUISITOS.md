@@ -58,7 +58,7 @@
 | RNF-05 Rendimiento | Latencias con muestras, percentiles y entorno. | Medición local; sin afirmar SLA ni mejora frente a la operación de Inkafarma. |
 | RNF-06 Usabilidad | Escritorio/móvil, errores recuperables y teclado probados. | Chromium; validación con usuarios destinatarios por registrar. |
 | RNF-07 Mantenibilidad | HU/diagramas/código/pruebas/resultados/PR enlazados. | Matriz de 46 criterios. |
-| RNF-08 Seguridad | Alcance, evidencia, riesgo, remediación y retest. | Informe acotado; pruebas funcionales no equivalen a ausencia de vulnerabilidades. |
+| RNF-08 Seguridad | Alcance, evidencia, riesgo, remediación y retest. | [Informe ejecutado](../08-seguridad/ANALISIS_VULNERABILIDADES.md), cinco hallazgos abiertos y [retest pendiente de correcciones](../08-seguridad/PLAN_REMEDIACION.md). |
 
 Los objetivos de disponibilidad, tiempos de producción, recuperación y retención deben acordarse con quien acepte el producto; no se presentan como compromisos aprobados.
 

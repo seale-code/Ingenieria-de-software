@@ -1,0 +1,8 @@
+ID,Hallazgo,Escenario,Probabilidad,Impacto,Riesgo contextual,Prioridad,Estado,Evidencia,Corrección aplicada,Retest,Responsable
+SEC-01,Clave compartida y privilegio global sin atribución individual,Operación multiusuario entre sucursales,2,3,Medio,P1,Abierto,seguridad-local.json SEC-01; operaciones_demo.py,No,Pendiente,Por asignar: backend y operación
+SEC-02,Reservas públicas sin verificar contacto ni limitar nuevas confirmaciones,Compra publicada con poco stock,3,2,Medio,P1,"Abierto, reproducido localmente",seguridad-local.json SEC-02,No,Pendiente,Por asignar: producto y backend
+SEC-03,Sin limitación de intentos en la aplicación,Panel expuesto con clave débil/reutilizada,2,3,Medio,P1,Abierto,seguridad-local.json SEC-03; operaciones_demo.py,No,Pendiente,Por asignar: backend y despliegue
+SEC-04,Cookie sin Secure y ausencia de CSP/HSTS en Flask,Publicación sin endurecimiento adicional,2,3,Medio,P1,"Abierto, configuración local observada",seguridad-local.json SEC-04; app.py,No,Pendiente,Por asignar: despliegue y frontend/backend
+SEC-05,Instaladores macOS incluidos en Playwright omiten autenticidad TLS,Ejecutar esos instaladores en una red interceptable,2,3,Medio,P2,"Abierto, no ejecutado en Linux",playwright-instaladores.json; GHSA-qxm8-4v54-964r,No,Pendiente,Por asignar: pruebas
+OBS-01,Secreto de sesión aleatorio por instancia,Varios procesos o reinicios,,,Observación,Por planificar,Abierto,seguridad-local.json OBS-01,No,Pendiente,Por asignar: despliegue y backend
+OBS-02,Validaciones de herramientas mediante assert,Herramientas ejecutadas con python -O,,,Observación,Por planificar,Abierto,bandit-triaje.csv B101,No,Pendiente,Por asignar: herramientas/documentación
