@@ -95,3 +95,15 @@ El movimiento de salida exige una reserva consumida y tiene `reserva_id` único.
 `s2_solicitudes` y `s2_capacidades` se inicializan con el módulo de pedidos. El arranque aplica migraciones y ese módulo. No se deshabilitan FK ni se repone inventario operado al reiniciar. La migración crea un saldo de apertura del físico existente; no inventa salidas históricas.
 
 El [modelo de Josue de S2/S3](../MODELO_DATOS_JOSUE_S2_S3.md) se conserva como evidencia de esas versiones; para el esquema vigente prevalece este documento.
+
+## Extensión de seguridad de la tienda
+
+La fábrica de la aplicación añade cinco tablas a las veinte del esquema de negocio v6. La instalación es idempotente sobre bases existentes. Las copias completas de SQLite incluyen estas tablas.
+
+| Tabla | Relación y finalidad |
+|---|---|
+| operadores | Identidad individual. La sucursal referencia su código. Un valor nulo indica la central. |
+| auditoria_operaciones | Usuario, ruta, acción, fecha y respuesta de la escritura. El nombre queda registrado tras la baja de la cuenta. |
+| verificaciones | UUID del pedido, teléfono, vencimiento, firma del código e intentos. |
+| ventanas | Clave derivada, contador y vencimiento compartidos entre workers. |
+| plazos_compra | Un plazo total por pedido verificado, enlazado a pedidos.id. |

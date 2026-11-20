@@ -3,6 +3,7 @@ import sqlite3
 
 from flask import Blueprint, current_app, jsonify, request
 
+from src.backend.seguridad import verificar_contacto
 from src.backend.catalogo_busqueda import buscar_productos
 from src.backend.pedidos_integracion import ConflictoConfirmacion
 from src.backend.pedidos_s2 import DatosInvalidos, ModuloNoInicializado, registrar_pedido
@@ -25,7 +26,7 @@ def opciones():
     productos=[dict(p,**extras.get(p['producto_codigo'],{})) for p in productos]
     if comercial:
         productos=[p for p in productos if p['producto_codigo'] in extras]
-    return jsonify(productos=productos, puntos=puntos, comercial=comercial,
+    return jsonify(productos=productos, puntos=puntos, comercial=comercial, verificar_celular=bool(current_app.config.get("IDENTIDAD_PERSONAL")),
         politica_envio=dict(costo_centimos=ENVIO_CENTIMOS,gratis_desde_centimos=ENVIO_GRATIS_DESDE),
         distritos=[dict(codigo=k,nombre=v[0]) for k,v in DISTRITOS.items()] if comercial else [])
 
@@ -57,6 +58,12 @@ def confirmar():
             comercial=validar_entrega(datos.get('comercio'))
             zona=DISTRITOS[comercial['distrito']]
             datos=dict(datos,latitud=zona[1],longitud=zona[2])
+        if current_app.config.get('IDENTIDAD_PERSONAL'):
+            if comercial is None:
+                return jsonify(error='Actualiza el catálogo comercial antes de aceptar pedidos.'),409
+            if not verificar_contacto(datos['confirmacion_id'],comercial['telefono'],datos.get('codigo_celular')):
+                return jsonify(error='Solicita la llamada e ingresa el código vigente para este pedido.'),403
+            comercial['_limitar_reservas']=True
         resultado = registrar_pedido(datos, current_app.config['DATABASE'],
                                      confirmacion_id=datos['confirmacion_id'],comercial=comercial)
     except DatosComercialesInvalidos as error:

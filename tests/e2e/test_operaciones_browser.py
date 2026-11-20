@@ -9,7 +9,7 @@ from uuid import uuid4
 from playwright.async_api import async_playwright, expect
 from werkzeug.serving import make_server
 
-from src.backend.app import create_app
+from scripts.fixture_sprints import create_fixture as create_app
 from src.backend.pedidos_s2 import iniciar_modulo, registrar_pedido
 from src.backend.repartidores_s3 import registrar_repartidor
 from src.database.database import initialize_database, connect_database
@@ -33,7 +33,7 @@ class OperacionesBrowserTests(unittest.IsolatedAsyncioTestCase):
         self.url = f'http://127.0.0.1:{self.server.server_port}'
         self.pw = await async_playwright().start()
         self.addAsyncCleanup(self.pw.stop)
-        self.browser = await self.pw.chromium.launch()
+        self.browser = await self.pw.chromium.launch(executable_path=os.environ.get('CHROMIUM_BIN'))
         self.addAsyncCleanup(self.browser.close)
         self.page = await self.browser.new_page(viewport={'width':1366,'height':950})
         self.errors = []

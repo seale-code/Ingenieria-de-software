@@ -12,6 +12,8 @@ Versión de aplicación: v6. [Inicio](../../README.md) · [Manual técnico](TECN
 
 La asignación utiliza disponibilidad, capacidad y distancia al centro del distrito. La sucursal mostrada puede cambiar si no puede atender o no acepta a tiempo; el código y los importes confirmados se conservan.
 
+Al revisar la compra, pulsa **Solicitar llamada**. El equipo llama a tu celular y te comunica un código de ocho dígitos. Introdúcelo antes de confirmar. El código vence a los diez minutos.
+
 ## Seguir el pedido
 
 Abrir Seguimiento e introducir el código completo. Consultar estado, sucursal, historial y cambios de atención. Actualizar para ver avances. El código permite la consulta y debe conservarse privado; no se publican nombre, teléfono o dirección.
@@ -20,7 +22,7 @@ Ante una confirmación con respuesta incierta, usar **Comprobar confirmación** 
 
 ## Acceder a operaciones
 
-Abrir `/operaciones` e introducir la clave que entrega el responsable del servidor. La sesión actual es de operador central: no hay cuentas individuales de empleados. Cerrar sesión al terminar.
+Abrir `/operaciones` e iniciar sesión con el usuario y contraseña personales. Una cuenta de sucursal atiende sus pedidos e inventario. La central coordina las sedes y el reparto. Cerrar sesión al terminar.
 
 ### Preparar y entregar
 
@@ -55,7 +57,7 @@ Registrar categoría y descripción en el pedido. Iniciar revisión y, al resolv
 ## Recuperación de errores
 
 - Error de conexión: comprobar conexión/servidor y actualizar; no asumir éxito sin comprobar el estado.
-- Sesión vencida: volver a iniciar sesión con la clave del servidor.
+- Sesión vencida: volver a iniciar sesión con tu cuenta personal.
 - Falta de stock/capacidad: ajustar cantidades o productos; las líneas no se dividen entre sucursales.
 - Código no encontrado: verificar que se pegó completo, sin reemplazarlo por el número del pedido.
 

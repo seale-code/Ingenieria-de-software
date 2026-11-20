@@ -8,7 +8,7 @@ from unittest.mock import patch
 from uuid import uuid4
 
 from scripts.iniciar_tienda import preparar_tienda
-from src.backend.app import create_app
+from scripts.fixture_sprints import create_fixture as create_app
 from src.backend.logistica import fecha_utc
 from src.backend.pedidos_s2 import configurar_capacidad
 from src.database.database import connect_database

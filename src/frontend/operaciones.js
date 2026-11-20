@@ -3,6 +3,7 @@ const ui = id => document.getElementById(id);
 const labels = {REGISTRADO:'Registrado', ASIGNADO:'Asignado', EN_PREPARACION:'En preparación', PREPARADO:'Preparado', EN_CAMINO:'En camino', ENTREGADO:'Entregado', CANCELADO:'Cancelado', ABIERTA:'Abierta', EN_REVISION:'En revisión', RESUELTA:'Resuelta'};
 const stages = ['ASIGNADO','EN_PREPARACION','PREPARADO','EN_CAMINO','ENTREGADO'];
 const dates = new Intl.DateTimeFormat('es-PE', {dateStyle:'medium', timeStyle:'short', timeZone:'America/Lima'});
+let branchScope = null;
 let csrf = '', orders = [], drivers = [], selected = null, busy = false, detailSequence = 0;
 let logisticsEnabled = false, inventory = {existencias:[], movimientos:[]}, movement = null;
 
@@ -73,10 +74,12 @@ function renderInbox() {
 }
 async function loadInbox() {
   const data = await api('/api/demo/pedidos');
+  branchScope = data.sucursal || null;
   orders = data.pedidos; drivers = data.repartidores;
   logisticsEnabled = data.logistica_habilitada;
   ui('tab-inventory').hidden = !logisticsEnabled;
   ui('reservation-notice').hidden = !logisticsEnabled;
+  ui('check-expirations').hidden = Boolean(branchScope);
   const pending = data.pendientes_aceptacion || 0;
   ui('pending-acceptance').textContent = `${pending} ${pending === 1 ? 'pedido pendiente' : 'pedidos pendientes'} de aceptación. Los plazos vencidos buscan otra sucursal de forma automática.`;
   for (const [id, key] of [['active','activos'],['delivery','en_camino'],['done','entregados'],['incidents','incidencias']]) {
@@ -168,7 +171,7 @@ function renderDetail(p) {
   const tools = node('div',undefined,'detail-tools');
   const tracking = node('a','Ver seguimiento del cliente','inline-link');
   tracking.href = '/seguimiento#' + encodeURIComponent(p.pedido_codigo); tools.append(tracking);
-  if (['REGISTRADO','ASIGNADO','EN_PREPARACION','PREPARADO'].includes(p.estado) && !p.entrega?.fecha_salida) {
+  if (!branchScope && ['REGISTRADO','ASIGNADO','EN_PREPARACION','PREPARADO'].includes(p.estado) && !p.entrega?.fecha_salida) {
     const cancel = node('button','Cancelar pedido','text-btn'); cancel.type = 'button';
     cancel.onclick = () => {
       if (busy) return;
@@ -181,10 +184,15 @@ function renderDetail(p) {
   for (const event of p.historial) {
     const li = node('li'); const time = node('time',date(event.fecha_cambio)); time.dateTime = event.fecha_cambio;
     li.append(node('span',labels[event.estado_nuevo] || event.estado_nuevo), time); history.append(li);
-  } panel.append(history, renderIncidents(p));
+  } panel.append(history);
+  if (!branchScope) panel.append(renderIncidents(p));
 }
 function renderNextStep(p) {
   const section = node('section',undefined,'next-step'); section.append(node('h3','Próximo paso'));
+  if (branchScope && !['REGISTRADO','ASIGNADO','EN_PREPARACION'].includes(p.estado)) {
+    section.append(node('p','La central coordina el reparto y el seguimiento de este pedido.'));
+    return section;
+  }
   let text, button;
   if (['REGISTRADO','ASIGNADO'].includes(p.estado)) {
     text = 'La sucursal ya tiene reservados los productos. Comienza la preparación.';
@@ -367,7 +375,7 @@ function renderIncidents(p) {
 ui('login-form').onsubmit = async event => {
   event.preventDefault(); ui('login-button').disabled = true;
   try {
-    const result = await api('/api/demo/sesion','POST',{clave:ui('demo-key').value});
+    const result = await api('/api/demo/sesion','POST',{...(ui('usuario').value ? {usuario:ui('usuario').value.trim()} : {}),clave:ui('demo-key').value});
     ui('demo-key').value = ''; csrf = result.csrf; showSession(true); await refresh();
   } catch (error) { showError(error); }
   finally { ui('login-button').disabled = false; }

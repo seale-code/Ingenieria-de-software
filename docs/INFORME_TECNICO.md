@@ -1,5 +1,7 @@
 # Informe técnico de la propuesta Inkafarma
 
+**Actualización posterior al informe v6.** Se implementaron las cinco correcciones de seguridad. Consultar [controles vigentes y resultados de la verificación](08-seguridad/REMEDIACION.md).
+
 **Versión funcional v6**, base `53b6ff8`, revisión documental del **20 de noviembre de 2026**. [Índice](README.md) · [Requisitos](01-requisitos/REQUISITOS.md).
 
 ## 1. Problema, objetivo y alcance
@@ -35,7 +37,7 @@ Los manuales de [usuario](09-manuales/USUARIO.md) y [operación técnica](09-man
 
 ## 6. Seguridad
 
-El [análisis local de vulnerabilidades](08-seguridad/ANALISIS_VULNERABILIDADES.md) registra 23 controles aprobados, triaje de 37 alertas estáticas y auditoría de once paquetes Python sin avisos reportados. Una revisión adicional identificó instaladores macOS inseguros incluidos en la herramienta de pruebas. Cinco hallazgos permanecen abiertos: identidad/privilegios, abuso de reservas, intentos de acceso, despliegue e instaladores. El [plan de remediación](08-seguridad/PLAN_REMEDIACION.md) especifica corrección y retest; estos cambios no se presentan como aplicados. La evaluación no certifica una infraestructura pública ni ausencia de vulnerabilidades.
+El [análisis local de vulnerabilidades](08-seguridad/ANALISIS_VULNERABILIDADES.md) registra 23 controles aprobados, triaje de 37 alertas estáticas y auditoría de once paquetes Python sin avisos reportados. Una revisión adicional identificó instaladores macOS inseguros incluidos en la herramienta de pruebas. La evaluación inicial identificó cinco hallazgos: identidad/privilegios, abuso de reservas, intentos de acceso, despliegue e instaladores. El [plan de remediación](08-seguridad/PLAN_REMEDIACION.md) especifica corrección y retest; la [entrega posterior](08-seguridad/REMEDIACION.md) implementa y verifica las cinco correcciones. La evaluación no certifica una infraestructura pública ni ausencia de vulnerabilidades.
 
 ## 7. Decisiones y continuidad
 

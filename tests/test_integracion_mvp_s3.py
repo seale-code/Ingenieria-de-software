@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 from uuid import uuid4
 
-from src.backend.app import create_app
+from scripts.fixture_sprints import create_fixture as create_app
 from src.backend.entregas_s3 import (
     EntregaDuplicada, obtener_historial_pedido, registrar_entrega,
     registrar_fecha_entrega, registrar_fecha_salida,

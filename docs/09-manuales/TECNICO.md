@@ -14,7 +14,7 @@ python -m pip install -r requirements.txt
 python -m scripts.iniciar_tienda
 ```
 
-Abrir `http://127.0.0.1:5000/` y `/operaciones`. La terminal muestra una clave aleatoria si no se configura `INKAFARMA_OPERATIONS_KEY`. Mantenerla privada. El servidor se enlaza a 127.0.0.1, con debug y reloader desactivados; este comando no configura HTTPS o un despliegue público.
+Abrir `http://127.0.0.1:5000/` y `/operaciones`. Antes de operar, crea una cuenta personal y prepara la atención de llamadas siguiendo la [guía de operación segura](../08-seguridad/REMEDIACION.md).
 
 La base persistente predeterminada es `data/inkafarma-comercial.sqlite3`. El arranque crea/migra hasta v6, inicializa el módulo de pedidos y agrega solo registros iniciales ausentes. No restablece stock, precios ni pedidos. Los fixtures antiguos `DEMO-*` son exclusivos de pruebas y comandos anteriores.
 
@@ -35,7 +35,7 @@ Con un servidor WSGI independiente, planificar cada minuto un proceso sobre la m
 python -m scripts.procesar_reservas --db data/inkafarma-comercial.sqlite3
 ```
 
-Cada lote procesa hasta 100 pedidos. No usar temporizadores del navegador como sustituto del supervisor. La gestión de claves de sesión entre procesos, HTTPS y cuentas individuales debe resolverse antes de un despliegue público; el análisis de seguridad documenta el estado actual.
+Cada lote procesa hasta 100 pedidos. No usar temporizadores del navegador como sustituto del supervisor. El [perfil HTTPS de producción](../08-seguridad/REMEDIACION.md) documenta Gunicorn, cuentas, certificado y secreto compartido entre workers.
 
 ## Respaldar y restaurar
 
@@ -70,4 +70,4 @@ Las pruebas y mediciones crean bases temporales, independientes de la base opera
 
 ## Repetir el análisis de seguridad
 
-La [metodología](../08-seguridad/METODOLOGIA.md) detalla inventarios, comandos y límites. Instalar `requirements-security.txt` en el entorno de evaluación y ejecutar `python -m scripts.analizar_seguridad`: utiliza bases temporales y no abre puertos. El [informe](../08-seguridad/ANALISIS_VULNERABILIDADES.md) mantiene cinco hallazgos abiertos y el [plan](../08-seguridad/PLAN_REMEDIACION.md) define sus retests. Un resultado de controles aprobados no cierra esas carencias.
+Ejecutar `python -m scripts.analizar_seguridad` para verificar los controles actuales en bases temporales. Consultar el [informe de remediación](../08-seguridad/REMEDIACION.md).

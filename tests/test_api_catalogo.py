@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from src.backend.app import create_app
+from scripts.fixture_sprints import create_fixture as create_app
 from src.database.database import connect_database, initialize_database
 from src.database.migrate_josue import migrar
 
