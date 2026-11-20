@@ -2,7 +2,13 @@
 
 [← Documentación](../README.md) · [Estado y pendientes](../ESTADO_Y_PENDIENTES.md)
 
-## Evidencia comercial actual
+## Validación vigente
+
+- [Documentación, respaldo, medición y verificación v6](../05-pruebas/VALIDACION_V6.md).
+- [Logística integrada en #56](2026-11-16_logistica-sucursales.md).
+- [Análisis de seguridad](../08-seguridad/README.md).
+
+## Evidencia comercial anterior
 
 - [Tienda, catálogo fotográfico, carrito y precios confirmados](2026-11-13_tienda-comercial.md).
 

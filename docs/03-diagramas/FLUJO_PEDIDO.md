@@ -1,18 +1,35 @@
-# Flujo previsto del pedido entre sucursales
+# Flujo implementado del pedido (v6)
 
-[← Documentación](../README.md)
+[Logística](../LOGISTICA_SUCURSALES.md) · [Precios](../CATALOGO_COMERCIAL.md) · [Datos](MODELO_DATOS.md)
 
-| Paso | Acción | Resultado o excepción | Sprint |
-|---|---|---|---|
-| 1 | Buscar producto y consultar disponibilidad | Mostrar resultados o ausencia de stock. | 1 |
-| 2 | Consultar sucursales y cercanía | El orden por distancia requiere tarea y criterio explícitos. | 1 |
-| 3 | Seleccionar productos y cantidades | Validar datos y disponibilidad. | 2 |
-| 4 | Evaluar sucursal según stock, distancia y capacidad | Informar si no existe sucursal elegible. | 2 |
-| 5 | Registrar pedido y gestionar reserva | Evitar sobreventa y definir vencimiento/liberación. | 2 |
-| 6 | Preparar pedido | Registrar cambio de estado autorizado. | 3 |
-| 7 | Gestionar recojo o entrega | Modalidad y transiciones por acordar. | 3 |
-| 8 | Confirmar entrega y consultar seguimiento | Registrar confirmación; impedir entrega duplicada. | 3 |
+## Confirmación
 
-Esta secuencia describe el plan funcional, no una máquina de estados implementada. El orden transaccional de asignación y reserva, los estados definitivos, la cancelación, la reasignación y las notificaciones deben detallarse antes de desarrollar S2/S3.
+El cliente obtiene cotización y confirma con UUID, dirección, teléfono y distrito. Una transacción comprueba productos, precio, stock completo y capacidad y persiste pedido, líneas, reservas y precios. Cambio de precio o falta de sucursal no deja escrituras parciales. El reintento válido recupera el mismo pedido.
 
-Fuente: [planes de sprint](../../README.md) e historias HU02, HU03, HU04, HU05 y HU15 del [PDF](../02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf). La [versión anterior](../00-historico/03-diagramas/FLUJO_PEDIDO.md) describía exclusivamente recojo.
+```mermaid
+stateDiagram-v2
+    [*] --> ASIGNADO: Confirmación y reserva
+    ASIGNADO --> EN_PREPARACION: Aceptar dentro del plazo
+    EN_PREPARACION --> PREPARADO: Verificar productos
+    PREPARADO --> EN_CAMINO: Repartidor y salida
+    EN_CAMINO --> ENTREGADO: Confirmar recepción
+    ENTREGADO --> [*]
+    ASIGNADO --> CANCELADO: Cancelar o sin alternativa
+    EN_PREPARACION --> CANCELADO: Cancelación previa a salida
+    PREPARADO --> CANCELADO: Cancelación previa a salida
+    CANCELADO --> [*]
+```
+
+`REGISTRADO` permanece admitido por compatibilidad; el formulario crea `ASIGNADO`. Una fecha aislada del módulo anterior no equivale a una transición integral.
+
+## Reasignación
+
+| Disparador | Operación atómica | Resultado |
+|---|---|---|
+| Plazo vencido sin aceptación | Liberar origen, evaluar alternativas, registrar incidencia/historial y reservar destino | ASIGNADO en destino con nuevo plazo. |
+| Incapacidad declarada durante asignación/preparación | Mismo proceso con motivo y generación esperada | Si estaba EN_PREPARACION, vuelve a ASIGNADO. |
+| No existe alternativa completa con capacidad | Liberar, cerrar pedido y resolver incidencia con el resultado | CANCELADO. |
+
+Se conservan código, dirección, cantidades e importes; se actualizan sucursal/distancia. Las reservas liberadas se mantienen. No se vuelve a sucursales intentadas. La preparación aceptada queda fuera del vencimiento; no se reasigna un pedido preparado o con entrega asignada.
+
+Al salir se consume la reserva y se genera una sola salida de inventario. Repetir salida/recepción no duplica efectos. Cancelar libera sin descontar físico y se bloquea después de la salida. El mismo código permite seguir el pedido; los avisos se consultan en web, sin envío externo.

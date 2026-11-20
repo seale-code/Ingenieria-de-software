@@ -18,11 +18,15 @@ from src.backend.comercio import disponible, metadatos
 FRONTEND = Path(__file__).resolve().parents[1] / "frontend"
 
 
-def create_app(db_path=None, *, demo_key=None, operations_key=None):
+def _crear_base(db_path=None):
     app = Flask(__name__, static_folder=str(FRONTEND), static_url_path="/assets")
     app.config["DATABASE"] = db_path or os.environ.get("INKAFARMA_DB", DEFAULT_DATABASE)
-    app.config['DEMO_KEY'] = operations_key if operations_key is not None else (
-        demo_key if demo_key is not None else os.environ.get('INKAFARMA_OPERATIONS_KEY',os.environ.get('INKAFARMA_DEMO_KEY')))
+    app.config['DEMO_KEY'] = None
+
+    @app.before_request
+    def configuracion_completa():
+        if not app.config.get('IDENTIDAD_PERSONAL') and not app.config.get('FIXTURE_HISTORICO'):
+            return jsonify(error='Inicializa la tienda con create_app.'), 503
     app.secret_key = secrets.token_hex(32)
     app.config.update(SESSION_COOKIE_HTTPONLY=True, SESSION_COOKIE_SAMESITE='Strict',
                       PERMANENT_SESSION_LIFETIME=timedelta(hours=2))
@@ -34,7 +38,7 @@ def create_app(db_path=None, *, demo_key=None, operations_key=None):
 
     @app.get('/operaciones')
     def panel_demo():
-        if not app.config['DEMO_KEY']:
+        if not (app.config.get('IDENTIDAD_PERSONAL') or app.config['DEMO_KEY']):
             from flask import abort
             abort(404)
         response = send_from_directory(FRONTEND, 'operaciones.html')
@@ -43,7 +47,7 @@ def create_app(db_path=None, *, demo_key=None, operations_key=None):
 
     @app.get('/api/contexto')
     def contexto():
-        return jsonify(operaciones_demo=bool(app.config['DEMO_KEY']))
+        return jsonify(operaciones_demo=bool(app.config.get('IDENTIDAD_PERSONAL') or app.config['DEMO_KEY']))
 
     @app.get('/ayuda')
     def ayuda():
@@ -151,6 +155,58 @@ def create_app(db_path=None, *, demo_key=None, operations_key=None):
                  if fila["producto_codigo"] == codigo]
         return jsonify(stock=filas)
 
+    return app
+
+
+def create_app(db_path=None):
+    from tempfile import NamedTemporaryFile
+    from werkzeug.security import generate_password_hash
+    from src.backend.seguridad import inicializar, seguridad, cerrar_auditoria
+
+    path = Path(db_path or os.environ.get('INKAFARMA_DB', 'data/inkafarma-comercial.sqlite3')).resolve()
+    produccion = os.environ.get('INKAFARMA_PERFIL', 'local')
+    if produccion not in ('local', 'produccion'):
+        raise ValueError('Perfil no reconocido.')
+    https = produccion == 'produccion'
+    host = os.environ.get('INKAFARMA_HOST', '')
+    secret = os.environ.get('INKAFARMA_SESSION_SECRET', '')
+    if https and (not host or len(secret) < 32 or host.startswith('.') or '/' in host):
+        raise ValueError('Producción requiere un host exacto y un secreto de sesión de al menos 32 caracteres.')
+    inicializar(path)
+    if not secret:
+        destino = path.with_name(path.name + '.session-key')
+        if not destino.exists():
+            with NamedTemporaryFile(dir=path.parent) as temporal:
+                temporal.write(secrets.token_hex(32).encode())
+                temporal.flush()
+                try:
+                    os.link(temporal.name, destino)
+                except FileExistsError:
+                    pass
+        secret = destino.read_text()
+    if len(secret) < 32:
+        raise ValueError('El secreto de sesión es demasiado corto.')
+    app = _crear_base(path)
+    app.config.update(IDENTIDAD_PERSONAL=True, SECRET_KEY=secret, SESSION_COOKIE_SECURE=https,
+                      HASH_INACTIVO=generate_password_hash(secrets.token_hex(24)),
+                      TRUSTED_HOSTS=[host] if https else ['localhost','127.0.0.1','[::1]'])
+    app.register_blueprint(seguridad)
+    app.after_request(cerrar_auditoria)
+
+    @app.before_request
+    def transporte():
+        if not https and request.remote_addr not in ('127.0.0.1','::1'):
+            return jsonify(error='El acceso de red requiere el perfil de producción.'), 403
+        if https and not request.is_secure:
+            return jsonify(error='Se requiere HTTPS.'), 400
+
+    @app.after_request
+    def cabeceras(respuesta):
+        respuesta.headers['Content-Security-Policy'] = ("default-src 'self'; object-src 'none'; "
+            "base-uri 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'")
+        if https and request.is_secure:
+            respuesta.headers['Strict-Transport-Security'] = 'max-age=31536000'
+        return respuesta
     return app
 
 

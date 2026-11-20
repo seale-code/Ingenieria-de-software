@@ -1,0 +1,346 @@
+{
+  "fecha_utc": "2026-11-20T16:37:06.264413+00:00",
+  "revision_declarada": "53b6ff85a4904c6c3f1beb6c73ab4601c4b14886",
+  "python": "3.12.14",
+  "esquema": 6,
+  "alcance": "Flask test_client; dos bases temporales; sin red externa",
+  "controles": [
+    {
+      "id": "C01",
+      "descripcion": "Panel deshabilitado sin clave",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "estados_http": [
+          404,
+          404
+        ]
+      }
+    },
+    {
+      "id": "C02",
+      "descripcion": "Datos internos requieren sesión",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "estados_http": [
+          401,
+          401
+        ]
+      }
+    },
+    {
+      "id": "C03",
+      "descripcion": "Clave incorrecta rechazada y clave válida aceptada",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "intentos_invalidos": 6,
+        "estados_http": [
+          401,
+          401,
+          401,
+          401,
+          401,
+          401
+        ],
+        "acceso_correcto_http": 200
+      }
+    },
+    {
+      "id": "C04",
+      "descripcion": "Cookie HttpOnly y SameSite Strict",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "httponly": true,
+        "samesite_strict": true
+      }
+    },
+    {
+      "id": "C05",
+      "descripcion": "Mutación sin CSRF rechazada",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "http": 403
+      }
+    },
+    {
+      "id": "C06",
+      "descripcion": "CSRF incorrecto rechazado",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "http": 403
+      }
+    },
+    {
+      "id": "C07",
+      "descripcion": "Origen externo rechazado",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "http": 403
+      }
+    },
+    {
+      "id": "C08",
+      "descripcion": "Mutación exige JSON",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "http": 400
+      }
+    },
+    {
+      "id": "C09",
+      "descripcion": "Sesión y CSRF válidos permiten la operación",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "http": 200
+      }
+    },
+    {
+      "id": "C10",
+      "descripcion": "Cuerpo mayor a 32 KiB rechazado",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "http": 413
+      }
+    },
+    {
+      "id": "C11",
+      "descripcion": "Búsqueda trata entrada SQL como dato",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "http": 200,
+        "coincidencias": 0
+      }
+    },
+    {
+      "id": "C12",
+      "descripcion": "Rutas estáticas no sirven archivos superiores",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "estados_http": [
+          404,
+          404
+        ]
+      }
+    },
+    {
+      "id": "C13",
+      "descripcion": "Servidor conserva precio y distrito frente a importes enviados",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "precio_servidor_conservado": true,
+        "distrito_servidor_conservado": true
+      }
+    },
+    {
+      "id": "C14",
+      "descripcion": "Reintento de confirmación no duplica pedido",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "http": 200,
+        "pedidos": 1
+      }
+    },
+    {
+      "id": "C15",
+      "descripcion": "ID de pedido no autoriza detalle interno",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "http": 401
+      }
+    },
+    {
+      "id": "C16",
+      "descripcion": "Seguimiento omite contacto y actores internos",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "http": 200,
+        "datos_privados_omitidos": true
+      }
+    },
+    {
+      "id": "C17",
+      "descripcion": "Seguimiento rechaza ID y código inexistente",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "estados_http": [
+          400,
+          404
+        ]
+      }
+    },
+    {
+      "id": "C18",
+      "descripcion": "API sin caché y cabeceras defensivas",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "no_store": true,
+        "nosniff": true,
+        "no_referrer": true,
+        "frame_deny": true
+      }
+    },
+    {
+      "id": "C19",
+      "descripcion": "Cliente no selecciona rol o actor",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "estados_http": [
+          400,
+          400
+        ]
+      }
+    },
+    {
+      "id": "C20",
+      "descripcion": "No permite saltar preparación o reparto",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "estados_http": [
+          409,
+          409,
+          409
+        ]
+      }
+    },
+    {
+      "id": "C21",
+      "descripcion": "Preparación exige generación vigente",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "http": 409
+      }
+    },
+    {
+      "id": "C22",
+      "descripcion": "Reintento de despacho descuenta una sola vez",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "estados_http": [
+          200,
+          200,
+          200,
+          200,
+          200
+        ],
+        "movimientos_salida": 1,
+        "saldo_final": 16
+      }
+    },
+    {
+      "id": "C23",
+      "descripcion": "Cerrar sesión retira acceso del cliente",
+      "resultado": "APROBADO",
+      "evidencia": {
+        "cierre_http": 200,
+        "siguiente_acceso_http": 401
+      }
+    }
+  ],
+  "observaciones": [
+    {
+      "id": "SEC-03",
+      "intentos_invalidos": 6,
+      "limite_observado": false,
+      "siguiente_acceso_correcto_http": 200
+    },
+    {
+      "id": "SEC-04",
+      "cookie_secure": false,
+      "csp_presente": false,
+      "hsts_presente": false,
+      "transporte": "test_client HTTP local"
+    },
+    {
+      "id": "SEC-01",
+      "segunda_sesion_inventario_http": 200,
+      "sucursales_accesibles": 3,
+      "identidad_individual": false
+    },
+    {
+      "id": "OBS-01",
+      "cookie_otra_instancia_http": 401,
+      "clave_operaciones_compartida": true
+    },
+    {
+      "id": "SEC-02",
+      "stock_preparado_por_sucursal": 1,
+      "sucursales": 3,
+      "solicitudes_publicas": 4,
+      "contactos_verificados": 0,
+      "estados_http": [
+        200,
+        200,
+        200,
+        409
+      ],
+      "reservas_activas": 3,
+      "stock_fisico": 3,
+      "bloqueo_temporal_reproducido": true
+    }
+  ],
+  "resumen": {
+    "controles": 23,
+    "aprobados": 23,
+    "fallos": 0,
+    "observaciones": 5
+  },
+  "sha256_fuentes": {
+    "requirements-test.txt": "232116a0ba019554b21ab59ebb816709f23081b2d480c787c9b8ae01060539ea",
+    "requirements.txt": "35fde835d2cdf4ccbfb67738c7e5d2f8829fd441d3cbcb34b1f4c948a0a11cd4",
+    "scripts/iniciar_tienda.py": "54ce8332bcff180d5b9434998e475c778e3d40e390bd9b08a5e00fd6e160600a",
+    "src/backend/app.py": "c17ba01c2c528a55ba773f799720260f92ab427b95ec374a3bac875ff475283b",
+    "src/backend/asignacion_sucursal.py": "0fd3b8b62427dc99216a80e4a2fdcaafa0aa906e5037cfbdb2a6bbe6856085ad",
+    "src/backend/catalogo_busqueda.py": "50d26c19de0603a5985abc67db47fe1fd1bdf7c93042212ec6f9fad5c25f41e0",
+    "src/backend/comercio.py": "c6ef4e3100ecdfed49ec75a30fa9e3ed38d79f08e348b710c87d7dbea3db2214",
+    "src/backend/entregas_s3.py": "01e36c49cef63b2b0a7b8a68e88aadc94d9e7671a17ee39c1a899c5e756014b9",
+    "src/backend/filtro_categorias.py": "cae645303c1cfd99b4761cf84e9f7ac615178d470122745a9913aaec47eccd19",
+    "src/backend/filtro_sucursal_stock.py": "0551395a23451818852950693d1268099877a2b5f2ea770a664187fa417f057a",
+    "src/backend/filtros_combinados.py": "33a6cb86c28333c4dd8613d907717e6339c1d004716aac7b0f817ccf84c0210d",
+    "src/backend/inventario.py": "31894f468e619c48aa838629c3a2d6884231c2bbdcbfa9cff88ea93242cad36a",
+    "src/backend/logistica.py": "443fa6d6198c0e8e6da634ac25e004c285315249efb0d0cacf2cdd814e24fd28",
+    "src/backend/operaciones_demo.py": "6c980bf37222023b47d9b0cc6a0e9880ba2b1662777067e3dce8909e5674decd",
+    "src/backend/pedidos_integracion.py": "1dc3e8ddae77026e9f1f0ebc4061e0f762f5aba98948489421e8628948cd9dd1",
+    "src/backend/pedidos_s2.py": "530dfe110db4a483894cf16a2a0d17320ea56a24c301e2c87d5f35c39ee2b0b2",
+    "src/backend/pedidos_s2_cli.py": "6c7eeab9dc89b0eb4e38fc3e39ba09566724a7861435f11fabf18b133961359c",
+    "src/backend/pedidos_s2_integracion.sql": "894bed8c24bcd7a9358f3dac99356a4450b0768b269b4e941c2f41ae7c5a70a0",
+    "src/backend/pedidos_s2_schema.sql": "a87c840e6cd3442266939f9b84b07f1bcc3d65b6b94547c82ea42fca1072e59a",
+    "src/backend/pedidos_web.py": "35bda21cce2c962e50a32dc09f7e2156ecc26d3d83a57e743277a6f057d559d4",
+    "src/backend/preparacion_pedidos.py": "974a34e1c85b66fc1f16b5b5e1425f45ade9887181bd6039c19b2bfe17b54ea5",
+    "src/backend/reglas_asignacion.py": "5f2a4cad91d1e72e0743a7f9eb794f0fbc06b0c64bfc7c9a1acd7157381ffa5d",
+    "src/backend/repartidores_s3.py": "a9bd29773b916210b760b88f59b3dab6d81a64a02affcb90b011d444c0105dd2",
+    "src/backend/reparto_integrado.py": "2750b8106162751db9f51fe2a2b9f4f5c029a1e3c4abc199eb119c3212edc91b",
+    "src/backend/seguimiento.py": "bbaf8a7feb9d9aa25510a051ab41ec0bff4a9edb2b9c39bcb612966fc44917bd",
+    "src/backend/soporte_pedidos_s3.py": "db8c0c902e1e54527bf351f11550886d0a05eb695d79afd8c4ac6cdf83870f88",
+    "src/backend/soporte_pedidos_s3_cli.py": "a5aae8c9d2fdc928a71c2b21af1d9af8eff08f568b586096c7a78c924c4ec351",
+    "src/backend/vencimientos.py": "f20f5c70b87d11198fa2abf08453b88ab51400ea14ae092127e69c6e646221ca",
+    "src/database/__init__.py": "3593cdcae8092a16b33355b9b1f85b924cfa41f81626000f1ae3fac1034c5480",
+    "src/database/__main__.py": "156240592386516f060f5c5c40c56d2c1f4b69fb6643b857dda44329f1c691f0",
+    "src/database/catalogo_comercial.py": "4347a462c12ee48ca8338964474ef4bc7c577d9c9f647db93b4543a8648e2beb",
+    "src/database/database.py": "6f4713af45eeeffd10605ca7699791051ceeaf40450a13da69f3ed2b99393f27",
+    "src/database/migrate_josue.py": "b8d54d9db2bfc17bca0ea6a12bc0c72a44cb42227c0be5bdb6aa43e5de53debe",
+    "src/database/migrations/002_pedidos_reservas.sql": "585a22f4de89713e7d0a03d4cbe098ee2aa712c282581bbe7f19b1645e374527",
+    "src/database/migrations/003_entregas_historial.sql": "c55c475c5127b18f5daa8b06762e80e23a6195d52790f014c9d66b9faa9a796c",
+    "src/database/migrations/004_soporte_incidencias.sql": "401a7dc210299cf09a7e44b3d9739562f99a328fdf9cef5c776159bec9694bfc",
+    "src/database/migrations/005_catalogo_comercial.sql": "e279f0a275b7ab66321c118aee8b3a644fa98de464ac25dad2310302329b1156",
+    "src/database/migrations/006_logistica_inventario.sql": "6ef4db44d6051a1b00bb6ed46465104e5ce6b667b4835821944578bd5f153277",
+    "src/database/schema.sql": "8f6f2e0e7569e570aec838f74dd46a9221d233bf778afdacd02ee67b33a5b2df",
+    "src/database/seed.sql": "fa11a98c54b283bda9f0ed0cfc011b0a13c4440144efe956e2f8d9eb97f6d284",
+    "src/frontend/ayuda.html": "1d6a8f6c3c122724abf8ee4b84d9ecb018d2d78186ce58009af726bf657a4dfb",
+    "src/frontend/catalogo.js": "aef1474f207ac179a4e893e60592bba30388ad05965f1e1082d5d1e8e26dc5f3",
+    "src/frontend/index.html": "2bbc41ab39e47c0d48a3bc415ed12123730a727cfee209f9db9ef0e4f0d2447e",
+    "src/frontend/logistica.css": "65290e895bb6c2e16cee1b5cb1f58296c23597ac86d865679feae40c8df642ba",
+    "src/frontend/navegacion.js": "1a241faf0fa39996512a73a27a07d7613bba69c7add61dcd8463c9dd23a7745b",
+    "src/frontend/operaciones.css": "644a671b5831b35cf0a12fefb2a096b6d6716c0226d4ede8e5cf3acb9b04ec7f",
+    "src/frontend/operaciones.html": "620914f5a5fd41538fc70e5cfa7936b166089ec9b77a457a6e07e068e2746c72",
+    "src/frontend/operaciones.js": "95a5c41235a1f2083e0e069fd9819e0db984121008ed59cbadf8b41a6fcd302d",
+    "src/frontend/pedido.css": "f0bfc1909b05654b2354d6341c538d9ad8200b4363b13c3f512eab3a535fa0b9",
+    "src/frontend/pedido.html": "fc23e8a0fa210b87986a9cb1dd01d4801bfe9841bbbed781e495140ff17bee6d",
+    "src/frontend/pedido.js": "32950f54451899021eb199a50ea132a13ebc6ecc8aada28676a56156a527dc27",
+    "src/frontend/privacidad.html": "d8c94b6ce0d84d23a1bf12d08050dfe7930d37d4314fc12bad2ee7e4ce9c3aaa",
+    "src/frontend/seguimiento.css": "5cb5658b586ae1993bb9f6923b8b34e711999ae51287191b9f3abbde0e62a742",
+    "src/frontend/seguimiento.html": "2c97397128e8b1826ada6223607752ef2e414f5e4f05e70822ec1aa6c05f69f5",
+    "src/frontend/seguimiento.js": "15cf3b5568b7e51be6ee74ce9b170e0427b88a0f528ab1a4970a0967cb651b41",
+    "src/frontend/styles.css": "ecbba3350c5cf19181c69187e9305f1eeee3bd4bea22f9eb0eb599ff3b7672de",
+    "src/frontend/tienda.css": "b34336e221ecedc88b5f9f09b6044875fbdcf6f1787782379295f3936ba84b47",
+    "src/frontend/tienda.js": "5db5d450142b64425634a2121393837d9b19cca90637486abc927ae5181b4ffa"
+  }
+}

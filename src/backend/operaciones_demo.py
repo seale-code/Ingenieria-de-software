@@ -1,14 +1,10 @@
-"""Panel local del expositor: habilitación explícita, sesión y protección CSRF.
-
-La sesión representa al operador de la demostración, que simula las acciones
-de sucursal, repartidor y soporte. No es autenticación de empleados reales.
-Los roles/actores para los servicios se determinan en el servidor.
-"""
+"""Panel de operaciones con permisos por cuenta, sucursal y acción."""
 import hmac
 import secrets
 import sqlite3
 
-from flask import Blueprint, abort, current_app, jsonify, request, session
+from src.backend.seguridad import acceso, cargar_cuenta, auditar
+from flask import g, Blueprint, abort, current_app, jsonify, request, session
 
 from src.backend.entregas_s3 import DatosEntregaInvalidos, EntregaDuplicada, registrar_entrega
 from src.backend.preparacion_pedidos import (
@@ -32,10 +28,12 @@ operaciones = Blueprint('operaciones_demo', __name__)
 
 
 def _clave():
-    return current_app.config.get('DEMO_KEY')
+    return current_app.config.get('IDENTIDAD_PERSONAL') or current_app.config.get('DEMO_KEY')
 
 
 def _sesion_valida():
+    if current_app.config.get('IDENTIDAD_PERSONAL'):
+        return cargar_cuenta()
     return _clave() and session.get('demo_autorizada') is True
 
 
@@ -59,6 +57,18 @@ def proteger_panel():
         esperado = session.get('demo_csrf', '')
         if not esperado or not hmac.compare_digest(token.encode(), esperado.encode()):
             return jsonify(error='La sesión cambió. Vuelve a iniciar sesión.'), 403
+
+    if current_app.config.get('IDENTIDAD_PERSONAL') and request.endpoint != 'operaciones_demo.sesion_demo':
+        if request.method == 'POST':
+            auditar()
+        if g.cuenta['sucursal'] and request.endpoint.rsplit('.',1)[-1] not in {
+                'inventario','mover_inventario','bandeja','detalle','actuar'}:
+            abort(403)
+
+
+def ambito():
+    cuenta = getattr(g, 'cuenta', None)
+    return cuenta['sucursal'] if cuenta else None
 
 
 def datos_invalidos(error):
@@ -96,6 +106,8 @@ def _datos(campos, obligatorios=()):
 @operaciones.route('/api/demo/sesion', methods=['GET', 'POST', 'DELETE'])
 def sesion_demo():
     if request.method == 'POST':
+        if current_app.config.get('IDENTIDAD_PERSONAL'):
+            return acceso(_datos({'usuario','clave'}, {'usuario','clave'}))
         datos = _datos({'clave'}, {'clave'})
         clave = datos['clave']
         if not isinstance(clave, str) or not hmac.compare_digest(clave.encode(), _clave().encode()):
@@ -113,6 +125,20 @@ def sesion_demo():
 def bandeja():
     with connect_database(current_app.config['DATABASE'], read_only=True) as db:
         db.execute('BEGIN')
+        if ambito():
+            filas=db.execute("""SELECT p.id pedido_id,p.estado,p.fecha_creacion,s.nombre sucursal_nombre,
+                sol.cliente,(SELECT sum(cantidad) FROM detalles_pedido WHERE pedido_id=p.id) unidades
+                FROM pedidos p JOIN sucursales s ON p.sucursal_id=s.id
+                LEFT JOIN s2_solicitudes sol ON sol.pedido_id=p.id WHERE s.codigo=? ORDER BY p.id DESC LIMIT 100""",
+                (ambito(),)).fetchall()
+            estados=[f['estado'] for f in filas]
+            return jsonify(pedidos=[dict(f) for f in filas],repartidores=[],logistica_habilitada=True,
+                pendientes_aceptacion=estados.count('ASIGNADO'),sucursal=ambito(),
+                resumen=dict(activos=sum(e not in ('CANCELADO','ENTREGADO') for e in estados),
+                             entregados=estados.count('ENTREGADO'),en_camino=estados.count('EN_CAMINO'),
+                             incidencias=db.execute("""SELECT COUNT(*) FROM incidencias_pedido i JOIN pedidos p
+                                 ON p.id=i.pedido_id JOIN sucursales s ON s.id=p.sucursal_id
+                                 WHERE s.codigo=? AND i.estado!='RESUELTA'""",(ambito(),)).fetchone()[0]))
         filas = db.execute("""SELECT p.id AS pedido_id, p.estado, p.fecha_creacion,
             s.nombre AS sucursal_nombre, sol.cliente,
             (SELECT sum(cantidad) FROM detalles_pedido WHERE pedido_id=p.id) AS unidades
@@ -136,6 +162,8 @@ def detalle(pedido_id):
     with connect_database(path, read_only=True) as db:
         db.execute('BEGIN')
         pedido = _consultar_pedido_por_id(db, pedido_id)
+        if ambito() and pedido['sucursal_codigo'] != ambito():
+            abort(403)
         entrega = db.execute('''SELECT e.*,r.nombre AS repartidor_nombre FROM entregas e
             JOIN repartidores r ON r.id=e.repartidor_id WHERE e.pedido_id=?''', (pedido_id,)).fetchone()
         if disponible(db):
@@ -146,7 +174,7 @@ def detalle(pedido_id):
             if comercio:
                 pedido['comercio']=dict(comercio,entrega=dict(datos_entrega))
     pedido['entrega'] = dict(entrega) if entrega else None
-    pedido['incidencias'] = listar_incidencias('ADMINISTRADOR', pedido_id=pedido_id, db_path=path)
+    pedido['incidencias'] = [] if ambito() else listar_incidencias('ADMINISTRADOR', pedido_id=pedido_id, db_path=path)
     return jsonify(pedido=pedido)
 
 
@@ -157,6 +185,14 @@ def actuar(pedido_id):
     path = current_app.config['DATABASE']
     with connect_database(path, read_only=True) as db:
         logistica = logistica_disponible(db)
+        if ambito():
+            if accion not in ('preparar','listo','rechazar'):
+                abort(403)
+            # El servicio comprueba de nuevo esta generación dentro de su transacción de escritura.
+            actual=db.execute("""SELECT c.asignacion_id,s.codigo FROM control_reservas c JOIN pedidos p
+                ON c.pedido_id=p.id JOIN sucursales s ON s.id=p.sucursal_id WHERE p.id=?""",(pedido_id,)).fetchone()
+            if not actual or actual['codigo']!=ambito() or datos.get('asignacion_id')!=actual['asignacion_id']:
+                abort(403)
     if logistica and accion in ('preparar', 'listo', 'rechazar'):
         identificador(datos.get('asignacion_id'), 'asignacion_id')
     if accion == 'preparar':
@@ -187,13 +223,21 @@ def actuar(pedido_id):
 
 @operaciones.get('/api/demo/inventario')
 def inventario():
-    return jsonify(consultar_inventario(current_app.config['DATABASE']))
+    datos=consultar_inventario(current_app.config['DATABASE'])
+    if ambito():
+        datos={k:[r for r in filas if r['sucursal_codigo']==ambito()] for k,filas in datos.items()}
+    return jsonify(datos)
 
 
 @operaciones.post('/api/demo/inventario/movimientos')
 def mover_inventario():
     datos = _datos({'producto_codigo', 'sucursal_codigo', 'tipo', 'cantidad', 'motivo', 'solicitud_id', 'cantidad_esperada'},
                    {'producto_codigo', 'sucursal_codigo', 'tipo', 'cantidad', 'motivo', 'solicitud_id'})
+    if ambito():
+        if datos['sucursal_codigo'] != ambito():
+            abort(403)
+        with connect_database(current_app.config['DATABASE'],read_only=True) as db:
+            datos.update(rol='PERSONAL_SUCURSAL',actor_id=db.execute('SELECT id FROM sucursales WHERE codigo=?',(ambito(),)).fetchone()[0])
     resultado = registrar_movimiento(**datos, db_path=current_app.config['DATABASE'])
     return jsonify(movimiento=resultado)
 

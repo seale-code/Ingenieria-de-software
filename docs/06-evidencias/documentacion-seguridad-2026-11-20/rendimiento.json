@@ -1,0 +1,29 @@
+{
+  "fecha_utc": "2026-11-20T16:23:13.661776+00:00",
+  "python": "3.12.14",
+  "sistema": "Linux",
+  "arquitectura": "x86_64",
+  "esquema": 6,
+  "alcance": "Flask test_client en proceso local; no mide red, WSGI de producción ni operación real de Inkafarma",
+  "catalogo": {
+    "productos": 16,
+    "sucursales": 3,
+    "calentamiento": 5,
+    "muestras": 30,
+    "p50_ms": 3.33,
+    "p95_ms": 4.351,
+    "max_ms": 4.397
+  },
+  "pedidos_servicio": {
+    "hilos": 4,
+    "solicitudes": 12,
+    "asignados": 12,
+    "duracion_total_ms": 42.276
+  },
+  "respaldo": {
+    "duracion_ms": 3.378,
+    "esquema": 6,
+    "integridad": "ok",
+    "claves_foraneas": "ok"
+  }
+}

@@ -1,5 +1,7 @@
 # Sprint 3 — Preparación, entrega y validación del MVP
 
+> **Actualización documental del 20/11/2026:** el programa integrado utiliza esquema v6. Consultar [cierre y evidencia por sprint](../docs/07-scrum/ESTADO_CIERRE_SPRINTS.md), [trazabilidad actual](../docs/01-requisitos/TRAZABILIDAD_IMPLEMENTACION.md) y [manual de usuario](../docs/09-manuales/USUARIO.md). Los resultados fechados debajo corresponden a sus entregas originales; los campos de reuniones/aceptación no se completan sin evidencia.
+
 [← Sprint 2](../sprint-2/README.md) · [Proyecto](../README.md) · [Tablero S1 (referencia)](../docs/07-scrum/tablero-kanban-sprint-1.png)
 
 ## Objetivo
@@ -28,13 +30,9 @@ Completar el flujo de preparación, entrega y seguimiento de pedidos, incorporar
 
 El código se mantiene en las carpetas compartidas; este README registra el trabajo y las evidencias del sprint.
 
-## Definición de terminado
-- [ ] Preparación, entrega y seguimiento cumplen los criterios acordados.
-- [ ] Se impiden transiciones y accesos no permitidos en los casos probados.
-- [ ] Incidencias básicas quedan registradas y asociadas al pedido.
-- [ ] Flujo completo desde búsqueda hasta entrega probado con datos ficticios.
-- [ ] Errores críticos corregidos y limitaciones restantes documentadas.
-- [ ] Cambios revisados y demostración final preparada.
+## Definición de terminado y verificación
+
+Los criterios de preparación, entrega, historial, incidencias e integridad tienen evidencia automática disponible. La revisión humana, aceptación de adaptaciones, Review y retrospectiva requieren registro del equipo. El [estado de cierre](../docs/07-scrum/ESTADO_CIERRE_SPRINTS.md) separa cada criterio y su evidencia; no se marcan todas las tareas aceptadas a partir de un merge.
 
 ## Resultados y evidencias
 
