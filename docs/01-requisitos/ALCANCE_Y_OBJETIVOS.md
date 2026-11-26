@@ -22,12 +22,12 @@ Desarrollar un prototipo académico de gestión de pedidos entre sucursales de I
 | 2 | Registro, reserva y asignación de pedidos. | [Plan S2](../../sprint-2/README.md) |
 | 3 | Preparación, entrega, seguimiento, soporte básico y validación del MVP. | [Plan S3](../../sprint-3/README.md) |
 
-El modelo inicial de inventario no completa HU14. El plan S1 tampoco contiene aún una tarea explícita de orden por cercanía. Estas brechas se mantienen visibles en el [backlog](../07-scrum/PRODUCT_BACKLOG.md).
+El modelo inicial no completaba HU14; la ampliación de logística incorpora movimientos de inventario. El orden de stock por cercanía al cliente sigue pendiente. Estas brechas se mantienen visibles en el [backlog](../07-scrum/PRODUCT_BACKLOG.md).
 
 ## Límites
 
 - Solo sucursales de Inkafarma, con datos ficticios para la demostración académica.
-- La cobertura web/móvil y las modalidades de entrega/recojo requieren acuerdo del equipo.
+- El prototipo actual es web adaptable, con entrega a domicilio y pago al recibir; no incluye aplicación móvil nativa ni recojo. La adaptación de las historias originales requiere acuerdo del equipo.
 - Pagos reales, SUNAT, integración con inventarios comerciales, recetas y operación regulatoria no forman parte del prototipo previsto.
 - Multicanal y alternativas de medicamentos permanecen en el backlog como alcance diferido propuesto.
 
@@ -35,6 +35,6 @@ El modelo inicial de inventario no completa HU14. El plan S1 tampoco contiene a�
 
 Fuente funcional: [HU01–HU15](../02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf). Priorización: [MoSCoW](../07-scrum/PRIORIZACION.md).
 
-Acordar fechas, duración, capacidad, roles Scrum, estimaciones, modalidad de entrega y criterios de aceptación pendientes. La propuesta técnica conversada es Flask/Python, SQLite y HTML/CSS/JavaScript; SQLite ya está implementado y probado; Flask y la interfaz siguen pendientes.
+Acordar fechas, duración, capacidad, roles Scrum, estimaciones, modalidad de entrega y criterios de aceptación pendientes. La implementación actual utiliza Flask/Python, SQLite y HTML/CSS/JavaScript. Incluye catálogo comercial, carrito, cotización, seguimiento, panel de operaciones, reasignación y movimientos de inventario. Véanse las [reglas logísticas](../LOGISTICA_SUCURSALES.md) y [evidencias](../06-evidencias/2026-11-16_logistica-sucursales.md).
 
 La [versión anterior](../00-historico/01-requisitos/ALCANCE_Y_OBJETIVOS.md) se conserva como referencia.

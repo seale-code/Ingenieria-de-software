@@ -7,14 +7,14 @@
 | Paso | Documento | Para qué sirve |
 |---|---|---|
 | 1 | [Alcance y objetivos](01-requisitos/ALCANCE_Y_OBJETIVOS.md) | Entender el sistema y sus límites. |
-| 2 | [Historias originales HU01–HU15](02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf) | Consultar la fuente de necesidades y criterios. |
+| 2 | [Historias originales HU01–HU15](02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf) | Consultar la fuente de necesidades y criterios y la [revisión de cobertura](02-historias-usuario/HISTORIAS_ACTUALIZADAS.md). |
 | 3 | [Requisitos vigentes](01-requisitos/REQUISITOS.md) | Relacionar necesidades con los sprints. |
-| 4 | [Product Backlog y PBI](07-scrum/PRODUCT_BACKLOG.md) | Revisar los 15 elementos y sus pendientes. |
+| 4 | [Product Backlog y PBI](07-scrum/PRODUCT_BACKLOG.md) | Revisar los 15 elementos y su cobertura técnica. |
 | 5 | [Priorización MoSCoW](07-scrum/PRIORIZACION.md) | Entender el orden propuesto. |
 | 6 | [Sprint Backlog 1](07-scrum/SPRINT_BACKLOG_1.md) | Consultar las 12 tareas y sus responsables propuestos. |
 | 7 | [Tablero Kanban en PNG](07-scrum/TABLERO.md) | Ver el tablero dentro del repositorio. |
 | 8 | [Casos de uso](03-diagramas/CASOS_DE_USO.md), [flujo](03-diagramas/FLUJO_PEDIDO.md), [datos](03-diagramas/MODELO_DATOS.md) | Revisar el diseño conceptual. |
-| 9 | [Pantallas previstas](04-diseño/GUIA_UI.md) | Orientar el desarrollo de interfaz. |
+| 9 | [Pantallas previstas (diseño original)](04-diseño/GUIA_UI.md) | Orientar el desarrollo de interfaz. |
 | 10 | [Casos de prueba](05-pruebas/CASOS_DE_PRUEBA.md) y [evidencias](06-evidencias/README.md) | Preparar la validación y registrar resultados reales. |
 
 ## Sprints
@@ -23,7 +23,7 @@
 
 ## Estado
 
-La documentación define trabajo previsto. La base SQLite ya tiene código, datos ficticios y [24 pruebas aprobadas](06-evidencias/2026-10-18_base-datos-sprint-1.md); API e interfaz siguen pendientes. El [informe de revisión](ESTADO_Y_PENDIENTES.md) distingue documentos disponibles, cobertura parcial y entregables pendientes.
+El prototipo web integra catálogo, carrito, pedidos, seguimiento, logística e inventario mediante Flask y SQLite. La [validación del 16/11/2026](06-evidencias/2026-11-16_logistica-sucursales.md) registra 322 pruebas Python/API y 44 recorridos Chromium aprobados. La aceptación del equipo sigue siendo independiente. La revisión DOC-01 actualiza requisitos y backlog sin alterar el PDF original. El [informe de revisión](ESTADO_Y_PENDIENTES.md) distingue documentos disponibles, cobertura parcial y entregables pendientes.
 
 Las versiones anteriores se conservan en [histórico](00-historico/README.md). El PDF original no se modifica.
 
