@@ -82,3 +82,7 @@ El programa no modifica el backend, la base de datos ni las historias originales
 ![MCU general](vistas/MCU.png)
 
 ![Componentes](vistas/componentes.png)
+
+## Modelo de implementación (DOC-02)
+
+Consultar la [vista AS-IS de la implementación comercial y logística](as-is/README.md), con 17 diagramas adicionales correspondientes al sistema actual. Esta vista no sustituye el modelo objetivo ni su trazabilidad de criterios originales.
