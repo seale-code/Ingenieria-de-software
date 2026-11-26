@@ -1,13 +1,11 @@
-# Código de la solución
+# Código de Inkafarma
 
-[← Proyecto](../README.md)
+[Proyecto](../README.md) · [Documentación](../docs/README.md)
 
-| Carpeta | Responsabilidad | Estado |
+| Capa | Responsabilidad | Estado v6 |
 |---|---|---|
-| [Frontend](frontend/README.md) | Catálogo, búsqueda, filtros y consulta de disponibilidad. | Guía; sin implementación. |
-| [Backend](backend/README.md) | Consultas y reglas del sistema. | Guía; sin implementación. |
-| [Base de datos](database/README.md) | Modelo, esquema y datos ficticios. | Implementada; 24 pruebas aprobadas, revisión del equipo pendiente. |
+| [Frontend](frontend/README.md) | Catálogo, carrito, checkout, seguimiento y operaciones. | Implementado. |
+| [Backend](backend/README.md) | API, asignación, preparación, reparto, soporte e inventario. | Implementado en Flask/Python. |
+| [Persistencia](database/README.md) | SQLite, migraciones, reservas, precios e historial. | Implementada hasta v6, con 20 tablas. |
 
-La propuesta técnica es HTML/CSS/JavaScript + Python/Flask + SQLite. La base SQLite ya se crea y consulta con los comandos de su [guía](database/README.md); API e interfaz pendientes.
-
-El primer incremento previsto es buscar un medicamento y consultar su stock por sucursal. Ver [Sprint 1](../sprint-1/README.md) y [requisitos](../docs/01-requisitos/REQUISITOS.md).
+El arranque es `python -m scripts.iniciar_tienda`. Las reglas del producto y su verificación están en [requisitos](../docs/01-requisitos/REQUISITOS.md), [trazabilidad](../docs/01-requisitos/TRAZABILIDAD_IMPLEMENTACION.md) y [validación](../docs/05-pruebas/VALIDACION_V6.md). Los fixtures de pruebas y bases temporales están separados de la base persistente de la aplicación.

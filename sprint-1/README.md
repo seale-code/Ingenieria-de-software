@@ -1,5 +1,7 @@
 # Sprint 1 — Catálogo, búsqueda y disponibilidad
 
+> **Actualización documental del 20/11/2026:** el programa integrado utiliza esquema v6. Consultar [cierre y evidencia por sprint](../docs/07-scrum/ESTADO_CIERRE_SPRINTS.md), [trazabilidad actual](../docs/01-requisitos/TRAZABILIDAD_IMPLEMENTACION.md) y [manual de usuario](../docs/09-manuales/USUARIO.md). Los resultados fechados debajo corresponden a sus entregas originales; los campos de reuniones/aceptación no se completan sin evidencia.
+
 [← Proyecto](../README.md) · [Tablero Kanban](../docs/07-scrum/tablero-kanban-sprint-1.png) · [Sprint 2 →](../sprint-2/README.md)
 
 ## Tablero Kanban
@@ -14,7 +16,7 @@ Permitir al cliente consultar productos y su disponibilidad por sucursal de Inka
 ## Planificación
 - Inicio y cierre: por acordar.
 - Estado: incremento de base de datos implementado y probado; revisión del equipo pendiente.
-- Propuesta técnica: HTML/CSS/JavaScript, Python/Flask y SQLite; base de datos implementada, API e interfaz pendientes.
+- Tecnología implementada: HTML/CSS/JavaScript, Python/Flask y SQLite; catálogo, API e interfaz integrados. Ver la actualización v6 enlazada arriba.
 
 ## Actividades y responsables propuestos
 | ID | Responsable | Actividad | Criterio de aceptación | Estado |

@@ -49,6 +49,12 @@ Generales: [MCU](generales/MCU.drawio) y [componentes](generales/componentes.dra
 
 `C1`, `C2`, etc. identifican condiciones locales de cada interacción. **No son** los criterios `CA1`, `CA2`, etc. de cada historia. La [matriz de trazabilidad](trazabilidad.csv) relaciona esos criterios con IDs de acciones del XML y números de mensajes de secuencia/colaboración.
 
+## Relación con la implementación v6
+
+La [matriz de implementación](../../01-requisitos/TRAZABILIDAD_IMPLEMENTACION.md) añade a los 46 criterios código, pruebas, resultados y PR. Estos 17 diagramas siguen describiendo el **sistema objetivo**; no se alteran sus XML/PDF para aparentar funciones nuevas. El [modelo de datos v6](../MODELO_DATOS.md) describe las relaciones efectivamente migradas.
+
+El plazo de la implementación es inicialmente 15 minutos hasta aceptación de sucursal, configurable para nuevas asignaciones. La agrupación por procesos fue solicitada para esta entrega; no consta aprobación docente de su equivalencia con un diagrama por HU.
+
 ## Fuente y decisiones de análisis
 
 La fuente principal es el [PDF HU01-HU15](../../02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf), páginas 2 a 16. Se adapta «boticas» a **sucursales de Inkafarma**, de acuerdo con el alcance del proyecto. El reparto por grupos no elimina ninguna historia.

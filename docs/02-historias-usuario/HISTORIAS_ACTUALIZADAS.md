@@ -1,6 +1,6 @@
 # Historias de usuario — revisión de cobertura DOC-01
 
-Fuente: [PDF original HU01–HU15](HistoriasdeUsuario-Inkafarma.pdf), conservado sin cambios. Base `53b6ff85a4904c6c3f1beb6c73ab4601c4b14886`. Se reproduce el texto de historia y criterios para mantener trazabilidad; los estados son una evaluación técnica preliminar, no aceptación formal. Las adaptaciones requieren aprobación del equipo.
+Fuente: [PDF original HU01–HU15](HistoriasdeUsuario-Inkafarma.pdf), conservado sin cambios. Base actual `daa9716` (PR #57); matriz histórica v6 basada en `53b6ff8`. Se reproduce el texto de historia y criterios para mantener trazabilidad; los estados por criterio siguen la matriz v6, con notas de remediación; son una evaluación técnica preliminar, no aceptación formal. Las adaptaciones requieren aprobación del equipo.
 
 ## HU01 — Consulta de disponibilidad de medicamentos
 
@@ -10,7 +10,11 @@ Como paciente que necesita comprar un medicamento, quiero consultar la disponibi
 - CA2: DADO que existen varias boticas disponibles, CUANDO se muestran los resultados, ENTONCES deben ordenarse mostrando primero las más cercanas.
 - CA3: DADO que un medicamento no tiene stock, CUANDO el usuario realiza la búsqueda, ENTONCES el sistema debe indicar que no está disponible.
 
-**Estado:** Parcial. CA1 y CA3: búsqueda y stock; CA2 pendiente: stock ordenado por código de sucursal, no cercanía.
+**Cobertura técnica por criterio:** CA1: implementado; CA2: pendiente; CA3: implementado.
+
+- CA1: Nombre/marca y disponibilidad por sucursal.
+- CA2: La consulta pública no ordena sucursales por ubicación del usuario. La asignación sí calcula distancia.
+- CA3: Ausencia de stock y filtrado de disponibles.
 
 ## HU02 — Reserva automática del medicamento
 
@@ -20,7 +24,11 @@ Como cliente que encontró un medicamento disponible, quiero reservarlo antes de
 - CA2: DADO que la reserva fue realizada, CUANDO la botica recibe la solicitud, ENTONCES debe recibir una notificación.
 - CA3: DADO que la reserva supera el tiempo permitido, CUANDO no se concreta la compra, ENTONCES el sistema debe liberar nuevamente el stock.
 
-**Estado:** Adaptada. CA1: reserva del pedido; CA2: bandeja operativa, no aviso externo; CA3: vence la aceptación, no la compra para recojo.
+**Cobertura técnica por criterio:** CA1: adaptado; CA2: adaptado; CA3: adaptado.
+
+- CA1: Reserva al confirmar pedido de domicilio después de verificar contacto; no reserva independiente para recojo.
+- CA2: Solicitud visible en bandeja y contador de pendientes; no aviso externo.
+- CA3: Vence la asignación sin aceptación (15 minutos iniciales; límite total de 45 minutos); alternativa o cancelación/liberación.
 
 ## HU03 — Asignación automática de la mejor botica
 
@@ -30,7 +38,11 @@ Como usuario que necesita un medicamento, quiero que el sistema seleccione la me
 - CA2: DADO que una botica tiene mayor cercanía y stock, CUANDO se genera la recomendación, ENTONCES debe aparecer como primera opción.
 - CA3: DADO que una botica no puede atender el pedido, CUANDO se identifica la restricción, ENTONCES debe asignarse otra alternativa.
 
-**Estado:** Adaptada. CA1–CA3: asignación automática y alternativa por stock completo, distancia y capacidad; no lista de recomendaciones al cliente.
+**Cobertura técnica por criterio:** CA1: adaptado; CA2: adaptado; CA3: implementado.
+
+- CA1: Distancia geográfica al centro del distrito y stock completo.
+- CA2: Elegibilidad por stock/capacidad y prioridad por distancia; no ETA de ruta.
+- CA3: Otra sucursal conservando código e importes; sin alternativa cancela.
 
 ## HU04 — Compra mediante aplicación móvil
 
@@ -40,7 +52,11 @@ Como usuario con poco tiempo disponible, quiero comprar medicamentos desde una a
 - CA2: DADO que el usuario tiene productos seleccionados, CUANDO confirma la compra, ENTONCES debe recibir confirmación del pedido.
 - CA3: DADO que la compra fue realizada, CUANDO termina el proceso, ENTONCES debe recibir información de entrega.
 
-**Estado:** Parcial. CA1: carrito sin cuenta registrada; CA2 y CA3: confirmación e información de entrega web.
+**Cobertura técnica por criterio:** CA1: parcial; CA2: implementado; CA3: implementado.
+
+- CA1: Carrito disponible; falta cuenta registrada del cliente.
+- CA2: Confirmación transaccional con UUID y cotización, previa verificación telefónica.
+- CA3: Dirección/distrito y sucursal confirmados; seguimiento disponible.
 
 ## HU05 — Seguimiento del pedido
 
@@ -50,7 +66,11 @@ Como cliente que realizó una compra, quiero conocer el estado de mi pedido, par
 - CA2: DADO que el pedido cambia de estado, CUANDO ocurre una actualización, ENTONCES el usuario debe recibir una notificación.
 - CA3: DADO que el pedido está listo para recoger, CUANDO la botica confirma disponibilidad, ENTONCES debe informarse al cliente.
 
-**Estado:** Parcial. CA1: consulta por código; CA2: actualización manual, sin notificación activa; CA3: recojo no implementado.
+**Cobertura técnica por criterio:** CA1: implementado; CA2: parcial; CA3: parcial.
+
+- CA1: Estado/historial por código completo.
+- CA2: Actualización por consulta; sin notificación externa automática al cliente.
+- CA3: Estado PREPARADO visible para domicilio; no aviso de recojo ni modalidad de recojo.
 
 ## HU06 — Notificación de disponibilidad
 
@@ -60,7 +80,11 @@ Como paciente que no encuentra un medicamento, quiero recibir una alerta cuando 
 - CA2: DADO que llega nuevo stock, CUANDO se actualiza la información, ENTONCES debe enviarse una notificación.
 - CA3: DADO que el usuario recibe la alerta, CUANDO ingresa a la plataforma, ENTONCES debe poder realizar la compra.
 
-**Estado:** Pendiente. CA1–CA3: no se identificó suscripción ni aviso de reposición.
+**Cobertura técnica por criterio:** CA1: pendiente; CA2: pendiente; CA3: pendiente.
+
+- CA1: No hay suscripción ni envío de avisos de reposición. Registrar entrada no equivale a notificar.
+- CA2: No hay suscripción ni envío de avisos de reposición. Registrar entrada no equivale a notificar.
+- CA3: No hay suscripción ni envío de avisos de reposición. Registrar entrada no equivale a notificar.
 
 ## HU07 — Comparación entre boticas
 
@@ -70,7 +94,11 @@ Como comprador, quiero comparar diferentes boticas, para elegir la opción más 
 - CA2: DADO que existen diferencias entre establecimientos, CUANDO se muestran resultados, ENTONCES deben estar organizados claramente.
 - CA3: DADO que el usuario selecciona una opción, CUANDO confirma, ENTONCES debe iniciar la compra.
 
-**Estado:** Parcial. CA1–CA3: precio de catálogo, stock por sucursal y carrito; no comparación de precios diferenciados ni selección de sucursal para compra.
+**Cobertura técnica por criterio:** CA1: adaptado; CA2: implementado; CA3: implementado.
+
+- CA1: Precios locales y stock por sucursal; no comparación con otras cadenas.
+- CA2: Categorías, orden por precio y ficha.
+- CA3: Agregar al carrito y continuar al pedido.
 
 ## HU08 — Compra para adultos mayores
 
@@ -80,7 +108,11 @@ Como adulto mayor, quiero realizar pedidos de medicamentos de forma sencilla, pa
 - CA2: DADO que necesita apoyo, CUANDO solicita ayuda, ENTONCES debe contar con asistencia.
 - CA3: DADO que completa un pedido, CUANDO confirma, ENTONCES debe recibir una explicación clara.
 
-**Estado:** Parcial. CA1 y CA3: interfaz y resumen; CA2: preguntas frecuentes, sin asistencia personalizada; falta validación con adultos mayores.
+**Cobertura técnica por criterio:** CA1: parcial; CA2: parcial; CA3: implementado.
+
+- CA1: Recorridos móviles/teclado probados; falta evaluación con adultos mayores.
+- CA2: Página de ayuda y soporte de operaciones; no asistencia humana conectada al cliente.
+- CA3: Resumen antes de confirmar y código de consulta.
 
 ## HU09 — Control de pedidos cancelados
 
@@ -90,7 +122,11 @@ Como administrador de la plataforma, quiero controlar pedidos con riesgo de canc
 - CA2: DADO que existe otra botica disponible, CUANDO ocurre una falla, ENTONCES debe reasignarse automáticamente.
 - CA3: DADO que el pedido fue solucionado, CUANDO cambia de estado, ENTONCES debe registrarse.
 
-**Estado:** Cobertura técnica. CA1–CA3: bandeja, vencimiento, reasignación e historial de solución; alerta operativa por incidencia, no canal externo.
+**Cobertura técnica por criterio:** CA1: adaptado; CA2: implementado; CA3: implementado.
+
+- CA1: Bandeja de pendientes con plazos por asignación y total; aceptación al preparar.
+- CA2: Supervisor resuelve vencimiento, evita ciclos y respeta límite total de asignaciones pendientes.
+- CA3: Historial de asignaciones e incidencia con solución.
 
 ## HU10 — Historial de compras
 
@@ -100,7 +136,11 @@ Como usuario frecuente, quiero revisar mis compras anteriores, para repetir pedi
 - CA2: DADO que encuentra un pedido anterior, CUANDO selecciona repetir compra, ENTONCES debe agregar nuevamente los productos.
 - CA3: DADO que existen datos registrados, CUANDO consulta, ENTONCES debe proteger la información personal.
 
-**Estado:** Pendiente. CA1–CA3: no hay cuenta, historial personal ni repetición de compras; seguimiento individual no sustituye historial.
+**Cobertura técnica por criterio:** CA1: pendiente; CA2: pendiente; CA3: parcial.
+
+- CA1: No hay cuenta/historial de compras del usuario ni acción de repetir compra.
+- CA2: No hay cuenta/historial de compras del usuario ni acción de repetir compra.
+- CA3: Seguimiento oculta contactos; no existe consulta de historial por cuenta autenticada.
 
 ## HU11 — Atención mediante chat de soporte
 
@@ -110,7 +150,11 @@ Como usuario que tiene dudas sobre un medicamento o pedido, quiero recibir orien
 - CA2: DADO que el usuario necesita información sobre un pedido, CUANDO solicita ayuda, ENTONCES el sistema debe permitir consultar el estado de la compra.
 - CA3: DADO que la consulta requiere atención especializada, CUANDO el sistema identifica la necesidad, ENTONCES debe derivarla a un asesor.
 
-**Estado:** Parcial. CA2: seguimiento y ayuda básica; CA1 y CA3: sin chat ni derivación a asesor.
+**Cobertura técnica por criterio:** CA1: pendiente; CA2: parcial; CA3: pendiente.
+
+- CA1: No existe chat de consulta/respuesta para clientes. Incidencias es un flujo interno de operaciones.
+- CA2: Ayuda enlaza seguimiento; no consulta integrada en conversación de soporte.
+- CA3: No existe derivación de conversación de cliente a asesor.
 
 ## HU12 — Disponibilidad mediante múltiples canales
 
@@ -120,7 +164,11 @@ Como cliente que utiliza diferentes medios de compra, quiero acceder a la dispon
 - CA2: DADO que el usuario inicia una compra en un canal, CUANDO cambia a otro canal, ENTONCES debe conservar la información del pedido.
 - CA3: DADO que existen diferentes puntos de atención, CUANDO busca un producto, ENTONCES debe visualizar todas las opciones disponibles.
 
-**Estado:** Diferida. CA1–CA3: no hay integración de canales físicos y digitales.
+**Cobertura técnica por criterio:** CA1: parcial; CA2: pendiente; CA3: parcial.
+
+- CA1: Datos de la misma aplicación/base; sin integración de canal físico.
+- CA2: Persistencia local del carrito no acredita continuidad entre canal físico y digital.
+- CA3: Se ofrece domicilio; no selector de modalidades multicanal.
 
 ## HU13 — Recomendación de productos alternativos
 
@@ -130,7 +178,11 @@ Como paciente que no encuentra un medicamento disponible, quiero recibir alterna
 - CA2: DADO que existen productos equivalentes, CUANDO aparecen las opciones, ENTONCES deben mostrar información básica del producto.
 - CA3: DADO que el usuario selecciona una alternativa, CUANDO confirma la compra, ENTONCES debe registrarse como nuevo pedido.
 
-**Estado:** Diferida. CA1–CA3: no hay flujo de alternativas de medicamentos; no realizar sustitución automática.
+**Cobertura técnica por criterio:** CA1: pendiente; CA2: pendiente; CA3: pendiente.
+
+- CA1: No existe servicio de equivalencias/alternativas de medicamentos. Diferida en backlog.
+- CA2: No existe servicio de equivalencias/alternativas de medicamentos. Diferida en backlog.
+- CA3: No existe servicio de equivalencias/alternativas de medicamentos. Diferida en backlog.
 
 ## HU14 — Gestión de inventario para boticas
 
@@ -140,7 +192,11 @@ Como administrador de una botica, quiero actualizar automáticamente mi inventar
 - CA2: DADO que llega nuevo medicamento al almacén, CUANDO se registra el ingreso, ENTONCES debe aumentar la disponibilidad mostrada.
 - CA3: DADO que existe información incorrecta, CUANDO el administrador revisa el sistema, ENTONCES debe poder corregir los datos.
 
-**Estado:** Cobertura técnica. CA1–CA3: salida al despacho, ingreso y ajuste autorizado en inventario del prototipo.
+**Cobertura técnica por criterio:** CA1: adaptado; CA2: implementado; CA3: adaptado.
+
+- CA1: Descuento al iniciar reparto; no integra venta de mostrador ni acreditación de cobro.
+- CA2: Entrada aumenta físico/disponible con motivo y saldo.
+- CA3: Corrección autorizada con cuenta personal y alcance de sede o central; escrituras auditadas.
 
 ## HU15 — Entrega rápida de medicamentos
 
@@ -151,15 +207,22 @@ Como usuario que necesita recibir un medicamento rápidamente, quiero que mi ped
 - CA3: DADO que el pedido está en proceso de entrega, CUANDO cambia de estado, ENTONCES el usuario debe recibir una actualización.
 - CA4: DADO que el pedido fue entregado, CUANDO finaliza la entrega, ENTONCES debe registrarse la confirmación.
 
-**Estado:** Parcial. CA1, CA2 y CA4: asignación y confirmación; CA3: estado consultable por código, sin aviso activo; no se mide rapidez.
+**Cobertura técnica por criterio:** CA1: implementado; CA2: adaptado; CA3: parcial; CA4: implementado.
+
+- CA1: Sucursal con el pedido completo.
+- CA2: Distancia geográfica y capacidad de preparación; no tiempo real de reparto.
+- CA3: Seguimiento web consultable durante reparto; sin push/SMS/correo.
+- CA4: Recepción registra estado y fecha de forma atómica.
 
 ## Refinamientos propuestos sin duplicar HU
 
 | HU | Criterios adicionales propuestos para aprobación |
 |---|---|
 | HU04 | Mostrar cotización del servidor con subtotal, envío y total; conservar importes al confirmar. |
-| HU02/HU09 | Aceptar antes del plazo, reasignar sin ciclos, cancelar sin alternativa y liberar reservas. |
+| HU02/HU09 | Verificar contacto antes de reservar; aceptar antes del plazo por asignación y del límite total, reasignar sin ciclos, cancelar sin alternativa y liberar reservas. |
 | HU14 | Registrar movimientos, saldos y motivo; impedir conteo inferior a reservas; evitar duplicación por reintento. |
 | HU05/HU15 | Consultar cambios de sucursal y estado mediante código privado sin datos internos. |
 
-El acceso operativo se documenta como requisito transversal RF-EXT-05; no se crean HU16–HU19 sin acuerdo de alcance. Véase [requisitos](../01-requisitos/REQUISITOS.md) y [evidencia de logística](../06-evidencias/2026-11-16_logistica-sucursales.md).
+El acceso operativo se documenta como requisito transversal RNF-03 y control SEC-01; no se crean HU16–HU19 sin acuerdo de alcance. Véase [requisitos](../01-requisitos/REQUISITOS.md) y [evidencia de logística](../06-evidencias/2026-11-16_logistica-sucursales.md).
+
+**Referencia de cobertura:** [matriz v6](../01-requisitos/TRAZABILIDAD_IMPLEMENTACION.md) y [Remediación](../08-seguridad/REMEDIACION.md). Se mantiene la clasificación histórica por criterio hasta DOC-05; las notas anteriores reflejan los controles añadidos. No constituyen aceptación del Product Owner.

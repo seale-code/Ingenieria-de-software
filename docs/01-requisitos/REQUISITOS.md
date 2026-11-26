@@ -1,65 +1,98 @@
-# Requisitos trazables al alcance actual
+# Requisitos de la implementación v6
 
-[← Documentación](../README.md) · [Alcance](ALCANCE_Y_OBJETIVOS.md) · [Product Backlog](../07-scrum/PRODUCT_BACKLOG.md)
+**Actualización posterior al informe v6.** Se implementaron las cinco correcciones de seguridad. Consultar [controles vigentes y resultados de la verificación](../08-seguridad/REMEDIACION.md).
 
-## Base y control
+[Alcance](ALCANCE_Y_OBJETIVOS.md) · [Trazabilidad](TRAZABILIDAD_IMPLEMENTACION.md) · [Estado](../ESTADO_Y_PENDIENTES.md)
 
-Revisión DOC-01 (#60), base `53b6ff85a4904c6c3f1beb6c73ab4601c4b14886`. Se conservan los IDs de planificación, el PDF original y los requisitos históricos. La cobertura técnica no equivale a aceptación del equipo. Los requisitos EXT son desgloses propuestos para revisión, no nuevos compromisos de sprint.
+**20 de noviembre de 2026.** Consolidación DOC-01 sobre `daa9716` (PR #57). Se conservan los IDs RF-S1/S2/S3. «Implementado» acredita el comportamiento indicado, no aceptación de toda la HU original.
 
-## Actores
+## Actores y acceso
 
-Cliente web sin cuenta; operador del panel con clave compartida; personal de sucursal, administrador y repartidor representados en servicios y flujo operativo (sin afirmar cuentas individuales).
+| Actor de negocio | Acceso disponible |
+|---|---|
+| Cliente | Catálogo, carrito y confirmación previa verificación telefónica; seguimiento con código privado completo. |
+| Personal de sucursal | Preparación/inventario según alcance del servicio. Cuenta personal de sucursal, limitada a su sede. |
+| Repartidor | Asignación y acciones verificadas en servicios; la web obtiene el actor en el servidor. |
+| Administrador / asesor | Gestión y soporte con políticas de servicio; cuenta personal central para coordinación; no implica chat con asesor. |
+| Supervisor | Resolución de plazos pendientes vencidos. |
 
-## Requisitos funcionales originales
+## Requisitos funcionales
 
-| ID | Requisito original | Fuente | Plan original | Cobertura observada |
-|---|---|---|---|---|
-| RF-S1-01 | Consultar catálogo y buscar por nombre, informando si no hay coincidencias. | HU01 / PBI-01; plan S1 | Tareas #5, #4, #7, #13, #14, #11.  | Búsqueda por nombre/marca y catálogo visual: app.py, catalogo.js. |
-| RF-S1-02 | Filtrar por categoría, sucursal y solo productos con stock; combinar con búsqueda. | Descomposición del plan S1, apoyo a HU01 | #1, #2, #8.  | Filtros combinados: app.py y catalogo.js. |
-| RF-S1-03 | Consultar disponibilidad del producto por sucursal. | HU01 / PBI-01 | #10 y tareas de interfaz e integración.  | Stock efectivo por sucursal: app.py, database.py. |
-| RF-S1-04 | Mostrar primero las sucursales más cercanas con disponibilidad. | HU01, criterio 2 | Falta tarea específica y definición de ubicación/distancia.  | Pendiente: database.py ordena por código; distancia solo en asignación. |
-| RF-S1-05 | Modelar Producto, Sucursal e Inventario y cargar datos ficticios. | Plan S1; base de HU14 | #6, #3; cobertura parcial de HU14.  | Modelo y migraciones implementados; datos ficticios. |
-| RF-S2-01 | Registrar y confirmar un pedido con sus productos y cantidades. | HU04 / PBI-04 | #20, #18, #12; refinar cuenta, carrito y plataforma.  | Carrito, cotización y confirmación web sin cuenta: tienda.js, comercio.py, pedidos_web.py. |
-| RF-S2-02 | Reservar stock y liberarlo al vencer el plazo; notificar a la sucursal. | HU02 / PBI-02 | #21, #18; expiración y notificación requieren detalle.  | Adaptado a plazo de aceptación, bandeja y liberación/reasignación: logistica.py, vencimientos.py. |
-| RF-S2-03 | Asignar sucursal considerando stock, distancia y capacidad; gestionar falta de alternativa. | HU03 y HU15 | #9, #18, #12; acordar reglas y desempates.  | Asignación y alternativa: asignacion_sucursal.py, logistica.py. |
-| RF-S3-01 | Gestionar preparación y cambios de estado autorizados. | Plan S3; HU05 y HU15 | #16, #22.  | Preparación autorizada: preparacion_pedidos.py, operaciones_demo.py. |
-| RF-S3-02 | Mostrar estado e historial e informar cambios al cliente. | HU05 / PBI-05 | #15, #19, #22; notificaciones por detallar.  | Seguimiento por código e historial: seguimiento.py; sin avisos activos ni recojo. |
-| RF-S3-03 | Registrar repartidor, entrega y confirmación final. | HU15 / PBI-15 | #19, #22, #17.  | Registro de repartidor, despacho y entrega: reparto_integrado.py, operaciones_demo.py. |
-| RF-S3-04 | Registrar incidencias y soporte básico asociado al pedido. | Plan S3; relación parcial con HU11 | #22; no cubre todavía un chat completo.  | Incidencias internas: soporte_pedidos_s3.py; sin chat. |
-
-## Desglose de ampliaciones implementadas (propuesto)
-
-| ID | Requisito | HU relacionada | Código de respaldo (src) |
+| ID | Comportamiento | Fuente | Estado v6 |
 |---|---|---|---|
-| RF-EXT-01 | Catálogo visual, marca, presentación, precio y ordenamiento por nombre/precio. | HU01/HU07 | catalogo.js, app.py, comercio.py |
-| RF-EXT-02 | Cotizar carrito en servidor, mostrar subtotal, envío y total en PEN; validar cantidades y conservar importes confirmados; pago al recibir. | HU04 | comercio.py, pedidos_web.py, tienda.js |
-| RF-EXT-03 | Aceptar asignación al iniciar preparación; plazo inicial configurable de 15 minutos; reasignar sin repetir sucursales intentadas o cancelar y liberar reservas. | HU02/HU03/HU09 | logistica.py, vencimientos.py |
-| RF-EXT-04 | Consultar inventario físico, reservado y disponible; registrar ingreso, ajuste y salida al despacho con historial e idempotencia. | HU14/HU15 | inventario.py, reparto_integrado.py |
-| RF-EXT-05 | Autorizar API operativa mediante clave compartida, sesión y token CSRF para escrituras; no equivale a cuentas individuales. | HU14/HU15; requisito transversal | operaciones_demo.py, app.py |
-| RF-EXT-06 | Mostrar seguimiento por código privado, sucursal y cambios de asignación sin contactos ni motivos internos. | HU05/HU09/HU15 | seguimiento.py |
-| RF-EXT-07 | Registrar y atender incidencias operativas vinculadas a pedidos, incluyendo resultado de falta de atención. | HU09/HU11 | soporte_pedidos_s3.py, operaciones_demo.py |
+| RF-S1-01 | Buscar por nombre/marca y mostrar resultados o ausencia. | HU01 | Implementado. |
+| RF-S1-02 | Combinar categoría, sucursal, búsqueda y disponibles; ordenar catálogo por precio. | S1 / HU07 | Implementado. |
+| RF-S1-03 | Consultar disponibilidad efectiva por sucursal. | HU01 / HU14 | Implementado. |
+| RF-S1-04 | Ordenar las sucursales del catálogo por cercanía del usuario. | HU01 CA2 | Pendiente en consulta pública; la asignación sí usa distancia. |
+| RF-S1-05 | Categorías, productos, sucursales e inventario con integridad. | HU14 | Implementado y ampliado. |
+| RF-S2-01 | Cotizar y confirmar productos, cantidades y datos de entrega. | HU04 | Implementado con verificación telefónica, sin cuenta de cliente; CA1 parcial. |
+| RF-S2-02 | Reservar con plazo hasta aceptación y mostrar solicitud en bandeja. | HU02 | Adaptado a entrega; no equivale a reserva para recojo sin compra. |
+| RF-S2-03 | Asignar con stock completo/capacidad y elegir por distancia. | HU03 / HU15 | Implementado con centro del distrito. |
+| RF-S3-01 | ASIGNADO → EN_PREPARACION → PREPARADO. | HU05 / HU15 | Implementado con generación y reservas vigentes. |
+| RF-S3-02 | Consultar estado/historial por código sin datos de contacto. | HU05 | Implementado por consulta; sin avisos externos/recojo. |
+| RF-S3-03 | Repartidor activo y salida/entrega coherentes con fechas e inventario. | HU15 | Implementado; una entrega por pedido. |
+| RF-S3-04 | Registrar/revisar/resolver incidencias. | S3 / HU11 | Operaciones implementado; sin chat del cliente. |
+| RF-LOG-01 | Reasignar por incapacidad o falta de aceptación. | HU03 / HU09 | Implementado sin volver a sucursales intentadas. |
+| RF-LOG-02 | Cancelar y liberar si no hay alternativa completa. | HU09 | Implementado. |
+| RF-INV-01 | Entradas/conteos con saldo, motivo e idempotencia. | HU14 | Implementado; protege reservas y rechaza conteo obsoleto. |
+| RF-COM-01 | Conservar precios, dirección e importes ante reintentos/reasignación. | HU04 / HU07 | Implementado en céntimos y snapshots inmutables. |
 
-## Requisitos no funcionales y verificación
+## Controles funcionales posteriores a la remediación
 
-| ID propuesto | Requisito | Evidencia o validación pendiente |
+Se mantienen los IDs vigentes; SEC-01–SEC-05 son referencias a hallazgos, no nuevos identificadores RF. Los controles siguientes complementan los requisitos originales.
+
+| Referencia | Comportamiento documentado | Requisitos relacionados |
 |---|---|---|
-| RNF-01 | Mostrar mensajes claros de carga, vacío, errores y confirmación. | catalogo.js, pedido.js; validar usabilidad con usuarios. |
-| RNF-02 | Permitir uso web en pantallas pequeñas y de escritorio. | Evidencias Chromium, incluyendo 320/390 px; no certifica accesibilidad. |
-| RNF-03 | Proteger escrituras administrativas mediante sesión y CSRF; rechazar origen distinto cuando se informa. | operaciones_demo.py; auditoría DOC-09 pendiente. |
-| RNF-04 | No revelar contactos ni motivos internos en seguimiento público; exigir código privado. | seguimiento.py; auditoría pendiente. |
-| RNF-05 | No permitir stock negativo ni reservas superiores al físico; mantener consistencia ante concurrencia. | inventario.py, logistica.py, pruebas de logística. |
-| RNF-06 | Conservar pedidos, importes, inventario y movimientos al reiniciar. | SQLite y migraciones; evidencia de reinicio. |
-| RNF-07 | Evitar duplicación de salidas y operaciones reintentadas. | UUID, transacciones y pruebas de logística. |
-| RNF-08 | Mantener capas frontend, backend y persistencia separadas. | src/frontend, src/backend, src/database. |
-| RNF-09 | Ejecutar en entorno Python compatible con dependencias fijadas. | README indica 3.10+; evidencia registrada en 3.12, otras versiones por validar. |
-| RNF-10 | Registrar transiciones, movimientos y reasignaciones. | Migraciones y servicios de logística. |
-| RNF-11 | Permitir pruebas reproducibles con bases temporales. | unittest y Playwright. |
-| RNF-12 | Definir y medir tiempos de respuesta antes de aceptar rendimiento. | Pendiente de umbral y medición. |
+| SEC-01 | Autenticar cuentas personales; central coordina sedes y sucursal opera únicamente su ámbito; revocar sesiones y auditar escrituras. | RNF-03, RF-INV-01, RF-S3-01/03/04 |
+| SEC-02 | Verificar contacto mediante llamada saliente manual y código ligado a teléfono y UUID antes de reservar; caducidad y límites de solicitudes y pedidos activos. | RF-S2-01/02/03, RF-LOG-01/02 |
+| SEC-03 | Limitar intentos de acceso con ventanas compartidas entre procesos. | RNF-03, RNF-08 |
+| SEC-04 | Perfil de producción con HTTPS obligatorio, host explícito, sesión protegida y cabeceras de seguridad; validado en loopback, no en dominio real. | RNF-03, RNF-08 |
+| SEC-05 | Actualizar Playwright y verificar validación TLS en instaladores afectados. | RNF-08 |
 
-## Brechas y límites
+Ver [remediación](../08-seguridad/REMEDIACION.md) y [validación](../06-evidencias/remediacion/validacion.md).
 
-Ver [historias actualizadas](../02-historias-usuario/HISTORIAS_ACTUALIZADAS.md) para cobertura por criterio. No se implementan cuentas de cliente, chat, alertas de reposición, recojo, integración comercial real ni comparación de precios por sucursal. No confundir controles existentes con una auditoría de seguridad aprobada.
+## Reglas de negocio
 
-## Validación
+1. Un pedido se atiende completo desde una sucursal; no divide líneas entre locales.
+2. Disponible = físico − reservas ACTIVA. Liberar no reduce físico; consumir al salir lo reduce una vez.
+3. Se conservan reservas liberadas. Solo una reserva ACTIVA o CONSUMIDA por línea.
+4. Las escrituras relacionadas se serializan con `BEGIN IMMEDIATE`.
+5. Confirmación con UUID; otra solicitud con ese UUID se rechaza. Reasignación y preparación validan la asignación esperada.
+6. Plazo inicial de 15 minutos por asignación y límite total de 45 minutos desde la compra para asignaciones pendientes; aceptar al preparar excluye del vencimiento automático.
+7. Entrada suma unidades; ajuste establece conteo final y exige el saldo visto por el operador.
+8. El servidor calcula precios; el navegador no determina el importe aceptado.
+9. La API del panel obtiene roles/actores en el servidor y rechaza esos campos enviados por el cliente.
 
-[Casos de prueba](../05-pruebas/CASOS_DE_PRUEBA.md) · [Reglas operativas](../LOGISTICA_SUCURSALES.md) · [Evidencia 16/11/2026](../06-evidencias/2026-11-16_logistica-sucursales.md): 322 pruebas Python/API y 44 Chromium según registros existentes. No se ejecutaron de nuevo en esta revisión.
+## Condiciones de calidad
+
+| ID | Condición | Evidencia / criterio |
+|---|---|---|
+| RNF-01 Integridad | Sin sobre-reserva ni escrituras parciales en escenarios cubiertos. | Concurrencia, rollback, `foreign_key_check` e `integrity_check`. |
+| RNF-02 Privacidad | Seguimiento omite nombre, teléfono, dirección, motivos internos y actores. | Pruebas HTTP. |
+| RNF-03 Acceso | Sesión para operaciones; JSON/CSRF/origen en escrituras. | Pruebas de acceso y análisis de seguridad; cuentas personales, alcance por sede/central y revocación de sesiones. |
+| RNF-04 Recuperación | Copia/restauración conserva estado y existencias. | Recorrido a ruta nueva, sin sobrescribir bases existentes. |
+| RNF-05 Rendimiento | Latencias con muestras, percentiles y entorno. | Medición local; sin afirmar SLA ni mejora frente a la operación de Inkafarma. |
+| RNF-06 Usabilidad | Escritorio/móvil, errores recuperables y teclado probados. | Chromium; validación con usuarios destinatarios por registrar. |
+| RNF-07 Mantenibilidad | HU/diagramas/código/pruebas/resultados/PR enlazados. | Matriz de 46 criterios. |
+| RNF-08 Seguridad | Alcance, evidencia, riesgo, remediación y retest. | [Informe ejecutado](../08-seguridad/ANALISIS_VULNERABILIDADES.md), cinco correcciones con [verificación posterior](../08-seguridad/REMEDIACION.md). |
+
+Los objetivos de disponibilidad, tiempos de producción, recuperación y retención deben acordarse con quien acepte el producto; no se presentan como compromisos aprobados.
+
+HU06, HU10, HU12 y HU13 permanecen diferidas. HU08/HU11 disponen de apoyos de interfaz/operaciones, sin validación específica de adultos mayores o chat especializado. La matriz describe cada criterio sin convertir una prueba parcial en aceptación de toda la historia.
+
+## Desglose y refinamientos DOC-01
+
+Los siguientes detalles complementan los requisitos existentes sin crear IDs duplicados ni renumerar RNF.
+
+| Requisito vigente | Detalle |
+|---|---|
+| RF-S1-01/02/03 | Catálogo visual con fotos, marca, presentación, precio, filtros y disponibilidad por sucursal. |
+| RF-S2-01 / RF-COM-01 | Cotización del servidor con subtotal, envío y total en PEN; pago al recibir sin cobro electrónico; conservar importes confirmados. |
+| RF-S2-02 / RF-LOG-01/02 | Verificación previa, aceptación al preparar, reasignación sin ciclos y liberación si no hay alternativa. |
+| RF-INV-01 / RF-S3-03 | Stock físico, reservado y disponible; movimientos con motivo y saldo; salida al despacho sin duplicación. |
+| RF-S3-02/04 | Seguimiento por código privado, cambios de asignación e incidencias internas; sin chat ni avisos externos. |
+| RNF-01/04 | Persistencia de pedidos e inventario, integridad transaccional e idempotencia. |
+| RNF-06 | Mensajes de carga, vacío, error y confirmación; uso móvil y escritorio; evaluación con usuarios pendiente. |
+| RNF-07 | Separación de frontend, backend y persistencia; pruebas reproducibles y referencias de código. |
+
+La compatibilidad de versiones de Python debe comprobarse según el [manual técnico](../09-manuales/TECNICO.md). No se declaran SLA ni certificaciones de seguridad. La [revisión de historias](../02-historias-usuario/HISTORIAS_ACTUALIZADAS.md) conserva sus textos y detalla las adaptaciones. La actualización de la matriz histórica corresponde a DOC-05.

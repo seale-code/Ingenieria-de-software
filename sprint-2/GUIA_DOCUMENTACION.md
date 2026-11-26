@@ -1,3 +1,5 @@
+> **Guía de la entrega de octubre de 2026.** Consultar [documentación v6](../docs/README.md) para el producto integrado actual; los límites listados debajo corresponden a esa etapa.
+
 # 💚 INKAFARMA — Sprint 02
 
 **Proyecto:** Sistema de Gestión de Pedidos entre Sucursales  
@@ -11,13 +13,13 @@
 
 | N.º | Carpeta | ¿Qué encontrarás? |
 |---|---|---|
-| 1 | [Product Backlog Item](1.Product_Backlog_Item/readme.md) | PBIs del Sprint 2, valor y criterios de aceptación. |
-| 2 | [Sprint Planning](2.Sprint_Planning/readme.md) | Objetivo, tareas, dependencias, Sprint Backlog y revisión prevista. |
-| 3 | [Daily Scrum](3.Daily_Scrum/readme.md) | Formato de seguimiento diario sin reuniones ficticias. |
-| 4 | [Sprint Retrospective](4.Sprint_Retrospective/readme.md) | Acta lista para completar con acuerdos reales. |
-| 5 | [Tablero de Asignación](5.Tablero_Asignacion_Tareas/readme.md) | Responsables, Issues y trazabilidad en GitHub. |
-| 6 | [Repositorio de Código](6.Repositorio_Codigo/readme.md) | Ubicación del código, arquitectura, comandos de ejemplo y PRs. |
-| 7 | [Pruebas](7.Pruebas/readme.md) | Casos, evidencias y reporte de ejecución del Sprint 2. |
+| 1 | [Product Backlog Item](01-product-backlog/readme.md) | PBIs del Sprint 2, valor y criterios de aceptación. |
+| 2 | [Sprint Planning](02-sprint-planning/readme.md) | Objetivo, tareas, dependencias, Sprint Backlog y revisión prevista. |
+| 3 | [Daily Scrum](03-daily-scrum/readme.md) | Formato de seguimiento diario sin reuniones ficticias. |
+| 4 | [Sprint Retrospective](04-sprint-retrospective/readme.md) | Acta lista para completar con acuerdos reales. |
+| 5 | [Tablero de Asignación](05-asignacion-tareas/readme.md) | Responsables, Issues y trazabilidad en GitHub. |
+| 6 | [Repositorio de Código](06-repositorio-codigo/readme.md) | Ubicación del código, arquitectura, comandos de ejemplo y PRs. |
+| 7 | [Pruebas](07-pruebas/readme.md) | Casos, evidencias y reporte de ejecución del Sprint 2. |
 
 ## Alcance funcional seleccionado
 

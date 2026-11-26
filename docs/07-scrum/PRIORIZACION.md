@@ -36,8 +36,12 @@ La prioridad de producto no es el orden exacto de programación. Por ejemplo, de
 
 | Sprint | Selección funcional propuesta | Límites actuales |
 |---|---|---|
-| 1 | PBI-01 y base técnica de PBI-14; apoyo de interfaz a PBI-08. | Las 12 tareas no cubren aún orden por cercanía ni movimientos completos de inventario. |
-| 2 | PBI-04, 02 y 03; parte de asignación de PBI-15. | Refinar cuenta/carrito, plataforma, expiración de reservas, notificaciones y reglas de asignación. |
-| 3 | PBI-15 y 05; soporte básico relacionado con PBI-11. | El chat completo y las alertas/reasignación de PBI-09 requieren tareas específicas si se seleccionan. |
+| 1 | PBI-01 y base técnica de PBI-14; apoyo de interfaz a PBI-08. | S1 cubrió el modelo/catálogo. Los movimientos se incorporaron después en #56; el orden público por cercanía sigue pendiente según matriz. |
+| 2 | PBI-04, 02 y 03; parte de asignación de PBI-15. | Carrito y cotización se ampliaron en #55; plazo/reasignación en #56. Cuentas de cliente y avisos externos no se implementan. |
+| 3 | PBI-15 y 05; soporte básico relacionado con PBI-11. | Reasignación/vencimientos están en #56. El chat completo y avisos externos permanecen diferidos. |
 
 No trasladar automáticamente un PBI completo a “Terminado” porque terminó su sprint. Revisar sus criterios originales y registrar pendientes.
+
+## Estado vigente de los criterios
+
+La clasificación de prioridades no cambia por implementar un requisito. Consultar [trazabilidad v6](../01-requisitos/TRAZABILIDAD_IMPLEMENTACION.md) para distinguir implementación, adaptación, cobertura parcial y pendiente. Esta actualización no inventa estimaciones ni aprobación del Product Owner.

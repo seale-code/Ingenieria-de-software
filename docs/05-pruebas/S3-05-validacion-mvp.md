@@ -1,3 +1,5 @@
+> **Registro de una etapa anterior.** La [validación vigente de v6](VALIDACION_V6.md) y su trazabilidad sustituyen las afirmaciones de integración pendiente como descripción del producto actual. Se conserva el contenido fechado original como evidencia.
+
 # Casos S3-05 — Validación integrada del MVP
 
 Tarea #17, Sebastian Calderon. Base SQLite nueva con demo, migración v3 e inicialización del servicio S2 en cada caso. Los casos API utilizan el cliente HTTP de Flask y consultas de verificación; los E2E usan Chromium contra servidor HTTP real.

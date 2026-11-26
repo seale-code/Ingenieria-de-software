@@ -1,0 +1,30 @@
+{
+  "playwright": "1.65.2",
+  "archivos": [
+    {
+      "archivo": "reinstall_chrome_beta_mac.sh",
+      "sha256": "a92eaeb4ebcf5633a4e9c981481e14c80764fc81b6fcbc0565398e50ff319433",
+      "descargas_verificadas": 1
+    },
+    {
+      "archivo": "reinstall_chrome_stable_mac.sh",
+      "sha256": "bb43a96c192a6cc81524ade0264686fff7809c019a89f7db0a9849635879c3be",
+      "descargas_verificadas": 1
+    },
+    {
+      "archivo": "reinstall_msedge_beta_mac.sh",
+      "sha256": "0036d738bc90d686100d81f328ba0003bf07863f5500b792c8da391d149750fa",
+      "descargas_verificadas": 1
+    },
+    {
+      "archivo": "reinstall_msedge_dev_mac.sh",
+      "sha256": "6f899e3b311f742c24ca37ff9e32298e8290514ffc14bf588cc51556a29da4c0",
+      "descargas_verificadas": 1
+    },
+    {
+      "archivo": "reinstall_msedge_stable_mac.sh",
+      "sha256": "3af1e893527ff2257aa2dbc3b259a053b92f45c3eadb13e38eba46e87902655d",
+      "descargas_verificadas": 1
+    }
+  ]
+}

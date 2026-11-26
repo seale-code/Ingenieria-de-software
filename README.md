@@ -1,65 +1,26 @@
-<div align="center">
+# Inkafarma · Pedidos entre sucursales
 
-# Inkafarma
+Una propuesta para coordinar los pedidos a domicilio entre **Miraflores, San Isidro y Santiago de Surco**. El cliente hace una sola compra y puede consultar su entrega aunque otra sucursal se encargue de prepararla.
 
-### Salud, cuidado personal y bienestar en un mismo lugar
+[![Vista de la tienda en escritorio con el buscador, la fotografía de portada y las categorías del catálogo](docs/06-evidencias/tienda-comercial-2026-11-13/tienda-1440.png)](docs/06-evidencias/tienda-comercial-2026-11-13/tienda-1440.png)
 
-Catálogo visual, carrito, pedidos y gestión de entregas.
+[Ver la tienda en móvil](docs/06-evidencias/tienda-comercial-2026-11-13/tienda-390.png) · [Iniciar la aplicación](docs/09-manuales/TECNICO.md) · [Guía de uso](docs/09-manuales/USUARIO.md)
 
-</div>
+## Del catálogo al carrito
 
-## Iniciar la aplicación
+El catálogo reúne 16 productos con fotos, precios en soles y existencias por sucursal. Antes de confirmar, el cliente revisa las cantidades, el costo de envío y el total que pagará al recibir.
 
-Desde la raíz del repositorio, con Python 3.10 o superior:
+| Dermocosmética | Protección solar | Medicamentos |
+| :---: | :---: | :---: |
+| <img src="src/frontend/imagenes/productos/023735.webp" alt="Pote de crema hidratante CeraVe" width="150"> | <img src="src/frontend/imagenes/productos/068513.webp" alt="Envase de protector solar Anthelios UVMune 400" width="150"> | <img src="src/frontend/imagenes/productos/036723.webp" alt="Caja de tabletas Panadol de 500 mg" width="150"> |
+| **CeraVe**<br>Crema hidratante · 340 g | **La Roche-Posay**<br>Anthelios UVMune 400 · 50 ml | **Panadol**<br>500 mg · Caja de 104 tabletas |
 
-```bash
-python -m pip install -r requirements.txt
-python -m scripts.iniciar_tienda
-```
+[Explorar el catálogo](docs/06-evidencias/tienda-comercial-2026-11-13/catalogo-comercial.png) · [Ver el carrito](docs/06-evidencias/tienda-comercial-2026-11-13/carrito-1440.png)
 
-Abre **http://127.0.0.1:5000/**. La terminal muestra la dirección y la clave de acceso al panel de operaciones. El catálogo inicial incluye 16 productos con fotografía, marca, presentación y precio en soles.
+## Un pedido, de la sucursal a la puerta
 
-Los pedidos, precios confirmados e inventario se conservan en `data/inkafarma-comercial.sqlite3`. Reiniciar la aplicación no restaura el stock ni reemplaza los precios operados. Puedes elegir otra ruta o puerto:
+1. **Asignación.** Al confirmar la compra, el sistema elige la sucursal más cercana al centro del distrito que tenga todos los productos y capacidad para preparar el pedido. Allí reserva las unidades.
+2. **Preparación.** Si la sucursal informa que no puede atenderlo o vence su plazo de aceptación, el sistema busca otra que pueda preparar la compra completa. Si la encuentra, el cliente conserva su código, su dirección y el total confirmado.
+3. **Entrega.** Cuando el pedido sale a reparto, las unidades se descuentan del inventario. Con su código, el cliente puede consultar qué sucursal lo atiende y cuándo se registra la entrega.
 
-```bash
-python -m scripts.iniciar_tienda --port 5001 --db data/mi-tienda.sqlite3
-```
-
-Para utilizar una clave propia en operaciones, configura `INKAFARMA_OPERATIONS_KEY` en el entorno del servidor. No publiques claves en el repositorio.
-
-## Recorrido del producto
-
-1. **Explora:** busca por producto o marca, elige categoría, ordena por precio y consulta stock por sucursal.
-2. **Arma tu pedido:** agrega productos al carrito, ajusta cantidades y consulta subtotal, envío y total.
-3. **Confirma:** completa tus datos de entrega y revisa el importe calculado por el servidor. El método disponible es pago al recibir.
-4. **Sigue la entrega:** conserva tu código y consulta preparación, salida y entrega.
-5. **Gestiona:** el panel de operaciones permite preparar, reasignar entre sucursales, asignar repartidor, confirmar entrega y atender incidencias.
-6. **Controla existencias:** registra ingresos y ajustes por conteo; consulta stock físico, reservas, disponible e historial de movimientos.
-
-La aplicación asigna una sucursal según disponibilidad, distancia y capacidad. Las reservas evitan sobreventa; el consumo se registra una vez al salir el pedido. Los importes confirmados quedan guardados aunque el precio del catálogo cambie después.
-
-La sucursal dispone de 15 minutos para aceptar la atención al iniciar la preparación. El supervisor busca otra sucursal cuando vence ese plazo; si ninguna puede atender el pedido completo, lo cancela y libera las reservas. El plazo para futuras asignaciones puede configurarse con `--reserva-minutos`.
-
-## Arquitectura
-
-| Capa | Tecnología | Ubicación |
-|---|---|---|
-| Interfaz | HTML, CSS y JavaScript | [src/frontend](src/frontend/README.md) |
-| Servicios y API | Python y Flask | [src/backend](src/backend/README.md) |
-| Persistencia | SQLite, migraciones incrementales | [src/database](src/database/README.md) |
-| Verificación | unittest y Playwright | [tests](tests/README.md) |
-
-## Pruebas
-
-```bash
-python -m pip install -r requirements-test.txt
-python -m unittest discover -s tests -v
-python -m playwright install chromium-headless-shell
-python -m unittest discover -s tests/e2e -v
-```
-
-Las pruebas usan bases temporales independientes de los datos de la aplicación.
-
-## Documentación
-
-[Reglas de sucursales, reservas e inventario](docs/LOGISTICA_SUCURSALES.md) · [Resultados de validación](docs/06-evidencias/2026-11-16_logistica-sucursales.md) · [Catálogo y fuentes](docs/CATALOGO_COMERCIAL.md) · [Modelos UML](docs/03-diagramas/uml/README.md) · [Índice del proyecto](docs/README.md) · [Project Inkafarma](https://github.com/users/seale-code/projects/1)
+[Cómo se coordinan las sucursales](docs/LOGISTICA_SUCURSALES.md) · [Documentación del proyecto](docs/README.md)

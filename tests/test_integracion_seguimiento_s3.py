@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 from uuid import uuid4
 
-from src.backend.app import create_app
+from scripts.fixture_sprints import create_fixture as create_app
 from src.backend.pedidos_s2 import iniciar_modulo, registrar_pedido
 from src.backend.preparacion_pedidos import (
     completar_preparacion_pedido, iniciar_preparacion_pedido,

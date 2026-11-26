@@ -1,8 +1,10 @@
-# Base de datos SQLite — Sprint 1
+# Base de datos SQLite — versión 6
 
-## Catálogo comercial (v5)
+## Operación actual
 
-El arranque `python -m scripts.iniciar_tienda` utiliza `data/inkafarma-comercial.sqlite3`. Inicializa el esquema, aplica migraciones hasta v5 y carga [productos.json](catalogo/productos.json) conservando los registros operados. La migración [005_catalogo_comercial.sql](migrations/005_catalogo_comercial.sql) añade metadatos, datos de entrega y precios confirmados; no modifica pedidos, reservas o historial anteriores.
+El arranque `python -m scripts.iniciar_tienda` utiliza `data/inkafarma-comercial.sqlite3`. Inicializa el esquema, aplica migraciones hasta v6 y carga [productos.json](catalogo/productos.json) conservando los registros operados. La migración [005_catalogo_comercial.sql](migrations/005_catalogo_comercial.sql) añade metadatos, datos de entrega y precios confirmados; no modifica pedidos, reservas o historial anteriores.
+
+La [migración 006](migrations/006_logistica_inventario.sql) incorpora reservas históricas, control de aceptación y movimientos. El [modelo v6](../../docs/03-diagramas/MODELO_DATOS.md) y [diccionario](../../docs/03-diagramas/DICCIONARIO_DATOS_V6.md) son las referencias vigentes. Los comandos S1 que siguen se conservan para su esquema/fixtures; el arranque de la tienda utiliza v6.
 
 Los importes se guardan en céntimos enteros. El inventario de la aplicación se conserva al reiniciar. [Contrato y fuentes](../../docs/CATALOGO_COMERCIAL.md).
 

@@ -1,32 +1,34 @@
-# Documentación del proyecto
+# Documentación de Inkafarma
 
-[← Inicio](../README.md) · [Revisión de cumplimiento y pendientes](ESTADO_Y_PENDIENTES.md)
+Actualización: **20 de noviembre de 2026**, esquema **v6**, base funcional histórica `53b6ff8` (PR #56 integrado); consolidación DOC-01 sobre `daa9716` (PR #57). Los informes anteriores conservan su fecha y versión.
 
-## Orden de lectura
+## Recorrido de lectura
 
-| Paso | Documento | Para qué sirve |
-|---|---|---|
-| 1 | [Alcance y objetivos](01-requisitos/ALCANCE_Y_OBJETIVOS.md) | Entender el sistema y sus límites. |
-| 2 | [Historias originales HU01–HU15](02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf) | Consultar la fuente de necesidades y criterios y la [revisión de cobertura](02-historias-usuario/HISTORIAS_ACTUALIZADAS.md). |
-| 3 | [Requisitos vigentes](01-requisitos/REQUISITOS.md) | Relacionar necesidades con los sprints. |
-| 4 | [Product Backlog y PBI](07-scrum/PRODUCT_BACKLOG.md) | Revisar los 15 elementos y su cobertura técnica. |
-| 5 | [Priorización MoSCoW](07-scrum/PRIORIZACION.md) | Entender el orden propuesto. |
-| 6 | [Sprint Backlog 1](07-scrum/SPRINT_BACKLOG_1.md) | Consultar las 12 tareas y sus responsables propuestos. |
-| 7 | [Tablero Kanban en PNG](07-scrum/TABLERO.md) | Ver el tablero dentro del repositorio. |
-| 8 | [Casos de uso](03-diagramas/CASOS_DE_USO.md), [flujo](03-diagramas/FLUJO_PEDIDO.md), [datos](03-diagramas/MODELO_DATOS.md) | Revisar el diseño conceptual. |
-| 9 | [Pantallas previstas (diseño original)](04-diseño/GUIA_UI.md) | Orientar el desarrollo de interfaz. |
-| 10 | [Casos de prueba](05-pruebas/CASOS_DE_PRUEBA.md) y [evidencias](06-evidencias/README.md) | Preparar la validación y registrar resultados reales. |
+| Documento | Contenido |
+|---|---|
+| [Alcance y objetivos](01-requisitos/ALCANCE_Y_OBJETIVOS.md) | Problema, objetivos y fronteras de la propuesta. |
+| [Requisitos](01-requisitos/REQUISITOS.md) | Funciones, reglas y condiciones de calidad comprobables. |
+| [Trazabilidad](01-requisitos/TRAZABILIDAD_IMPLEMENTACION.md) | 46 criterios: HU → diagrama → código → prueba → resultado → PR. |
+| [Historias originales](02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf) | Fuente funcional conservada sin modificar; [historias y cobertura actualizadas](02-historias-usuario/HISTORIAS_ACTUALIZADAS.md). |
+| [Casos de uso](03-diagramas/CASOS_DE_USO.md) y [flujo](03-diagramas/FLUJO_PEDIDO.md) | Recorridos y estados de la aplicación. |
+| [Datos v6](03-diagramas/MODELO_DATOS.md) y [diccionario](03-diagramas/DICCIONARIO_DATOS_V6.md) | Relaciones, restricciones y campos del esquema. |
+| [UML editable](03-diagramas/uml/README.md) | 17 diagramas del sistema objetivo por procesos; incluye funciones futuras. |
+| [Scrum](07-scrum/README.md), [MoSCoW](07-scrum/PRIORIZACION.md) y [cierre](07-scrum/ESTADO_CIERRE_SPRINTS.md) | Planificación y evidencia técnica diferenciada de reuniones y aceptación. |
+| [Manual de usuario](09-manuales/USUARIO.md) | Compra, seguimiento, operaciones e inventario. |
+| [Manual técnico](09-manuales/TECNICO.md) | Instalación, configuración, migración, respaldo y recuperación. |
+| [Validación v6](05-pruebas/VALIDACION_V6.md) | Pruebas, recuperación y mediciones locales reproducibles. |
+| [Seguridad](08-seguridad/README.md) | Alcance y resultados del análisis de vulnerabilidades de esta entrega. |
+| [Informe técnico](INFORME_TECNICO.md) | Síntesis de solución, resultados y decisiones. |
+| [Estado y decisiones](ESTADO_Y_PENDIENTES.md) | Cobertura real y validaciones del equipo. |
 
-## Sprints
+## Producto y versiones
 
-[Sprint 1](../sprint-1/README.md) · [Sprint 2](../sprint-2/README.md) · [Sprint 3](../sprint-3/README.md)
+Funcionan catálogo, carrito, cotización, pedidos, preparación, reparto, seguimiento e inventario con Flask, SQLite y HTML/CSS/JavaScript. Se inicia con `python -m scripts.iniciar_tienda`; API e interfaz ya están implementadas.
 
-## Estado
+La [validación de logística del 16 de noviembre](06-evidencias/2026-11-16_logistica-sucursales.md) registra 322 pruebas Python/API y 44 recorridos Chromium sobre la funcionalidad integrada en #56. Consultar [catálogo comercial](CATALOGO_COMERCIAL.md), [reglas logísticas](LOGISTICA_SUCURSALES.md) y el [índice de evidencias](06-evidencias/README.md).
 
-El prototipo web integra catálogo, carrito, pedidos, seguimiento, logística e inventario mediante Flask y SQLite. La [validación del 16/11/2026](06-evidencias/2026-11-16_logistica-sucursales.md) registra 322 pruebas Python/API y 44 recorridos Chromium aprobados. La aceptación del equipo sigue siendo independiente. La revisión DOC-01 actualiza requisitos y backlog sin alterar el PDF original. El [informe de revisión](ESTADO_Y_PENDIENTES.md) distingue documentos disponibles, cobertura parcial y entregables pendientes.
+La [validación posterior a la remediación](06-evidencias/remediacion/validacion.md) registra 334 pruebas Python/API/recuperación y 44 recorridos Chromium aprobados localmente el 20 de noviembre. La verificación telefónica previa a la reserva y las cuentas personales de operadores se describen en [remediación](08-seguridad/REMEDIACION.md). Estos resultados no fueron ejecutados de nuevo en DOC-01.
 
-Las versiones anteriores se conservan en [histórico](00-historico/README.md). El PDF original no se modifica.
+Los documentos iniciales se conservan en [histórico](00-historico/README.md); las copias del [índice](00-historico/estado-anterior-v6/README.txt) y [revisión anteriores](00-historico/estado-anterior-v6/ESTADO_Y_PENDIENTES.txt) preservan su texto. Los enlaces dentro de esas copias corresponden a su ubicación original.
 
-## Modelo UML por procesos
-
-[17 diagramas editables en diagrams.net](03-diagramas/uml/README.md): MCU general, componentes general y actividades, secuencia y colaboración para cinco grupos que cubren HU01-HU15. [PDF de consulta](03-diagramas/uml/Inkafarma-modelo-UML.pdf).
+Una prueba aprobada o un merge no acredita por sí solo una Sprint Review, aceptación del Product Owner, validación con usuarios ni aprobación del docente.
