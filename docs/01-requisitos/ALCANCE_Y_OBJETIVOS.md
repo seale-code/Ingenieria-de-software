@@ -2,7 +2,7 @@
 
 [Documentación](../README.md) · [Requisitos](REQUISITOS.md) · [Cobertura por criterio](TRAZABILIDAD_IMPLEMENTACION.md)
 
-**20 de noviembre de 2026**, esquema v6, base funcional `53b6ff8`.
+**20 de noviembre de 2026**, esquema v6, base funcional histórica `53b6ff8`; consolidación DOC-01 sobre `daa9716` (PR #57).
 
 ## Problema y objetivo general
 
@@ -28,7 +28,7 @@ Web con catálogo de 16 productos de referencia comercial, fotos locales, búsqu
 
 La asignación exige todos los productos en una sucursal y capacidad disponible. Entre las elegibles prioriza distancia geográfica. La ubicación de entrega es el centro del distrito seleccionado, no una geocodificación de la dirección. Se configuran Miraflores, San Isidro y Santiago de Surco.
 
-Cada asignación pendiente dispone inicialmente de 15 minutos para aceptar al iniciar preparación. El supervisor busca otra sucursal al vencer sin aceptación; si no hay alternativa, cancela y libera. Un pedido aceptado no vence por falta de pago anticipado. El plazo de futuras asignaciones es configurable.
+Cada asignación pendiente dispone inicialmente de 15 minutos para aceptar al iniciar preparación. El supervisor busca otra sucursal al vencer sin aceptación; si no hay alternativa, cancela y libera. Un pedido aceptado no vence por falta de pago anticipado. El plazo de futuras asignaciones es configurable. Las asignaciones pendientes tienen además un límite total de 45 minutos desde la compra, incluidas las reasignaciones. Antes de confirmar se exige un código telefónico vinculado al pedido; no se reserva sin verificación.
 
 El método disponible es **pago al recibir**: se conservan método e importes; no se ejecuta un cobro electrónico ni se acredita automáticamente el pago.
 
@@ -47,9 +47,13 @@ Las integraciones Git acreditan cambios de código, no fechas de reuniones o ace
 
 - Precios y existencias pertenecen a la base local; las fuentes del catálogo están documentadas. No hay sincronización con inventarios internos de Inkafarma.
 - La operación actual es entrega a domicilio. Reserva para recojo, continuidad entre canales, cuentas de clientes y repetición de compras tienen cobertura pendiente o parcial.
-- El panel utiliza clave compartida de operador. Los servicios validan roles/alcances, pero la web no identifica cuentas individuales de empleados.
-- Los avisos se consultan en bandeja/seguimiento; no hay envío de SMS, correo o push.
+- El panel utiliza cuentas personales con permisos diferenciados de central y sucursal; las escrituras se auditan con identidad.
+- Los avisos se consultan en bandeja/seguimiento; no hay envío de SMS, correo o push. La verificación del contacto requiere una llamada saliente manual de un operador.
 - Recetas, equivalencias de medicamentos, SUNAT y pasarela no forman parte de esta versión.
 - Los 17 diagramas agrupados conservan las HU. La conformidad con la exigencia original de un diagrama por HU requiere validación del docente.
 
 Fuente: [HU01–HU15](../02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf). Las adaptaciones de recojo a entrega y prioridades [MoSCoW](../07-scrum/PRIORIZACION.md) requieren aceptación del equipo/Product Owner. No se atribuyen acuerdos no documentados.
+
+## Consolidación DOC-01
+
+Se conserva el alcance histórico y las 15 historias originales. Ver [revisión de historias](../02-historias-usuario/HISTORIAS_ACTUALIZADAS.md), [Remediación](../08-seguridad/REMEDIACION.md) y [Validación posterior a la remediación](../06-evidencias/remediacion/validacion.md). Los resultados registrados (334 pruebas Python/API/recuperación y 44 recorridos Chromium) son históricos; no se ejecutaron de nuevo en esta consolidación.

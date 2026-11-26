@@ -50,3 +50,27 @@ La base de PBI-14 se entregó con 24 pruebas aprobadas, pendiente de revisión d
 ## Ampliación funcional después del Sprint 3
 
 La versión 6 incorpora coordinación de sucursales, plazos de aceptación y movimientos de inventario vinculados a #17. [Reglas, alcance y criterios comprobados](../LOGISTICA_SUCURSALES.md). Esta actualización describe implementación y verificación técnica; no registra aprobación del Product Owner ni cambia retrospectivamente los compromisos de los sprints.
+
+## Consolidación DOC-01 (#60)
+
+Se conserva el orden MoSCoW y los compromisos históricos. Los estados siguientes cuentan criterios de la matriz v6, no historias aceptadas. Las notas incorporan la remediación del PR #57.
+
+| PBI / HU | Implementado | Adaptado | Parcial | Pendiente |
+|---|---:|---:|---:|---:|
+| PBI-01 / HU01 | 2 | 0 | 0 | 1 |
+| PBI-02 / HU02 | 0 | 3 | 0 | 0 |
+| PBI-03 / HU03 | 1 | 2 | 0 | 0 |
+| PBI-04 / HU04 | 2 | 0 | 1 | 0 |
+| PBI-05 / HU05 | 1 | 0 | 2 | 0 |
+| PBI-06 / HU06 | 0 | 0 | 0 | 3 |
+| PBI-07 / HU07 | 2 | 1 | 0 | 0 |
+| PBI-08 / HU08 | 1 | 0 | 2 | 0 |
+| PBI-09 / HU09 | 2 | 1 | 0 | 0 |
+| PBI-10 / HU10 | 0 | 0 | 1 | 2 |
+| PBI-11 / HU11 | 0 | 0 | 1 | 2 |
+| PBI-12 / HU12 | 0 | 0 | 2 | 1 |
+| PBI-13 / HU13 | 0 | 0 | 0 | 3 |
+| PBI-14 / HU14 | 1 | 2 | 0 | 0 |
+| PBI-15 / HU15 | 2 | 1 | 1 | 0 |
+
+HU02/HU04: verificación telefónica previa a la reserva; HU02/HU09: límite total de asignaciones pendientes de 45 minutos; HU14: cuentas personales y auditoría de operaciones. Estos controles no sustituyen los criterios originales de recojo, cuenta de cliente ni venta física. Ver [historias actualizadas](../02-historias-usuario/HISTORIAS_ACTUALIZADAS.md) y [Remediación](../08-seguridad/REMEDIACION.md). DOC-01–DOC-09 se agrupan en #59; no constituyen un Sprint 4 aprobado.
