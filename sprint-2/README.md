@@ -1,5 +1,7 @@
 # Sprint 2 — Registro y asignación de pedidos
 
+> **Actualización documental del 20/11/2026:** el programa integrado utiliza esquema v6. Consultar [cierre y evidencia por sprint](../docs/07-scrum/ESTADO_CIERRE_SPRINTS.md), [trazabilidad actual](../docs/01-requisitos/TRAZABILIDAD_IMPLEMENTACION.md) y [manual de usuario](../docs/09-manuales/USUARIO.md). Los resultados fechados debajo corresponden a sus entregas originales; los campos de reuniones/aceptación no se completan sin evidencia.
+
 [← Sprint 1](../sprint-1/README.md) · [Proyecto](../README.md) · [Tablero S1 (referencia)](../docs/07-scrum/tablero-kanban-sprint-1.png) · [Sprint 3 →](../sprint-3/README.md)
 
 ## Objetivo

@@ -50,6 +50,11 @@
     <dl id="review-customer" class="order-meta"></dl>
     <div class="order-table-wrap"><table class="order-table"><thead><tr><th scope="col">Producto</th><th scope="col">Cantidad</th></tr></thead><tbody id="review-items"></tbody></table></div>
     <p id="review-total" class="order-total"></p><div id="review-prices"></div>
+    <fieldset id="verificacion" hidden><legend>Verifica tu celular</legend>
+      <button type="button" id="pedir-codigo">Solicitar llamada</button>
+      <label for="codigo-celular">Código de ocho dígitos</label>
+      <input id="codigo-celular" inputmode="numeric" maxlength="8" autocomplete="one-time-code">
+      <p id="estado-codigo" role="status"></p></fieldset>
     <div class="order-review-actions"><button type="button" class="order-secondary" id="edit-order">Editar pedido</button><button type="button" class="action order-primary" id="confirm-order">Confirmar pedido</button></div>
     <p id="confirm-progress" role="status" class="order-help"></p>
   </section>

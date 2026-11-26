@@ -193,7 +193,11 @@ def resolver_falta_atencion(pedido_id, asignacion_id, motivo, solicitud_id, rol=
         asignacion = evaluar_sucursales(db, coordenadas['latitud'], coordenadas['longitud'], productos,
                                       excluir_ids=visitadas)
         destino = None
-        if asignacion['asignada']:
+        techo = None
+        if db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='plazos_compra'").fetchone():
+            fila=db.execute('SELECT limite FROM plazos_compra WHERE pedido_id=?',(pedido_id,)).fetchone()
+            techo=fila[0] if fila else None
+        if asignacion['asignada'] and (techo is None or fecha < techo):
             destino = db.execute('SELECT id FROM sucursales WHERE codigo=?', (asignacion['sucursal_asignada'],)).fetchone()[0]
         categoria = 'RETRASO' if por_vencimiento else 'PRODUCTO_FALTANTE'
         incidencia = db.execute("""INSERT INTO incidencias_pedido(pedido_id,categoria,descripcion,reportado_por_rol,reportado_por_id)
@@ -206,6 +210,8 @@ def resolver_falta_atencion(pedido_id, asignacion_id, motivo, solicitud_id, rol=
         if destino is not None:
             db.execute("UPDATE pedidos SET sucursal_id=?,estado='ASIGNADO' WHERE id=?", (destino, pedido_id))
             limite = nuevo_limite(db, reloj)
+            if techo:
+                limite=min(limite,techo)
             for producto in productos:
                 db.execute('''INSERT INTO reservas_stock(pedido_id,producto_id,sucursal_id,cantidad,fecha_vencimiento)
                     VALUES(?,?,?,?,?)''', (pedido_id, producto['id'], destino, producto['cantidad'], limite))

@@ -1,31 +1,25 @@
-# Scrum — PBI, Product Backlog, priorización y tablero
+# Gestión del desarrollo: Scrum y MoSCoW
 
-[← Documentación](../README.md) · [Sprint 1](../../sprint-1/README.md) · [Tablero Kanban en PNG](tablero-kanban-sprint-1.png)
+[Backlog](PRODUCT_BACKLOG.md) · [Priorización](PRIORIZACION.md) · [Estado de cierre](ESTADO_CIERRE_SPRINTS.md)
 
-![Tablero Kanban del Sprint 1](tablero-kanban-sprint-1.png)
+Scrum es la referencia para organizar objetivos, incrementos y revisión del trabajo. MoSCoW es la técnica de priorización dentro del backlog; no reemplaza Scrum. El tablero permite visualizar tareas y PR, sin constituir por sí solo evidencia de todas las prácticas del marco.
 
-## Qué presentar
+## Evidencia disponible
 
-1. [Product Backlog y sus 15 PBI](PRODUCT_BACKLOG.md): qué necesita el producto, de qué historia sale cada elemento y cómo se aceptará.
-2. [Priorización MoSCoW](PRIORIZACION.md): qué se considera indispensable y por qué se ordenó así.
-3. [Sprint Backlog 1](SPRINT_BACKLOG_1.md): qué parte se seleccionó y cómo se descompone en las 12 tareas existentes.
-4. [Tablero y reglas de avance](TABLERO.md): dónde seguir las tareas y cuándo cambiar su estado.
+Hay planes de tres sprints, responsables técnicos por tarea, Issues/PR, código integrado y resultados de pruebas. Las prioridades se proponen sobre los 15 PBI derivados de las HU originales. El orden no constituye aprobación del Product Owner ni estimación del equipo.
 
-## Cómo se relacionan
+No se dispone de registros completos de ceremonias ni de designación aprobada de Product Owner/Scrum Master. Se describe **desarrollo incremental organizado por sprints** y las prácticas Scrum documentadas, sin afirmar cumplimiento completo del marco.
 
-**Historia de usuario → PBI del Product Backlog → selección para el sprint → tareas en Issues → seguimiento en el tablero Kanban → revisión con evidencias.**
+## Relación entre artefactos
 
-Un **PBI (Product Backlog Item)** es un elemento del trabajo del producto. En este backlog se usa un PBI por historia original para conservar su trazabilidad; durante el refinamiento puede dividirse.
+Historia/criterio → PBI → objetivo y selección de sprint → tarea/Issue → implementación/PR → prueba/evidencia → revisión y decisión de aceptación.
 
-El **Product Backlog** reúne y ordena el trabajo del producto. El **Sprint Backlog** contiene el objetivo, la selección y el plan de trabajo de un sprint. Por eso, las 12 tareas del Sprint 1 no equivalen a 12 historias de usuario.
+- [Selección de S1](SPRINT_BACKLOG_1.md); [S2](../../sprint-2/README.md); [S3](../../sprint-3/README.md).
+- [Tablero de referencia de S1](TABLERO.md); [Project](https://github.com/users/seale-code/projects/1) para seguimiento del repositorio.
+- [Matriz por criterio](../01-requisitos/TRAZABILIDAD_IMPLEMENTACION.md) para no confundir cierre de tarea con cobertura de toda la HU.
 
-## Fuentes y estado de la planificación
+## Criterio de terminado y aceptación
 
-- [Historias originales HU01–HU15, páginas 2–16](../02-historias-usuario/HistoriasdeUsuario-Inkafarma.pdf).
-- [Alcance actual del proyecto](../../README.md): sucursales de Inkafarma.
-- [Plan Sprint 1](../../sprint-1/README.md), [Sprint 2](../../sprint-2/README.md) y [Sprint 3](../../sprint-3/README.md).
-- [Issues principales de los tres sprints](https://github.com/seale-code/Ingenieria-de-software/issues?q=is%3Aissue+Sprint+in%3Atitle).
+Un cambio técnico necesita cumplir su criterio, preservar integridad, pasar pruebas aplicables, actualizar documentación y tener revisión registrada. La evidencia automática se identifica como tal. Una fecha de merge no se utiliza como acta, asistencia o decisión de aceptación de producto.
 
-Los resúmenes de los PBI se derivan del PDF; las prioridades y el orden son una **propuesta de planificación pendiente de validación por el equipo/Product Owner**. No hay estimaciones ni fechas acordadas. La documentación no acredita funcionalidades implementadas.
-
-Los [requisitos vigentes](../01-requisitos/REQUISITOS.md) se organizan por sprint y señalan cobertura parcial. Los documentos iniciales de ventas y recojo están conservados en el [histórico](../00-historico/README.md). Consultar la [revisión de cumplimiento](../ESTADO_Y_PENDIENTES.md) antes de declarar un entregable completo.
+[Scrum Guide](https://scrumguides.org/scrum-guide.html) y [MoSCoW del Agile Business Consortium](https://www.agilebusiness.org/dsdm-project-framework/moscow-prioritisation.html) son las referencias de gestión; los métodos de evaluación de seguridad se documentan por separado.

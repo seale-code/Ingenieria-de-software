@@ -98,6 +98,7 @@ async function loadOrderOptions() {
       message.textContent = 'Aún no hay productos o puntos de referencia para preparar un pedido.';
       return;
     }
+    orderElement('verificacion').hidden = !data.verificar_celular;
     orderElement('reference').replaceChildren(new Option(commercial?'Selecciona un distrito':'Selecciona un punto', ''));
     for (const p of orderPoints) orderElement('reference').add(new Option(p.nombre, p.codigo));
     orderElement('order-lines').replaceChildren();
@@ -146,6 +147,8 @@ async function reviewOrder(event) {
     finally{reviewing=false;orderElement('edit-fields').disabled=false;}
   }
   confirmationId = crypto.randomUUID();
+  orderElement('codigo-celular').value='';
+  orderElement('estado-codigo').textContent='';
   uncertain = false;
   orderElement('review-customer').replaceChildren(textNode('dt', 'Nombre'), textNode('dd', customer), textNode('dt', 'Punto de referencia'), textNode('dd', point.nombre));
   if(commercial)orderElement('review-customer').append(textNode('dt','Dirección'),textNode('dd',pendingOrder.comercio.direccion),textNode('dt','Celular'),textNode('dd',pendingOrder.comercio.telefono));
@@ -228,7 +231,7 @@ async function confirmOrder() {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 10000);
   try {
-    const response = await fetch('/api/pedidos', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({...pendingOrder, confirmacion_id: confirmationId}), signal: controller.signal});
+    const response = await fetch('/api/pedidos', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({...pendingOrder, codigo_celular:orderElement('codigo-celular').value, confirmacion_id: confirmationId}), signal: controller.signal});
     if (response.status >= 500) throw new Error();
     const result = await response.json();
     if (!response.ok) {
@@ -255,6 +258,15 @@ async function confirmOrder() {
     orderElement('edit-order').disabled = uncertain;
   }
 }
+orderElement('pedir-codigo').onclick = async () => {
+  const status=orderElement('estado-codigo');
+  try {
+    const res=await fetch('/api/pedidos/verificacion',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({telefono:pendingOrder.comercio.telefono,confirmacion_id:confirmationId})});
+    const data=await res.json();
+    status.textContent=data.mensaje || data.error || 'Vuelve a revisar el pedido.';
+  } catch { status.textContent='No pudimos solicitar la llamada. Inténtalo otra vez.'; }
+};
 orderElement('order-form').addEventListener('submit', reviewOrder);
 orderElement('order-form').addEventListener('invalid', event => {
   // Mantiene las restricciones HTML y presenta el error dentro de la página.

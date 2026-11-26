@@ -9,6 +9,10 @@ from werkzeug.serving import make_server
 
 from scripts.iniciar_tienda import preparar_tienda
 from src.backend.app import create_app
+from src.backend.seguridad import emitir_codigo, guardar_usuario
+from unittest.mock import patch
+import secrets
+import subprocess
 from src.database.database import connect_database
 
 
@@ -17,12 +21,19 @@ class TiendaBrowserTests(unittest.IsolatedAsyncioTestCase):
         temp=tempfile.TemporaryDirectory();self.addCleanup(temp.cleanup)
         self.path=Path(temp.name)/'tienda.sqlite3';preparar_tienda(self.path)
         self.key='clave-de-operaciones-para-la-prueba'
-        self.server=make_server('127.0.0.1',0,create_app(self.path,operations_key=self.key),threaded=True)
+        with patch.dict(os.environ,dict(INKAFARMA_PERFIL='produccion',INKAFARMA_HOST='127.0.0.1',
+                                        INKAFARMA_SESSION_SECRET=secrets.token_hex(32))):
+            self.app=create_app(self.path)
+        guardar_usuario(self.path,'central',self.key)
+        cert,key=Path(temp.name)/'cert.pem',Path(temp.name)/'key.pem'
+        subprocess.run(['openssl','req','-x509','-newkey','rsa:2048','-nodes','-days','1','-subj','/CN=127.0.0.1',
+                        '-keyout',str(key),'-out',str(cert)],check=True,capture_output=True)
+        self.server=make_server('127.0.0.1',0,self.app,threaded=True,ssl_context=(str(cert),str(key)))
         self.thread=threading.Thread(target=self.server.serve_forever,daemon=True);self.thread.start();self.addCleanup(self.stop)
-        self.url=f'http://127.0.0.1:{self.server.server_port}'
+        self.url=f'https://127.0.0.1:{self.server.server_port}'
         self.pw=await async_playwright().start();self.addAsyncCleanup(self.pw.stop)
-        self.browser=await self.pw.chromium.launch();self.addAsyncCleanup(self.browser.close)
-        self.page=await self.browser.new_page(viewport={'width':1440,'height':1000})
+        self.browser=await self.pw.chromium.launch(executable_path=os.environ.get('CHROMIUM_BIN'));self.addAsyncCleanup(self.browser.close)
+        self.page=await self.browser.new_page(ignore_https_errors=True,viewport={'width':1440,'height':1000})
         self.errors=[];self.page.on('pageerror',lambda e:self.errors.append(str(e)))
 
     def stop(self):
@@ -46,6 +57,15 @@ class TiendaBrowserTests(unittest.IsolatedAsyncioTestCase):
         await self.page.locator('#phone').fill('987654321')
         await self.page.locator('#address').fill('Calle de prueba 123')
 
+    async def verificar_celular(self):
+        await self.page.locator('#pedir-codigo').click()
+        await expect(self.page.locator('#estado-codigo')).to_contain_text('llamaremos')
+        with connect_database(self.path) as db:
+            solicitud=db.execute('SELECT solicitud FROM verificaciones WHERE digest IS NULL').fetchone()[0]
+        with self.app.app_context():
+            _,codigo=emitir_codigo(solicitud)
+        await self.page.locator('#codigo-celular').fill(codigo)
+
     async def capture(self,name,full=False):
         if os.environ.get('EVIDENCE_DIR'):
             target=Path(os.environ['EVIDENCE_DIR']);target.mkdir(parents=True,exist_ok=True)
@@ -59,6 +79,7 @@ class TiendaBrowserTests(unittest.IsolatedAsyncioTestCase):
         await expect(self.page.locator('#review-prices')).to_contain_text('153.80')
         await expect(self.page.locator('#review-prices')).to_contain_text('Sin costo')
         await self.capture('pedido-revision.png',True)
+        await self.verificar_celular()
         await self.page.locator('#confirm-order').click()
         await expect(self.page.locator('#success-view')).to_be_visible()
         await expect(self.page.locator('#success-prices')).to_contain_text('153.80')
@@ -67,6 +88,7 @@ class TiendaBrowserTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(await self.page.evaluate("JSON.parse(localStorage.getItem('inkafarma.carrito.v1'))"),[])
         await self.capture('pedido-confirmado.png',True)
         await self.page.goto(self.url+'/operaciones')
+        await self.page.locator('#usuario').fill('central')
         await self.page.locator('#demo-key').fill(self.key)
         await self.page.locator('#login-button').click()
         await expect(self.page.locator('#refresh')).to_be_enabled()
@@ -108,12 +130,14 @@ class TiendaBrowserTests(unittest.IsolatedAsyncioTestCase):
         await expect(self.page.locator('#review-view')).to_be_visible()
         with connect_database(self.path) as db:
             db.execute("UPDATE catalogo_comercial SET precio_centimos=7700 WHERE producto_id=(SELECT id FROM productos WHERE codigo='023735')")
+        await self.verificar_celular()
         await self.page.locator('#confirm-order').click()
         await expect(self.page.locator('#edit-view')).to_be_visible()
         await expect(self.page.locator('#order-error')).to_contain_text('El precio cambió')
         with connect_database(self.path) as db:self.assertEqual(db.execute('SELECT count(*) FROM pedidos').fetchone()[0],0)
         await self.page.locator('#review-order').click()
         await expect(self.page.locator('#review-prices')).to_contain_text('83.90')
+        await self.verificar_celular()
         await self.page.locator('#confirm-order').click()
         await expect(self.page.locator('#success-view')).to_be_visible()
         await expect(self.page.locator('#success-prices')).to_contain_text('83.90')
@@ -139,7 +163,7 @@ class TiendaBrowserTests(unittest.IsolatedAsyncioTestCase):
         for width,height in [(1440,1000),(390,844),(320,780)]:
             await self.page.set_viewport_size({'width':width,'height':height});await self.open()
             await self.page.evaluate("document.querySelectorAll('img').forEach(i=>i.loading='eager')")
-            await self.page.wait_for_function("Array.from(document.querySelectorAll('.product .art img')).every(i=>i.complete&&i.naturalWidth>0)",timeout=10000)
+            await self.page.locator('.product .art img').evaluate_all("imgs => Promise.all(imgs.map(img => img.decode()))")
             self.assertTrue(await self.page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
             self.assertTrue(await self.page.locator('.product .art img').evaluate_all('imgs=>imgs.every(i=>i.complete&&i.naturalWidth>0)'))
             await self.capture(f'tienda-{width}.png')

@@ -1,3 +1,5 @@
+> **Documento histórico de las migraciones v2/v3.** Para las relaciones y tablas vigentes de v6 consultar [Modelo de datos v6](03-diagramas/MODELO_DATOS.md) y su diccionario. La relación antigua de una reserva por línea y la FK compuesta a la sucursal no describen la reasignación de v6.
+
 # Modelo de datos de Josue — S2-03 y S3-03
 
 ## 1. Diagrama entidad–relación

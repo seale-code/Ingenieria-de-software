@@ -6,7 +6,7 @@ import tempfile
 from uuid import uuid4
 
 from scripts.iniciar_tienda import preparar_tienda
-from src.backend.app import create_app
+from scripts.fixture_sprints import create_fixture as create_app
 from src.backend.inventario import consultar_inventario, registrar_movimiento
 from src.backend.logistica import procesar_vencimientos
 from src.database.database import connect_database

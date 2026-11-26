@@ -7,7 +7,7 @@ productos sin inventario; `filtro_categorias.py` de César conserva su contrato 
 
 ## Aplicación comercial
 
-`python -m scripts.iniciar_tienda` prepara la base persistente v5, carga los productos iniciales y habilita el acceso a operaciones. [Guía de inicio](../../README.md) · [Precios, fuentes y contrato comercial](../../docs/CATALOGO_COMERCIAL.md).
+`python -m scripts.iniciar_tienda` prepara la base persistente v6, carga los productos iniciales y habilita el acceso a operaciones. [Guía de inicio](../../README.md) · [Precios, fuentes y contrato comercial](../../docs/CATALOGO_COMERCIAL.md).
 
 El catálogo público incorpora marca, presentación, fotografía, precio de lista y precio de venta. La búsqueda incluye marcas; la disponibilidad sigue descontando las reservas activas. `POST /api/pedidos/cotizacion` devuelve los importes calculados por el servidor. En v5, la confirmación exige cotización y datos de entrega; guarda sus precios dentro de la misma transacción del pedido. Un precio cambiado exige otra revisión y un reintento ya confirmado conserva el importe original.
 
@@ -92,3 +92,7 @@ La cookie de sesión caduca tras dos horas sin uso, es HttpOnly/SameSite=Strict 
 
 La autenticación de clientes y empleados, cuentas con permisos individuales y despliegue público están fuera del alcance de esta demostración.
 Este servidor es para demostración académica local, no despliegue de producción.
+
+## Contratos de logística v6
+
+El panel incorpora vencimientos, reasignación y entradas/ajustes de inventario. Consultar [rutas y política](../../docs/LOGISTICA_SUCURSALES.md), [requisitos vigentes](../../docs/01-requisitos/REQUISITOS.md) y [análisis de seguridad](../../docs/08-seguridad/README.md). Los endpoints conservan el prefijo `/api/demo` por compatibilidad; el acceso real es de operador compartido, no de cuentas individuales.
