@@ -1844,3 +1844,51 @@ button {
     font-size:10px
   }
 }
+
+/* SC-INK-001: Mejora del botón de búsqueda */
+
+.header-search button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-shrink: 0;
+    padding: 0 15px;
+    background: #14783e;
+    color: #ffffff;
+    border-radius: 0 9px 9px 0;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.header-search button svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: inherit;
+}
+
+.header-search button span {
+    font-size: 13px;
+}
+
+.header-search button:hover {
+    background: #106532;
+}
+
+@media (max-width: 480px) {
+    .header-search button {
+        padding: 0 10px;
+        gap: 5px;
+    }
+
+    .header-search button span {
+        font-size: 11px;
+    }
+
+    .header-search button svg {
+        width: 16px;
+        height: 16px;
+    }
+}

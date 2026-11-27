@@ -18,6 +18,7 @@ Actualización: **20 de noviembre de 2026**, esquema **v6**, base funcional hist
 | [Manual técnico](09-manuales/TECNICO.md) | Instalación, configuración, migración, respaldo y recuperación. |
 | [Validación v6](05-pruebas/VALIDACION_V6.md) | Pruebas, recuperación y mediciones locales reproducibles. |
 | [Seguridad](08-seguridad/README.md) | Alcance y resultados del análisis de vulnerabilidades de esta entrega. |
+| [Gestión de cambios](10-gestion-cambios/README.md) | Procedimiento y solicitud SC-INK-001, pendientes de aprobación y ejecución. |
 | [Informe técnico](INFORME_TECNICO.md) | Síntesis de solución, resultados y decisiones. |
 | [Estado y decisiones](ESTADO_Y_PENDIENTES.md) | Cobertura real y validaciones del equipo. |
 
