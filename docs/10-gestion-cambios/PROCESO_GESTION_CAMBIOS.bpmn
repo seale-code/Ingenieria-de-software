@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='utf-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_SC001" targetNamespace="https://example.org/inkafarma/gestion-cambios">
+  <bpmn:process id="Process_SC001" isExecutable="false">
+    <bpmn:laneSet id="Lanes">
+      <bpmn:lane id="Lane0" name="Solicitante">
+        <bpmn:flowNodeRef>s</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>req</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane1" name="Responsable de cambios">
+        <bpmn:flowNodeRef>eval</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>close</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>end</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane2" name="Aprobador">
+        <bpmn:flowNodeRef>dec</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>g</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>rej</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>endno</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane3" name="Desarrollador">
+        <bpmn:flowNodeRef>impl</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane4" name="Revisor / QA">
+        <bpmn:flowNodeRef>test</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ok</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>pr</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="s" name="Inicio" />
+    <bpmn:task id="req" name="Registrar solicitud" />
+    <bpmn:task id="eval" name="Evaluar impacto" />
+    <bpmn:task id="dec" name="Evaluar y registrar decisión" />
+    <bpmn:exclusiveGateway id="g" name="¿Aprobado?" />
+    <bpmn:task id="rej" name="Registrar rechazo" />
+    <bpmn:endEvent id="endno" name="Fin sin cambio" />
+    <bpmn:task id="impl" name="Implementar ajuste" />
+    <bpmn:task id="test" name="Validar cambio" />
+    <bpmn:exclusiveGateway id="ok" name="¿Cumple?" />
+    <bpmn:task id="pr" name="Revisar PR e integrar" />
+    <bpmn:task id="close" name="Registrar y cerrar" />
+    <bpmn:endEvent id="end" name="Fin" />
+    <bpmn:sequenceFlow id="F0" sourceRef="s" targetRef="req" />
+    <bpmn:sequenceFlow id="F1" sourceRef="req" targetRef="eval" />
+    <bpmn:sequenceFlow id="F2" sourceRef="eval" targetRef="dec" />
+    <bpmn:sequenceFlow id="F3" sourceRef="dec" targetRef="g" />
+    <bpmn:sequenceFlow id="F4" sourceRef="g" targetRef="rej" name="No" />
+    <bpmn:sequenceFlow id="F5" sourceRef="rej" targetRef="endno" />
+    <bpmn:sequenceFlow id="F6" sourceRef="g" targetRef="impl" name="Sí" />
+    <bpmn:sequenceFlow id="F7" sourceRef="impl" targetRef="test" />
+    <bpmn:sequenceFlow id="F8" sourceRef="test" targetRef="ok" />
+    <bpmn:sequenceFlow id="F9" sourceRef="ok" targetRef="impl" name="No" />
+    <bpmn:sequenceFlow id="F10" sourceRef="ok" targetRef="pr" name="Sí" />
+    <bpmn:sequenceFlow id="F11" sourceRef="pr" targetRef="close" />
+    <bpmn:sequenceFlow id="F12" sourceRef="close" targetRef="end" />
+  </bpmn:process>
+  <bpmn:collaboration id="Collab">
+    <bpmn:participant id="Pool" name="Inkafarma — Gestión de cambio menor" processRef="Process_SC001" />
+  </bpmn:collaboration>
+  <bpmndi:BPMNDiagram id="Diagram">
+    <bpmndi:BPMNPlane id="Plane" bpmnElement="Collab">
+      <bpmndi:BPMNShape id="Shape_Pool" bpmnElement="Pool" isHorizontal="true">
+        <dc:Bounds x="10" y="65" width="1640" height="525" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Lane0" bpmnElement="Lane0" isHorizontal="true">
+        <dc:Bounds x="40" y="65" width="1610" height="105" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Lane1" bpmnElement="Lane1" isHorizontal="true">
+        <dc:Bounds x="40" y="170" width="1610" height="105" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Lane2" bpmnElement="Lane2" isHorizontal="true">
+        <dc:Bounds x="40" y="275" width="1610" height="105" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Lane3" bpmnElement="Lane3" isHorizontal="true">
+        <dc:Bounds x="40" y="380" width="1610" height="105" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Lane4" bpmnElement="Lane4" isHorizontal="true">
+        <dc:Bounds x="40" y="485" width="1610" height="105" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_s" bpmnElement="s">
+        <dc:Bounds x="100" y="100" width="30" height="30" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_req" bpmnElement="req">
+        <dc:Bounds x="160" y="84" width="135" height="60" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_eval" bpmnElement="eval">
+        <dc:Bounds x="330" y="189" width="140" height="60" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_dec" bpmnElement="dec">
+        <dc:Bounds x="510" y="294" width="145" height="60" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_g" bpmnElement="g">
+        <dc:Bounds x="690" y="304" width="40" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_rej" bpmnElement="rej">
+        <dc:Bounds x="780" y="294" width="140" height="60" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_endno" bpmnElement="endno">
+        <dc:Bounds x="960" y="309" width="30" height="30" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_impl" bpmnElement="impl">
+        <dc:Bounds x="780" y="399" width="145" height="60" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_test" bpmnElement="test">
+        <dc:Bounds x="970" y="504" width="145" height="60" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_ok" bpmnElement="ok">
+        <dc:Bounds x="1150" y="514" width="40" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_pr" bpmnElement="pr">
+        <dc:Bounds x="1230" y="504" width="145" height="60" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_close" bpmnElement="close">
+        <dc:Bounds x="1410" y="189" width="140" height="60" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_end" bpmnElement="end">
+        <dc:Bounds x="1590" y="204" width="30" height="30" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Edge0" bpmnElement="F0">
+        <di:waypoint x="130" y="115" />
+        <di:waypoint x="160" y="115" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge1" bpmnElement="F1">
+        <di:waypoint x="295" y="114" />
+        <di:waypoint x="312" y="114" />
+        <di:waypoint x="312" y="219" />
+        <di:waypoint x="330" y="219" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge2" bpmnElement="F2">
+        <di:waypoint x="470" y="219" />
+        <di:waypoint x="490" y="219" />
+        <di:waypoint x="490" y="324" />
+        <di:waypoint x="510" y="324" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge3" bpmnElement="F3">
+        <di:waypoint x="655" y="324" />
+        <di:waypoint x="690" y="324" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge4" bpmnElement="F4">
+        <di:waypoint x="730" y="324" />
+        <di:waypoint x="780" y="324" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge5" bpmnElement="F5">
+        <di:waypoint x="920" y="324" />
+        <di:waypoint x="960" y="324" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge6" bpmnElement="F6">
+        <di:waypoint x="710" y="344" />
+        <di:waypoint x="710" y="429" />
+        <di:waypoint x="780" y="429" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge7" bpmnElement="F7">
+        <di:waypoint x="925" y="429" />
+        <di:waypoint x="946" y="429" />
+        <di:waypoint x="946" y="534" />
+        <di:waypoint x="970" y="534" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge8" bpmnElement="F8">
+        <di:waypoint x="1115" y="534" />
+        <di:waypoint x="1150" y="534" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge9" bpmnElement="F9">
+        <di:waypoint x="1170" y="514" />
+        <di:waypoint x="1170" y="382" />
+        <di:waypoint x="850" y="382" />
+        <di:waypoint x="850" y="399" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge10" bpmnElement="F10">
+        <di:waypoint x="1190" y="534" />
+        <di:waypoint x="1230" y="534" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge11" bpmnElement="F11">
+        <di:waypoint x="1375" y="534" />
+        <di:waypoint x="1392" y="534" />
+        <di:waypoint x="1392" y="219" />
+        <di:waypoint x="1410" y="219" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge12" bpmnElement="F12">
+        <di:waypoint x="1550" y="219" />
+        <di:waypoint x="1590" y="219" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
