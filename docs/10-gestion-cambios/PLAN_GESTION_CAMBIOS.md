@@ -8,11 +8,11 @@ Controlar un único cambio de presentación del catálogo, desde su solicitud ha
 ## Roles
 | Rol | Responsabilidad | Asignación confirmada |
 |---|---|---|
-| Solicitante | Registrar necesidad y resultado esperado. | Pendiente |
-| Responsable de cambios | Revisar integridad, registrar decisión y coordinar evaluación. | Pendiente |
+| Solicitante | Registrar necesidad y resultado esperado. | Cesar Milla |
+| Responsable de cambios | Revisar integridad, registrar decisión y coordinar evaluación. | Cesar Milla |
 | Responsable de aprobación | Aprobar o rechazar con justificación antes de implementar. | `josue456cris` (decisión documentada) |
-| Desarrollador | Estimar impacto, implementar lo autorizado y registrar commit. | Pendiente de identificación formal |
-| Revisor / QA | Verificar criterios y documentar resultado. | Pendiente de identificación formal |
+| Desarrollador | Estimar impacto, implementar lo autorizado y registrar commit. | Cesar Milla |
+| Revisor / QA | Verificar criterios y documentar resultado. | Cesar Milla |
 
 ## Procedimiento previsto
 1. Registrar solicitud SC-INK-001 y asociar Issue #62.
